@@ -1,0 +1,49 @@
+local Native = require('lib.stdlib.native')
+
+---@class AbilityStringLevelField
+local AbilityStringLevelField = {
+    IconNormal = Native.ConvertAbilityStringLevelField(0x61617274), --ABILITY_SLF_ICON_NORMAL
+    Caster = Native.ConvertAbilityStringLevelField(0x61636174), --ABILITY_SLF_CASTER
+    Target = Native.ConvertAbilityStringLevelField(0x61746174), --ABILITY_SLF_TARGET
+    Special = Native.ConvertAbilityStringLevelField(0x61736174), --ABILITY_SLF_SPECIAL
+    Effect = Native.ConvertAbilityStringLevelField(0x61656174), --ABILITY_SLF_EFFECT
+    AreaEffect = Native.ConvertAbilityStringLevelField(0x61616561), --ABILITY_SLF_AREA_EFFECT
+    LightningEffects = Native.ConvertAbilityStringLevelField(0x616C6967), --ABILITY_SLF_LIGHTNING_EFFECTS
+    MissileArt = Native.ConvertAbilityStringLevelField(0x616D6174), --ABILITY_SLF_MISSILE_ART
+    TooltipLearn = Native.ConvertAbilityStringLevelField(0x61726574), --ABILITY_SLF_TOOLTIP_LEARN
+    TooltipLearnExtended = Native.ConvertAbilityStringLevelField(0x61727574), --ABILITY_SLF_TOOLTIP_LEARN_EXTENDED
+    TooltipNormal = Native.ConvertAbilityStringLevelField(0x61747031), --ABILITY_SLF_TOOLTIP_NORMAL
+    TooltipTurnOff = Native.ConvertAbilityStringLevelField(0x61757431), --ABILITY_SLF_TOOLTIP_TURN_OFF
+    TooltipNormalExtended = Native.ConvertAbilityStringLevelField(0x61756231), --ABILITY_SLF_TOOLTIP_NORMAL_EXTENDED
+    TooltipTurnOffExtended = Native.ConvertAbilityStringLevelField(0x61757531), --ABILITY_SLF_TOOLTIP_TURN_OFF_EXTENDED
+    NormalFormUnitEme1 = Native.ConvertAbilityStringLevelField(0x456D6531), --ABILITY_SLF_NORMAL_FORM_UNIT_EME1
+    SpawnedUnits = Native.ConvertAbilityStringLevelField(0x4E647031), --ABILITY_SLF_SPAWNED_UNITS
+    AbilityForUnitCreation = Native.ConvertAbilityStringLevelField(0x4E726331), --ABILITY_SLF_ABILITY_FOR_UNIT_CREATION
+    NormalFormUnitMil1 = Native.ConvertAbilityStringLevelField(0x4D696C31), --ABILITY_SLF_NORMAL_FORM_UNIT_MIL1
+    AlternateFormUnitMil2 = Native.ConvertAbilityStringLevelField(0x4D696C32), --ABILITY_SLF_ALTERNATE_FORM_UNIT_MIL2
+    BaseOrderIdAns5 = Native.ConvertAbilityStringLevelField(0x416E7335), --ABILITY_SLF_BASE_ORDER_ID_ANS5
+    MorphUnitsGround = Native.ConvertAbilityStringLevelField(0x506C7932), --ABILITY_SLF_MORPH_UNITS_GROUND
+    MorphUnitsAir = Native.ConvertAbilityStringLevelField(0x506C7933), --ABILITY_SLF_MORPH_UNITS_AIR
+    MorphUnitsAmphibious = Native.ConvertAbilityStringLevelField(0x506C7934), --ABILITY_SLF_MORPH_UNITS_AMPHIBIOUS
+    MorphUnitsWater = Native.ConvertAbilityStringLevelField(0x506C7935), --ABILITY_SLF_MORPH_UNITS_WATER
+    UnitTypeOne = Native.ConvertAbilityStringLevelField(0x52616933), --ABILITY_SLF_UNIT_TYPE_ONE
+    UnitTypeTwo = Native.ConvertAbilityStringLevelField(0x52616934), --ABILITY_SLF_UNIT_TYPE_TWO
+    UnitTypeSod2 = Native.ConvertAbilityStringLevelField(0x536F6432), --ABILITY_SLF_UNIT_TYPE_SOD2
+    Summon1UnitType = Native.ConvertAbilityStringLevelField(0x49737431), --ABILITY_SLF_SUMMON_1_UNIT_TYPE
+    Summon2UnitType = Native.ConvertAbilityStringLevelField(0x49737432), --ABILITY_SLF_SUMMON_2_UNIT_TYPE
+    RaceToConvert = Native.ConvertAbilityStringLevelField(0x4E646331), --ABILITY_SLF_RACE_TO_CONVERT
+    PartnerUnitType = Native.ConvertAbilityStringLevelField(0x636F6131), --ABILITY_SLF_PARTNER_UNIT_TYPE
+    PartnerUnitTypeOne = Native.ConvertAbilityStringLevelField(0x64637031), --ABILITY_SLF_PARTNER_UNIT_TYPE_ONE
+    PartnerUnitTypeTwo = Native.ConvertAbilityStringLevelField(0x64637032), --ABILITY_SLF_PARTNER_UNIT_TYPE_TWO
+    RequiredUnitType = Native.ConvertAbilityStringLevelField(0x74706931), --ABILITY_SLF_REQUIRED_UNIT_TYPE
+    ConvertedUnitType = Native.ConvertAbilityStringLevelField(0x74706932), --ABILITY_SLF_CONVERTED_UNIT_TYPE
+    SpellList = Native.ConvertAbilityStringLevelField(0x73706231), --ABILITY_SLF_SPELL_LIST
+    BaseOrderIdSpb5 = Native.ConvertAbilityStringLevelField(0x73706235), --ABILITY_SLF_BASE_ORDER_ID_SPB5
+    BaseOrderIdNcl6 = Native.ConvertAbilityStringLevelField(0x4E636C36), --ABILITY_SLF_BASE_ORDER_ID_NCL6
+    AbilityUpgrade1 = Native.ConvertAbilityStringLevelField(0x4E656733), --ABILITY_SLF_ABILITY_UPGRADE_1
+    AbilityUpgrade2 = Native.ConvertAbilityStringLevelField(0x4E656734), --ABILITY_SLF_ABILITY_UPGRADE_2
+    AbilityUpgrade3 = Native.ConvertAbilityStringLevelField(0x4E656735), --ABILITY_SLF_ABILITY_UPGRADE_3
+    AbilityUpgrade4 = Native.ConvertAbilityStringLevelField(0x4E656736), --ABILITY_SLF_ABILITY_UPGRADE_4
+    SpawnUnitIdNsy2 = Native.ConvertAbilityStringLevelField(0x4E737932), --ABILITY_SLF_SPAWN_UNIT_ID_NSY2
+}
+return AbilityStringLevelField

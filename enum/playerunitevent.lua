@@ -1,0 +1,52 @@
+local Native = require('lib.stdlib.native')
+
+---@class PlayerUnitEvent
+local PlayerUnitEvent = {
+    UnitAttacked = Native.ConvertPlayerUnitEvent(18), --EVENT_PLAYER_UNIT_ATTACKED
+    UnitRescued = Native.ConvertPlayerUnitEvent(19), --EVENT_PLAYER_UNIT_RESCUED
+    UnitDeath = Native.ConvertPlayerUnitEvent(20), --EVENT_PLAYER_UNIT_DEATH
+    UnitDecay = Native.ConvertPlayerUnitEvent(21), --EVENT_PLAYER_UNIT_DECAY
+    UnitDetected = Native.ConvertPlayerUnitEvent(22), --EVENT_PLAYER_UNIT_DETECTED
+    UnitHidden = Native.ConvertPlayerUnitEvent(23), --EVENT_PLAYER_UNIT_HIDDEN
+    UnitSelected = Native.ConvertPlayerUnitEvent(24), --EVENT_PLAYER_UNIT_SELECTED
+    UnitDeselected = Native.ConvertPlayerUnitEvent(25), --EVENT_PLAYER_UNIT_DESELECTED
+    UnitConstructStart = Native.ConvertPlayerUnitEvent(26), --EVENT_PLAYER_UNIT_CONSTRUCT_START
+    UnitConstructCancel = Native.ConvertPlayerUnitEvent(27), --EVENT_PLAYER_UNIT_CONSTRUCT_CANCEL
+    UnitConstructFinish = Native.ConvertPlayerUnitEvent(28), --EVENT_PLAYER_UNIT_CONSTRUCT_FINISH
+    UnitUpgradeStart = Native.ConvertPlayerUnitEvent(29), --EVENT_PLAYER_UNIT_UPGRADE_START
+    UnitUpgradeCancel = Native.ConvertPlayerUnitEvent(30), --EVENT_PLAYER_UNIT_UPGRADE_CANCEL
+    UnitUpgradeFinish = Native.ConvertPlayerUnitEvent(31), --EVENT_PLAYER_UNIT_UPGRADE_FINISH
+    UnitTrainStart = Native.ConvertPlayerUnitEvent(32), --EVENT_PLAYER_UNIT_TRAIN_START
+    UnitTrainCancel = Native.ConvertPlayerUnitEvent(33), --EVENT_PLAYER_UNIT_TRAIN_CANCEL
+    UnitTrainFinish = Native.ConvertPlayerUnitEvent(34), --EVENT_PLAYER_UNIT_TRAIN_FINISH
+    UnitResearchStart = Native.ConvertPlayerUnitEvent(35), --EVENT_PLAYER_UNIT_RESEARCH_START
+    UnitResearchCancel = Native.ConvertPlayerUnitEvent(36), --EVENT_PLAYER_UNIT_RESEARCH_CANCEL
+    UnitResearchFinish = Native.ConvertPlayerUnitEvent(37), --EVENT_PLAYER_UNIT_RESEARCH_FINISH
+    UnitIssuedOrder = Native.ConvertPlayerUnitEvent(38), --EVENT_PLAYER_UNIT_ISSUED_ORDER
+    UnitIssuedPointOrder = Native.ConvertPlayerUnitEvent(39), --EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER
+    UnitIssuedTargetOrder = Native.ConvertPlayerUnitEvent(40), --EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER
+    UnitIssuedUnitOrder = Native.ConvertPlayerUnitEvent(40), --EVENT_PLAYER_UNIT_ISSUED_UNIT_ORDER
+    HeroLevel = Native.ConvertPlayerUnitEvent(41), --EVENT_PLAYER_HERO_LEVEL
+    HeroSkill = Native.ConvertPlayerUnitEvent(42), --EVENT_PLAYER_HERO_SKILL
+    HeroRevivable = Native.ConvertPlayerUnitEvent(43), --EVENT_PLAYER_HERO_REVIVABLE
+    HeroReviveStart = Native.ConvertPlayerUnitEvent(44), --EVENT_PLAYER_HERO_REVIVE_START
+    HeroReviveCancel = Native.ConvertPlayerUnitEvent(45), --EVENT_PLAYER_HERO_REVIVE_CANCEL
+    HeroReviveFinish = Native.ConvertPlayerUnitEvent(46), --EVENT_PLAYER_HERO_REVIVE_FINISH
+    UnitSummon = Native.ConvertPlayerUnitEvent(47), --EVENT_PLAYER_UNIT_SUMMON
+    UnitDropItem = Native.ConvertPlayerUnitEvent(48), --EVENT_PLAYER_UNIT_DROP_ITEM
+    UnitPickupItem = Native.ConvertPlayerUnitEvent(49), --EVENT_PLAYER_UNIT_PICKUP_ITEM
+    UnitUseItem = Native.ConvertPlayerUnitEvent(50), --EVENT_PLAYER_UNIT_USE_ITEM
+    UnitLoaded = Native.ConvertPlayerUnitEvent(51), --EVENT_PLAYER_UNIT_LOADED
+    UnitDamaged = Native.ConvertPlayerUnitEvent(308), --EVENT_PLAYER_UNIT_DAMAGED
+    UnitDamaging = Native.ConvertPlayerUnitEvent(315), --EVENT_PLAYER_UNIT_DAMAGING
+    UnitSell = Native.ConvertPlayerUnitEvent(269), --EVENT_PLAYER_UNIT_SELL
+    UnitChangeOwner = Native.ConvertPlayerUnitEvent(270), --EVENT_PLAYER_UNIT_CHANGE_OWNER
+    UnitSellItem = Native.ConvertPlayerUnitEvent(271), --EVENT_PLAYER_UNIT_SELL_ITEM
+    UnitSpellChannel = Native.ConvertPlayerUnitEvent(272), --EVENT_PLAYER_UNIT_SPELL_CHANNEL
+    UnitSpellCast = Native.ConvertPlayerUnitEvent(273), --EVENT_PLAYER_UNIT_SPELL_CAST
+    UnitSpellEffect = Native.ConvertPlayerUnitEvent(274), --EVENT_PLAYER_UNIT_SPELL_EFFECT
+    UnitSpellFinish = Native.ConvertPlayerUnitEvent(275), --EVENT_PLAYER_UNIT_SPELL_FINISH
+    UnitSpellEndcast = Native.ConvertPlayerUnitEvent(276), --EVENT_PLAYER_UNIT_SPELL_ENDCAST
+    UnitPawnItem = Native.ConvertPlayerUnitEvent(277), --EVENT_PLAYER_UNIT_PAWN_ITEM
+}
+return PlayerUnitEvent

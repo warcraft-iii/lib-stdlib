@@ -1,0 +1,53 @@
+local Native = require('lib.stdlib.native')
+
+---@class UnitEvent
+local UnitEvent = {
+    Damaged = Native.ConvertUnitEvent(52), --EVENT_UNIT_DAMAGED
+    Damaging = Native.ConvertUnitEvent(314), --EVENT_UNIT_DAMAGING
+    Death = Native.ConvertUnitEvent(53), --EVENT_UNIT_DEATH
+    Decay = Native.ConvertUnitEvent(54), --EVENT_UNIT_DECAY
+    Detected = Native.ConvertUnitEvent(55), --EVENT_UNIT_DETECTED
+    Hidden = Native.ConvertUnitEvent(56), --EVENT_UNIT_HIDDEN
+    Selected = Native.ConvertUnitEvent(57), --EVENT_UNIT_SELECTED
+    Deselected = Native.ConvertUnitEvent(58), --EVENT_UNIT_DESELECTED
+    StateLimit = Native.ConvertUnitEvent(59), --EVENT_UNIT_STATE_LIMIT
+    AcquiredTarget = Native.ConvertUnitEvent(60), --EVENT_UNIT_ACQUIRED_TARGET
+    TargetInRange = Native.ConvertUnitEvent(61), --EVENT_UNIT_TARGET_IN_RANGE
+    Attacked = Native.ConvertUnitEvent(62), --EVENT_UNIT_ATTACKED
+    Rescued = Native.ConvertUnitEvent(63), --EVENT_UNIT_RESCUED
+    ConstructCancel = Native.ConvertUnitEvent(64), --EVENT_UNIT_CONSTRUCT_CANCEL
+    ConstructFinish = Native.ConvertUnitEvent(65), --EVENT_UNIT_CONSTRUCT_FINISH
+    UpgradeStart = Native.ConvertUnitEvent(66), --EVENT_UNIT_UPGRADE_START
+    UpgradeCancel = Native.ConvertUnitEvent(67), --EVENT_UNIT_UPGRADE_CANCEL
+    UpgradeFinish = Native.ConvertUnitEvent(68), --EVENT_UNIT_UPGRADE_FINISH
+    TrainStart = Native.ConvertUnitEvent(69), --EVENT_UNIT_TRAIN_START
+    TrainCancel = Native.ConvertUnitEvent(70), --EVENT_UNIT_TRAIN_CANCEL
+    TrainFinish = Native.ConvertUnitEvent(71), --EVENT_UNIT_TRAIN_FINISH
+    ResearchStart = Native.ConvertUnitEvent(72), --EVENT_UNIT_RESEARCH_START
+    ResearchCancel = Native.ConvertUnitEvent(73), --EVENT_UNIT_RESEARCH_CANCEL
+    ResearchFinish = Native.ConvertUnitEvent(74), --EVENT_UNIT_RESEARCH_FINISH
+    IssuedOrder = Native.ConvertUnitEvent(75), --EVENT_UNIT_ISSUED_ORDER
+    IssuedPointOrder = Native.ConvertUnitEvent(76), --EVENT_UNIT_ISSUED_POINT_ORDER
+    IssuedTargetOrder = Native.ConvertUnitEvent(77), --EVENT_UNIT_ISSUED_TARGET_ORDER
+    HeroLevel = Native.ConvertUnitEvent(78), --EVENT_UNIT_HERO_LEVEL
+    HeroSkill = Native.ConvertUnitEvent(79), --EVENT_UNIT_HERO_SKILL
+    HeroRevivable = Native.ConvertUnitEvent(80), --EVENT_UNIT_HERO_REVIVABLE
+    HeroReviveStart = Native.ConvertUnitEvent(81), --EVENT_UNIT_HERO_REVIVE_START
+    HeroReviveCancel = Native.ConvertUnitEvent(82), --EVENT_UNIT_HERO_REVIVE_CANCEL
+    HeroReviveFinish = Native.ConvertUnitEvent(83), --EVENT_UNIT_HERO_REVIVE_FINISH
+    Summon = Native.ConvertUnitEvent(84), --EVENT_UNIT_SUMMON
+    DropItem = Native.ConvertUnitEvent(85), --EVENT_UNIT_DROP_ITEM
+    PickupItem = Native.ConvertUnitEvent(86), --EVENT_UNIT_PICKUP_ITEM
+    UseItem = Native.ConvertUnitEvent(87), --EVENT_UNIT_USE_ITEM
+    Loaded = Native.ConvertUnitEvent(88), --EVENT_UNIT_LOADED
+    Sell = Native.ConvertUnitEvent(286), --EVENT_UNIT_SELL
+    ChangeOwner = Native.ConvertUnitEvent(287), --EVENT_UNIT_CHANGE_OWNER
+    SellItem = Native.ConvertUnitEvent(288), --EVENT_UNIT_SELL_ITEM
+    SpellChannel = Native.ConvertUnitEvent(289), --EVENT_UNIT_SPELL_CHANNEL
+    SpellCast = Native.ConvertUnitEvent(290), --EVENT_UNIT_SPELL_CAST
+    SpellEffect = Native.ConvertUnitEvent(291), --EVENT_UNIT_SPELL_EFFECT
+    SpellFinish = Native.ConvertUnitEvent(292), --EVENT_UNIT_SPELL_FINISH
+    SpellEndcast = Native.ConvertUnitEvent(293), --EVENT_UNIT_SPELL_ENDCAST
+    PawnItem = Native.ConvertUnitEvent(294), --EVENT_UNIT_PAWN_ITEM
+}
+return UnitEvent
