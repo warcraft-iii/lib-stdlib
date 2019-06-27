@@ -42,6 +42,28 @@ function spairs(t)
     end
 end
 
+---vipairs
+---@generic V
+---@param t array
+---@return fun(t:array):V
+function vipairs(t)
+    local i = 0
+    return function()
+        i = i + 1
+        return t[i]
+    end
+end
+
+---wipe
+---@param t T
+---@return T
+function table.wipe(t)
+    for k, v in pairs(t) do
+        t[k] = nil
+    end
+    return t
+end
+
 ---reduce
 ---@generic V, T
 ---@param t array
