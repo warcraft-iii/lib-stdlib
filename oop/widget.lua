@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.widget')
+return require('lib.stdlib.oop._generated._widget')

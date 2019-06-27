@@ -1,4 +1,4 @@
-local Frame = require('lib.stdlib.oop._generated.frame')
+local Frame = require('lib.stdlib.oop._generated._frame')
 local Native = require('lib.stdlib.native')
 
 ---show

@@ -12414,5 +12414,9 @@ Native.PATHING_FLAG_UNITEMPLACABLE = nil
 
 --@end-remove@
 
+for _, v in ipairs(require('lib.stdlib.native._generated._globals')) do
+    Native[v] = _G[v]
+end
+
 return Native
 

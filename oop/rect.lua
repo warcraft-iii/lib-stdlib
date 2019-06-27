@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.rect')
+return require('lib.stdlib.oop._generated._rect')

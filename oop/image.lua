@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.image')
+return require('lib.stdlib.oop._generated._image')

@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.sound')
+return require('lib.stdlib.oop._generated._sound')

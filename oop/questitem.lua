@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.questitem')
+return require('lib.stdlib.oop._generated._questitem')

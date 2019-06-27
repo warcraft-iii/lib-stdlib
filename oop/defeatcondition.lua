@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.defeatcondition')
+return require('lib.stdlib.oop._generated._defeatcondition')

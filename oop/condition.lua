@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.condition')
+return require('lib.stdlib.oop._generated._condition')

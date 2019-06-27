@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.boolexpr')
+return require('lib.stdlib.oop._generated._boolexpr')

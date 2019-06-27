@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.leaderboard')
+return require('lib.stdlib.oop._generated._leaderboard')

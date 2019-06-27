@@ -1,4 +1,4 @@
-local Trigger =  require('lib.stdlib.oop._generated.trigger')
+local Trigger =  require('lib.stdlib.oop._generated._trigger')
 local Player = require('lib.stdlib.oop.player')
 
 ---registerAllPlayersUnitEvent

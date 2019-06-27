@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.fogmodifier')
+return require('lib.stdlib.oop._generated._fogmodifier')

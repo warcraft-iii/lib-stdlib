@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.agent')
+return require('lib.stdlib.oop._generated._agent')

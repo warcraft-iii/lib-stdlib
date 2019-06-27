@@ -1,4 +1,4 @@
-local Player = require('lib.stdlib.oop._generated.player')
+local Player = require('lib.stdlib.oop._generated._player')
 local PlayerState = require('lib.stdlib.enum.playerstate')
 
 ---adjustState

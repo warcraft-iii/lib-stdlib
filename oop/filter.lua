@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.filter')
+return require('lib.stdlib.oop._generated._filter')

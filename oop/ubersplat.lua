@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.ubersplat')
+return require('lib.stdlib.oop._generated._ubersplat')

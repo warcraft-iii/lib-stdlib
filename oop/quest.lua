@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.quest')
+return require('lib.stdlib.oop._generated._quest')

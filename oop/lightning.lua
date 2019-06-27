@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.lightning')
+return require('lib.stdlib.oop._generated._lightning')

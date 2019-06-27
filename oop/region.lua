@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.region')
+return require('lib.stdlib.oop._generated._region')

@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.hashtable')
+return require('lib.stdlib.oop._generated._hashtable')

@@ -1,4 +1,4 @@
-local Unit = require('lib.stdlib.oop._generated.unit')
+local Unit = require('lib.stdlib.oop._generated._unit')
 
 ---isDead
 ---@return boolean

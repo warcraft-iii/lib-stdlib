@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.dialog')
+return require('lib.stdlib.oop._generated._dialog')

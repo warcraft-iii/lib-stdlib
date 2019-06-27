@@ -1,1 +1,1 @@
-return require('lib.stdlib.oop._generated.timerdialog')
+return require('lib.stdlib.oop._generated._timerdialog')
