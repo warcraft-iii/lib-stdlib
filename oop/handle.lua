@@ -6,12 +6,19 @@
 ---@class Handle: object
 local Handle = class('Handle')
 
-local weakMt = {__mode = 'k'}
+local mtDestroyed = {
+    __index = function()
+        error('object destroyed')
+    end,
+    __newindex = function()
+        error('object destroyed')
+    end
+}
 
 ---inherit
 ---@private
 function Handle:inherit()
-    self._object = setmetatable({}, weakMt)
+    self._object = {}
 end
 
 ---constructor
@@ -21,6 +28,20 @@ end
 function Handle:constructor(ud)
     self[0] = ud
     self._object[ud] = self
+end
+
+---delete
+---@return void
+function Handle:delete()
+    self._object[self:getUd()] = nil
+
+    local destructor = rawget(self:getType(), 'destructor')
+    if destructor then
+        destructor(self)
+    end
+
+    table.wipe(self)
+    setmetatable(self, mtDestroyed)
 end
 
 ---fromUd
