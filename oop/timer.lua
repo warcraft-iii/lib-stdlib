@@ -1,6 +1,5 @@
 local Timer = require('lib.stdlib.oop._generated._timer')
 local Native = require('lib.stdlib.native')
-local Function = require('lib.stdlib.oop.function')
 
 ---<static> after
 ---@param duration number
@@ -8,10 +7,10 @@ local Function = require('lib.stdlib.oop.function')
 ---@return Timer
 function Timer:after(duration, func)
     local timer = Timer:create()
-    Native.TimerStart(timer:getUd(), duration, false, Function:errorable(function()
+    Native.TimerStart(timer:getUd(), duration, false, function()
         func()
         timer:destroy()
-    end))
+    end)
     return timer
 end
 
@@ -19,7 +18,7 @@ end
 ---@param duration number
 ---@param func function
 function Timer:start(duration, func)
-    Native.TimerStart(getUd(self), duration, true, Function:errorable(func))
+    Native.TimerStart(getUd(self), duration, true, func)
 end
 
 return Timer

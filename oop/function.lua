@@ -13,25 +13,29 @@
 
 local Function = {}
 
-local function safereturn(ok, ...)
-    if ok then
-        return ...
-    end
-    print(...)
-end
+--@remove@
 
-local function safecall(f, ...)
-    return safereturn(pcall(f, ...))
-end
+---createUnitCallback
+---@param filter UnitCallback
+---@return function
+function Function:createUnitCallback(filter) end
 
-function Function:errorable(f)
-    if not f then
-        return
-    end
-    return function(...)
-        return safecall(f, ...)
-    end
-end
+---createPlayerCallback
+---@param filter PlayerCallback
+---@return function
+function Function:createPlayerCallback(filter) end
+
+---createDestructableCallback
+---@param filter DestructableCallback
+---@return function
+function Function:createDestructableCallback(filter) end
+
+---createItemCallback
+---@param filter ItemCallback
+---@return function
+function Function:createItemCallback(filter) end
+
+--@end-remove@
 
 local function generateCallbackCreator(cls, method)
     return function(_, callback)
@@ -49,24 +53,9 @@ local function generateCallbackCreator(cls, method)
     end
 end
 
----createUnitCallback
----@param filter UnitCallback
----@return function
 Function.createUnitCallback = generateCallbackCreator(Unit, GetEnumUnit)
-
----createPlayerCallback
----@param filter PlayerCallback
----@return function
 Function.createPlayerCallback = generateCallbackCreator(Player, GetEnumPlayer)
-
----createDestructableCallback
----@param filter DestructableCallback
----@return function
 Function.createDestructableCallback = generateCallbackCreator(Destructable, GetEnumDestructable)
-
----createItemCallback
----@param filter ItemCallback
----@return function
 Function.createItemCallback = generateCallbackCreator(Item, GetEnumItem)
 
 return Function

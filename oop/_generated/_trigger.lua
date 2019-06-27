@@ -1,7 +1,6 @@
 local Native = require('lib.stdlib.native')
 local Event = require('lib.stdlib.oop.event')
 local TriggerCondition = require('lib.stdlib.oop.triggercondition')
-local Function = require('lib.stdlib.oop.function')
 
 ---@class Trigger : Agent
 local Trigger = class('Trigger', require('lib.stdlib.oop.agent'))
@@ -290,7 +289,6 @@ end
 ---@param actionFunc function
 ---@return TriggerAction
 function Trigger:addAction(actionFunc)
-    actionFunc = Function:errorable(actionFunc)
     return Native.TriggerAddAction(getUd(self), actionFunc)
 end
 

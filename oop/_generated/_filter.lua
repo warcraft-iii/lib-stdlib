@@ -1,5 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Function = require('lib.stdlib.oop.function')
 
 ---@class Filter : BoolExpr
 local Filter = class('Filter', require('lib.stdlib.oop.boolexpr'))
@@ -15,7 +14,6 @@ setmetatable(Filter, mt)
 ---@param func function
 ---@return Filter
 function Filter:create(func)
-    func = Function:errorable(func)
     return Filter:fromUd(Native.Filter(func))
 end
 
