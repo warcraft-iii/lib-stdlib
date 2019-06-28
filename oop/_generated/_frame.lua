@@ -153,13 +153,6 @@ function Frame:setTextColor(color)
     return Native.BlzFrameSetTextColor(getUd(self), color)
 end
 
----setFocus
----@param flag boolean
----@return void
-function Frame:setFocus(flag)
-    return Native.BlzFrameSetFocus(getUd(self), flag)
-end
-
 ---setModel
 ---@param modelFile string
 ---@param cameraIndex integer
