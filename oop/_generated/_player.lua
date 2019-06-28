@@ -18,6 +18,12 @@ function Player:get(number)
     return Player:fromUd(Native.Player(number))
 end
 
+---<static> getLocal
+---@return Player
+function Player:getLocal()
+    return Player:fromUd(Native.GetLocalPlayer())
+end
+
 ---setTeam
 ---@param team integer
 ---@return void
