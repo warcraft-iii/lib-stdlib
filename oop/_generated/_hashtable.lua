@@ -1,40 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Player = require('lib.stdlib.oop.player')
-local Widget = require('lib.stdlib.oop.widget')
-local Destructable = require('lib.stdlib.oop.destructable')
-local Item = require('lib.stdlib.oop.item')
-local Unit = require('lib.stdlib.oop.unit')
-local Ability = require('lib.stdlib.oop.ability')
-local Timer = require('lib.stdlib.oop.timer')
-local Trigger = require('lib.stdlib.oop.trigger')
-local TriggerCondition = require('lib.stdlib.oop.triggercondition')
-local Event = require('lib.stdlib.oop.event')
-local Force = require('lib.stdlib.oop.force')
-local Group = require('lib.stdlib.oop.group')
-local Location = require('lib.stdlib.oop.location')
-local Rect = require('lib.stdlib.oop.rect')
-local BoolExpr = require('lib.stdlib.oop.boolexpr')
-local Sound = require('lib.stdlib.oop.sound')
-local Effect = require('lib.stdlib.oop.effect')
-local UnitPool = require('lib.stdlib.oop.unitpool')
-local ItemPool = require('lib.stdlib.oop.itempool')
-local Quest = require('lib.stdlib.oop.quest')
-local QuestItem = require('lib.stdlib.oop.questitem')
-local DefeatCondition = require('lib.stdlib.oop.defeatcondition')
-local TimerDialog = require('lib.stdlib.oop.timerdialog')
-local LeaderBoard = require('lib.stdlib.oop.leaderboard')
-local MultiBoard = require('lib.stdlib.oop.multiboard')
-local MultiBoardItem = require('lib.stdlib.oop.multiboarditem')
-local Trackable = require('lib.stdlib.oop.trackable')
-local Dialog = require('lib.stdlib.oop.dialog')
-local Button = require('lib.stdlib.oop.button')
-local TextTag = require('lib.stdlib.oop.texttag')
-local Lightning = require('lib.stdlib.oop.lightning')
-local Image = require('lib.stdlib.oop.image')
-local Ubersplat = require('lib.stdlib.oop.ubersplat')
-local Region = require('lib.stdlib.oop.region')
-local FogModifier = require('lib.stdlib.oop.fogmodifier')
-local Frame = require('lib.stdlib.oop.frame')
 
 ---@class Hashtable : Agent
 local Hashtable = class('Hashtable', require('lib.stdlib.oop.agent'))
@@ -478,7 +442,7 @@ end
 ---@param childKey integer
 ---@return Player
 function Hashtable:loadPlayerHandle(parentKey, childKey)
-    return Player:fromUd(Native.LoadPlayerHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.player'):fromUd(Native.LoadPlayerHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadWidgetHandle
@@ -486,7 +450,7 @@ end
 ---@param childKey integer
 ---@return Widget
 function Hashtable:loadWidgetHandle(parentKey, childKey)
-    return Widget:fromUd(Native.LoadWidgetHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.widget'):fromUd(Native.LoadWidgetHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadDestructableHandle
@@ -494,7 +458,7 @@ end
 ---@param childKey integer
 ---@return Destructable
 function Hashtable:loadDestructableHandle(parentKey, childKey)
-    return Destructable:fromUd(Native.LoadDestructableHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.destructable'):fromUd(Native.LoadDestructableHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadItemHandle
@@ -502,7 +466,7 @@ end
 ---@param childKey integer
 ---@return Item
 function Hashtable:loadItemHandle(parentKey, childKey)
-    return Item:fromUd(Native.LoadItemHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.item'):fromUd(Native.LoadItemHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadUnitHandle
@@ -510,7 +474,7 @@ end
 ---@param childKey integer
 ---@return Unit
 function Hashtable:loadUnitHandle(parentKey, childKey)
-    return Unit:fromUd(Native.LoadUnitHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.unit'):fromUd(Native.LoadUnitHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadAbilityHandle
@@ -518,7 +482,7 @@ end
 ---@param childKey integer
 ---@return Ability
 function Hashtable:loadAbilityHandle(parentKey, childKey)
-    return Ability:fromUd(Native.LoadAbilityHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.ability'):fromUd(Native.LoadAbilityHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadTimerHandle
@@ -526,7 +490,7 @@ end
 ---@param childKey integer
 ---@return Timer
 function Hashtable:loadTimerHandle(parentKey, childKey)
-    return Timer:fromUd(Native.LoadTimerHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.timer'):fromUd(Native.LoadTimerHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadTriggerHandle
@@ -534,7 +498,7 @@ end
 ---@param childKey integer
 ---@return Trigger
 function Hashtable:loadTriggerHandle(parentKey, childKey)
-    return Trigger:fromUd(Native.LoadTriggerHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.trigger'):fromUd(Native.LoadTriggerHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadTriggerConditionHandle
@@ -542,7 +506,7 @@ end
 ---@param childKey integer
 ---@return TriggerCondition
 function Hashtable:loadTriggerConditionHandle(parentKey, childKey)
-    return TriggerCondition:fromUd(Native.LoadTriggerConditionHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.triggercondition'):fromUd(Native.LoadTriggerConditionHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadTriggerActionHandle
@@ -558,7 +522,7 @@ end
 ---@param childKey integer
 ---@return Event
 function Hashtable:loadTriggerEventHandle(parentKey, childKey)
-    return Event:fromUd(Native.LoadTriggerEventHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.event'):fromUd(Native.LoadTriggerEventHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadForceHandle
@@ -566,7 +530,7 @@ end
 ---@param childKey integer
 ---@return Force
 function Hashtable:loadForceHandle(parentKey, childKey)
-    return Force:fromUd(Native.LoadForceHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.force'):fromUd(Native.LoadForceHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadGroupHandle
@@ -574,7 +538,7 @@ end
 ---@param childKey integer
 ---@return Group
 function Hashtable:loadGroupHandle(parentKey, childKey)
-    return Group:fromUd(Native.LoadGroupHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.group'):fromUd(Native.LoadGroupHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadLocationHandle
@@ -582,7 +546,7 @@ end
 ---@param childKey integer
 ---@return Location
 function Hashtable:loadLocationHandle(parentKey, childKey)
-    return Location:fromUd(Native.LoadLocationHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.location'):fromUd(Native.LoadLocationHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadRectHandle
@@ -590,7 +554,7 @@ end
 ---@param childKey integer
 ---@return Rect
 function Hashtable:loadRectHandle(parentKey, childKey)
-    return Rect:fromUd(Native.LoadRectHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.rect'):fromUd(Native.LoadRectHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadBooleanExprHandle
@@ -598,7 +562,7 @@ end
 ---@param childKey integer
 ---@return BoolExpr
 function Hashtable:loadBooleanExprHandle(parentKey, childKey)
-    return BoolExpr:fromUd(Native.LoadBooleanExprHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.boolexpr'):fromUd(Native.LoadBooleanExprHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadSoundHandle
@@ -606,7 +570,7 @@ end
 ---@param childKey integer
 ---@return Sound
 function Hashtable:loadSoundHandle(parentKey, childKey)
-    return Sound:fromUd(Native.LoadSoundHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.sound'):fromUd(Native.LoadSoundHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadEffectHandle
@@ -614,7 +578,7 @@ end
 ---@param childKey integer
 ---@return Effect
 function Hashtable:loadEffectHandle(parentKey, childKey)
-    return Effect:fromUd(Native.LoadEffectHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.effect'):fromUd(Native.LoadEffectHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadUnitPoolHandle
@@ -622,7 +586,7 @@ end
 ---@param childKey integer
 ---@return UnitPool
 function Hashtable:loadUnitPoolHandle(parentKey, childKey)
-    return UnitPool:fromUd(Native.LoadUnitPoolHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.unitpool'):fromUd(Native.LoadUnitPoolHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadItemPoolHandle
@@ -630,7 +594,7 @@ end
 ---@param childKey integer
 ---@return ItemPool
 function Hashtable:loadItemPoolHandle(parentKey, childKey)
-    return ItemPool:fromUd(Native.LoadItemPoolHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.itempool'):fromUd(Native.LoadItemPoolHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadQuestHandle
@@ -638,7 +602,7 @@ end
 ---@param childKey integer
 ---@return Quest
 function Hashtable:loadQuestHandle(parentKey, childKey)
-    return Quest:fromUd(Native.LoadQuestHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.quest'):fromUd(Native.LoadQuestHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadQuestItemHandle
@@ -646,7 +610,7 @@ end
 ---@param childKey integer
 ---@return QuestItem
 function Hashtable:loadQuestItemHandle(parentKey, childKey)
-    return QuestItem:fromUd(Native.LoadQuestItemHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.questitem'):fromUd(Native.LoadQuestItemHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadDefeatConditionHandle
@@ -654,7 +618,7 @@ end
 ---@param childKey integer
 ---@return DefeatCondition
 function Hashtable:loadDefeatConditionHandle(parentKey, childKey)
-    return DefeatCondition:fromUd(Native.LoadDefeatConditionHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.defeatcondition'):fromUd(Native.LoadDefeatConditionHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadTimerDialogHandle
@@ -662,7 +626,7 @@ end
 ---@param childKey integer
 ---@return TimerDialog
 function Hashtable:loadTimerDialogHandle(parentKey, childKey)
-    return TimerDialog:fromUd(Native.LoadTimerDialogHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.timerdialog'):fromUd(Native.LoadTimerDialogHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadLeaderboardHandle
@@ -670,7 +634,7 @@ end
 ---@param childKey integer
 ---@return LeaderBoard
 function Hashtable:loadLeaderboardHandle(parentKey, childKey)
-    return LeaderBoard:fromUd(Native.LoadLeaderboardHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.leaderboard'):fromUd(Native.LoadLeaderboardHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadMultiboardHandle
@@ -678,7 +642,7 @@ end
 ---@param childKey integer
 ---@return MultiBoard
 function Hashtable:loadMultiboardHandle(parentKey, childKey)
-    return MultiBoard:fromUd(Native.LoadMultiboardHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.multiboard'):fromUd(Native.LoadMultiboardHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadMultiboardItemHandle
@@ -686,7 +650,7 @@ end
 ---@param childKey integer
 ---@return MultiBoardItem
 function Hashtable:loadMultiboardItemHandle(parentKey, childKey)
-    return MultiBoardItem:fromUd(Native.LoadMultiboardItemHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.multiboarditem'):fromUd(Native.LoadMultiboardItemHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadTrackableHandle
@@ -694,7 +658,7 @@ end
 ---@param childKey integer
 ---@return Trackable
 function Hashtable:loadTrackableHandle(parentKey, childKey)
-    return Trackable:fromUd(Native.LoadTrackableHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.trackable'):fromUd(Native.LoadTrackableHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadDialogHandle
@@ -702,7 +666,7 @@ end
 ---@param childKey integer
 ---@return Dialog
 function Hashtable:loadDialogHandle(parentKey, childKey)
-    return Dialog:fromUd(Native.LoadDialogHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.dialog'):fromUd(Native.LoadDialogHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadButtonHandle
@@ -710,7 +674,7 @@ end
 ---@param childKey integer
 ---@return Button
 function Hashtable:loadButtonHandle(parentKey, childKey)
-    return Button:fromUd(Native.LoadButtonHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.button'):fromUd(Native.LoadButtonHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadTextTagHandle
@@ -718,7 +682,7 @@ end
 ---@param childKey integer
 ---@return TextTag
 function Hashtable:loadTextTagHandle(parentKey, childKey)
-    return TextTag:fromUd(Native.LoadTextTagHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.texttag'):fromUd(Native.LoadTextTagHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadLightningHandle
@@ -726,7 +690,7 @@ end
 ---@param childKey integer
 ---@return Lightning
 function Hashtable:loadLightningHandle(parentKey, childKey)
-    return Lightning:fromUd(Native.LoadLightningHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.lightning'):fromUd(Native.LoadLightningHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadImageHandle
@@ -734,7 +698,7 @@ end
 ---@param childKey integer
 ---@return Image
 function Hashtable:loadImageHandle(parentKey, childKey)
-    return Image:fromUd(Native.LoadImageHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.image'):fromUd(Native.LoadImageHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadUbersplatHandle
@@ -742,7 +706,7 @@ end
 ---@param childKey integer
 ---@return Ubersplat
 function Hashtable:loadUbersplatHandle(parentKey, childKey)
-    return Ubersplat:fromUd(Native.LoadUbersplatHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.ubersplat'):fromUd(Native.LoadUbersplatHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadRegionHandle
@@ -750,7 +714,7 @@ end
 ---@param childKey integer
 ---@return Region
 function Hashtable:loadRegionHandle(parentKey, childKey)
-    return Region:fromUd(Native.LoadRegionHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.region'):fromUd(Native.LoadRegionHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadFogStateHandle
@@ -766,7 +730,7 @@ end
 ---@param childKey integer
 ---@return FogModifier
 function Hashtable:loadFogModifierHandle(parentKey, childKey)
-    return FogModifier:fromUd(Native.LoadFogModifierHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.fogmodifier'):fromUd(Native.LoadFogModifierHandle(getUd(self), parentKey, childKey))
 end
 
 ---loadHandle
@@ -782,7 +746,7 @@ end
 ---@param childKey integer
 ---@return Frame
 function Hashtable:loadFrameHandle(parentKey, childKey)
-    return Frame:fromUd(Native.LoadFrameHandle(getUd(self), parentKey, childKey))
+    return require('lib.stdlib.oop.frame'):fromUd(Native.LoadFrameHandle(getUd(self), parentKey, childKey))
 end
 
 ---haveSavedInteger

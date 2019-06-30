@@ -1,5 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Item = require('lib.stdlib.oop.item')
 
 ---@class ItemPool : Handle
 local ItemPool = class('ItemPool', require('lib.stdlib.oop.handle'))
@@ -36,7 +35,7 @@ end
 ---@param y float
 ---@return Item
 function ItemPool:placeRandomItem(x, y)
-    return Item:fromUd(Native.PlaceRandomItem(getUd(self), x, y))
+    return require('lib.stdlib.oop.item'):fromUd(Native.PlaceRandomItem(getUd(self), x, y))
 end
 
 return ItemPool

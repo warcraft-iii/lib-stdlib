@@ -1,6 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Event = require('lib.stdlib.oop.event')
-local TriggerCondition = require('lib.stdlib.oop.triggercondition')
 
 ---@class Trigger : Agent
 local Trigger = class('Trigger', require('lib.stdlib.oop.agent'))
@@ -99,7 +97,7 @@ end
 ---@param limitval float
 ---@return Event
 function Trigger:registerVariableEvent(varName, opcode, limitval)
-    return Event:fromUd(Native.TriggerRegisterVariableEvent(getUd(self), varName, opcode, limitval))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterVariableEvent(getUd(self), varName, opcode, limitval))
 end
 
 ---registerTimerEvent
@@ -107,14 +105,14 @@ end
 ---@param periodic boolean
 ---@return Event
 function Trigger:registerTimerEvent(timeout, periodic)
-    return Event:fromUd(Native.TriggerRegisterTimerEvent(getUd(self), timeout, periodic))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterTimerEvent(getUd(self), timeout, periodic))
 end
 
 ---registerTimerExpireEvent
 ---@param t Timer
 ---@return Event
 function Trigger:registerTimerExpireEvent(t)
-    return Event:fromUd(Native.TriggerRegisterTimerExpireEvent(getUd(self), getUd(t)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterTimerExpireEvent(getUd(self), getUd(t)))
 end
 
 ---registerGameStateEvent
@@ -123,28 +121,28 @@ end
 ---@param limitval float
 ---@return Event
 function Trigger:registerGameStateEvent(state, opcode, limitval)
-    return Event:fromUd(Native.TriggerRegisterGameStateEvent(getUd(self), state, opcode, limitval))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterGameStateEvent(getUd(self), state, opcode, limitval))
 end
 
 ---registerDialogEvent
 ---@param dialog Dialog
 ---@return Event
 function Trigger:registerDialogEvent(dialog)
-    return Event:fromUd(Native.TriggerRegisterDialogEvent(getUd(self), getUd(dialog)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterDialogEvent(getUd(self), getUd(dialog)))
 end
 
 ---registerDialogButtonEvent
 ---@param button Button
 ---@return Event
 function Trigger:registerDialogButtonEvent(button)
-    return Event:fromUd(Native.TriggerRegisterDialogButtonEvent(getUd(self), getUd(button)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterDialogButtonEvent(getUd(self), getUd(button)))
 end
 
 ---registerGameEvent
 ---@param gameEvent GameEvent
 ---@return Event
 function Trigger:registerGameEvent(gameEvent)
-    return Event:fromUd(Native.TriggerRegisterGameEvent(getUd(self), gameEvent))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterGameEvent(getUd(self), gameEvent))
 end
 
 ---registerEnterRegion
@@ -152,7 +150,7 @@ end
 ---@param filter BoolExpr
 ---@return Event
 function Trigger:registerEnterRegion(region, filter)
-    return Event:fromUd(Native.TriggerRegisterEnterRegion(getUd(self), getUd(region), getUd(filter)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterEnterRegion(getUd(self), getUd(region), getUd(filter)))
 end
 
 ---registerLeaveRegion
@@ -160,21 +158,21 @@ end
 ---@param filter BoolExpr
 ---@return Event
 function Trigger:registerLeaveRegion(region, filter)
-    return Event:fromUd(Native.TriggerRegisterLeaveRegion(getUd(self), getUd(region), getUd(filter)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterLeaveRegion(getUd(self), getUd(region), getUd(filter)))
 end
 
 ---registerTrackableHitEvent
 ---@param t Trackable
 ---@return Event
 function Trigger:registerTrackableHitEvent(t)
-    return Event:fromUd(Native.TriggerRegisterTrackableHitEvent(getUd(self), getUd(t)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterTrackableHitEvent(getUd(self), getUd(t)))
 end
 
 ---registerTrackableTrackEvent
 ---@param t Trackable
 ---@return Event
 function Trigger:registerTrackableTrackEvent(t)
-    return Event:fromUd(Native.TriggerRegisterTrackableTrackEvent(getUd(self), getUd(t)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterTrackableTrackEvent(getUd(self), getUd(t)))
 end
 
 ---registerPlayerEvent
@@ -182,7 +180,7 @@ end
 ---@param playerEvent PlayerEvent
 ---@return Event
 function Trigger:registerPlayerEvent(player, playerEvent)
-    return Event:fromUd(Native.TriggerRegisterPlayerEvent(getUd(self), getUd(player), playerEvent))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterPlayerEvent(getUd(self), getUd(player), playerEvent))
 end
 
 ---registerPlayerUnitEvent
@@ -191,7 +189,7 @@ end
 ---@param filter BoolExpr
 ---@return Event
 function Trigger:registerPlayerUnitEvent(player, playerUnitEvent, filter)
-    return Event:fromUd(Native.TriggerRegisterPlayerUnitEvent(getUd(self), getUd(player), playerUnitEvent, getUd(filter)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterPlayerUnitEvent(getUd(self), getUd(player), playerUnitEvent, getUd(filter)))
 end
 
 ---registerPlayerAllianceChange
@@ -199,7 +197,7 @@ end
 ---@param alliance AllianceType
 ---@return Event
 function Trigger:registerPlayerAllianceChange(player, alliance)
-    return Event:fromUd(Native.TriggerRegisterPlayerAllianceChange(getUd(self), getUd(player), alliance))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterPlayerAllianceChange(getUd(self), getUd(player), alliance))
 end
 
 ---registerPlayerStateEvent
@@ -209,7 +207,7 @@ end
 ---@param limitval float
 ---@return Event
 function Trigger:registerPlayerStateEvent(player, state, opcode, limitval)
-    return Event:fromUd(Native.TriggerRegisterPlayerStateEvent(getUd(self), getUd(player), state, opcode, limitval))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterPlayerStateEvent(getUd(self), getUd(player), state, opcode, limitval))
 end
 
 ---registerPlayerChatEvent
@@ -218,14 +216,14 @@ end
 ---@param exactMatchOnly boolean
 ---@return Event
 function Trigger:registerPlayerChatEvent(player, chatMessageToDetect, exactMatchOnly)
-    return Event:fromUd(Native.TriggerRegisterPlayerChatEvent(getUd(self), getUd(player), chatMessageToDetect, exactMatchOnly))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterPlayerChatEvent(getUd(self), getUd(player), chatMessageToDetect, exactMatchOnly))
 end
 
 ---registerDeathEvent
 ---@param widget Widget
 ---@return Event
 function Trigger:registerDeathEvent(widget)
-    return Event:fromUd(Native.TriggerRegisterDeathEvent(getUd(self), getUd(widget)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterDeathEvent(getUd(self), getUd(widget)))
 end
 
 ---registerUnitStateEvent
@@ -235,7 +233,7 @@ end
 ---@param limitval float
 ---@return Event
 function Trigger:registerUnitStateEvent(unit, state, opcode, limitval)
-    return Event:fromUd(Native.TriggerRegisterUnitStateEvent(getUd(self), getUd(unit), state, opcode, limitval))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterUnitStateEvent(getUd(self), getUd(unit), state, opcode, limitval))
 end
 
 ---registerUnitEvent
@@ -243,7 +241,7 @@ end
 ---@param event UnitEvent
 ---@return Event
 function Trigger:registerUnitEvent(unit, event)
-    return Event:fromUd(Native.TriggerRegisterUnitEvent(getUd(self), getUd(unit), event))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterUnitEvent(getUd(self), getUd(unit), event))
 end
 
 ---registerFilterUnitEvent
@@ -252,7 +250,7 @@ end
 ---@param filter BoolExpr
 ---@return Event
 function Trigger:registerFilterUnitEvent(unit, event, filter)
-    return Event:fromUd(Native.TriggerRegisterFilterUnitEvent(getUd(self), getUd(unit), event, getUd(filter)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterFilterUnitEvent(getUd(self), getUd(unit), event, getUd(filter)))
 end
 
 ---registerUnitInRange
@@ -261,7 +259,7 @@ end
 ---@param filter BoolExpr
 ---@return Event
 function Trigger:registerUnitInRange(unit, range, filter)
-    return Event:fromUd(Native.TriggerRegisterUnitInRange(getUd(self), getUd(unit), range, getUd(filter)))
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterUnitInRange(getUd(self), getUd(unit), range, getUd(filter)))
 end
 
 ---addCondition
@@ -269,7 +267,7 @@ end
 ---@return TriggerCondition
 function Trigger:addCondition(condition)
     condition = Native.Condition(condition)
-    return TriggerCondition:fromUd(Native.TriggerAddCondition(getUd(self), condition))
+    return require('lib.stdlib.oop.triggercondition'):fromUd(Native.TriggerAddCondition(getUd(self), condition))
 end
 
 ---removeCondition
@@ -328,7 +326,7 @@ end
 ---@param eventId FrameEventType
 ---@return Event
 function Trigger:registerFrameEvent(frame, eventId)
-    return Event:fromUd(Native.BlzTriggerRegisterFrameEvent(getUd(self), getUd(frame), eventId))
+    return require('lib.stdlib.oop.event'):fromUd(Native.BlzTriggerRegisterFrameEvent(getUd(self), getUd(frame), eventId))
 end
 
 ---registerPlayerSyncEvent
@@ -337,7 +335,7 @@ end
 ---@param fromServer boolean
 ---@return Event
 function Trigger:registerPlayerSyncEvent(player, prefix, fromServer)
-    return Event:fromUd(Native.BlzTriggerRegisterPlayerSyncEvent(getUd(self), getUd(player), prefix, fromServer))
+    return require('lib.stdlib.oop.event'):fromUd(Native.BlzTriggerRegisterPlayerSyncEvent(getUd(self), getUd(player), prefix, fromServer))
 end
 
 ---registerPlayerKeyEvent
@@ -347,7 +345,7 @@ end
 ---@param keyDown boolean
 ---@return Event
 function Trigger:registerPlayerKeyEvent(player, key, metaKey, keyDown)
-    return Event:fromUd(Native.BlzTriggerRegisterPlayerKeyEvent(getUd(self), getUd(player), key, metaKey, keyDown))
+    return require('lib.stdlib.oop.event'):fromUd(Native.BlzTriggerRegisterPlayerKeyEvent(getUd(self), getUd(player), key, metaKey, keyDown))
 end
 
 return Trigger

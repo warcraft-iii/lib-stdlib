@@ -1,7 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Filter = require('lib.stdlib.oop.filter')
-local Function = require('lib.stdlib.oop.function')
-local WeatherEffect = require('lib.stdlib.oop.weathereffect')
 
 ---@class Rect : Agent
 local Rect = class('Rect', require('lib.stdlib.oop.agent'))
@@ -111,8 +108,8 @@ end
 ---@param actionFunc DestructableCallback
 ---@return void
 function Rect:enumDestructablesIn(filter, actionFunc)
-    filter = Filter:createDestructableFilter(filter)
-    actionFunc = Function:createDestructableCallback(actionFunc)
+    filter = require('lib.stdlib.oop.filter'):createDestructableFilter(filter)
+    actionFunc = require('lib.stdlib.oop.function'):createDestructableCallback(actionFunc)
     Native.EnumDestructablesInRect(getUd(self), filter, actionFunc)
     if filter then filter:destroy() end
 end
@@ -122,8 +119,8 @@ end
 ---@param actionFunc ItemCallback
 ---@return void
 function Rect:enumItemsIn(filter, actionFunc)
-    filter = Filter:createItemFilter(filter)
-    actionFunc = Function:createItemCallback(actionFunc)
+    filter = require('lib.stdlib.oop.filter'):createItemFilter(filter)
+    actionFunc = require('lib.stdlib.oop.function'):createItemCallback(actionFunc)
     Native.EnumItemsInRect(getUd(self), filter, actionFunc)
     if filter then filter:destroy() end
 end
@@ -132,7 +129,7 @@ end
 ---@param effectID integer
 ---@return WeatherEffect
 function Rect:addWeatherEffect(effectID)
-    return WeatherEffect:fromUd(Native.AddWeatherEffect(getUd(self), effectID))
+    return require('lib.stdlib.oop.weathereffect'):fromUd(Native.AddWeatherEffect(getUd(self), effectID))
 end
 
 ---setDoodadAnimation

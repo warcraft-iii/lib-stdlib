@@ -1,5 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Location = require('lib.stdlib.oop.location')
 
 ---@class CameraSetup : Handle
 local CameraSetup = class('CameraSetup', require('lib.stdlib.oop.handle'))
@@ -38,7 +37,7 @@ end
 ---getDestPositionLoc
 ---@return Location
 function CameraSetup:getDestPositionLoc()
-    return Location:fromUd(Native.CameraSetupGetDestPositionLoc(getUd(self)))
+    return require('lib.stdlib.oop.location'):fromUd(Native.CameraSetupGetDestPositionLoc(getUd(self)))
 end
 
 ---getDestPositionX

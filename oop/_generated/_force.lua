@@ -1,6 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Filter = require('lib.stdlib.oop.filter')
-local Function = require('lib.stdlib.oop.function')
 
 ---@class Force : Agent
 local Force = class('Force', require('lib.stdlib.oop.agent'))
@@ -48,7 +46,7 @@ end
 ---@param filter PlayerFilter
 ---@return void
 function Force:enumPlayers(filter)
-    filter = Filter:createPlayerFilter(filter)
+    filter = require('lib.stdlib.oop.filter'):createPlayerFilter(filter)
     Native.ForceEnumPlayers(getUd(self), filter)
     if filter then filter:destroy() end
 end
@@ -58,7 +56,7 @@ end
 ---@param filter PlayerFilter
 ---@return void
 function Force:enumPlayersCounted(countLimit, filter)
-    filter = Filter:createPlayerFilter(filter)
+    filter = require('lib.stdlib.oop.filter'):createPlayerFilter(filter)
     Native.ForceEnumPlayersCounted(getUd(self), filter, countLimit)
     if filter then filter:destroy() end
 end
@@ -68,7 +66,7 @@ end
 ---@param filter PlayerFilter
 ---@return void
 function Force:enumAllies(player, filter)
-    filter = Filter:createPlayerFilter(filter)
+    filter = require('lib.stdlib.oop.filter'):createPlayerFilter(filter)
     Native.ForceEnumAllies(getUd(self), getUd(player), filter)
     if filter then filter:destroy() end
 end
@@ -78,7 +76,7 @@ end
 ---@param filter PlayerFilter
 ---@return void
 function Force:enumEnemies(player, filter)
-    filter = Filter:createPlayerFilter(filter)
+    filter = require('lib.stdlib.oop.filter'):createPlayerFilter(filter)
     Native.ForceEnumEnemies(getUd(self), getUd(player), filter)
     if filter then filter:destroy() end
 end
@@ -87,7 +85,7 @@ end
 ---@param callback PlayerCallback
 ---@return void
 function Force:forEach(callback)
-    callback = Function:createPlayerCallback(callback)
+    callback = require('lib.stdlib.oop.function'):createPlayerCallback(callback)
     return Native.ForForce(getUd(self), callback)
 end
 

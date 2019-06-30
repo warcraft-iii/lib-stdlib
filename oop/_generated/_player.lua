@@ -1,5 +1,4 @@
 local Native = require('lib.stdlib.native')
-local LeaderBoard = require('lib.stdlib.oop.leaderboard')
 
 ---@class Player : Agent
 local Player = class('Player', require('lib.stdlib.oop.agent'))
@@ -500,7 +499,7 @@ end
 ---getLeaderboard
 ---@return LeaderBoard
 function Player:getLeaderboard()
-    return LeaderBoard:fromUd(Native.PlayerGetLeaderboard(getUd(self)))
+    return require('lib.stdlib.oop.leaderboard'):fromUd(Native.PlayerGetLeaderboard(getUd(self)))
 end
 
 ---setBlight

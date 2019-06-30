@@ -1,5 +1,4 @@
 local Native = require('lib.stdlib.native')
-local QuestItem = require('lib.stdlib.oop.questitem')
 
 ---@class Quest : Agent
 local Quest = class('Quest', require('lib.stdlib.oop.agent'))
@@ -105,7 +104,7 @@ end
 ---createItem
 ---@return QuestItem
 function Quest:createItem()
-    return QuestItem:fromUd(Native.QuestCreateItem(getUd(self)))
+    return require('lib.stdlib.oop.questitem'):fromUd(Native.QuestCreateItem(getUd(self)))
 end
 
 return Quest

@@ -1,5 +1,4 @@
 local Native = require('lib.stdlib.native')
-local MultiBoardItem = require('lib.stdlib.oop.multiboarditem')
 
 ---@class MultiBoard : Agent
 local MultiBoard = class('MultiBoard', require('lib.stdlib.oop.agent'))
@@ -141,7 +140,7 @@ end
 ---@param column integer
 ---@return MultiBoardItem
 function MultiBoard:getItem(row, column)
-    return MultiBoardItem:fromUd(Native.MultiboardGetItem(getUd(self), row, column))
+    return require('lib.stdlib.oop.multiboarditem'):fromUd(Native.MultiboardGetItem(getUd(self), row, column))
 end
 
 return MultiBoard

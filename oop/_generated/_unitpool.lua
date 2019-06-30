@@ -1,5 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Unit = require('lib.stdlib.oop.unit')
 
 ---@class UnitPool : Handle
 local UnitPool = class('UnitPool', require('lib.stdlib.oop.handle'))
@@ -38,7 +37,7 @@ end
 ---@param facing float
 ---@return Unit
 function UnitPool:placeRandomUnit(forWhichPlayer, x, y, facing)
-    return Unit:fromUd(Native.PlaceRandomUnit(getUd(self), getUd(forWhichPlayer), x, y, facing))
+    return require('lib.stdlib.oop.unit'):fromUd(Native.PlaceRandomUnit(getUd(self), getUd(forWhichPlayer), x, y, facing))
 end
 
 return UnitPool

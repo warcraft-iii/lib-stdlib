@@ -1,9 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Item = require('lib.stdlib.oop.item')
-local Location = require('lib.stdlib.oop.location')
-local Player = require('lib.stdlib.oop.player')
-local Destructable = require('lib.stdlib.oop.destructable')
-local Ability = require('lib.stdlib.oop.ability')
 
 ---@class Unit : Widget
 local Unit = class('Unit', require('lib.stdlib.oop.widget'))
@@ -587,7 +582,7 @@ end
 ---@param itemId integer
 ---@return Item
 function Unit:addItemById(itemId)
-    return Item:fromUd(Native.UnitAddItemById(getUd(self), itemId))
+    return require('lib.stdlib.oop.item'):fromUd(Native.UnitAddItemById(getUd(self), itemId))
 end
 
 ---addItemToSlotById
@@ -609,7 +604,7 @@ end
 ---@param itemSlot integer
 ---@return Item
 function Unit:removeItemFromSlot(itemSlot)
-    return Item:fromUd(Native.UnitRemoveItemFromSlot(getUd(self), itemSlot))
+    return require('lib.stdlib.oop.item'):fromUd(Native.UnitRemoveItemFromSlot(getUd(self), itemSlot))
 end
 
 ---hasItem
@@ -623,7 +618,7 @@ end
 ---@param itemSlot integer
 ---@return Item
 function Unit:itemInSlot(itemSlot)
-    return Item:fromUd(Native.UnitItemInSlot(getUd(self), itemSlot))
+    return require('lib.stdlib.oop.item'):fromUd(Native.UnitItemInSlot(getUd(self), itemSlot))
 end
 
 ---inventorySize
@@ -696,7 +691,7 @@ end
 ---getLoc
 ---@return Location
 function Unit:getLoc()
-    return Location:fromUd(Native.GetUnitLoc(getUd(self)))
+    return require('lib.stdlib.oop.location'):fromUd(Native.GetUnitLoc(getUd(self)))
 end
 
 ---getFacing
@@ -727,7 +722,7 @@ end
 ---getOwningPlayer
 ---@return Player
 function Unit:getOwningPlayer()
-    return Player:fromUd(Native.GetOwningPlayer(getUd(self)))
+    return require('lib.stdlib.oop.player'):fromUd(Native.GetOwningPlayer(getUd(self)))
 end
 
 ---getTypeId
@@ -770,7 +765,7 @@ end
 ---getRallyPoint
 ---@return Location
 function Unit:getRallyPoint()
-    return Location:fromUd(Native.GetUnitRallyPoint(getUd(self)))
+    return require('lib.stdlib.oop.location'):fromUd(Native.GetUnitRallyPoint(getUd(self)))
 end
 
 ---getRallyUnit
@@ -782,7 +777,7 @@ end
 ---getRallyDestructable
 ---@return Destructable
 function Unit:getRallyDestructable()
-    return Destructable:fromUd(Native.GetUnitRallyDestructable(getUd(self)))
+    return require('lib.stdlib.oop.destructable'):fromUd(Native.GetUnitRallyDestructable(getUd(self)))
 end
 
 ---isInGroup
@@ -1654,14 +1649,14 @@ end
 ---@param abilId integer
 ---@return Ability
 function Unit:getAbility(abilId)
-    return Ability:fromUd(Native.BlzGetUnitAbility(getUd(self), abilId))
+    return require('lib.stdlib.oop.ability'):fromUd(Native.BlzGetUnitAbility(getUd(self), abilId))
 end
 
 ---getAbilityByIndex
 ---@param index integer
 ---@return Ability
 function Unit:getAbilityByIndex(index)
-    return Ability:fromUd(Native.BlzGetUnitAbilityByIndex(getUd(self), index))
+    return require('lib.stdlib.oop.ability'):fromUd(Native.BlzGetUnitAbilityByIndex(getUd(self), index))
 end
 
 ---pauseEx

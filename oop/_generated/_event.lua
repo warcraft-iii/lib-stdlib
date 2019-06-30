@@ -1,16 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Player = require('lib.stdlib.oop.player')
-local Region = require('lib.stdlib.oop.region')
-local Unit = require('lib.stdlib.oop.unit')
-local Trackable = require('lib.stdlib.oop.trackable')
-local Button = require('lib.stdlib.oop.button')
-local Dialog = require('lib.stdlib.oop.dialog')
-local Item = require('lib.stdlib.oop.item')
-local Location = require('lib.stdlib.oop.location')
-local Widget = require('lib.stdlib.oop.widget')
-local Destructable = require('lib.stdlib.oop.destructable')
-local Ability = require('lib.stdlib.oop.ability')
-local Frame = require('lib.stdlib.oop.frame')
 
 ---@class Event : Agent
 local Event = class('Event', require('lib.stdlib.oop.agent'))
@@ -24,43 +12,43 @@ end
 ---<static> getWinningPlayer
 ---@return Player
 function Event:getWinningPlayer()
-    return Player:fromUd(Native.GetWinningPlayer())
+    return require('lib.stdlib.oop.player'):fromUd(Native.GetWinningPlayer())
 end
 
 ---<static> getTriggeringRegion
 ---@return Region
 function Event:getTriggeringRegion()
-    return Region:fromUd(Native.GetTriggeringRegion())
+    return require('lib.stdlib.oop.region'):fromUd(Native.GetTriggeringRegion())
 end
 
 ---<static> getEnteringUnit
 ---@return Unit
 function Event:getEnteringUnit()
-    return Unit:fromUd(Native.GetEnteringUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetEnteringUnit())
 end
 
 ---<static> getLeavingUnit
 ---@return Unit
 function Event:getLeavingUnit()
-    return Unit:fromUd(Native.GetLeavingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetLeavingUnit())
 end
 
 ---<static> getTriggeringTrackable
 ---@return Trackable
 function Event:getTriggeringTrackable()
-    return Trackable:fromUd(Native.GetTriggeringTrackable())
+    return require('lib.stdlib.oop.trackable'):fromUd(Native.GetTriggeringTrackable())
 end
 
 ---<static> getClickedButton
 ---@return Button
 function Event:getClickedButton()
-    return Button:fromUd(Native.GetClickedButton())
+    return require('lib.stdlib.oop.button'):fromUd(Native.GetClickedButton())
 end
 
 ---<static> getClickedDialog
 ---@return Dialog
 function Event:getClickedDialog()
-    return Dialog:fromUd(Native.GetClickedDialog())
+    return require('lib.stdlib.oop.dialog'):fromUd(Native.GetClickedDialog())
 end
 
 ---<static> getTournamentFinishSoonTimeRemaining
@@ -78,7 +66,7 @@ end
 ---<static> getTournamentFinishNowPlayer
 ---@return Player
 function Event:getTournamentFinishNowPlayer()
-    return Player:fromUd(Native.GetTournamentFinishNowPlayer())
+    return require('lib.stdlib.oop.player'):fromUd(Native.GetTournamentFinishNowPlayer())
 end
 
 ---<static> getSaveBasicFilename
@@ -90,19 +78,19 @@ end
 ---<static> getTriggerPlayer
 ---@return Player
 function Event:getTriggerPlayer()
-    return Player:fromUd(Native.GetTriggerPlayer())
+    return require('lib.stdlib.oop.player'):fromUd(Native.GetTriggerPlayer())
 end
 
 ---<static> getLevelingUnit
 ---@return Unit
 function Event:getLevelingUnit()
-    return Unit:fromUd(Native.GetLevelingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetLevelingUnit())
 end
 
 ---<static> getLearningUnit
 ---@return Unit
 function Event:getLearningUnit()
-    return Unit:fromUd(Native.GetLearningUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetLearningUnit())
 end
 
 ---<static> getLearnedSkill
@@ -120,67 +108,67 @@ end
 ---<static> getRevivableUnit
 ---@return Unit
 function Event:getRevivableUnit()
-    return Unit:fromUd(Native.GetRevivableUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetRevivableUnit())
 end
 
 ---<static> getRevivingUnit
 ---@return Unit
 function Event:getRevivingUnit()
-    return Unit:fromUd(Native.GetRevivingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetRevivingUnit())
 end
 
 ---<static> getAttacker
 ---@return Unit
 function Event:getAttacker()
-    return Unit:fromUd(Native.GetAttacker())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetAttacker())
 end
 
 ---<static> getRescuer
 ---@return Unit
 function Event:getRescuer()
-    return Unit:fromUd(Native.GetRescuer())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetRescuer())
 end
 
 ---<static> getDyingUnit
 ---@return Unit
 function Event:getDyingUnit()
-    return Unit:fromUd(Native.GetDyingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetDyingUnit())
 end
 
 ---<static> getKillingUnit
 ---@return Unit
 function Event:getKillingUnit()
-    return Unit:fromUd(Native.GetKillingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetKillingUnit())
 end
 
 ---<static> getDecayingUnit
 ---@return Unit
 function Event:getDecayingUnit()
-    return Unit:fromUd(Native.GetDecayingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetDecayingUnit())
 end
 
 ---<static> getConstructingStructure
 ---@return Unit
 function Event:getConstructingStructure()
-    return Unit:fromUd(Native.GetConstructingStructure())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetConstructingStructure())
 end
 
 ---<static> getCancelledStructure
 ---@return Unit
 function Event:getCancelledStructure()
-    return Unit:fromUd(Native.GetCancelledStructure())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetCancelledStructure())
 end
 
 ---<static> getConstructedStructure
 ---@return Unit
 function Event:getConstructedStructure()
-    return Unit:fromUd(Native.GetConstructedStructure())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetConstructedStructure())
 end
 
 ---<static> getResearchingUnit
 ---@return Unit
 function Event:getResearchingUnit()
-    return Unit:fromUd(Native.GetResearchingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetResearchingUnit())
 end
 
 ---<static> getResearched
@@ -198,91 +186,91 @@ end
 ---<static> getTrainedUnit
 ---@return Unit
 function Event:getTrainedUnit()
-    return Unit:fromUd(Native.GetTrainedUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetTrainedUnit())
 end
 
 ---<static> getDetectedUnit
 ---@return Unit
 function Event:getDetectedUnit()
-    return Unit:fromUd(Native.GetDetectedUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetDetectedUnit())
 end
 
 ---<static> getSummoningUnit
 ---@return Unit
 function Event:getSummoningUnit()
-    return Unit:fromUd(Native.GetSummoningUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetSummoningUnit())
 end
 
 ---<static> getSummonedUnit
 ---@return Unit
 function Event:getSummonedUnit()
-    return Unit:fromUd(Native.GetSummonedUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetSummonedUnit())
 end
 
 ---<static> getTransportUnit
 ---@return Unit
 function Event:getTransportUnit()
-    return Unit:fromUd(Native.GetTransportUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetTransportUnit())
 end
 
 ---<static> getLoadedUnit
 ---@return Unit
 function Event:getLoadedUnit()
-    return Unit:fromUd(Native.GetLoadedUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetLoadedUnit())
 end
 
 ---<static> getSellingUnit
 ---@return Unit
 function Event:getSellingUnit()
-    return Unit:fromUd(Native.GetSellingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetSellingUnit())
 end
 
 ---<static> getSoldUnit
 ---@return Unit
 function Event:getSoldUnit()
-    return Unit:fromUd(Native.GetSoldUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetSoldUnit())
 end
 
 ---<static> getBuyingUnit
 ---@return Unit
 function Event:getBuyingUnit()
-    return Unit:fromUd(Native.GetBuyingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetBuyingUnit())
 end
 
 ---<static> getSoldItem
 ---@return Item
 function Event:getSoldItem()
-    return Item:fromUd(Native.GetSoldItem())
+    return require('lib.stdlib.oop.item'):fromUd(Native.GetSoldItem())
 end
 
 ---<static> getChangingUnit
 ---@return Unit
 function Event:getChangingUnit()
-    return Unit:fromUd(Native.GetChangingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetChangingUnit())
 end
 
 ---<static> getChangingUnitPrevOwner
 ---@return Player
 function Event:getChangingUnitPrevOwner()
-    return Player:fromUd(Native.GetChangingUnitPrevOwner())
+    return require('lib.stdlib.oop.player'):fromUd(Native.GetChangingUnitPrevOwner())
 end
 
 ---<static> getManipulatingUnit
 ---@return Unit
 function Event:getManipulatingUnit()
-    return Unit:fromUd(Native.GetManipulatingUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetManipulatingUnit())
 end
 
 ---<static> getManipulatedItem
 ---@return Item
 function Event:getManipulatedItem()
-    return Item:fromUd(Native.GetManipulatedItem())
+    return require('lib.stdlib.oop.item'):fromUd(Native.GetManipulatedItem())
 end
 
 ---<static> getOrderedUnit
 ---@return Unit
 function Event:getOrderedUnit()
-    return Unit:fromUd(Native.GetOrderedUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetOrderedUnit())
 end
 
 ---<static> getIssuedOrderId
@@ -306,37 +294,37 @@ end
 ---<static> getOrderPointLoc
 ---@return Location
 function Event:getOrderPointLoc()
-    return Location:fromUd(Native.GetOrderPointLoc())
+    return require('lib.stdlib.oop.location'):fromUd(Native.GetOrderPointLoc())
 end
 
 ---<static> getOrderTarget
 ---@return Widget
 function Event:getOrderTarget()
-    return Widget:fromUd(Native.GetOrderTarget())
+    return require('lib.stdlib.oop.widget'):fromUd(Native.GetOrderTarget())
 end
 
 ---<static> getOrderTargetDestructable
 ---@return Destructable
 function Event:getOrderTargetDestructable()
-    return Destructable:fromUd(Native.GetOrderTargetDestructable())
+    return require('lib.stdlib.oop.destructable'):fromUd(Native.GetOrderTargetDestructable())
 end
 
 ---<static> getOrderTargetItem
 ---@return Item
 function Event:getOrderTargetItem()
-    return Item:fromUd(Native.GetOrderTargetItem())
+    return require('lib.stdlib.oop.item'):fromUd(Native.GetOrderTargetItem())
 end
 
 ---<static> getOrderTargetUnit
 ---@return Unit
 function Event:getOrderTargetUnit()
-    return Unit:fromUd(Native.GetOrderTargetUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetOrderTargetUnit())
 end
 
 ---<static> getSpellAbilityUnit
 ---@return Unit
 function Event:getSpellAbilityUnit()
-    return Unit:fromUd(Native.GetSpellAbilityUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetSpellAbilityUnit())
 end
 
 ---<static> getSpellAbilityId
@@ -348,13 +336,13 @@ end
 ---<static> getSpellAbility
 ---@return Ability
 function Event:getSpellAbility()
-    return Ability:fromUd(Native.GetSpellAbility())
+    return require('lib.stdlib.oop.ability'):fromUd(Native.GetSpellAbility())
 end
 
 ---<static> getSpellTargetLoc
 ---@return Location
 function Event:getSpellTargetLoc()
-    return Location:fromUd(Native.GetSpellTargetLoc())
+    return require('lib.stdlib.oop.location'):fromUd(Native.GetSpellTargetLoc())
 end
 
 ---<static> getSpellTargetX
@@ -372,19 +360,19 @@ end
 ---<static> getSpellTargetDestructable
 ---@return Destructable
 function Event:getSpellTargetDestructable()
-    return Destructable:fromUd(Native.GetSpellTargetDestructable())
+    return require('lib.stdlib.oop.destructable'):fromUd(Native.GetSpellTargetDestructable())
 end
 
 ---<static> getSpellTargetItem
 ---@return Item
 function Event:getSpellTargetItem()
-    return Item:fromUd(Native.GetSpellTargetItem())
+    return require('lib.stdlib.oop.item'):fromUd(Native.GetSpellTargetItem())
 end
 
 ---<static> getSpellTargetUnit
 ---@return Unit
 function Event:getSpellTargetUnit()
-    return Unit:fromUd(Native.GetSpellTargetUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetSpellTargetUnit())
 end
 
 ---<static> getEventPlayerState
@@ -408,7 +396,7 @@ end
 ---<static> getTriggerUnit
 ---@return Unit
 function Event:getTriggerUnit()
-    return Unit:fromUd(Native.GetTriggerUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetTriggerUnit())
 end
 
 ---<static> getEventUnitState
@@ -426,31 +414,31 @@ end
 ---<static> getEventDamageSource
 ---@return Unit
 function Event:getEventDamageSource()
-    return Unit:fromUd(Native.GetEventDamageSource())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetEventDamageSource())
 end
 
 ---<static> getEventDetectingPlayer
 ---@return Player
 function Event:getEventDetectingPlayer()
-    return Player:fromUd(Native.GetEventDetectingPlayer())
+    return require('lib.stdlib.oop.player'):fromUd(Native.GetEventDetectingPlayer())
 end
 
 ---<static> getEventTargetUnit
 ---@return Unit
 function Event:getEventTargetUnit()
-    return Unit:fromUd(Native.GetEventTargetUnit())
+    return require('lib.stdlib.oop.unit'):fromUd(Native.GetEventTargetUnit())
 end
 
 ---<static> getTriggerWidget
 ---@return Widget
 function Event:getTriggerWidget()
-    return Widget:fromUd(Native.GetTriggerWidget())
+    return require('lib.stdlib.oop.widget'):fromUd(Native.GetTriggerWidget())
 end
 
 ---<static> getTriggerDestructable
 ---@return Destructable
 function Event:getTriggerDestructable()
-    return Destructable:fromUd(Native.GetTriggerDestructable())
+    return require('lib.stdlib.oop.destructable'):fromUd(Native.GetTriggerDestructable())
 end
 
 ---<static> getTriggerPlayerMouseX
@@ -468,7 +456,7 @@ end
 ---<static> getTriggerPlayerMousePosition
 ---@return Location
 function Event:getTriggerPlayerMousePosition()
-    return Location:fromUd(Native.BlzGetTriggerPlayerMousePosition())
+    return require('lib.stdlib.oop.location'):fromUd(Native.BlzGetTriggerPlayerMousePosition())
 end
 
 ---<static> getTriggerPlayerMouseButton
@@ -480,7 +468,7 @@ end
 ---<static> getTriggerFrame
 ---@return Frame
 function Event:getTriggerFrame()
-    return Frame:fromUd(Native.BlzGetTriggerFrame())
+    return require('lib.stdlib.oop.frame'):fromUd(Native.BlzGetTriggerFrame())
 end
 
 ---<static> getTriggerFrameEvent

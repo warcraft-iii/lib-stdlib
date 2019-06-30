@@ -1,5 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Unit = require('lib.stdlib.oop.unit')
 
 ---@class GameCache : Agent
 local GameCache = class('GameCache', require('lib.stdlib.oop.agent'))
@@ -236,7 +235,7 @@ end
 ---@param facing float
 ---@return Unit
 function GameCache:restoreUnit(missionKey, key, forWhichPlayer, x, y, facing)
-    return Unit:fromUd(Native.RestoreUnit(getUd(self), missionKey, key, getUd(forWhichPlayer), x, y, facing))
+    return require('lib.stdlib.oop.unit'):fromUd(Native.RestoreUnit(getUd(self), missionKey, key, getUd(forWhichPlayer), x, y, facing))
 end
 
 return GameCache

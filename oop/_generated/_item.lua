@@ -1,6 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Player = require('lib.stdlib.oop.player')
-local Ability = require('lib.stdlib.oop.ability')
 
 ---@class Item : Widget
 local Item = class('Item', require('lib.stdlib.oop.widget'))
@@ -23,7 +21,7 @@ end
 ---getPlayer
 ---@return Player
 function Item:getPlayer()
-    return Player:fromUd(Native.GetItemPlayer(getUd(self)))
+    return require('lib.stdlib.oop.player'):fromUd(Native.GetItemPlayer(getUd(self)))
 end
 
 ---getTypeId
@@ -245,14 +243,14 @@ end
 ---@param index integer
 ---@return Ability
 function Item:getAbilityByIndex(index)
-    return Ability:fromUd(Native.BlzGetItemAbilityByIndex(getUd(self), index))
+    return require('lib.stdlib.oop.ability'):fromUd(Native.BlzGetItemAbilityByIndex(getUd(self), index))
 end
 
 ---getAbility
 ---@param abilCode integer
 ---@return Ability
 function Item:getAbility(abilCode)
-    return Ability:fromUd(Native.BlzGetItemAbility(getUd(self), abilCode))
+    return require('lib.stdlib.oop.ability'):fromUd(Native.BlzGetItemAbility(getUd(self), abilCode))
 end
 
 ---addAbility

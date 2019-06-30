@@ -1,5 +1,4 @@
 local Native = require('lib.stdlib.native')
-local Button = require('lib.stdlib.oop.button')
 
 ---@class Dialog : Agent
 local Dialog = class('Dialog', require('lib.stdlib.oop.agent'))
@@ -34,7 +33,7 @@ end
 ---@param hotkey integer
 ---@return Button
 function Dialog:addButton(buttonText, hotkey)
-    return Button:fromUd(Native.DialogAddButton(getUd(self), buttonText, hotkey))
+    return require('lib.stdlib.oop.button'):fromUd(Native.DialogAddButton(getUd(self), buttonText, hotkey))
 end
 
 ---addQuitButton
@@ -43,7 +42,7 @@ end
 ---@param hotkey integer
 ---@return Button
 function Dialog:addQuitButton(doScoreScreen, buttonText, hotkey)
-    return Button:fromUd(Native.DialogAddQuitButton(getUd(self), doScoreScreen, buttonText, hotkey))
+    return require('lib.stdlib.oop.button'):fromUd(Native.DialogAddQuitButton(getUd(self), doScoreScreen, buttonText, hotkey))
 end
 
 return Dialog
