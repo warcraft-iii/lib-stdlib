@@ -3,6 +3,8 @@
 -- @Link   : https://dengsir.github.io
 -- @Date   : 4/1/2019 4:15 PM
 
+local string, table = string, table
+
 ---trimleft
 ---@param s string
 ---@return string

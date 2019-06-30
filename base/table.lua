@@ -3,6 +3,9 @@
 -- @Link   : https://dengsir.github.io
 -- @Date   : 4/1/2019 2:47 PM
 
+local pairs, ipairs, select, type = pairs, ipairs, select, type
+local table = table
+
 ---@class integer: number
 ---@class float: number
 
@@ -109,11 +112,11 @@ end
 ---@return boolean
 function table.every(t, callback)
     for i, v in ipairs(t) do
-        if callback(v, i, t) then
-            return true
+        if not callback(v, i, t) then
+            return false
         end
     end
-    return false
+    return true
 end
 
 ---shallowcopy
@@ -152,19 +155,6 @@ function table.indexof(t, item)
         end
     end
 end
-
----lastindexof
----@generic V
----@param t array
----@param item V
----@return integer|nil
---function table.lastindexof(t, item)
---    for i, v in ripairs(t) do
---        if v == item then
---            return i
---        end
---    end
---end
 
 ---contains
 ---@generic V

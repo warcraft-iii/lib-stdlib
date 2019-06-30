@@ -50,17 +50,18 @@ end
 
 local function new(cls, ...)
     if not isClass(cls) then
-        error('bad argument #self to `new` (class expected)')
+        error('bad argument #self to `new` (class expected)', 2)
     end
     return constructor(setmetatable({}, cls.meta), cls, ...)
 end
 
 ---new
 ---@generic T
+---@vararg any
 ---@return T
 function object:new(...)
     if not isClass(self) then
-        error('bad argument #self to `new` (class expected)')
+        error('bad argument #self to `new` (class expected)', 2)
     end
 
     local destructor = rawget(self, 'destructor')
