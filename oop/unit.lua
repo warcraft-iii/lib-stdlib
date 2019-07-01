@@ -12,4 +12,12 @@ function Unit:isAlive()
     return not self:isDead()
 end
 
+---replace
+---@param id integer
+---@param method ReplaceUnitStateMethod
+---@return Unit
+function Unit:replace(id, method)
+    return Unit:fromUd(ReplaceUnitBJ(getUd(self), id, method))
+end
+
 return Unit
