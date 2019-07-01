@@ -1,3 +1,4 @@
+---@type Group
 local Group = require('lib.stdlib.oop._generated._group')
 
 ---getUnits

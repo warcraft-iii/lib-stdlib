@@ -1,3 +1,4 @@
+---@type Timer
 local Timer = require('lib.stdlib.oop._generated._timer')
 local Native = require('lib.stdlib.native')
 
