@@ -85,3 +85,5 @@ Version = require('lib.stdlib.enum.version')
 VolumeGroup = require('lib.stdlib.enum.volumegroup')
 WeaponType = require('lib.stdlib.enum.weapontype')
 WidgetEvent = require('lib.stdlib.enum.widgetevent')
+
+ReplaceUnitStateMethod = require('lib.stdlib.enum.replaceunitstatemethod')

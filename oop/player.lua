@@ -1,5 +1,8 @@
+---@type Player
 local Player = require('lib.stdlib.oop._generated._player')
 local PlayerState = require('lib.stdlib.enum.playerstate')
+local Native = require('lib.stdlib.native.native')
+local Group = require('lib.stdlib.oop.group')
 
 ---adjustState
 ---@param state PlayerState
@@ -38,6 +41,34 @@ function Player:iterateAll()
             coroutine.yield(Player:get(i))
         end
     end)
+end
+
+---getUnits
+---@param filter UnitFilter
+---@return Unit[]
+function Player:getUnits(filter)
+    local group = Group:create()
+    group:enumUnitsOfPlayer(self, filter)
+    local units = group:getUnits()
+    group:delete()
+    return units
+end
+
+---iterUnits
+---@param filter UnitFilter
+---@return fun(): Unit
+function Player:iterUnits(filter)
+    return vipairs(self:getUnits(filter))
+end
+
+---selectUnitSingle
+---@param unit Unit
+---@return void
+function Player:selectUnitSingle(unit)
+    if Player:getLocal() == self then
+        Native.ClearSelection()
+        unit:select(true)
+    end
 end
 
 return Player
