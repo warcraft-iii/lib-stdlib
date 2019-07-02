@@ -202,3 +202,16 @@ function table.join(...)
     end
     return r
 end
+
+---merge
+---@vararg table
+---@return table
+function table.merge(...)
+    local r = {}
+    for i = 1, select('#', ...) do
+        for k, v in pairs(select(i, ...)) do
+            r[k] = v
+        end
+    end
+    return r
+end
