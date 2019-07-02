@@ -4,23 +4,33 @@ local Native = require('lib.stdlib.native')
 local Condition = class('Condition', require('lib.stdlib.oop.boolexpr'))
 
 ---- compact same name native function
-local mt = table.shallowcopy(getmetatable(Condition))
-mt.__call = function(_, ...)
+setmetatable(Condition, table.merge(getmetatable(Condition), {__call = function(_, ...)
     return Native.Condition(...)
+end}))
+
+---destructor
+---@return void
+function Condition:destructor()
+    return Native.DestroyCondition(getUd(self))
 end
-setmetatable(Condition, mt)
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function Condition:destroy() end
+
+--@end-remove@
+
+Condition.destroy = Condition.delete
+
 
 ---<static> create
 ---@param func function
 ---@return Condition
 function Condition:create(func)
     return Condition:fromUd(Native.Condition(func))
-end
-
----destroy
----@return void
-function Condition:destroy()
-    return Native.DestroyCondition(getUd(self))
 end
 
 return Condition

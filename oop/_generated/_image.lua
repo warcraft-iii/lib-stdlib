@@ -3,6 +3,24 @@ local Native = require('lib.stdlib.native')
 ---@class Image : Handle
 local Image = class('Image', require('lib.stdlib.oop.handle'))
 
+---destructor
+---@return void
+function Image:destructor()
+    return Native.DestroyImage(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function Image:destroy() end
+
+--@end-remove@
+
+Image.destroy = Image.delete
+
+
 ---<static> create
 ---@param file string
 ---@param sizeX float
@@ -18,12 +36,6 @@ local Image = class('Image', require('lib.stdlib.oop.handle'))
 ---@return Image
 function Image:create(file, sizeX, sizeY, sizeZ, posX, posY, posZ, originX, originY, originZ, imageType)
     return Image:fromUd(Native.CreateImage(file, sizeX, sizeY, sizeZ, posX, posY, posZ, originX, originY, originZ, imageType))
-end
-
----destroy
----@return void
-function Image:destroy()
-    return Native.DestroyImage(getUd(self))
 end
 
 ---show

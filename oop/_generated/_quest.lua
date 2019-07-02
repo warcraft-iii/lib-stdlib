@@ -3,16 +3,28 @@ local Native = require('lib.stdlib.native')
 ---@class Quest : Agent
 local Quest = class('Quest', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function Quest:destructor()
+    return Native.DestroyQuest(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function Quest:destroy() end
+
+--@end-remove@
+
+Quest.destroy = Quest.delete
+
+
 ---<static> create
 ---@return Quest
 function Quest:create()
     return Quest:fromUd(Native.CreateQuest())
-end
-
----destroy
----@return void
-function Quest:destroy()
-    return Native.DestroyQuest(getUd(self))
 end
 
 ---setTitle

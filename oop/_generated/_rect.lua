@@ -4,11 +4,27 @@ local Native = require('lib.stdlib.native')
 local Rect = class('Rect', require('lib.stdlib.oop.agent'))
 
 ---- compact same name native function
-local mt = table.shallowcopy(getmetatable(Rect))
-mt.__call = function(_, ...)
+setmetatable(Rect, table.merge(getmetatable(Rect), {__call = function(_, ...)
     return Native.Rect(...)
+end}))
+
+---destructor
+---@return void
+function Rect:destructor()
+    return Native.RemoveRect(getUd(self))
 end
-setmetatable(Rect, mt)
+
+--@remove@
+
+---remove
+---@deprecated
+---@return void
+function Rect:remove() end
+
+--@end-remove@
+
+Rect.remove = Rect.delete
+
 
 ---<static> create
 ---@param minx float
@@ -26,12 +42,6 @@ end
 ---@return Rect
 function Rect:fromLoc(min, max)
     return Rect:fromUd(Native.RectFromLoc(getUd(min), getUd(max)))
-end
-
----remove
----@return void
-function Rect:remove()
-    return Native.RemoveRect(getUd(self))
 end
 
 ---set

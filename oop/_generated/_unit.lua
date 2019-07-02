@@ -3,6 +3,24 @@ local Native = require('lib.stdlib.native')
 ---@class Unit : Widget
 local Unit = class('Unit', require('lib.stdlib.oop.widget'))
 
+---destructor
+---@return void
+function Unit:destructor()
+    return Native.RemoveUnit(getUd(self))
+end
+
+--@remove@
+
+---remove
+---@deprecated
+---@return void
+function Unit:remove() end
+
+--@end-remove@
+
+Unit.remove = Unit.delete
+
+
 ---<static> create
 ---@param id Player
 ---@param unitid integer
@@ -70,12 +88,6 @@ end
 ---@return void
 function Unit:kill()
     return Native.KillUnit(getUd(self))
-end
-
----remove
----@return void
-function Unit:remove()
-    return Native.RemoveUnit(getUd(self))
 end
 
 ---show

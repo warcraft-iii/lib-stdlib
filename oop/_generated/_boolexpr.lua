@@ -3,6 +3,24 @@ local Native = require('lib.stdlib.native')
 ---@class BoolExpr : Agent
 local BoolExpr = class('BoolExpr', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function BoolExpr:destructor()
+    return Native.DestroyBoolExpr(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function BoolExpr:destroy() end
+
+--@end-remove@
+
+BoolExpr.destroy = BoolExpr.delete
+
+
 ---and_
 ---@param operandB BoolExpr
 ---@return BoolExpr
@@ -21,12 +39,6 @@ end
 ---@return BoolExpr
 function BoolExpr:not_()
     return BoolExpr:fromUd(Native.Not(getUd(self)))
-end
-
----destroy
----@return void
-function BoolExpr:destroy()
-    return Native.DestroyBoolExpr(getUd(self))
 end
 
 return BoolExpr

@@ -3,16 +3,28 @@ local Native = require('lib.stdlib.native')
 ---@class MultiBoard : Agent
 local MultiBoard = class('MultiBoard', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function MultiBoard:destructor()
+    return Native.DestroyMultiboard(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function MultiBoard:destroy() end
+
+--@end-remove@
+
+MultiBoard.destroy = MultiBoard.delete
+
+
 ---<static> create
 ---@return MultiBoard
 function MultiBoard:create()
     return MultiBoard:fromUd(Native.CreateMultiboard())
-end
-
----destroy
----@return void
-function MultiBoard:destroy()
-    return Native.DestroyMultiboard(getUd(self))
 end
 
 ---display

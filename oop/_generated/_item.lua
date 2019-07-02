@@ -3,6 +3,24 @@ local Native = require('lib.stdlib.native')
 ---@class Item : Widget
 local Item = class('Item', require('lib.stdlib.oop.widget'))
 
+---destructor
+---@return void
+function Item:destructor()
+    return Native.RemoveItem(getUd(self))
+end
+
+--@remove@
+
+---remove
+---@deprecated
+---@return void
+function Item:remove() end
+
+--@end-remove@
+
+Item.remove = Item.delete
+
+
 ---<static> create
 ---@param itemid integer
 ---@param x float
@@ -10,12 +28,6 @@ local Item = class('Item', require('lib.stdlib.oop.widget'))
 ---@return Item
 function Item:create(itemid, x, y)
     return Item:fromUd(Native.CreateItem(itemid, x, y))
-end
-
----remove
----@return void
-function Item:remove()
-    return Native.RemoveItem(getUd(self))
 end
 
 ---getPlayer

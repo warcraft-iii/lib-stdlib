@@ -3,6 +3,24 @@ local Native = require('lib.stdlib.native')
 ---@class Ubersplat : Handle
 local Ubersplat = class('Ubersplat', require('lib.stdlib.oop.handle'))
 
+---destructor
+---@return void
+function Ubersplat:destructor()
+    return Native.DestroyUbersplat(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function Ubersplat:destroy() end
+
+--@end-remove@
+
+Ubersplat.destroy = Ubersplat.delete
+
+
 ---<static> create
 ---@param x float
 ---@param y float
@@ -16,12 +34,6 @@ local Ubersplat = class('Ubersplat', require('lib.stdlib.oop.handle'))
 ---@return Ubersplat
 function Ubersplat:create(x, y, name, red, green, blue, alpha, forcePaused, noBirthTime)
     return Ubersplat:fromUd(Native.CreateUbersplat(x, y, name, red, green, blue, alpha, forcePaused, noBirthTime))
-end
-
----destroy
----@return void
-function Ubersplat:destroy()
-    return Native.DestroyUbersplat(getUd(self))
 end
 
 ---reset

@@ -3,6 +3,24 @@ local Native = require('lib.stdlib.native')
 ---@class Destructable : Widget
 local Destructable = class('Destructable', require('lib.stdlib.oop.widget'))
 
+---destructor
+---@return void
+function Destructable:destructor()
+    return Native.RemoveDestructable(getUd(self))
+end
+
+--@remove@
+
+---remove
+---@deprecated
+---@return void
+function Destructable:remove() end
+
+--@end-remove@
+
+Destructable.remove = Destructable.delete
+
+
 ---<static> create
 ---@param objectid integer
 ---@param x float
@@ -51,12 +69,6 @@ end
 ---@return Destructable
 function Destructable:createDeadZ(objectid, x, y, z, face, scale, variation)
     return Destructable:fromUd(Native.CreateDeadDestructableZ(objectid, x, y, z, face, scale, variation))
-end
-
----remove
----@return void
-function Destructable:remove()
-    return Native.RemoveDestructable(getUd(self))
 end
 
 ---kill

@@ -4,11 +4,27 @@ local Native = require('lib.stdlib.native')
 local Location = class('Location', require('lib.stdlib.oop.agent'))
 
 ---- compact same name native function
-local mt = table.shallowcopy(getmetatable(Location))
-mt.__call = function(_, ...)
+setmetatable(Location, table.merge(getmetatable(Location), {__call = function(_, ...)
     return Native.Location(...)
+end}))
+
+---destructor
+---@return void
+function Location:destructor()
+    return Native.RemoveLocation(getUd(self))
 end
-setmetatable(Location, mt)
+
+--@remove@
+
+---remove
+---@deprecated
+---@return void
+function Location:remove() end
+
+--@end-remove@
+
+Location.remove = Location.delete
+
 
 ---<static> create
 ---@param x float
@@ -16,12 +32,6 @@ setmetatable(Location, mt)
 ---@return Location
 function Location:create(x, y)
     return Location:fromUd(Native.Location(x, y))
-end
-
----remove
----@return void
-function Location:remove()
-    return Native.RemoveLocation(getUd(self))
 end
 
 ---move

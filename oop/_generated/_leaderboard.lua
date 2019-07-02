@@ -3,16 +3,28 @@ local Native = require('lib.stdlib.native')
 ---@class LeaderBoard : Agent
 local LeaderBoard = class('LeaderBoard', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function LeaderBoard:destructor()
+    return Native.DestroyLeaderboard(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function LeaderBoard:destroy() end
+
+--@end-remove@
+
+LeaderBoard.destroy = LeaderBoard.delete
+
+
 ---<static> create
 ---@return LeaderBoard
 function LeaderBoard:create()
     return LeaderBoard:fromUd(Native.CreateLeaderboard())
-end
-
----destroy
----@return void
-function LeaderBoard:destroy()
-    return Native.DestroyLeaderboard(getUd(self))
 end
 
 ---display

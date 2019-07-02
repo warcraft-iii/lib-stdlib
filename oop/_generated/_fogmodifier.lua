@@ -3,6 +3,24 @@ local Native = require('lib.stdlib.native')
 ---@class FogModifier : Agent
 local FogModifier = class('FogModifier', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function FogModifier:destructor()
+    return Native.DestroyFogModifier(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function FogModifier:destroy() end
+
+--@end-remove@
+
+FogModifier.destroy = FogModifier.delete
+
+
 ---<static> createRect
 ---@param forWhichPlayer Player
 ---@param state FogState
@@ -37,12 +55,6 @@ end
 ---@return FogModifier
 function FogModifier:createRadiusLoc(forWhichPlayer, state, center, radius, useSharedVision, afterUnits)
     return FogModifier:fromUd(Native.CreateFogModifierRadiusLoc(getUd(forWhichPlayer), state, getUd(center), radius, useSharedVision, afterUnits))
-end
-
----destroy
----@return void
-function FogModifier:destroy()
-    return Native.DestroyFogModifier(getUd(self))
 end
 
 ---start

@@ -3,11 +3,23 @@ local Native = require('lib.stdlib.native')
 ---@class Lightning : Handle
 local Lightning = class('Lightning', require('lib.stdlib.oop.handle'))
 
----destroy
+---destructor
 ---@return boolean
-function Lightning:destroy()
+function Lightning:destructor()
     return Native.DestroyLightning(getUd(self))
 end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function Lightning:destroy() end
+
+--@end-remove@
+
+Lightning.destroy = Lightning.delete
+
 
 ---move
 ---@param checkVisibility boolean

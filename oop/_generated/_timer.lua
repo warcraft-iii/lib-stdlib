@@ -3,16 +3,28 @@ local Native = require('lib.stdlib.native')
 ---@class Timer : Agent
 local Timer = class('Timer', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function Timer:destructor()
+    return Native.DestroyTimer(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function Timer:destroy() end
+
+--@end-remove@
+
+Timer.destroy = Timer.delete
+
+
 ---<static> create
 ---@return Timer
 function Timer:create()
     return Timer:fromUd(Native.CreateTimer())
-end
-
----destroy
----@return void
-function Timer:destroy()
-    return Native.DestroyTimer(getUd(self))
 end
 
 ---getElapsed

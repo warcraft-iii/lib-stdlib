@@ -3,16 +3,28 @@ local Native = require('lib.stdlib.native')
 ---@class UnitPool : Handle
 local UnitPool = class('UnitPool', require('lib.stdlib.oop.handle'))
 
+---destructor
+---@return void
+function UnitPool:destructor()
+    return Native.DestroyUnitPool(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function UnitPool:destroy() end
+
+--@end-remove@
+
+UnitPool.destroy = UnitPool.delete
+
+
 ---<static> create
 ---@return UnitPool
 function UnitPool:create()
     return UnitPool:fromUd(Native.CreateUnitPool())
-end
-
----destroy
----@return void
-function UnitPool:destroy()
-    return Native.DestroyUnitPool(getUd(self))
 end
 
 ---addUnitType

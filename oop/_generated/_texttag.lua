@@ -3,16 +3,28 @@ local Native = require('lib.stdlib.native')
 ---@class TextTag : Handle
 local TextTag = class('TextTag', require('lib.stdlib.oop.handle'))
 
+---destructor
+---@return void
+function TextTag:destructor()
+    return Native.DestroyTextTag(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function TextTag:destroy() end
+
+--@end-remove@
+
+TextTag.destroy = TextTag.delete
+
+
 ---<static> create
 ---@return TextTag
 function TextTag:create()
     return TextTag:fromUd(Native.CreateTextTag())
-end
-
----destroy
----@return void
-function TextTag:destroy()
-    return Native.DestroyTextTag(getUd(self))
 end
 
 ---setText

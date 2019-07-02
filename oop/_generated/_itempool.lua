@@ -3,16 +3,28 @@ local Native = require('lib.stdlib.native')
 ---@class ItemPool : Handle
 local ItemPool = class('ItemPool', require('lib.stdlib.oop.handle'))
 
+---destructor
+---@return void
+function ItemPool:destructor()
+    return Native.DestroyItemPool(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function ItemPool:destroy() end
+
+--@end-remove@
+
+ItemPool.destroy = ItemPool.delete
+
+
 ---<static> create
 ---@return ItemPool
 function ItemPool:create()
     return ItemPool:fromUd(Native.CreateItemPool())
-end
-
----destroy
----@return void
-function ItemPool:destroy()
-    return Native.DestroyItemPool(getUd(self))
 end
 
 ---addItemType

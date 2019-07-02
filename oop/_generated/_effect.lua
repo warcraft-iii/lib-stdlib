@@ -3,6 +3,24 @@ local Native = require('lib.stdlib.native')
 ---@class Effect : Agent
 local Effect = class('Effect', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function Effect:destructor()
+    return Native.DestroyEffect(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function Effect:destroy() end
+
+--@end-remove@
+
+Effect.destroy = Effect.delete
+
+
 ---<static> addSpecial
 ---@param modelName string
 ---@param x float
@@ -85,12 +103,6 @@ end
 ---@return Effect
 function Effect:addSpellTargetById(abilityId, t, targetWidget, attachPoint)
     return Effect:fromUd(Native.AddSpellEffectTargetById(abilityId, t, getUd(targetWidget), attachPoint))
-end
-
----destroy
----@return void
-function Effect:destroy()
-    return Native.DestroyEffect(getUd(self))
 end
 
 ---setSpecialColorByPlayer

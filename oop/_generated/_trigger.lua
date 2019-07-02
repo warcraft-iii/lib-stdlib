@@ -3,6 +3,24 @@ local Native = require('lib.stdlib.native')
 ---@class Trigger : Agent
 local Trigger = class('Trigger', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function Trigger:destructor()
+    return Native.DestroyTrigger(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function Trigger:destroy() end
+
+--@end-remove@
+
+Trigger.destroy = Trigger.delete
+
+
 ---<static> create
 ---@return Trigger
 function Trigger:create()
@@ -34,12 +52,6 @@ end
 ---@return void
 function Trigger:syncReady()
     return Native.TriggerSyncReady()
-end
-
----destroy
----@return void
-function Trigger:destroy()
-    return Native.DestroyTrigger(getUd(self))
 end
 
 ---reset

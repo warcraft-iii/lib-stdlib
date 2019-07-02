@@ -3,16 +3,28 @@ local Native = require('lib.stdlib.native')
 ---@class Region : Agent
 local Region = class('Region', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function Region:destructor()
+    return Native.RemoveRegion(getUd(self))
+end
+
+--@remove@
+
+---remove
+---@deprecated
+---@return void
+function Region:remove() end
+
+--@end-remove@
+
+Region.remove = Region.delete
+
+
 ---<static> create
 ---@return Region
 function Region:create()
     return Region:fromUd(Native.CreateRegion())
-end
-
----remove
----@return void
-function Region:remove()
-    return Native.RemoveRegion(getUd(self))
 end
 
 ---addRect

@@ -3,17 +3,29 @@ local Native = require('lib.stdlib.native')
 ---@class TimerDialog : Agent
 local TimerDialog = class('TimerDialog', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function TimerDialog:destructor()
+    return Native.DestroyTimerDialog(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function TimerDialog:destroy() end
+
+--@end-remove@
+
+TimerDialog.destroy = TimerDialog.delete
+
+
 ---<static> create
 ---@param t Timer
 ---@return TimerDialog
 function TimerDialog:create(t)
     return TimerDialog:fromUd(Native.CreateTimerDialog(getUd(t)))
-end
-
----destroy
----@return void
-function TimerDialog:destroy()
-    return Native.DestroyTimerDialog(getUd(self))
 end
 
 ---setTitle

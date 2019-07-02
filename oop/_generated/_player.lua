@@ -4,11 +4,9 @@ local Native = require('lib.stdlib.native')
 local Player = class('Player', require('lib.stdlib.oop.agent'))
 
 ---- compact same name native function
-local mt = table.shallowcopy(getmetatable(Player))
-mt.__call = function(_, ...)
+setmetatable(Player, table.merge(getmetatable(Player), {__call = function(_, ...)
     return Native.Player(...)
-end
-setmetatable(Player, mt)
+end}))
 
 ---<static> get
 ---@param number integer
