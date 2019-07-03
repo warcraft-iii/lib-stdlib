@@ -3,16 +3,28 @@ local Native = require('lib.stdlib.native')
 ---@class Dialog : Agent
 local Dialog = class('Dialog', require('lib.stdlib.oop.agent'))
 
+---destructor
+---@return void
+function Dialog:destructor()
+    return Native.DialogDestroy(getUd(self))
+end
+
+--@remove@
+
+---destroy
+---@deprecated
+---@return void
+function Dialog:destroy() end
+
+--@end-remove@
+
+Dialog.destroy = Dialog.delete
+
+
 ---<static> create
 ---@return Dialog
 function Dialog:create()
     return Dialog:fromUd(Native.DialogCreate())
-end
-
----destroy
----@return void
-function Dialog:destroy()
-    return Native.DialogDestroy(getUd(self))
 end
 
 ---clear
