@@ -63,4 +63,17 @@ Trigger.registerAllPlayersChatEvent = generateRegisterAllPlayers(Trigger.registe
 Trigger.registerAllPlayersSyncEvent = generateRegisterAllPlayers(Trigger.registerPlayerSyncEvent)
 Trigger.registerAllPlayersKeyEvent = generateRegisterAllPlayers(Trigger.registerPlayerKeyEvent)
 
+---registerEnterRect
+---@param rect Rect
+---@return Event
+function Trigger:registerEnterRect(rect)
+    if self.rect then
+        error('Can`t registerEnterRect twice', 2)
+    end
+    local region = Region:create()
+    region:addRect(rect)
+    self.rect = rect
+    return self:registerEnterRegion(region)
+end
+
 return Trigger
