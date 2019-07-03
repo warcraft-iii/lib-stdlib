@@ -1161,104 +1161,53 @@ function Unit:damageTarget(target, amount, attack, ranged, attackType, damageTyp
 end
 
 ---issueImmediateOrder
----@param order string
----@return boolean
-function Unit:issueImmediateOrder(order)
-    return Native.IssueImmediateOrder(getUd(self), order)
-end
-
----issueImmediateOrderById
 ---@param order integer
 ---@return boolean
-function Unit:issueImmediateOrderById(order)
+function Unit:issueImmediateOrder(order)
     return Native.IssueImmediateOrderById(getUd(self), order)
 end
 
 ---issuePointOrder
----@param order string
+---@param order integer
 ---@param x float
 ---@param y float
 ---@return boolean
 function Unit:issuePointOrder(order, x, y)
-    return Native.IssuePointOrder(getUd(self), order, x, y)
-end
-
----issuePointOrderLoc
----@param order string
----@param loc Location
----@return boolean
-function Unit:issuePointOrderLoc(order, loc)
-    return Native.IssuePointOrderLoc(getUd(self), order, getUd(loc))
-end
-
----issuePointOrderById
----@param order integer
----@param x float
----@param y float
----@return boolean
-function Unit:issuePointOrderById(order, x, y)
     return Native.IssuePointOrderById(getUd(self), order, x, y)
 end
 
----issuePointOrderByIdLoc
+---issuePointOrderLoc
 ---@param order integer
 ---@param loc Location
 ---@return boolean
-function Unit:issuePointOrderByIdLoc(order, loc)
+function Unit:issuePointOrderLoc(order, loc)
     return Native.IssuePointOrderByIdLoc(getUd(self), order, getUd(loc))
 end
 
 ---issueTargetOrder
----@param order string
----@param targetWidget Widget
----@return boolean
-function Unit:issueTargetOrder(order, targetWidget)
-    return Native.IssueTargetOrder(getUd(self), order, getUd(targetWidget))
-end
-
----issueTargetOrderById
 ---@param order integer
 ---@param targetWidget Widget
 ---@return boolean
-function Unit:issueTargetOrderById(order, targetWidget)
+function Unit:issueTargetOrder(order, targetWidget)
     return Native.IssueTargetOrderById(getUd(self), order, getUd(targetWidget))
 end
 
 ---issueInstantPointOrder
----@param order string
+---@param order integer
 ---@param x float
 ---@param y float
 ---@param instantTargetWidget Widget
 ---@return boolean
 function Unit:issueInstantPointOrder(order, x, y, instantTargetWidget)
-    return Native.IssueInstantPointOrder(getUd(self), order, x, y, getUd(instantTargetWidget))
-end
-
----issueInstantPointOrderById
----@param order integer
----@param x float
----@param y float
----@param instantTargetWidget Widget
----@return boolean
-function Unit:issueInstantPointOrderById(order, x, y, instantTargetWidget)
     return Native.IssueInstantPointOrderById(getUd(self), order, x, y, getUd(instantTargetWidget))
 end
 
 ---issueInstantTargetOrder
----@param order string
----@param targetWidget Widget
----@param instantTargetWidget Widget
----@return boolean
-function Unit:issueInstantTargetOrder(order, targetWidget, instantTargetWidget)
-    return Native.IssueInstantTargetOrder(getUd(self), order, getUd(targetWidget), getUd(instantTargetWidget))
-end
-
----issueInstantTargetOrderById
 ---@param order integer
 ---@param targetWidget Widget
 ---@param instantTargetWidget Widget
 ---@return boolean
-function Unit:issueInstantTargetOrderById(order, targetWidget, instantTargetWidget)
+function Unit:issueInstantTargetOrder(order, targetWidget, instantTargetWidget)
     return Native.IssueInstantTargetOrderById(getUd(self), order, getUd(targetWidget), getUd(instantTargetWidget))
 end
 
