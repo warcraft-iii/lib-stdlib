@@ -9,17 +9,15 @@ function Trigger:destructor()
     return Native.DestroyTrigger(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function Trigger:destroy() end
-
---@end-remove@
-
-Trigger.destroy = Trigger.delete
-
+function Trigger:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@return Trigger

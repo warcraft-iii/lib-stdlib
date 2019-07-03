@@ -9,17 +9,15 @@ function Effect:destructor()
     return Native.DestroyEffect(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function Effect:destroy() end
-
---@end-remove@
-
-Effect.destroy = Effect.delete
-
+function Effect:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> addSpecial
 ---@param modelName string

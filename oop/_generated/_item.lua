@@ -9,17 +9,15 @@ function Item:destructor()
     return Native.RemoveItem(getUd(self))
 end
 
---@remove@
-
 ---remove
 ---@deprecated
 ---@return void
-function Item:remove() end
-
---@end-remove@
-
-Item.remove = Item.delete
-
+function Item:remove()
+--@debug@
+    deprecated('remove', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@param itemid integer

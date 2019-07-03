@@ -9,17 +9,15 @@ function FogModifier:destructor()
     return Native.DestroyFogModifier(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function FogModifier:destroy() end
-
---@end-remove@
-
-FogModifier.destroy = FogModifier.delete
-
+function FogModifier:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> createRect
 ---@param forWhichPlayer Player

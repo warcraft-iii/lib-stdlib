@@ -45,16 +45,14 @@ function Unit:hide()
     return self:setShown(false)
 end
 
--- @remove
-
 ---getOwningPlayer
 ---@deprecated
 ---@return Player
 function Unit:getOwningPlayer()
+    -- @debug@
+    deprecated('getOwningPlayer', 'getOwner')
+    -- @end-debug@
+    return self:getOwner()
 end
-
--- @end-remove@
-
-Unit.getOwningPlayer = Unit.getOwner
 
 return Unit

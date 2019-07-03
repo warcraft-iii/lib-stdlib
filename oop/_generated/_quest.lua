@@ -9,17 +9,15 @@ function Quest:destructor()
     return Native.DestroyQuest(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function Quest:destroy() end
-
---@end-remove@
-
-Quest.destroy = Quest.delete
-
+function Quest:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@return Quest

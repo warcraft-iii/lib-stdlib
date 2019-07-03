@@ -9,17 +9,15 @@ function UnitPool:destructor()
     return Native.DestroyUnitPool(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function UnitPool:destroy() end
-
---@end-remove@
-
-UnitPool.destroy = UnitPool.delete
-
+function UnitPool:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@return UnitPool

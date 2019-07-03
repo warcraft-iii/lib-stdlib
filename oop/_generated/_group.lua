@@ -9,17 +9,15 @@ function Group:destructor()
     return Native.DestroyGroup(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function Group:destroy() end
-
---@end-remove@
-
-Group.destroy = Group.delete
-
+function Group:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@return Group

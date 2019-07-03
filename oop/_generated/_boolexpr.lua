@@ -9,17 +9,15 @@ function BoolExpr:destructor()
     return Native.DestroyBoolExpr(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function BoolExpr:destroy() end
-
---@end-remove@
-
-BoolExpr.destroy = BoolExpr.delete
-
+function BoolExpr:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---and_
 ---@param operandB BoolExpr

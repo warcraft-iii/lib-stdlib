@@ -9,17 +9,15 @@ function Region:destructor()
     return Native.RemoveRegion(getUd(self))
 end
 
---@remove@
-
 ---remove
 ---@deprecated
 ---@return void
-function Region:remove() end
-
---@end-remove@
-
-Region.remove = Region.delete
-
+function Region:remove()
+--@debug@
+    deprecated('remove', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@return Region

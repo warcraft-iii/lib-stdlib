@@ -9,17 +9,15 @@ function Dialog:destructor()
     return Native.DialogDestroy(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function Dialog:destroy() end
-
---@end-remove@
-
-Dialog.destroy = Dialog.delete
-
+function Dialog:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@return Dialog

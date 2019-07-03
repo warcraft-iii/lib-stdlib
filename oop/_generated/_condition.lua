@@ -14,17 +14,15 @@ function Condition:destructor()
     return Native.DestroyCondition(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function Condition:destroy() end
-
---@end-remove@
-
-Condition.destroy = Condition.delete
-
+function Condition:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@param func function

@@ -9,17 +9,15 @@ function Destructable:destructor()
     return Native.RemoveDestructable(getUd(self))
 end
 
---@remove@
-
 ---remove
 ---@deprecated
 ---@return void
-function Destructable:remove() end
-
---@end-remove@
-
-Destructable.remove = Destructable.delete
-
+function Destructable:remove()
+--@debug@
+    deprecated('remove', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@param objectid integer

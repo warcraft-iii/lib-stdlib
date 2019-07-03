@@ -14,17 +14,15 @@ function Rect:destructor()
     return Native.RemoveRect(getUd(self))
 end
 
---@remove@
-
 ---remove
 ---@deprecated
 ---@return void
-function Rect:remove() end
-
---@end-remove@
-
-Rect.remove = Rect.delete
-
+function Rect:remove()
+--@debug@
+    deprecated('remove', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@param minx float

@@ -9,17 +9,15 @@ function TextTag:destructor()
     return Native.DestroyTextTag(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function TextTag:destroy() end
-
---@end-remove@
-
-TextTag.destroy = TextTag.delete
-
+function TextTag:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@return TextTag

@@ -9,17 +9,15 @@ function ItemPool:destructor()
     return Native.DestroyItemPool(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function ItemPool:destroy() end
-
---@end-remove@
-
-ItemPool.destroy = ItemPool.delete
-
+function ItemPool:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@return ItemPool

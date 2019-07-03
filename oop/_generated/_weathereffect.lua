@@ -9,17 +9,15 @@ function WeatherEffect:destructor()
     return Native.RemoveWeatherEffect(getUd(self))
 end
 
---@remove@
-
 ---remove
 ---@deprecated
 ---@return void
-function WeatherEffect:remove() end
-
---@end-remove@
-
-WeatherEffect.remove = WeatherEffect.delete
-
+function WeatherEffect:remove()
+--@debug@
+    deprecated('remove', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---enable
 ---@param enable boolean

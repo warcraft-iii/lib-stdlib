@@ -9,17 +9,15 @@ function Unit:destructor()
     return Native.RemoveUnit(getUd(self))
 end
 
---@remove@
-
 ---remove
 ---@deprecated
 ---@return void
-function Unit:remove() end
-
---@end-remove@
-
-Unit.remove = Unit.delete
-
+function Unit:remove()
+--@debug@
+    deprecated('remove', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@param id Player

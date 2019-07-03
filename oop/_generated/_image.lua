@@ -9,17 +9,15 @@ function Image:destructor()
     return Native.DestroyImage(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function Image:destroy() end
-
---@end-remove@
-
-Image.destroy = Image.delete
-
+function Image:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@param file string

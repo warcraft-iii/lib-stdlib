@@ -9,17 +9,15 @@ function Ubersplat:destructor()
     return Native.DestroyUbersplat(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function Ubersplat:destroy() end
-
---@end-remove@
-
-Ubersplat.destroy = Ubersplat.delete
-
+function Ubersplat:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@param x float

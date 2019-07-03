@@ -9,17 +9,15 @@ function DefeatCondition:destructor()
     return Native.DestroyDefeatCondition(getUd(self))
 end
 
---@remove@
-
 ---destroy
 ---@deprecated
 ---@return void
-function DefeatCondition:destroy() end
-
---@end-remove@
-
-DefeatCondition.destroy = DefeatCondition.delete
-
+function DefeatCondition:destroy()
+--@debug@
+    deprecated('destroy', 'delete')
+--@end-debug@
+    return self:delete()
+end
 
 ---<static> create
 ---@return DefeatCondition
