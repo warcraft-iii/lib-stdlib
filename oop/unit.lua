@@ -33,4 +33,28 @@ function Unit:resume()
     return self:setPaused(false)
 end
 
+---show
+---@return void
+function Unit:show()
+    return self:setShown(true)
+end
+
+---hide
+---@return void
+function Unit:hide()
+    return self:setShown(false)
+end
+
+-- @remove
+
+---getOwningPlayer
+---@deprecated
+---@return Player
+function Unit:getOwningPlayer()
+end
+
+-- @end-remove@
+
+Unit.getOwningPlayer = Unit.getOwner
+
 return Unit

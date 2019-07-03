@@ -90,10 +90,10 @@ function Unit:kill()
     return Native.KillUnit(getUd(self))
 end
 
----show
+---setShown
 ---@param show boolean
 ---@return void
-function Unit:show(show)
+function Unit:setShown(show)
     return Native.ShowUnit(getUd(self), show)
 end
 
@@ -731,9 +731,9 @@ function Unit:getState(unitState)
     return Native.GetUnitState(getUd(self), unitState)
 end
 
----getOwningPlayer
+---getOwner
 ---@return Player
-function Unit:getOwningPlayer()
+function Unit:getOwner()
     return require('lib.stdlib.oop.player'):fromUd(Native.GetOwningPlayer(getUd(self)))
 end
 
