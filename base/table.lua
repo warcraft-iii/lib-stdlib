@@ -57,6 +57,22 @@ function vipairs(t)
     end
 end
 
+---vpairs
+---@generic K
+---@generic V
+---@param t table<K, V>
+---@return fun(): V
+function vpairs(t)
+    local k
+    return function()
+        k = next(t, k)
+        if not k then
+            return
+        end
+        return t[k]
+    end
+end
+
 ---wipe
 ---@param t T
 ---@return T
@@ -214,4 +230,15 @@ function table.merge(...)
         end
     end
     return r
+end
+
+---random
+---@generic T
+---@param t T[]
+---@return T
+function table.random(t)
+    if #t == 1 then
+        return t[1]
+    end
+    return t[math.random(1, #t)]
 end
