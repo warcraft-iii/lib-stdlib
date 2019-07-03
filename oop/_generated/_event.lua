@@ -273,9 +273,9 @@ function Event:getOrderedUnit()
     return require('lib.stdlib.oop.unit'):fromUd(Native.GetOrderedUnit())
 end
 
----<static> getIssuedOrderId
+---<static> getIssuedOrder
 ---@return integer
-function Event:getIssuedOrderId()
+function Event:getIssuedOrder()
     return Native.GetIssuedOrderId()
 end
 
