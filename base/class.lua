@@ -32,7 +32,7 @@ local function inherit(cls, super)
 end
 
 ---@class object
-local object = {}
+object = {}
 
 object.meta = { __index = object, __type = object, __name = 'object' }
 
@@ -70,6 +70,27 @@ function object:new(...)
     end
     self.new = new
     return new(self, ...)
+end
+
+local mtDestroyed = {
+    __index = function()
+        error('object destroyed', 2)
+    end,
+    __newindex = function()
+        error('object destroyed', 2)
+    end
+}
+
+---delete
+---@return void
+function object:delete()
+    local destructor = rawget(self:getType(), 'destructor')
+    if destructor then
+        destructor(self)
+    end
+
+    table.wipe(self)
+    setmetatable(self, mtDestroyed)
 end
 
 ---isClass

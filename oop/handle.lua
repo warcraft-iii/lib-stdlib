@@ -6,15 +6,6 @@
 ---@class Handle: object
 local Handle = class('Handle')
 
-local mtDestroyed = {
-    __index = function()
-        error('object destroyed')
-    end,
-    __newindex = function()
-        error('object destroyed')
-    end
-}
-
 ---inherit
 ---@private
 function Handle:inherit()
@@ -34,14 +25,7 @@ end
 ---@return void
 function Handle:delete()
     self._object[self:getUd()] = nil
-
-    local destructor = rawget(self:getType(), 'destructor')
-    if destructor then
-        destructor(self)
-    end
-
-    table.wipe(self)
-    setmetatable(self, mtDestroyed)
+    object.delete(self)
 end
 
 ---fromUd
