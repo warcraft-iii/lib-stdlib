@@ -87,3 +87,5 @@ WeaponType = require('lib.stdlib.enum.weapontype')
 WidgetEvent = require('lib.stdlib.enum.widgetevent')
 
 ReplaceUnitStateMethod = require('lib.stdlib.enum.replaceunitstatemethod')
+SpecialOrder = require('lib.stdlib.enum.specialorder')
+Order = require('lib.stdlib.enum.order')
