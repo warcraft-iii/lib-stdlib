@@ -39,16 +39,12 @@ function Function:createItemCallback(filter) end
 
 local function generateCallbackCreator(cls, method)
     return function(_, callback)
-        if not callback then
-            return
-        end
-
-        local function f()
-            return callback(cls:fromUd(method()))
+        if type(callback) ~= 'function' then
+            return callback
         end
 
         return function()
-            return safecall(f)
+            return callback(cls:fromUd(method()))
         end
     end
 end
