@@ -10,7 +10,7 @@ function Timer:after(duration, func)
     local timer = Timer:create()
     Native.TimerStart(timer:getUd(), duration, false, function()
         func()
-        timer:destroy()
+        timer:delete()
     end)
     return timer
 end
