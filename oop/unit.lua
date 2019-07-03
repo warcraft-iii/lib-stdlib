@@ -1,3 +1,4 @@
+---@type Unit
 local Unit = require('lib.stdlib.oop._generated._unit')
 
 ---isDead
