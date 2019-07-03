@@ -54,10 +54,10 @@ function Player:getUnits(filter)
     return units
 end
 
----iterUnits
+---iterateUnits
 ---@param filter UnitFilter
 ---@return fun(): Unit
-function Player:iterUnits(filter)
+function Player:iterateUnits(filter)
     return vipairs(self:getUnits(filter))
 end
 
