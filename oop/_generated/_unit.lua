@@ -550,10 +550,10 @@ function Unit:setInvulnerable(flag)
     return Native.SetUnitInvulnerable(getUd(self), flag)
 end
 
----pause
+---setPaused
 ---@param flag boolean
 ---@return void
-function Unit:pause(flag)
+function Unit:setPaused(flag)
     return Native.PauseUnit(getUd(self), flag)
 end
 

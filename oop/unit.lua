@@ -21,4 +21,16 @@ function Unit:replace(id, method)
     return Unit:fromUd(ReplaceUnitBJ(getUd(self), id, method))
 end
 
+---pause
+---@return void
+function Unit:pause()
+    return self:setPaused(true)
+end
+
+---resume
+---@return void
+function Unit:resume()
+    return self:setPaused(false)
+end
+
 return Unit
