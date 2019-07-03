@@ -5,7 +5,7 @@
 ---@class Observer: object
 local Observer = class('Observer')
 
-local Dispatcher = require('lib.stdlib.system.utils._dispatcher')
+local Dispatcher = require('lib.stdlib.utils._dispatcher')
 
 ---registerEvent
 ---@param id integer
