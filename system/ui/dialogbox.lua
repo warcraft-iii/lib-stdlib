@@ -7,7 +7,7 @@ local Player = require("lib.stdlib.oop.player")
 ---@field private title string
 ---@field private dlg Dialog
 ---@field private trig Trigger
----@field private buttons Button[]
+---@field private buttons table<Button, integer>
 ---@field private callback fun(id: integer)
 local DialogBox = class("DialogBox")
 
@@ -129,12 +129,8 @@ function DialogBox:question(player, title, dialogItems, callback)
     else
         dlgBox:displayToAllPlayers(true)
     end
-    
-    return dlgBox
-end
 
-function DialogBox:delete()
-    self:destructor()
+    return dlgBox
 end
 
 return DialogBox
