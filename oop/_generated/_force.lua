@@ -9,12 +9,11 @@ function Force:destructor()
     return Native.DestroyForce(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function Force:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('Force.destroy', 'Force.delete')
 --@end-debug@
     return self:delete()
 end

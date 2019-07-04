@@ -3,6 +3,12 @@ local Native = require('lib.stdlib.native')
 ---@class Event : Agent
 local Event = class('Event', require('lib.stdlib.oop.agent'))
 
+---<static> getTriggeringTrigger
+---@return Trigger
+function Event:getTriggeringTrigger()
+    return require('lib.stdlib.oop.trigger'):fromUd(Native.GetTriggeringTrigger())
+end
+
 ---<static> getEventGameState
 ---@return GameState
 function Event:getEventGameState()

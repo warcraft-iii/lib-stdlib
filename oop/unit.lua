@@ -45,8 +45,7 @@ function Unit:hide()
     return self:setShown(false)
 end
 
----getOwningPlayer
----@deprecated
+---<**_DEPRECATED_**>getOwningPlayer
 ---@return Player
 function Unit:getOwningPlayer()
     -- @debug@

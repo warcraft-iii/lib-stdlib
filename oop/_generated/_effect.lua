@@ -9,12 +9,11 @@ function Effect:destructor()
     return Native.DestroyEffect(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function Effect:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('Effect.destroy', 'Effect.delete')
 --@end-debug@
     return self:delete()
 end

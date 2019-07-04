@@ -9,12 +9,11 @@ function LeaderBoard:destructor()
     return Native.DestroyLeaderboard(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function LeaderBoard:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('LeaderBoard.destroy', 'LeaderBoard.delete')
 --@end-debug@
     return self:delete()
 end

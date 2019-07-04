@@ -9,12 +9,11 @@ function Unit:destructor()
     return Native.RemoveUnit(getUd(self))
 end
 
----remove
----@deprecated
+---<**_DEPRECATED_**> remove
 ---@return void
 function Unit:remove()
 --@debug@
-    deprecated('remove', 'delete')
+    deprecated('Unit.remove', 'Unit.delete')
 --@end-debug@
     return self:delete()
 end

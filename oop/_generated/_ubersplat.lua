@@ -9,12 +9,11 @@ function Ubersplat:destructor()
     return Native.DestroyUbersplat(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function Ubersplat:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('Ubersplat.destroy', 'Ubersplat.delete')
 --@end-debug@
     return self:delete()
 end

@@ -9,12 +9,11 @@ function Lightning:destructor()
     return Native.DestroyLightning(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function Lightning:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('Lightning.destroy', 'Lightning.delete')
 --@end-debug@
     return self:delete()
 end

@@ -9,12 +9,11 @@ function Destructable:destructor()
     return Native.RemoveDestructable(getUd(self))
 end
 
----remove
----@deprecated
+---<**_DEPRECATED_**> remove
 ---@return void
 function Destructable:remove()
 --@debug@
-    deprecated('remove', 'delete')
+    deprecated('Destructable.remove', 'Destructable.delete')
 --@end-debug@
     return self:delete()
 end

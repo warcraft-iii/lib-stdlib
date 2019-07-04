@@ -9,12 +9,11 @@ function Item:destructor()
     return Native.RemoveItem(getUd(self))
 end
 
----remove
----@deprecated
+---<**_DEPRECATED_**> remove
 ---@return void
 function Item:remove()
 --@debug@
-    deprecated('remove', 'delete')
+    deprecated('Item.remove', 'Item.delete')
 --@end-debug@
     return self:delete()
 end

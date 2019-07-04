@@ -9,12 +9,11 @@ function Group:destructor()
     return Native.DestroyGroup(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function Group:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('Group.destroy', 'Group.delete')
 --@end-debug@
     return self:delete()
 end

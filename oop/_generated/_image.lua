@@ -9,12 +9,11 @@ function Image:destructor()
     return Native.DestroyImage(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function Image:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('Image.destroy', 'Image.delete')
 --@end-debug@
     return self:delete()
 end

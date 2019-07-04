@@ -9,12 +9,11 @@ function Timer:destructor()
     return Native.DestroyTimer(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function Timer:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('Timer.destroy', 'Timer.delete')
 --@end-debug@
     return self:delete()
 end

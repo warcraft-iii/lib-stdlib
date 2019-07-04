@@ -9,12 +9,11 @@ function DefeatCondition:destructor()
     return Native.DestroyDefeatCondition(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function DefeatCondition:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('DefeatCondition.destroy', 'DefeatCondition.delete')
 --@end-debug@
     return self:delete()
 end

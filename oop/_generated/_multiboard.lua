@@ -9,12 +9,11 @@ function MultiBoard:destructor()
     return Native.DestroyMultiboard(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function MultiBoard:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('MultiBoard.destroy', 'MultiBoard.delete')
 --@end-debug@
     return self:delete()
 end

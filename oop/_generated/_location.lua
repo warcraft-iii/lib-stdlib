@@ -14,12 +14,11 @@ function Location:destructor()
     return Native.RemoveLocation(getUd(self))
 end
 
----remove
----@deprecated
+---<**_DEPRECATED_**> remove
 ---@return void
 function Location:remove()
 --@debug@
-    deprecated('remove', 'delete')
+    deprecated('Location.remove', 'Location.delete')
 --@end-debug@
     return self:delete()
 end

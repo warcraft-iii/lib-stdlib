@@ -9,12 +9,11 @@ function TextTag:destructor()
     return Native.DestroyTextTag(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function TextTag:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('TextTag.destroy', 'TextTag.delete')
 --@end-debug@
     return self:delete()
 end

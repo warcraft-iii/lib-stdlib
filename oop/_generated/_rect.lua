@@ -14,12 +14,11 @@ function Rect:destructor()
     return Native.RemoveRect(getUd(self))
 end
 
----remove
----@deprecated
+---<**_DEPRECATED_**> remove
 ---@return void
 function Rect:remove()
 --@debug@
-    deprecated('remove', 'delete')
+    deprecated('Rect.remove', 'Rect.delete')
 --@end-debug@
     return self:delete()
 end

@@ -14,12 +14,11 @@ function Filter:destructor()
     return Native.DestroyFilter(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function Filter:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('Filter.destroy', 'Filter.delete')
 --@end-debug@
     return self:delete()
 end

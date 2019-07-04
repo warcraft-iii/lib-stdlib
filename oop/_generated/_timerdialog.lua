@@ -9,12 +9,11 @@ function TimerDialog:destructor()
     return Native.DestroyTimerDialog(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function TimerDialog:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('TimerDialog.destroy', 'TimerDialog.delete')
 --@end-debug@
     return self:delete()
 end

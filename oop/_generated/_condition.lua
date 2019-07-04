@@ -14,12 +14,11 @@ function Condition:destructor()
     return Native.DestroyCondition(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function Condition:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('Condition.destroy', 'Condition.delete')
 --@end-debug@
     return self:delete()
 end

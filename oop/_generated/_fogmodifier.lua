@@ -9,12 +9,11 @@ function FogModifier:destructor()
     return Native.DestroyFogModifier(getUd(self))
 end
 
----destroy
----@deprecated
+---<**_DEPRECATED_**> destroy
 ---@return void
 function FogModifier:destroy()
 --@debug@
-    deprecated('destroy', 'delete')
+    deprecated('FogModifier.destroy', 'FogModifier.delete')
 --@end-debug@
     return self:delete()
 end
