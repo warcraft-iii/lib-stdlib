@@ -65,10 +65,39 @@ end
 ---@param unit Unit
 ---@return void
 function Player:selectUnitSingle(unit)
-    if Player:getLocal() == self then
+    if self:isLocal() then
         Native.ClearSelection()
-        unit:select(true)
+        unit:setSelected(true)
     end
+end
+
+---setUnitSelected
+---@param unit Unit
+---@param flag boolean
+---@return void
+function Player:setUnitSelected(unit, flag)
+    if self:isLocal() then
+        return unit:setSelected(flag)
+    end
+end
+
+---selectUnit
+---@param unit Unit
+---@return void
+function Player:selectUnit(unit)
+    return self:setUnitSelected(unit, true)
+end
+
+---deselectUnit
+---@param unit Unit
+function Player:deselectUnit(unit)
+    return self:setUnitSelected(unit, false)
+end
+
+---isLocal
+---@return boolean
+function Player:isLocal()
+    return self == Player:getLocal()
 end
 
 return Player
