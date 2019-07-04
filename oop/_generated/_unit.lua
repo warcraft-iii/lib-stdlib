@@ -567,10 +567,10 @@ function Unit:setPathing(flag)
     return Native.SetUnitPathing(getUd(self), flag)
 end
 
----select
+---setSelected
 ---@param flag boolean
 ---@return void
-function Unit:select(flag)
+function Unit:setSelected(flag)
     return Native.SelectUnit(getUd(self), flag)
 end
 
