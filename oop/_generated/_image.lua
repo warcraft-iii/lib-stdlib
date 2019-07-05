@@ -35,10 +35,10 @@ function Image:create(file, sizeX, sizeY, sizeZ, posX, posY, posZ, originX, orig
     return Image:fromUd(Native.CreateImage(file, sizeX, sizeY, sizeZ, posX, posY, posZ, originX, originY, originZ, imageType))
 end
 
----show
+---setShown
 ---@param flag boolean
 ---@return void
-function Image:show(flag)
+function Image:setShown(flag)
     return Native.ShowImage(getUd(self), flag)
 end
 
