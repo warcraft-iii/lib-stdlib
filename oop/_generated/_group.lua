@@ -182,66 +182,34 @@ function Group:enumUnitsSelected(player, filter)
 end
 
 ---immediateOrder
----@param order string
----@return boolean
-function Group:immediateOrder(order)
-    return Native.GroupImmediateOrder(getUd(self), order)
-end
-
----immediateOrderById
 ---@param order integer
 ---@return boolean
-function Group:immediateOrderById(order)
+function Group:immediateOrder(order)
     return Native.GroupImmediateOrderById(getUd(self), order)
 end
 
 ---pointOrder
----@param order string
+---@param order integer
 ---@param x float
 ---@param y float
 ---@return boolean
 function Group:pointOrder(order, x, y)
-    return Native.GroupPointOrder(getUd(self), order, x, y)
-end
-
----pointOrderLoc
----@param order string
----@param loc Location
----@return boolean
-function Group:pointOrderLoc(order, loc)
-    return Native.GroupPointOrderLoc(getUd(self), order, getUd(loc))
-end
-
----pointOrderById
----@param order integer
----@param x float
----@param y float
----@return boolean
-function Group:pointOrderById(order, x, y)
     return Native.GroupPointOrderById(getUd(self), order, x, y)
 end
 
----pointOrderByIdLoc
+---pointOrderLoc
 ---@param order integer
 ---@param loc Location
 ---@return boolean
-function Group:pointOrderByIdLoc(order, loc)
+function Group:pointOrderLoc(order, loc)
     return Native.GroupPointOrderByIdLoc(getUd(self), order, getUd(loc))
 end
 
 ---targetOrder
----@param order string
----@param targetWidget Widget
----@return boolean
-function Group:targetOrder(order, targetWidget)
-    return Native.GroupTargetOrder(getUd(self), order, getUd(targetWidget))
-end
-
----targetOrderById
 ---@param order integer
 ---@param targetWidget Widget
 ---@return boolean
-function Group:targetOrderById(order, targetWidget)
+function Group:targetOrder(order, targetWidget)
     return Native.GroupTargetOrderById(getUd(self), order, getUd(targetWidget))
 end
 
