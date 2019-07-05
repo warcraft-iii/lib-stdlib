@@ -15,6 +15,13 @@ function Trackable:create(trackableModelPath, x, y, facing)
         facing = y
         x, y = table.unpack(x)
     end
+--@debug@
+    checkclass(self, Trackable, 'create', 'self')
+    checktype(trackableModelPath, 'string', 'create', 1)
+    checktype(x, 'float', 'create', 2)
+    checktype(y, 'float', 'create', 3)
+    checktype(facing, 'float', 'create', 4)
+--@end-debug@
     return Trackable:fromUd(Native.CreateTrackable(trackableModelPath, x, y, facing))
 end
 

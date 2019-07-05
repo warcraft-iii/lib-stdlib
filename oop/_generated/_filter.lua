@@ -11,6 +11,9 @@ end}))
 ---destructor
 ---@return void
 function Filter:destructor()
+--@debug@
+    checkobject(self, Filter, 'destructor', 'self')
+--@end-debug@
     return Native.DestroyFilter(getUd(self))
 end
 
@@ -27,6 +30,10 @@ end
 ---@param func function
 ---@return Filter
 function Filter:create(func)
+--@debug@
+    checkclass(self, Filter, 'create', 'self')
+    checktype(func, 'function', 'create', 1)
+--@end-debug@
     return Filter:fromUd(Native.Filter(func))
 end
 

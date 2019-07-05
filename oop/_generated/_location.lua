@@ -17,6 +17,11 @@ function Location:create(x, y)
     if type(x) == 'table' then
         x, y = table.unpack(x)
     end
+--@debug@
+    checkclass(self, Location, 'create', 'self')
+    checktype(x, 'float', 'create', 1)
+    checktype(y, 'float', 'create', 2)
+--@end-debug@
     return Location:fromUd(Native.Location(x, y))
 end
 

@@ -6,6 +6,9 @@ local DefeatCondition = class('DefeatCondition', require('lib.stdlib.oop.agent')
 ---destructor
 ---@return void
 function DefeatCondition:destructor()
+--@debug@
+    checkobject(self, DefeatCondition, 'destructor', 'self')
+--@end-debug@
     return Native.DestroyDefeatCondition(getUd(self))
 end
 
@@ -28,6 +31,10 @@ end
 ---@param description string
 ---@return void
 function DefeatCondition:setDescription(description)
+--@debug@
+    checkobject(self, DefeatCondition, 'setDescription', 'self')
+    checktype(description, 'string', 'setDescription', 1)
+--@end-debug@
     return Native.DefeatConditionSetDescription(getUd(self), description)
 end
 

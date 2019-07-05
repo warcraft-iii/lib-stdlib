@@ -11,6 +11,9 @@ end}))
 ---destructor
 ---@return void
 function Condition:destructor()
+--@debug@
+    checkobject(self, Condition, 'destructor', 'self')
+--@end-debug@
     return Native.DestroyCondition(getUd(self))
 end
 
@@ -27,6 +30,10 @@ end
 ---@param func function
 ---@return Condition
 function Condition:create(func)
+--@debug@
+    checkclass(self, Condition, 'create', 'self')
+    checktype(func, 'function', 'create', 1)
+--@end-debug@
     return Condition:fromUd(Native.Condition(func))
 end
 
