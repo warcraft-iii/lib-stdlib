@@ -45,10 +45,10 @@ function Ubersplat:finish()
     return Native.FinishUbersplat(getUd(self))
 end
 
----show
+---setShown
 ---@param flag boolean
 ---@return void
-function Ubersplat:show(flag)
+function Ubersplat:setShown(flag)
     return Native.ShowUbersplat(getUd(self), flag)
 end
 
