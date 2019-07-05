@@ -140,4 +140,11 @@ function Player:isLocal()
     return self == _localPlayer
 end
 
+---getStartPos
+---@return float, float
+function Player:getStartPos()
+    local s = Native.GetPlayerStartLocation(self:getUd())
+    return Native.GetStartLocationX(s), Native.GetStartLocationY(s)
+end
+
 return Player
