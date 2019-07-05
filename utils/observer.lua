@@ -15,6 +15,16 @@ function Observer:registerEvent(id, method)
     Dispatcher:get(id):addObject(self, method)
 end
 
+---registerEvents
+---@param ids integer[]
+---@param method function
+---@return void
+function Observer:registerEvents(ids, method)
+    for _, id in ipairs(ids) do
+        self:registerEvent(id, method)
+    end
+end
+
 ---unregisterEvent
 ---@param id integer
 ---@return void
