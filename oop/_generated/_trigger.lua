@@ -276,7 +276,7 @@ end
 ---@return TriggerCondition
 function Trigger:addCondition(condition)
     condition = Native.Condition(condition)
-    return require('lib.stdlib.oop.triggercondition'):fromUd(Native.TriggerAddCondition(getUd(self), condition))
+    return require('lib.stdlib.oop.triggercondition'):fromUd(Native.TriggerAddCondition(getUd(self), getUd(condition)))
 end
 
 ---removeCondition

@@ -77,8 +77,8 @@ end
 ---@return void
 function Group:enumUnitsOfType(unitname, filter)
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsOfType(getUd(self), unitname, filter)
-    if filter then filter:destroy() end
+    Native.GroupEnumUnitsOfType(getUd(self), unitname, getUd(filter))
+    if filter then filter:delete() end
 end
 
 ---enumUnitsOfPlayer
@@ -87,8 +87,8 @@ end
 ---@return void
 function Group:enumUnitsOfPlayer(player, filter)
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsOfPlayer(getUd(self), getUd(player), filter)
-    if filter then filter:destroy() end
+    Native.GroupEnumUnitsOfPlayer(getUd(self), getUd(player), getUd(filter))
+    if filter then filter:delete() end
 end
 
 ---enumUnitsOfTypeCounted
@@ -98,8 +98,8 @@ end
 ---@return void
 function Group:enumUnitsOfTypeCounted(unitname, countLimit, filter)
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsOfTypeCounted(getUd(self), unitname, filter, countLimit)
-    if filter then filter:destroy() end
+    Native.GroupEnumUnitsOfTypeCounted(getUd(self), unitname, getUd(filter), countLimit)
+    if filter then filter:delete() end
 end
 
 ---enumUnitsInRect
@@ -108,8 +108,8 @@ end
 ---@return void
 function Group:enumUnitsInRect(r, filter)
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsInRect(getUd(self), getUd(r), filter)
-    if filter then filter:destroy() end
+    Native.GroupEnumUnitsInRect(getUd(self), getUd(r), getUd(filter))
+    if filter then filter:delete() end
 end
 
 ---enumUnitsInRectCounted
@@ -119,8 +119,8 @@ end
 ---@return void
 function Group:enumUnitsInRectCounted(r, countLimit, filter)
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsInRectCounted(getUd(self), getUd(r), filter, countLimit)
-    if filter then filter:destroy() end
+    Native.GroupEnumUnitsInRectCounted(getUd(self), getUd(r), getUd(filter), countLimit)
+    if filter then filter:delete() end
 end
 
 ---enumUnitsInRange
@@ -131,8 +131,8 @@ end
 ---@return void
 function Group:enumUnitsInRange(x, y, radius, filter)
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsInRange(getUd(self), x, y, radius, filter)
-    if filter then filter:destroy() end
+    Native.GroupEnumUnitsInRange(getUd(self), x, y, radius, getUd(filter))
+    if filter then filter:delete() end
 end
 
 ---enumUnitsInRangeOfLoc
@@ -142,8 +142,8 @@ end
 ---@return void
 function Group:enumUnitsInRangeOfLoc(loc, radius, filter)
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsInRangeOfLoc(getUd(self), getUd(loc), radius, filter)
-    if filter then filter:destroy() end
+    Native.GroupEnumUnitsInRangeOfLoc(getUd(self), getUd(loc), radius, getUd(filter))
+    if filter then filter:delete() end
 end
 
 ---enumUnitsInRangeCounted
@@ -155,8 +155,8 @@ end
 ---@return void
 function Group:enumUnitsInRangeCounted(x, y, radius, countLimit, filter)
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsInRangeCounted(getUd(self), x, y, radius, filter, countLimit)
-    if filter then filter:destroy() end
+    Native.GroupEnumUnitsInRangeCounted(getUd(self), x, y, radius, getUd(filter), countLimit)
+    if filter then filter:delete() end
 end
 
 ---enumUnitsInRangeOfLocCounted
@@ -167,8 +167,8 @@ end
 ---@return void
 function Group:enumUnitsInRangeOfLocCounted(loc, radius, countLimit, filter)
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsInRangeOfLocCounted(getUd(self), getUd(loc), radius, filter, countLimit)
-    if filter then filter:destroy() end
+    Native.GroupEnumUnitsInRangeOfLocCounted(getUd(self), getUd(loc), radius, getUd(filter), countLimit)
+    if filter then filter:delete() end
 end
 
 ---enumUnitsSelected
@@ -177,8 +177,8 @@ end
 ---@return void
 function Group:enumUnitsSelected(player, filter)
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsSelected(getUd(self), getUd(player), filter)
-    if filter then filter:destroy() end
+    Native.GroupEnumUnitsSelected(getUd(self), getUd(player), getUd(filter))
+    if filter then filter:delete() end
 end
 
 ---immediateOrder

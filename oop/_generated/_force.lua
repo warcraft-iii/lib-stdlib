@@ -56,8 +56,8 @@ end
 ---@return void
 function Force:enumPlayers(filter)
     filter = require('lib.stdlib.oop.filter'):createPlayerFilter(filter)
-    Native.ForceEnumPlayers(getUd(self), filter)
-    if filter then filter:destroy() end
+    Native.ForceEnumPlayers(getUd(self), getUd(filter))
+    if filter then filter:delete() end
 end
 
 ---enumPlayersCounted
@@ -66,8 +66,8 @@ end
 ---@return void
 function Force:enumPlayersCounted(countLimit, filter)
     filter = require('lib.stdlib.oop.filter'):createPlayerFilter(filter)
-    Native.ForceEnumPlayersCounted(getUd(self), filter, countLimit)
-    if filter then filter:destroy() end
+    Native.ForceEnumPlayersCounted(getUd(self), getUd(filter), countLimit)
+    if filter then filter:delete() end
 end
 
 ---enumAllies
@@ -76,8 +76,8 @@ end
 ---@return void
 function Force:enumAllies(player, filter)
     filter = require('lib.stdlib.oop.filter'):createPlayerFilter(filter)
-    Native.ForceEnumAllies(getUd(self), getUd(player), filter)
-    if filter then filter:destroy() end
+    Native.ForceEnumAllies(getUd(self), getUd(player), getUd(filter))
+    if filter then filter:delete() end
 end
 
 ---enumEnemies
@@ -86,8 +86,8 @@ end
 ---@return void
 function Force:enumEnemies(player, filter)
     filter = require('lib.stdlib.oop.filter'):createPlayerFilter(filter)
-    Native.ForceEnumEnemies(getUd(self), getUd(player), filter)
-    if filter then filter:destroy() end
+    Native.ForceEnumEnemies(getUd(self), getUd(player), getUd(filter))
+    if filter then filter:delete() end
 end
 
 ---forEach

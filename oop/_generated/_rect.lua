@@ -117,8 +117,8 @@ end
 function Rect:enumDestructablesIn(filter, actionFunc)
     filter = require('lib.stdlib.oop.filter'):createDestructableFilter(filter)
     actionFunc = require('lib.stdlib.oop.function'):createDestructableCallback(actionFunc)
-    Native.EnumDestructablesInRect(getUd(self), filter, actionFunc)
-    if filter then filter:destroy() end
+    Native.EnumDestructablesInRect(getUd(self), getUd(filter), actionFunc)
+    if filter then filter:delete() end
 end
 
 ---enumItemsIn
@@ -128,8 +128,8 @@ end
 function Rect:enumItemsIn(filter, actionFunc)
     filter = require('lib.stdlib.oop.filter'):createItemFilter(filter)
     actionFunc = require('lib.stdlib.oop.function'):createItemCallback(actionFunc)
-    Native.EnumItemsInRect(getUd(self), filter, actionFunc)
-    if filter then filter:destroy() end
+    Native.EnumItemsInRect(getUd(self), getUd(filter), actionFunc)
+    if filter then filter:delete() end
 end
 
 ---addWeatherEffect
