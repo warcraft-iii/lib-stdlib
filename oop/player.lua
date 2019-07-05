@@ -3,6 +3,7 @@ local Player = require('lib.stdlib.oop._generated._player')
 local PlayerState = require('lib.stdlib.enum.playerstate')
 local Native = require('lib.stdlib.native.native')
 local Group = require('lib.stdlib.oop.group')
+local Vector = require('lib.stdlib.oop.vector')
 
 ---@type Player
 local _localPlayer = Player:fromUd(Native.GetLocalPlayer())
@@ -150,7 +151,7 @@ end
 ---@return float, float
 function Player:getStartPos()
     local s = Native.GetPlayerStartLocation(self:getUd())
-    return Native.GetStartLocationX(s), Native.GetStartLocationY(s)
+    return Vector:new(Native.GetStartLocationX(s), Native.GetStartLocationY(s))
 end
 
 return Player
