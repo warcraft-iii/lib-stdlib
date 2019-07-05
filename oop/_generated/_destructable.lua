@@ -160,10 +160,10 @@ function Destructable:setAnimationSpeed(speedFactor)
     return Native.SetDestructableAnimationSpeed(getUd(self), speedFactor)
 end
 
----show
+---setShown
 ---@param flag boolean
 ---@return void
-function Destructable:show(flag)
+function Destructable:setShown(flag)
     return Native.ShowDestructable(getUd(self), flag)
 end
 
