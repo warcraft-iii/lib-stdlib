@@ -12,7 +12,9 @@ local Message = {}
 ---@param text string
 ---@param timeout float
 function Message:toAll(text, timeout)
-    return self:toForce(Force:allPlayers(), text, timeout)
+    for player in Player:iterateAll() do
+        self:toPlayer(player, text, timeout)
+    end
 end
 
 ---toForce
