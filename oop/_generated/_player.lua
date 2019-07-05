@@ -402,7 +402,7 @@ function Player:setState(playerState, value)
 end
 
 ---remove
----@param gameResult PlayerGameresult
+---@param gameResult PlayerGameResult
 ---@return void
 function Player:remove(gameResult)
     return Native.RemovePlayer(getUd(self), gameResult)
