@@ -19,6 +19,7 @@ function Ubersplat:destroy()
 end
 
 ---<static> create
+---@overload fun(vec: Vector2, name: string, red: integer, green: integer, blue: integer, alpha: integer, forcePaused: boolean, noBirthTime: boolean): Ubersplat
 ---@param x float
 ---@param y float
 ---@param name string
@@ -30,6 +31,10 @@ end
 ---@param noBirthTime boolean
 ---@return Ubersplat
 function Ubersplat:create(x, y, name, red, green, blue, alpha, forcePaused, noBirthTime)
+    if type(x) == 'table' then
+        name, red, green, blue, alpha, forcePaused, noBirthTime = y, name, red, green, blue, alpha, forcePaused
+        x, y = table.unpack(x)
+    end
     return Ubersplat:fromUd(Native.CreateUbersplat(x, y, name, red, green, blue, alpha, forcePaused, noBirthTime))
 end
 

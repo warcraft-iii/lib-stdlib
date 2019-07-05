@@ -19,20 +19,16 @@ function Effect:destroy()
 end
 
 ---<static> addSpecial
+---@overload fun(modelName: string, vec: Vector2): Effect
 ---@param modelName string
 ---@param x float
 ---@param y float
 ---@return Effect
 function Effect:addSpecial(modelName, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Effect:fromUd(Native.AddSpecialEffect(modelName, x, y))
-end
-
----<static> addSpecialLoc
----@param modelName string
----@param where Location
----@return Effect
-function Effect:addSpecialLoc(modelName, where)
-    return Effect:fromUd(Native.AddSpecialEffectLoc(modelName, getUd(where)))
 end
 
 ---<static> addSpecialTarget
@@ -45,41 +41,31 @@ function Effect:addSpecialTarget(modelName, targetWidget, attachPointName)
 end
 
 ---<static> addSpell
+---@overload fun(abilityString: string, t: EffectType, vec: Vector2): Effect
 ---@param abilityString string
 ---@param t EffectType
 ---@param x float
 ---@param y float
 ---@return Effect
 function Effect:addSpell(abilityString, t, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Effect:fromUd(Native.AddSpellEffect(abilityString, t, x, y))
 end
 
----<static> addSpellLoc
----@param abilityString string
----@param t EffectType
----@param where Location
----@return Effect
-function Effect:addSpellLoc(abilityString, t, where)
-    return Effect:fromUd(Native.AddSpellEffectLoc(abilityString, t, getUd(where)))
-end
-
 ---<static> addSpellById
+---@overload fun(abilityId: integer, t: EffectType, vec: Vector2): Effect
 ---@param abilityId integer
 ---@param t EffectType
 ---@param x float
 ---@param y float
 ---@return Effect
 function Effect:addSpellById(abilityId, t, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Effect:fromUd(Native.AddSpellEffectById(abilityId, t, x, y))
-end
-
----<static> addSpellByIdLoc
----@param abilityId integer
----@param t EffectType
----@param where Location
----@return Effect
-function Effect:addSpellByIdLoc(abilityId, t, where)
-    return Effect:fromUd(Native.AddSpellEffectByIdLoc(abilityId, t, getUd(where)))
 end
 
 ---<static> addSpellTarget
@@ -133,11 +119,15 @@ function Effect:setSpecialScale(scale)
 end
 
 ---setSpecialPosition
+---@overload fun(vec: Vector3): void
 ---@param x float
 ---@param y float
 ---@param z float
 ---@return void
 function Effect:setSpecialPosition(x, y, z)
+    if type(x) == 'table' then
+        x, y, z = table.unpack(x)
+    end
     return Native.BlzSetSpecialEffectPosition(getUd(self), x, y, z)
 end
 
@@ -213,13 +203,6 @@ function Effect:setSpecialZ(z)
     return Native.BlzSetSpecialEffectZ(getUd(self), z)
 end
 
----setSpecialPositionLoc
----@param loc Location
----@return void
-function Effect:setSpecialPositionLoc(loc)
-    return Native.BlzSetSpecialEffectPositionLoc(getUd(self), getUd(loc))
-end
-
 ---getLocalSpecialX
 ---@return float
 function Effect:getLocalSpecialX()
@@ -280,11 +263,15 @@ function Effect:getSpecialScale()
 end
 
 ---setSpecialMatrixScale
+---@overload fun(vec: Vector3): void
 ---@param x float
 ---@param y float
 ---@param z float
 ---@return void
 function Effect:setSpecialMatrixScale(x, y, z)
+    if type(x) == 'table' then
+        x, y, z = table.unpack(x)
+    end
     return Native.BlzSetSpecialEffectMatrixScale(getUd(self), x, y, z)
 end
 

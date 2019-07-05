@@ -110,29 +110,41 @@ function Sound:setConeAngles(inside, outside, outsideVolume)
 end
 
 ---setConeOrientation
+---@overload fun(vec: Vector3): void
 ---@param x float
 ---@param y float
 ---@param z float
 ---@return void
 function Sound:setConeOrientation(x, y, z)
+    if type(x) == 'table' then
+        x, y, z = table.unpack(x)
+    end
     return Native.SetSoundConeOrientation(getUd(self), x, y, z)
 end
 
 ---setPosition
+---@overload fun(vec: Vector3): void
 ---@param x float
 ---@param y float
 ---@param z float
 ---@return void
 function Sound:setPosition(x, y, z)
+    if type(x) == 'table' then
+        x, y, z = table.unpack(x)
+    end
     return Native.SetSoundPosition(getUd(self), x, y, z)
 end
 
 ---setVelocity
+---@overload fun(vec: Vector3): void
 ---@param x float
 ---@param y float
 ---@param z float
 ---@return void
 function Sound:setVelocity(x, y, z)
+    if type(x) == 'table' then
+        x, y, z = table.unpack(x)
+    end
     return Native.SetSoundVelocity(getUd(self), x, y, z)
 end
 

@@ -176,22 +176,30 @@ function Player:issueNeutralImmediateOrderById(neutralStructure, unitId)
 end
 
 ---issueNeutralPointOrder
+---@overload fun(neutralStructure: Unit, unitToBuild: string, vec: Vector2): boolean
 ---@param neutralStructure Unit
 ---@param unitToBuild string
 ---@param x float
 ---@param y float
 ---@return boolean
 function Player:issueNeutralPointOrder(neutralStructure, unitToBuild, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.IssueNeutralPointOrder(getUd(self), getUd(neutralStructure), unitToBuild, x, y)
 end
 
 ---issueNeutralPointOrderById
+---@overload fun(neutralStructure: Unit, unitId: integer, vec: Vector2): boolean
 ---@param neutralStructure Unit
 ---@param unitId integer
 ---@param x float
 ---@param y float
 ---@return boolean
 function Player:issueNeutralPointOrderById(neutralStructure, unitId, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.IssueNeutralPointOrderById(getUd(self), getUd(neutralStructure), unitId, x, y)
 end
 
@@ -424,6 +432,7 @@ function Player:setFogStateRect(state, where, useSharedVision)
 end
 
 ---setFogStateRadius
+---@overload fun(state: FogState, vec: Vector2, radius: float, useSharedVision: boolean): void
 ---@param state FogState
 ---@param centerx float
 ---@param centerY float
@@ -431,17 +440,11 @@ end
 ---@param useSharedVision boolean
 ---@return void
 function Player:setFogStateRadius(state, centerx, centerY, radius, useSharedVision)
+    if type(centerx) == 'table' then
+        radius, useSharedVision = centerY, radius
+        centerx, centerY = table.unpack(centerx)
+    end
     return Native.SetFogStateRadius(getUd(self), state, centerx, centerY, radius, useSharedVision)
-end
-
----setFogStateRadiusLoc
----@param state FogState
----@param center Location
----@param radius float
----@param useSharedVision boolean
----@return void
-function Player:setFogStateRadiusLoc(state, center, radius, useSharedVision)
-    return Native.SetFogStateRadiusLoc(getUd(self), state, getUd(center), radius, useSharedVision)
 end
 
 ---dialogDisplay
@@ -453,31 +456,46 @@ function Player:dialogDisplay(dialog, flag)
 end
 
 ---displayTextTo
+---@overload fun(vec: Vector2, message: string): void
 ---@param x float
 ---@param y float
 ---@param message string
 ---@return void
 function Player:displayTextTo(x, y, message)
+    if type(x) == 'table' then
+        message = y
+        x, y = table.unpack(x)
+    end
     return Native.DisplayTextToPlayer(getUd(self), x, y, message)
 end
 
 ---displayTimedTextTo
+---@overload fun(vec: Vector2, duration: float, message: string): void
 ---@param x float
 ---@param y float
 ---@param duration float
 ---@param message string
 ---@return void
 function Player:displayTimedTextTo(x, y, duration, message)
+    if type(x) == 'table' then
+        duration, message = y, duration
+        x, y = table.unpack(x)
+    end
     return Native.DisplayTimedTextToPlayer(getUd(self), x, y, duration, message)
 end
 
 ---displayTimedTextFrom
+---@overload fun(vec: Vector2, duration: float, message: string): void
 ---@param x float
 ---@param y float
 ---@param duration float
 ---@param message string
 ---@return void
 function Player:displayTimedTextFrom(x, y, duration, message)
+    if type(x) == 'table' then
+        duration, message = y, duration
+        x, y = table.unpack(x)
+    end
     return Native.DisplayTimedTextFromPlayer(getUd(self), x, y, duration, message)
 end
 
@@ -495,12 +513,17 @@ function Player:getLeaderboard()
 end
 
 ---setBlight
+---@overload fun(vec: Vector2, radius: float, addBlight: boolean): void
 ---@param x float
 ---@param y float
 ---@param radius float
 ---@param addBlight boolean
 ---@return void
 function Player:setBlight(x, y, radius, addBlight)
+    if type(x) == 'table' then
+        radius, addBlight = y, radius
+        x, y = table.unpack(x)
+    end
     return Native.SetBlight(getUd(self), x, y, radius, addBlight)
 end
 
@@ -513,21 +536,17 @@ function Player:setBlightRect(r, addBlight)
 end
 
 ---setBlightPoint
+---@overload fun(vec: Vector2, addBlight: boolean): void
 ---@param x float
 ---@param y float
 ---@param addBlight boolean
 ---@return void
 function Player:setBlightPoint(x, y, addBlight)
+    if type(x) == 'table' then
+        addBlight = y
+        x, y = table.unpack(x)
+    end
     return Native.SetBlightPoint(getUd(self), x, y, addBlight)
-end
-
----setBlightLoc
----@param loc Location
----@param radius float
----@param addBlight boolean
----@return void
-function Player:setBlightLoc(loc, radius, addBlight)
-    return Native.SetBlightLoc(getUd(self), getUd(loc), radius, addBlight)
 end
 
 ---startMeleeAI

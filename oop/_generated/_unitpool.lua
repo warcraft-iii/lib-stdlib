@@ -40,12 +40,17 @@ function UnitPool:removeUnitType(unitId)
 end
 
 ---placeRandomUnit
+---@overload fun(forWhichPlayer: Player, vec: Vector2, facing: float): Unit
 ---@param forWhichPlayer Player
 ---@param x float
 ---@param y float
 ---@param facing float
 ---@return Unit
 function UnitPool:placeRandomUnit(forWhichPlayer, x, y, facing)
+    if type(x) == 'table' then
+        facing = y
+        x, y = table.unpack(x)
+    end
     return require('lib.stdlib.oop.unit'):fromUd(Native.PlaceRandomUnit(getUd(self), getUd(forWhichPlayer), x, y, facing))
 end
 

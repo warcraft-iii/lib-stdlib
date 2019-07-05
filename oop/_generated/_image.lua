@@ -51,11 +51,15 @@ function Image:setConstantHeight(flag, height)
 end
 
 ---setPosition
+---@overload fun(vec: Vector3): void
 ---@param x float
 ---@param y float
 ---@param z float
 ---@return void
 function Image:setPosition(x, y, z)
+    if type(x) == 'table' then
+        x, y, z = table.unpack(x)
+    end
     return Native.SetImagePosition(getUd(self), x, y, z)
 end
 

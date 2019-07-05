@@ -26,11 +26,16 @@ function CameraSetup:getField(field)
 end
 
 ---setDestPosition
+---@overload fun(vec: Vector2, duration: float): void
 ---@param x float
 ---@param y float
 ---@param duration float
 ---@return void
 function CameraSetup:setDestPosition(x, y, duration)
+    if type(x) == 'table' then
+        duration = y
+        x, y = table.unpack(x)
+    end
     return Native.CameraSetupSetDestPosition(getUd(self), x, y, duration)
 end
 

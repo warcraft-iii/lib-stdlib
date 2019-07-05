@@ -227,6 +227,7 @@ function GameCache:getStoredString(missionKey, key)
 end
 
 ---restoreUnit
+---@overload fun(missionKey: string, key: string, forWhichPlayer: Player, vec: Vector2, facing: float): Unit
 ---@param missionKey string
 ---@param key string
 ---@param forWhichPlayer Player
@@ -235,6 +236,10 @@ end
 ---@param facing float
 ---@return Unit
 function GameCache:restoreUnit(missionKey, key, forWhichPlayer, x, y, facing)
+    if type(x) == 'table' then
+        facing = y
+        x, y = table.unpack(x)
+    end
     return require('lib.stdlib.oop.unit'):fromUd(Native.RestoreUnit(getUd(self), missionKey, key, getUd(forWhichPlayer), x, y, facing))
 end
 

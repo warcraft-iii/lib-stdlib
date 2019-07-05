@@ -40,10 +40,14 @@ function ItemPool:removeItemType(itemId)
 end
 
 ---placeRandomItem
+---@overload fun(vec: Vector2): Item
 ---@param x float
 ---@param y float
 ---@return Item
 function ItemPool:placeRandomItem(x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return require('lib.stdlib.oop.item'):fromUd(Native.PlaceRandomItem(getUd(self), x, y))
 end
 

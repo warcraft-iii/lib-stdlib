@@ -33,11 +33,16 @@ function TextTag:setText(s, height)
 end
 
 ---setPos
+---@overload fun(vec: Vector2, heightOffset: float): void
 ---@param x float
 ---@param y float
 ---@param heightOffset float
 ---@return void
 function TextTag:setPos(x, y, heightOffset)
+    if type(x) == 'table' then
+        heightOffset = y
+        x, y = table.unpack(x)
+    end
     return Native.SetTextTagPos(getUd(self), x, y, heightOffset)
 end
 

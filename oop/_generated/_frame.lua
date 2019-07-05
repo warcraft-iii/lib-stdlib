@@ -56,6 +56,7 @@ function Frame:destroy()
 end
 
 ---setPoint
+---@overload fun(point: FramePointType, relative: Frame, relativePoint: FramePointType, vec: Vector2): void
 ---@param point FramePointType
 ---@param relative Frame
 ---@param relativePoint FramePointType
@@ -63,15 +64,22 @@ end
 ---@param y float
 ---@return void
 function Frame:setPoint(point, relative, relativePoint, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.BlzFrameSetPoint(getUd(self), point, getUd(relative), relativePoint, x, y)
 end
 
 ---setAbsPoint
+---@overload fun(point: FramePointType, vec: Vector2): void
 ---@param point FramePointType
 ---@param x float
 ---@param y float
 ---@return void
 function Frame:setAbsPoint(point, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.BlzFrameSetAbsPoint(getUd(self), point, x, y)
 end
 

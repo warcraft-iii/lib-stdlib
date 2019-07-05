@@ -19,6 +19,7 @@ function Unit:remove()
 end
 
 ---<static> create
+---@overload fun(id: Player, unitid: integer, vec: Vector2, face: float): Unit
 ---@param id Player
 ---@param unitid integer
 ---@param x float
@@ -26,10 +27,15 @@ end
 ---@param face float
 ---@return Unit
 function Unit:create(id, unitid, x, y, face)
+    if type(x) == 'table' then
+        face = y
+        x, y = table.unpack(x)
+    end
     return Unit:fromUd(Native.CreateUnit(getUd(id), unitid, x, y, face))
 end
 
 ---<static> createByName
+---@overload fun(player: Player, unitname: string, vec: Vector2, face: float): Unit
 ---@param player Player
 ---@param unitname string
 ---@param x float
@@ -37,30 +43,15 @@ end
 ---@param face float
 ---@return Unit
 function Unit:createByName(player, unitname, x, y, face)
+    if type(x) == 'table' then
+        face = y
+        x, y = table.unpack(x)
+    end
     return Unit:fromUd(Native.CreateUnitByName(getUd(player), unitname, x, y, face))
 end
 
----<static> createAtLoc
----@param id Player
----@param unitid integer
----@param loc Location
----@param face float
----@return Unit
-function Unit:createAtLoc(id, unitid, loc, face)
-    return Unit:fromUd(Native.CreateUnitAtLoc(getUd(id), unitid, getUd(loc), face))
-end
-
----<static> createAtLocByName
----@param id Player
----@param unitname string
----@param loc Location
----@param face float
----@return Unit
-function Unit:createAtLocByName(id, unitname, loc, face)
-    return Unit:fromUd(Native.CreateUnitAtLocByName(getUd(id), unitname, getUd(loc), face))
-end
-
 ---<static> createCorpse
+---@overload fun(player: Player, unitid: integer, vec: Vector2, face: float): Unit
 ---@param player Player
 ---@param unitid integer
 ---@param x float
@@ -68,16 +59,25 @@ end
 ---@param face float
 ---@return Unit
 function Unit:createCorpse(player, unitid, x, y, face)
+    if type(x) == 'table' then
+        face = y
+        x, y = table.unpack(x)
+    end
     return Unit:fromUd(Native.CreateCorpse(getUd(player), unitid, x, y, face))
 end
 
 ---<static> createBlightedGoldmine
+---@overload fun(id: Player, vec: Vector2, face: float): Unit
 ---@param id Player
 ---@param x float
 ---@param y float
 ---@param face float
 ---@return Unit
 function Unit:createBlightedGoldmine(id, x, y, face)
+    if type(x) == 'table' then
+        face = y
+        x, y = table.unpack(x)
+    end
     return Unit:fromUd(Native.CreateBlightedGoldmine(getUd(id), x, y, face))
 end
 
@@ -117,18 +117,15 @@ function Unit:setY(y)
 end
 
 ---setPosition
+---@overload fun(vec: Vector2): void
 ---@param x float
 ---@param y float
 ---@return void
 function Unit:setPosition(x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.SetUnitPosition(getUd(self), x, y)
-end
-
----setPositionLoc
----@param loc Location
----@return void
-function Unit:setPositionLoc(loc)
-    return Native.SetUnitPositionLoc(getUd(self), getUd(loc))
 end
 
 ---setFacing
@@ -253,11 +250,15 @@ function Unit:setColor(color)
 end
 
 ---setScale
+---@overload fun(vec: Vector3): void
 ---@param scaleX float
 ---@param scaleY float
 ---@param scaleZ float
 ---@return void
 function Unit:setScale(scaleX, scaleY, scaleZ)
+    if type(scaleX) == 'table' then
+        scaleX, scaleY, scaleZ = table.unpack(scaleX)
+    end
     return Native.SetUnitScale(getUd(self), scaleX, scaleY, scaleZ)
 end
 
@@ -323,6 +324,7 @@ function Unit:addAnimationProperties(animProperties, add)
 end
 
 ---setUnitLookAt
+---@overload fun(bone: string, lookAtTarget: Unit, vec: Vector3): void
 ---@param bone string
 ---@param lookAtTarget Unit
 ---@param offsetX float
@@ -330,6 +332,9 @@ end
 ---@param offsetZ float
 ---@return void
 function Unit:setUnitLookAt(bone, lookAtTarget, offsetX, offsetY, offsetZ)
+    if type(offsetX) == 'table' then
+        offsetX, offsetY, offsetZ = table.unpack(offsetX)
+    end
     return Native.SetUnitLookAt(getUd(self), bone, getUd(lookAtTarget), offsetX, offsetY, offsetZ)
 end
 
@@ -517,20 +522,17 @@ function Unit:setAbilityLevel(abilcode, level)
 end
 
 ---reviveHero
+---@overload fun(vec: Vector2, doEyecandy: boolean): boolean
 ---@param x float
 ---@param y float
 ---@param doEyecandy boolean
 ---@return boolean
 function Unit:reviveHero(x, y, doEyecandy)
+    if type(x) == 'table' then
+        doEyecandy = y
+        x, y = table.unpack(x)
+    end
     return Native.ReviveHero(getUd(self), x, y, doEyecandy)
-end
-
----reviveHeroLoc
----@param loc Location
----@param doEyecandy boolean
----@return boolean
-function Unit:reviveHeroLoc(loc, doEyecandy)
-    return Native.ReviveHeroLoc(getUd(self), getUd(loc), doEyecandy)
 end
 
 ---setExploded
@@ -637,11 +639,15 @@ function Unit:inventorySize()
 end
 
 ---dropItemPoint
+---@overload fun(item: Item, vec: Vector2): boolean
 ---@param item Item
 ---@param x float
 ---@param y float
 ---@return boolean
 function Unit:dropItemPoint(item, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.UnitDropItemPoint(getUd(self), getUd(item), x, y)
 end
 
@@ -669,11 +675,15 @@ function Unit:useItem(item)
 end
 
 ---useItemPoint
+---@overload fun(item: Item, vec: Vector2): boolean
 ---@param item Item
 ---@param x float
 ---@param y float
 ---@return boolean
 function Unit:useItemPoint(item, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.UnitUseItemPoint(getUd(self), getUd(item), x, y)
 end
 
@@ -896,20 +906,17 @@ function Unit:isUnitInRange(otherUnit, distance)
 end
 
 ---isInRangeXY
+---@overload fun(vec: Vector2, distance: float): boolean
 ---@param x float
 ---@param y float
 ---@param distance float
 ---@return boolean
 function Unit:isInRangeXY(x, y, distance)
+    if type(x) == 'table' then
+        distance = y
+        x, y = table.unpack(x)
+    end
     return Native.IsUnitInRangeXY(getUd(self), x, y, distance)
-end
-
----isInRangeLoc
----@param loc Location
----@param distance float
----@return boolean
-function Unit:isInRangeLoc(loc, distance)
-    return Native.IsUnitInRangeLoc(getUd(self), getUd(loc), distance)
 end
 
 ---isHidden
@@ -1129,6 +1136,7 @@ function Unit:setUsesAltIcon(flag)
 end
 
 ---damagePoint
+---@overload fun(delay: float, radius: float, vec: Vector2, amount: float, attack: boolean, ranged: boolean, attackType: AttackType, damageType: DamageType, weaponType: WeaponType): boolean
 ---@param delay float
 ---@param radius float
 ---@param x float
@@ -1141,6 +1149,10 @@ end
 ---@param weaponType WeaponType
 ---@return boolean
 function Unit:damagePoint(delay, radius, x, y, amount, attack, ranged, attackType, damageType, weaponType)
+    if type(x) == 'table' then
+        amount, attack, ranged, attackType, damageType, weaponType = y, amount, attack, ranged, attackType, damageType
+        x, y = table.unpack(x)
+    end
     return Native.UnitDamagePoint(getUd(self), delay, radius, x, y, amount, attack, ranged, attackType, damageType, weaponType)
 end
 
@@ -1165,20 +1177,16 @@ function Unit:issueImmediateOrder(order)
 end
 
 ---issuePointOrder
+---@overload fun(order: integer, vec: Vector2): boolean
 ---@param order integer
 ---@param x float
 ---@param y float
 ---@return boolean
 function Unit:issuePointOrder(order, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.IssuePointOrderById(getUd(self), order, x, y)
-end
-
----issuePointOrderLoc
----@param order integer
----@param loc Location
----@return boolean
-function Unit:issuePointOrderLoc(order, loc)
-    return Native.IssuePointOrderByIdLoc(getUd(self), order, getUd(loc))
 end
 
 ---issueTargetOrder
@@ -1190,12 +1198,17 @@ function Unit:issueTargetOrder(order, targetWidget)
 end
 
 ---issueInstantPointOrder
+---@overload fun(order: integer, vec: Vector2, instantTargetWidget: Widget): boolean
 ---@param order integer
 ---@param x float
 ---@param y float
 ---@param instantTargetWidget Widget
 ---@return boolean
 function Unit:issueInstantPointOrder(order, x, y, instantTargetWidget)
+    if type(x) == 'table' then
+        instantTargetWidget = y
+        x, y = table.unpack(x)
+    end
     return Native.IssueInstantPointOrderById(getUd(self), order, x, y, getUd(instantTargetWidget))
 end
 
@@ -1209,20 +1222,28 @@ function Unit:issueInstantTargetOrder(order, targetWidget, instantTargetWidget)
 end
 
 ---issueBuildOrder
+---@overload fun(unitToBuild: string, vec: Vector2): boolean
 ---@param unitToBuild string
 ---@param x float
 ---@param y float
 ---@return boolean
 function Unit:issueBuildOrder(unitToBuild, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.IssueBuildOrder(getUd(self), unitToBuild, x, y)
 end
 
 ---issueBuildOrderById
+---@overload fun(unitId: integer, vec: Vector2): boolean
 ---@param unitId integer
 ---@param x float
 ---@param y float
 ---@return boolean
 function Unit:issueBuildOrderById(unitId, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.IssueBuildOrderById(getUd(self), unitId, x, y)
 end
 
@@ -1265,10 +1286,14 @@ function Unit:waygateGetDestinationY()
 end
 
 ---waygateSetDestination
+---@overload fun(vec: Vector2): void
 ---@param x float
 ---@param y float
 ---@return void
 function Unit:waygateSetDestination(x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.WaygateSetDestination(getUd(self), x, y)
 end
 

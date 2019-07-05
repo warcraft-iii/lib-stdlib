@@ -33,14 +33,6 @@ function Rect:create(minx, miny, maxx, maxy)
     return Rect:fromUd(Native.Rect(minx, miny, maxx, maxy))
 end
 
----<static> fromLoc
----@param min Location
----@param max Location
----@return Rect
-function Rect:fromLoc(min, max)
-    return Rect:fromUd(Native.RectFromLoc(getUd(min), getUd(max)))
-end
-
 ---set
 ---@param minx float
 ---@param miny float
@@ -51,27 +43,16 @@ function Rect:set(minx, miny, maxx, maxy)
     return Native.SetRect(getUd(self), minx, miny, maxx, maxy)
 end
 
----setFromLoc
----@param min Location
----@param max Location
----@return void
-function Rect:setFromLoc(min, max)
-    return Native.SetRectFromLoc(getUd(self), getUd(min), getUd(max))
-end
-
 ---moveTo
+---@overload fun(vec: Vector2): void
 ---@param centerX float
 ---@param centerY float
 ---@return void
 function Rect:moveTo(centerX, centerY)
+    if type(centerX) == 'table' then
+        centerX, centerY = table.unpack(centerX)
+    end
     return Native.MoveRectTo(getUd(self), centerX, centerY)
-end
-
----moveToLoc
----@param centerLoc Location
----@return void
-function Rect:moveToLoc(centerLoc)
-    return Native.MoveRectToLoc(getUd(self), getUd(centerLoc))
 end
 
 ---getCenterX

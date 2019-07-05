@@ -19,11 +19,15 @@ function Item:remove()
 end
 
 ---<static> create
+---@overload fun(itemid: integer, vec: Vector2): Item
 ---@param itemid integer
 ---@param x float
 ---@param y float
 ---@return Item
 function Item:create(itemid, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Item:fromUd(Native.CreateItem(itemid, x, y))
 end
 
@@ -52,10 +56,14 @@ function Item:getY()
 end
 
 ---setPosition
+---@overload fun(vec: Vector2): void
 ---@param x float
 ---@param y float
 ---@return void
 function Item:setPosition(x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.SetItemPosition(getUd(self), x, y)
 end
 

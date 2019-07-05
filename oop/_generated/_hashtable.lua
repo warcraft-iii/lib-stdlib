@@ -162,15 +162,6 @@ function Hashtable:saveGroupHandle(parentKey, childKey, group)
     return Native.SaveGroupHandle(getUd(self), parentKey, childKey, getUd(group))
 end
 
----saveLocationHandle
----@param parentKey integer
----@param childKey integer
----@param loc Location
----@return boolean
-function Hashtable:saveLocationHandle(parentKey, childKey, loc)
-    return Native.SaveLocationHandle(getUd(self), parentKey, childKey, getUd(loc))
-end
-
 ---saveRectHandle
 ---@param parentKey integer
 ---@param childKey integer

@@ -39,33 +39,27 @@ function Region:clearRect(r)
 end
 
 ---addCell
+---@overload fun(vec: Vector2): void
 ---@param x float
 ---@param y float
 ---@return void
 function Region:addCell(x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.RegionAddCell(getUd(self), x, y)
 end
 
----addCellAtLoc
----@param loc Location
----@return void
-function Region:addCellAtLoc(loc)
-    return Native.RegionAddCellAtLoc(getUd(self), getUd(loc))
-end
-
 ---clearCell
+---@overload fun(vec: Vector2): void
 ---@param x float
 ---@param y float
 ---@return void
 function Region:clearCell(x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.RegionClearCell(getUd(self), x, y)
-end
-
----clearCellAtLoc
----@param loc Location
----@return void
-function Region:clearCellAtLoc(loc)
-    return Native.RegionClearCellAtLoc(getUd(self), getUd(loc))
 end
 
 ---isUnitIn
@@ -76,18 +70,15 @@ function Region:isUnitIn(unit)
 end
 
 ---isPointIn
+---@overload fun(vec: Vector2): boolean
 ---@param x float
 ---@param y float
 ---@return boolean
 function Region:isPointIn(x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.IsPointInRegion(getUd(self), x, y)
-end
-
----isLocationIn
----@param loc Location
----@return boolean
-function Region:isLocationIn(loc)
-    return Native.IsLocationInRegion(getUd(self), getUd(loc))
 end
 
 return Region

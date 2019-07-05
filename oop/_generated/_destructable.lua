@@ -19,6 +19,7 @@ function Destructable:remove()
 end
 
 ---<static> create
+---@overload fun(objectid: integer, vec: Vector2, face: float, scale: float, variation: integer): Destructable
 ---@param objectid integer
 ---@param x float
 ---@param y float
@@ -27,10 +28,15 @@ end
 ---@param variation integer
 ---@return Destructable
 function Destructable:create(objectid, x, y, face, scale, variation)
+    if type(x) == 'table' then
+        face, scale, variation = y, face, scale
+        x, y = table.unpack(x)
+    end
     return Destructable:fromUd(Native.CreateDestructable(objectid, x, y, face, scale, variation))
 end
 
 ---<static> createZ
+---@overload fun(objectid: integer, vec: Vector3, face: float, scale: float, variation: integer): Destructable
 ---@param objectid integer
 ---@param x float
 ---@param y float
@@ -40,10 +46,15 @@ end
 ---@param variation integer
 ---@return Destructable
 function Destructable:createZ(objectid, x, y, z, face, scale, variation)
+    if type(x) == 'table' then
+        face, scale, variation = y, z, face
+        x, y, z = table.unpack(x)
+    end
     return Destructable:fromUd(Native.CreateDestructableZ(objectid, x, y, z, face, scale, variation))
 end
 
 ---<static> createDead
+---@overload fun(objectid: integer, vec: Vector2, face: float, scale: float, variation: integer): Destructable
 ---@param objectid integer
 ---@param x float
 ---@param y float
@@ -52,10 +63,15 @@ end
 ---@param variation integer
 ---@return Destructable
 function Destructable:createDead(objectid, x, y, face, scale, variation)
+    if type(x) == 'table' then
+        face, scale, variation = y, face, scale
+        x, y = table.unpack(x)
+    end
     return Destructable:fromUd(Native.CreateDeadDestructable(objectid, x, y, face, scale, variation))
 end
 
 ---<static> createDeadZ
+---@overload fun(objectid: integer, vec: Vector3, face: float, scale: float, variation: integer): Destructable
 ---@param objectid integer
 ---@param x float
 ---@param y float
@@ -65,6 +81,10 @@ end
 ---@param variation integer
 ---@return Destructable
 function Destructable:createDeadZ(objectid, x, y, z, face, scale, variation)
+    if type(x) == 'table' then
+        face, scale, variation = y, z, face
+        x, y, z = table.unpack(x)
+    end
     return Destructable:fromUd(Native.CreateDeadDestructableZ(objectid, x, y, z, face, scale, variation))
 end
 

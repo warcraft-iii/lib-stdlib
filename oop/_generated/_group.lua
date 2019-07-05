@@ -124,29 +124,24 @@ function Group:enumUnitsInRectCounted(r, countLimit, filter)
 end
 
 ---enumUnitsInRange
+---@overload fun(vec: Vector2, radius: float, filter: UnitFilter): void
 ---@param x float
 ---@param y float
 ---@param radius float
 ---@param filter UnitFilter
 ---@return void
 function Group:enumUnitsInRange(x, y, radius, filter)
+    if type(x) == 'table' then
+        radius, filter = y, radius
+        x, y = table.unpack(x)
+    end
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
     Native.GroupEnumUnitsInRange(getUd(self), x, y, radius, getUd(filter))
     if filter then filter:delete() end
 end
 
----enumUnitsInRangeOfLoc
----@param loc Location
----@param radius float
----@param filter UnitFilter
----@return void
-function Group:enumUnitsInRangeOfLoc(loc, radius, filter)
-    filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsInRangeOfLoc(getUd(self), getUd(loc), radius, getUd(filter))
-    if filter then filter:delete() end
-end
-
 ---enumUnitsInRangeCounted
+---@overload fun(vec: Vector2, radius: float, countLimit: integer, filter: UnitFilter): void
 ---@param x float
 ---@param y float
 ---@param radius float
@@ -154,20 +149,12 @@ end
 ---@param filter UnitFilter
 ---@return void
 function Group:enumUnitsInRangeCounted(x, y, radius, countLimit, filter)
+    if type(x) == 'table' then
+        radius, countLimit, filter = y, radius, countLimit
+        x, y = table.unpack(x)
+    end
     filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
     Native.GroupEnumUnitsInRangeCounted(getUd(self), x, y, radius, getUd(filter), countLimit)
-    if filter then filter:delete() end
-end
-
----enumUnitsInRangeOfLocCounted
----@param loc Location
----@param radius float
----@param countLimit integer
----@param filter UnitFilter
----@return void
-function Group:enumUnitsInRangeOfLocCounted(loc, radius, countLimit, filter)
-    filter = require('lib.stdlib.oop.filter'):createUnitFilter(filter)
-    Native.GroupEnumUnitsInRangeOfLocCounted(getUd(self), getUd(loc), radius, getUd(filter), countLimit)
     if filter then filter:delete() end
 end
 
@@ -189,20 +176,16 @@ function Group:immediateOrder(order)
 end
 
 ---pointOrder
+---@overload fun(order: integer, vec: Vector2): boolean
 ---@param order integer
 ---@param x float
 ---@param y float
 ---@return boolean
 function Group:pointOrder(order, x, y)
+    if type(x) == 'table' then
+        x, y = table.unpack(x)
+    end
     return Native.GroupPointOrderById(getUd(self), order, x, y)
-end
-
----pointOrderLoc
----@param order integer
----@param loc Location
----@return boolean
-function Group:pointOrderLoc(order, loc)
-    return Native.GroupPointOrderByIdLoc(getUd(self), order, getUd(loc))
 end
 
 ---targetOrder
