@@ -94,6 +94,20 @@ function Player:deselectUnit(unit)
     return self:setUnitSelected(unit, false)
 end
 
+---showDialog
+---@param dialog Dialog
+---@return void
+function Player:showDialog(dialog)
+    return self:dialogDisplay(dialog, true)
+end
+
+---hideDialog
+---@param dialog Dialog
+---@return void
+function Player:hideDialog(dialog)
+    return self:dialogDisplay(dialog, false)
+end
+
 ---isLocal
 ---@return boolean
 function Player:isLocal()
