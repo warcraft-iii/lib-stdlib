@@ -4,6 +4,36 @@ local PlayerState = require('lib.stdlib.enum.playerstate')
 local Native = require('lib.stdlib.native.native')
 local Group = require('lib.stdlib.oop.group')
 
+---@type Player
+local _localPlayer = Player:fromUd(Native.GetLocalPlayer())
+
+---@type Player[]
+local _players = {}
+do
+    for id = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        table.insert(_players, Player:fromUd(Native.Player(id)))
+    end
+end
+
+---<static> get
+---@param id integer
+---@return Player
+function Player:get(id)
+    return _players[id + 1]
+end
+
+---<static> at
+---@return Player
+function Player:at(index)
+    return _players[index]
+end
+
+---<static> getLocal
+---@return Player
+function Player:getLocal()
+    return _localPlayer
+end
+
 ---adjustState
 ---@param state PlayerState
 ---@param delta integer
@@ -36,11 +66,7 @@ end
 ---iterateAll
 ---@return fun(): Player
 function Player:iterateAll()
-    return coroutine.wrap(function()
-        for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
-            coroutine.yield(Player:get(i))
-        end
-    end)
+    return vipairs(_players)
 end
 
 ---getUnits
@@ -111,7 +137,7 @@ end
 ---isLocal
 ---@return boolean
 function Player:isLocal()
-    return self == Player:getLocal()
+    return self == _localPlayer
 end
 
 return Player
