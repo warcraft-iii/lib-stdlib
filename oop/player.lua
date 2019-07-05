@@ -148,7 +148,7 @@ function Player:isLocal()
 end
 
 ---getStartPos
----@return float, float
+---@return Vector
 function Player:getStartPos()
     local s = Native.GetPlayerStartLocation(self:getUd())
     return Vector:new(Native.GetStartLocationX(s), Native.GetStartLocationY(s))
