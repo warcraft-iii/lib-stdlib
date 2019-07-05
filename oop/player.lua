@@ -153,4 +153,23 @@ function Player:getStartPos()
     return Native.GetStartLocationX(s), Native.GetStartLocationY(s)
 end
 
+---setFogStateRadiusVec
+---@param state FogState
+---@param center Vector
+---@param radius float
+---@param useSharedVision boolean
+---@return void
+function Player:setFogStateRadiusVec(state, center, radius, useSharedVision)
+    return self:setFogStateRadius(state, center:getX(), center:getY(), radius, useSharedVision)
+end
+
+---setBlightVec
+---@param vec Vector
+---@param radius float
+---@param addBlight boolean
+---@return void
+function Player:setBlightVec(vec, radius, addBlight)
+    return self:setBlight(vec:getX(), vec:getY(), radius, addBlight)
+end
+
 return Player
