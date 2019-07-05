@@ -16,12 +16,14 @@ function Observer:registerEvent(id, method)
 end
 
 ---registerEvents
----@param ids integer[]
+---@vararg integer[]
 ---@param method function
 ---@return void
-function Observer:registerEvents(ids, method)
-    for _, id in ipairs(ids) do
-        self:registerEvent(id, method)
+function Observer:registerEvents(...)
+    local args = {...}
+    local count = #args
+    for i = 1, count - 1 do
+        self:registerEvent(args[i], args[count])
     end
 end
 

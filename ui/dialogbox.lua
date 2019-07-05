@@ -1,28 +1,28 @@
-local Dialog = require("lib.stdlib.oop.dialog")
-local Trigger = require("lib.stdlib.oop.trigger")
-local Event = require("lib.stdlib.oop.event")
-local Player = require("lib.stdlib.oop.player")
+local Dialog = require('lib.stdlib.oop.dialog')
+local Trigger = require('lib.stdlib.oop.trigger')
+local Event = require('lib.stdlib.oop.event')
+local Player = require('lib.stdlib.oop.player')
 
 ---@class DialogBox : object
 ---@field private title string
 ---@field private dlg Dialog
----@field private trig Trigger
+---@field private trigger Trigger
 ---@field private buttons table<Button, integer>
 ---@field private callback fun(id: integer)
-local DialogBox = class("DialogBox")
+local DialogBox = class('DialogBox')
 
 ---DialogBoxCallback
 ---@type fun(id: integer)
 
 function DialogBox:constructor()
     local dlg = Dialog:create()
-    local trig = Trigger:create()
-    trig:registerDialogEvent(dlg)
-    trig:addAction(function()
+    local trigger = Trigger:create()
+    trigger:registerDialogEvent(dlg)
+    trigger:addAction(function()
         self:buttonClicked(Event:getClickedButton())
     end)
     self.dlg = dlg
-    self.trig = trig
+    self.trigger = trigger
     self.buttons = {}
 end
 
@@ -33,7 +33,7 @@ function DialogBox:destructor()
 
     self.dlg:clear()
     self.dlg:delete()
-    self.trig:delete()
+    self.trigger:delete()
 end
 
 ---setCallback
