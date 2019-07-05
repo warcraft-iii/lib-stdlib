@@ -87,14 +87,20 @@ function Player:iterateUnits(filter)
     return vipairs(self:getUnits(filter))
 end
 
+---clearSelected
+---@return void
+function Player:clearSelected()
+    if self:isLocal() then
+        Native.ClearSelection()
+    end
+end
+
 ---selectUnitSingle
 ---@param unit Unit
 ---@return void
 function Player:selectUnitSingle(unit)
-    if self:isLocal() then
-        Native.ClearSelection()
-        unit:setSelected(true)
-    end
+    self:clearSelected()
+    self:selectUnit(unit)
 end
 
 ---setUnitSelected
