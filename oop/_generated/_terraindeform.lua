@@ -4,7 +4,7 @@ local Native = require('lib.stdlib.native')
 local TerrainDeform = class('TerrainDeform', require('lib.stdlib.oop.handle'))
 
 ---<static> crater
----@overload fun(vec: Vector2, radius: float, depth: float, duration: integer, permanent: boolean): TerrainDeform
+---@overload fun(vec: Vector, radius: float, depth: float, duration: integer, permanent: boolean): TerrainDeform
 ---@param x float
 ---@param y float
 ---@param radius float
@@ -30,7 +30,7 @@ function TerrainDeform:crater(x, y, radius, depth, duration, permanent)
 end
 
 ---<static> ripple
----@overload fun(vec: Vector2, radius: float, depth: float, duration: integer, count: integer, spaceWaves: float, timeWaves: float, radiusStartPct: float, limitNeg: boolean): TerrainDeform
+---@overload fun(vec: Vector, radius: float, depth: float, duration: integer, count: integer, spaceWaves: float, timeWaves: float, radiusStartPct: float, limitNeg: boolean): TerrainDeform
 ---@param x float
 ---@param y float
 ---@param radius float
@@ -63,37 +63,8 @@ function TerrainDeform:ripple(x, y, radius, depth, duration, count, spaceWaves, 
     return TerrainDeform:fromUd(Native.TerrainDeformRipple(x, y, radius, depth, duration, count, spaceWaves, timeWaves, radiusStartPct, limitNeg))
 end
 
----<static> wave
----@param x float
----@param y float
----@param dirX float
----@param dirY float
----@param distance float
----@param speed float
----@param radius float
----@param depth float
----@param trailTime integer
----@param count integer
----@return TerrainDeform
-function TerrainDeform:wave(x, y, dirX, dirY, distance, speed, radius, depth, trailTime, count)
---@debug@
-    checkclass(self, TerrainDeform, 'wave', 'self')
-    checktype(x, 'float', 'wave', 1)
-    checktype(y, 'float', 'wave', 2)
-    checktype(dirX, 'float', 'wave', 3)
-    checktype(dirY, 'float', 'wave', 4)
-    checktype(distance, 'float', 'wave', 5)
-    checktype(speed, 'float', 'wave', 6)
-    checktype(radius, 'float', 'wave', 7)
-    checktype(depth, 'float', 'wave', 8)
-    checktype(trailTime, 'integer', 'wave', 9)
-    checktype(count, 'integer', 'wave', 10)
---@end-debug@
-    return TerrainDeform:fromUd(Native.TerrainDeformWave(x, y, dirX, dirY, distance, speed, radius, depth, trailTime, count))
-end
-
 ---<static> random
----@overload fun(vec: Vector2, radius: float, minDelta: float, maxDelta: float, duration: integer, updateInterval: integer): TerrainDeform
+---@overload fun(vec: Vector, radius: float, minDelta: float, maxDelta: float, duration: integer, updateInterval: integer): TerrainDeform
 ---@param x float
 ---@param y float
 ---@param radius float

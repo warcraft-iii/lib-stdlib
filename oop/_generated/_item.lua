@@ -22,7 +22,7 @@ function Item:remove()
 end
 
 ---<static> create
----@overload fun(itemid: integer, vec: Vector2): Item
+---@overload fun(itemid: integer, vec: Vector): Item
 ---@param itemid integer
 ---@param x float
 ---@param y float
@@ -77,7 +77,7 @@ function Item:getY()
 end
 
 ---setPosition
----@overload fun(vec: Vector2): void
+---@overload fun(vec: Vector): void
 ---@param x float
 ---@param y float
 ---@return void

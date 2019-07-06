@@ -4,7 +4,7 @@ local Native = require('lib.stdlib.native')
 local Trackable = class('Trackable', require('lib.stdlib.oop.agent'))
 
 ---<static> create
----@overload fun(trackableModelPath: string, vec: Vector2, facing: float): Trackable
+---@overload fun(trackableModelPath: string, vec: Vector, facing: float): Trackable
 ---@param trackableModelPath string
 ---@param x float
 ---@param y float

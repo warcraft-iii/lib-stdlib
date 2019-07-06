@@ -271,7 +271,7 @@ function Player:issueNeutralImmediateOrderById(neutralStructure, unitId)
 end
 
 ---issueNeutralPointOrder
----@overload fun(neutralStructure: Unit, unitToBuild: string, vec: Vector2): boolean
+---@overload fun(neutralStructure: Unit, unitToBuild: string, vec: Vector): boolean
 ---@param neutralStructure Unit
 ---@param unitToBuild string
 ---@param x float
@@ -292,7 +292,7 @@ function Player:issueNeutralPointOrder(neutralStructure, unitToBuild, x, y)
 end
 
 ---issueNeutralPointOrderById
----@overload fun(neutralStructure: Unit, unitId: integer, vec: Vector2): boolean
+---@overload fun(neutralStructure: Unit, unitId: integer, vec: Vector): boolean
 ---@param neutralStructure Unit
 ---@param unitId integer
 ---@param x float
@@ -676,7 +676,7 @@ function Player:setFogStateRect(state, where, useSharedVision)
 end
 
 ---setFogStateRadius
----@overload fun(state: FogState, vec: Vector2, radius: float, useSharedVision: boolean): void
+---@overload fun(state: FogState, vec: Vector, radius: float, useSharedVision: boolean): void
 ---@param state FogState
 ---@param centerx float
 ---@param centerY float
@@ -713,7 +713,7 @@ function Player:dialogDisplay(dialog, flag)
 end
 
 ---displayTextTo
----@overload fun(vec: Vector2, message: string): void
+---@overload fun(vec: Vector, message: string): void
 ---@param x float
 ---@param y float
 ---@param message string
@@ -733,7 +733,7 @@ function Player:displayTextTo(x, y, message)
 end
 
 ---displayTimedTextTo
----@overload fun(vec: Vector2, duration: float, message: string): void
+---@overload fun(vec: Vector, duration: float, message: string): void
 ---@param x float
 ---@param y float
 ---@param duration float
@@ -755,7 +755,7 @@ function Player:displayTimedTextTo(x, y, duration, message)
 end
 
 ---displayTimedTextFrom
----@overload fun(vec: Vector2, duration: float, message: string): void
+---@overload fun(vec: Vector, duration: float, message: string): void
 ---@param x float
 ---@param y float
 ---@param duration float
@@ -797,7 +797,7 @@ function Player:getLeaderboard()
 end
 
 ---setBlight
----@overload fun(vec: Vector2, radius: float, addBlight: boolean): void
+---@overload fun(vec: Vector, radius: float, addBlight: boolean): void
 ---@param x float
 ---@param y float
 ---@param radius float
@@ -832,7 +832,7 @@ function Player:setBlightRect(r, addBlight)
 end
 
 ---setBlightPoint
----@overload fun(vec: Vector2, addBlight: boolean): void
+---@overload fun(vec: Vector, addBlight: boolean): void
 ---@param x float
 ---@param y float
 ---@param addBlight boolean

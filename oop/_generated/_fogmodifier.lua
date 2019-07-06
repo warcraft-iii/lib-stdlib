@@ -41,7 +41,7 @@ function FogModifier:createRect(forWhichPlayer, state, where, useSharedVision, a
 end
 
 ---<static> createRadius
----@overload fun(forWhichPlayer: Player, state: FogState, vec: Vector2, radius: float, useSharedVision: boolean, afterUnits: boolean): FogModifier
+---@overload fun(forWhichPlayer: Player, state: FogState, vec: Vector, radius: float, useSharedVision: boolean, afterUnits: boolean): FogModifier
 ---@param forWhichPlayer Player
 ---@param state FogState
 ---@param centerx float

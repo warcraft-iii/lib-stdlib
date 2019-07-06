@@ -22,7 +22,7 @@ function Destructable:remove()
 end
 
 ---<static> create
----@overload fun(objectid: integer, vec: Vector2, face: float, scale: float, variation: integer): Destructable
+---@overload fun(objectid: integer, vec: Vector, face: float, scale: float, variation: integer): Destructable
 ---@param objectid integer
 ---@param x float
 ---@param y float
@@ -76,7 +76,7 @@ function Destructable:createZ(objectid, x, y, z, face, scale, variation)
 end
 
 ---<static> createDead
----@overload fun(objectid: integer, vec: Vector2, face: float, scale: float, variation: integer): Destructable
+---@overload fun(objectid: integer, vec: Vector, face: float, scale: float, variation: integer): Destructable
 ---@param objectid integer
 ---@param x float
 ---@param y float

@@ -9,7 +9,7 @@ setmetatable(Location, table.merge(getmetatable(Location), {__call = function(_,
 end}))
 
 ---<static> create
----@overload fun(vec: Vector2): Location
+---@overload fun(vec: Vector): Location
 ---@param x float
 ---@param y float
 ---@return Location

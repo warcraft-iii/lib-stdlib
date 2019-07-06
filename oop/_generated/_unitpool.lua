@@ -52,7 +52,7 @@ function UnitPool:removeUnitType(unitId)
 end
 
 ---placeRandomUnit
----@overload fun(forWhichPlayer: Player, vec: Vector2, facing: float): Unit
+---@overload fun(forWhichPlayer: Player, vec: Vector, facing: float): Unit
 ---@param forWhichPlayer Player
 ---@param x float
 ---@param y float

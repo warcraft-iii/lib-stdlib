@@ -52,7 +52,7 @@ function ItemPool:removeItemType(itemId)
 end
 
 ---placeRandomItem
----@overload fun(vec: Vector2): Item
+---@overload fun(vec: Vector): Item
 ---@param x float
 ---@param y float
 ---@return Item

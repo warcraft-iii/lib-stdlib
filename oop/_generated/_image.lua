@@ -21,37 +21,6 @@ function Image:destroy()
     return self:delete()
 end
 
----<static> create
----@param file string
----@param sizeX float
----@param sizeY float
----@param sizeZ float
----@param posX float
----@param posY float
----@param posZ float
----@param originX float
----@param originY float
----@param originZ float
----@param imageType integer
----@return Image
-function Image:create(file, sizeX, sizeY, sizeZ, posX, posY, posZ, originX, originY, originZ, imageType)
---@debug@
-    checkclass(self, Image, 'create', 'self')
-    checktype(file, 'string', 'create', 1)
-    checktype(sizeX, 'float', 'create', 2)
-    checktype(sizeY, 'float', 'create', 3)
-    checktype(sizeZ, 'float', 'create', 4)
-    checktype(posX, 'float', 'create', 5)
-    checktype(posY, 'float', 'create', 6)
-    checktype(posZ, 'float', 'create', 7)
-    checktype(originX, 'float', 'create', 8)
-    checktype(originY, 'float', 'create', 9)
-    checktype(originZ, 'float', 'create', 10)
-    checktype(imageType, 'integer', 'create', 11)
---@end-debug@
-    return Image:fromUd(Native.CreateImage(file, sizeX, sizeY, sizeZ, posX, posY, posZ, originX, originY, originZ, imageType))
-end
-
 ---setShown
 ---@param flag boolean
 ---@return void

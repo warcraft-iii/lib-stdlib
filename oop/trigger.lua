@@ -1,3 +1,4 @@
+---@type Trigger
 local Trigger = require('lib.stdlib.oop._generated._trigger')
 local Player = require('lib.stdlib.oop.player')
 
@@ -67,12 +68,12 @@ Trigger.registerAllPlayersKeyEvent = generateRegisterAllPlayers(Trigger.register
 ---@param rect Rect
 ---@return Event
 function Trigger:registerEnterRect(rect)
-    if self.rect then
+    if self._rect then
         error('Can`t registerEnterRect twice', 2)
     end
     local region = Region:create()
     region:addRect(rect)
-    self.rect = rect
+    self._rect = rect
     return self:registerEnterRegion(region)
 end
 

@@ -90,7 +90,7 @@ function Frame:destroy()
 end
 
 ---setPoint
----@overload fun(point: FramePointType, relative: Frame, relativePoint: FramePointType, vec: Vector2): void
+---@overload fun(point: FramePointType, relative: Frame, relativePoint: FramePointType, vec: Vector): void
 ---@param point FramePointType
 ---@param relative Frame
 ---@param relativePoint FramePointType
@@ -113,7 +113,7 @@ function Frame:setPoint(point, relative, relativePoint, x, y)
 end
 
 ---setAbsPoint
----@overload fun(point: FramePointType, vec: Vector2): void
+---@overload fun(point: FramePointType, vec: Vector): void
 ---@param point FramePointType
 ---@param x float
 ---@param y float

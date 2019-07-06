@@ -36,7 +36,7 @@ function CameraSetup:getField(field)
 end
 
 ---setDestPosition
----@overload fun(vec: Vector2, duration: float): void
+---@overload fun(vec: Vector, duration: float): void
 ---@param x float
 ---@param y float
 ---@param duration float

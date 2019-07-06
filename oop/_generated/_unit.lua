@@ -22,7 +22,7 @@ function Unit:remove()
 end
 
 ---<static> create
----@overload fun(id: Player, unitid: integer, vec: Vector2, face: float): Unit
+---@overload fun(id: Player, unitid: integer, vec: Vector, face: float): Unit
 ---@param id Player
 ---@param unitid integer
 ---@param x float
@@ -46,7 +46,7 @@ function Unit:create(id, unitid, x, y, face)
 end
 
 ---<static> createByName
----@overload fun(player: Player, unitname: string, vec: Vector2, face: float): Unit
+---@overload fun(player: Player, unitname: string, vec: Vector, face: float): Unit
 ---@param player Player
 ---@param unitname string
 ---@param x float
@@ -70,7 +70,7 @@ function Unit:createByName(player, unitname, x, y, face)
 end
 
 ---<static> createCorpse
----@overload fun(player: Player, unitid: integer, vec: Vector2, face: float): Unit
+---@overload fun(player: Player, unitid: integer, vec: Vector, face: float): Unit
 ---@param player Player
 ---@param unitid integer
 ---@param x float
@@ -94,7 +94,7 @@ function Unit:createCorpse(player, unitid, x, y, face)
 end
 
 ---<static> createBlightedGoldmine
----@overload fun(id: Player, vec: Vector2, face: float): Unit
+---@overload fun(id: Player, vec: Vector, face: float): Unit
 ---@param id Player
 ---@param x float
 ---@param y float
@@ -171,7 +171,7 @@ function Unit:setY(y)
 end
 
 ---setPosition
----@overload fun(vec: Vector2): void
+---@overload fun(vec: Vector): void
 ---@param x float
 ---@param y float
 ---@return void
@@ -804,7 +804,7 @@ function Unit:setAbilityLevel(abilcode, level)
 end
 
 ---reviveHero
----@overload fun(vec: Vector2, doEyecandy: boolean): boolean
+---@overload fun(vec: Vector, doEyecandy: boolean): boolean
 ---@param x float
 ---@param y float
 ---@param doEyecandy boolean
@@ -985,7 +985,7 @@ function Unit:inventorySize()
 end
 
 ---dropItemPoint
----@overload fun(item: Item, vec: Vector2): boolean
+---@overload fun(item: Item, vec: Vector): boolean
 ---@param item Item
 ---@param x float
 ---@param y float
@@ -1041,7 +1041,7 @@ function Unit:useItem(item)
 end
 
 ---useItemPoint
----@overload fun(item: Item, vec: Vector2): boolean
+---@overload fun(item: Item, vec: Vector): boolean
 ---@param item Item
 ---@param x float
 ---@param y float
@@ -1397,7 +1397,7 @@ function Unit:isUnitInRange(otherUnit, distance)
 end
 
 ---isInRangeXY
----@overload fun(vec: Vector2, distance: float): boolean
+---@overload fun(vec: Vector, distance: float): boolean
 ---@param x float
 ---@param y float
 ---@param distance float
@@ -1762,7 +1762,7 @@ function Unit:setUsesAltIcon(flag)
 end
 
 ---damagePoint
----@overload fun(delay: float, radius: float, vec: Vector2, amount: float, attack: boolean, ranged: boolean, attackType: AttackType, damageType: DamageType, weaponType: WeaponType): boolean
+---@overload fun(delay: float, radius: float, vec: Vector, amount: float, attack: boolean, ranged: boolean, attackType: AttackType, damageType: DamageType, weaponType: WeaponType): boolean
 ---@param delay float
 ---@param radius float
 ---@param x float
@@ -1830,7 +1830,7 @@ function Unit:issueImmediateOrder(order)
 end
 
 ---issuePointOrder
----@overload fun(order: integer, vec: Vector2): boolean
+---@overload fun(order: integer, vec: Vector): boolean
 ---@param order integer
 ---@param x float
 ---@param y float
@@ -1862,7 +1862,7 @@ function Unit:issueTargetOrder(order, targetWidget)
 end
 
 ---issueInstantPointOrder
----@overload fun(order: integer, vec: Vector2, instantTargetWidget: Widget): boolean
+---@overload fun(order: integer, vec: Vector, instantTargetWidget: Widget): boolean
 ---@param order integer
 ---@param x float
 ---@param y float
@@ -1899,7 +1899,7 @@ function Unit:issueInstantTargetOrder(order, targetWidget, instantTargetWidget)
 end
 
 ---issueBuildOrder
----@overload fun(unitToBuild: string, vec: Vector2): boolean
+---@overload fun(unitToBuild: string, vec: Vector): boolean
 ---@param unitToBuild string
 ---@param x float
 ---@param y float
@@ -1918,7 +1918,7 @@ function Unit:issueBuildOrder(unitToBuild, x, y)
 end
 
 ---issueBuildOrderById
----@overload fun(unitId: integer, vec: Vector2): boolean
+---@overload fun(unitId: integer, vec: Vector): boolean
 ---@param unitId integer
 ---@param x float
 ---@param y float
@@ -1995,7 +1995,7 @@ function Unit:waygateGetDestinationY()
 end
 
 ---waygateSetDestination
----@overload fun(vec: Vector2): void
+---@overload fun(vec: Vector): void
 ---@param x float
 ---@param y float
 ---@return void

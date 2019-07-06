@@ -22,7 +22,7 @@ function Ubersplat:destroy()
 end
 
 ---<static> create
----@overload fun(vec: Vector2, name: string, red: integer, green: integer, blue: integer, alpha: integer, forcePaused: boolean, noBirthTime: boolean): Ubersplat
+---@overload fun(vec: Vector, name: string, red: integer, green: integer, blue: integer, alpha: integer, forcePaused: boolean, noBirthTime: boolean): Ubersplat
 ---@param x float
 ---@param y float
 ---@param name string

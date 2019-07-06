@@ -366,7 +366,7 @@ function GameCache:getStoredString(missionKey, key)
 end
 
 ---restoreUnit
----@overload fun(missionKey: string, key: string, forWhichPlayer: Player, vec: Vector2, facing: float): Unit
+---@overload fun(missionKey: string, key: string, forWhichPlayer: Player, vec: Vector, facing: float): Unit
 ---@param missionKey string
 ---@param key string
 ---@param forWhichPlayer Player

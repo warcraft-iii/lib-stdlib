@@ -41,7 +41,7 @@ function TextTag:setText(s, height)
 end
 
 ---setPos
----@overload fun(vec: Vector2, heightOffset: float): void
+---@overload fun(vec: Vector, heightOffset: float): void
 ---@param x float
 ---@param y float
 ---@param heightOffset float

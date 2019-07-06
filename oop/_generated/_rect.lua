@@ -26,42 +26,8 @@ function Rect:remove()
     return self:delete()
 end
 
----<static> create
----@param minx float
----@param miny float
----@param maxx float
----@param maxy float
----@return Rect
-function Rect:create(minx, miny, maxx, maxy)
---@debug@
-    checkclass(self, Rect, 'create', 'self')
-    checktype(minx, 'float', 'create', 1)
-    checktype(miny, 'float', 'create', 2)
-    checktype(maxx, 'float', 'create', 3)
-    checktype(maxy, 'float', 'create', 4)
---@end-debug@
-    return Rect:fromUd(Native.Rect(minx, miny, maxx, maxy))
-end
-
----set
----@param minx float
----@param miny float
----@param maxx float
----@param maxy float
----@return void
-function Rect:set(minx, miny, maxx, maxy)
---@debug@
-    checkobject(self, Rect, 'set', 'self')
-    checktype(minx, 'float', 'set', 1)
-    checktype(miny, 'float', 'set', 2)
-    checktype(maxx, 'float', 'set', 3)
-    checktype(maxy, 'float', 'set', 4)
---@end-debug@
-    return Native.SetRect(getUd(self), minx, miny, maxx, maxy)
-end
-
 ---moveTo
----@overload fun(vec: Vector2): void
+---@overload fun(vec: Vector): void
 ---@param centerX float
 ---@param centerY float
 ---@return void

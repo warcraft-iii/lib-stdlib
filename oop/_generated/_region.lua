@@ -50,7 +50,7 @@ function Region:clearRect(r)
 end
 
 ---addCell
----@overload fun(vec: Vector2): void
+---@overload fun(vec: Vector): void
 ---@param x float
 ---@param y float
 ---@return void
@@ -67,7 +67,7 @@ function Region:addCell(x, y)
 end
 
 ---clearCell
----@overload fun(vec: Vector2): void
+---@overload fun(vec: Vector): void
 ---@param x float
 ---@param y float
 ---@return void
@@ -95,7 +95,7 @@ function Region:isUnitIn(unit)
 end
 
 ---isPointIn
----@overload fun(vec: Vector2): boolean
+---@overload fun(vec: Vector): boolean
 ---@param x float
 ---@param y float
 ---@return boolean

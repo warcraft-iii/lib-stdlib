@@ -22,7 +22,7 @@ function Effect:destroy()
 end
 
 ---<static> addSpecial
----@overload fun(modelName: string, vec: Vector2): Effect
+---@overload fun(modelName: string, vec: Vector): Effect
 ---@param modelName string
 ---@param x float
 ---@param y float
@@ -56,7 +56,7 @@ function Effect:addSpecialTarget(modelName, targetWidget, attachPointName)
 end
 
 ---<static> addSpell
----@overload fun(abilityString: string, t: EffectType, vec: Vector2): Effect
+---@overload fun(abilityString: string, t: EffectType, vec: Vector): Effect
 ---@param abilityString string
 ---@param t EffectType
 ---@param x float
@@ -77,7 +77,7 @@ function Effect:addSpell(abilityString, t, x, y)
 end
 
 ---<static> addSpellById
----@overload fun(abilityId: integer, t: EffectType, vec: Vector2): Effect
+---@overload fun(abilityId: integer, t: EffectType, vec: Vector): Effect
 ---@param abilityId integer
 ---@param t EffectType
 ---@param x float

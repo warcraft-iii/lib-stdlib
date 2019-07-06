@@ -180,7 +180,7 @@ function Group:enumUnitsInRectCounted(r, countLimit, filter)
 end
 
 ---enumUnitsInRange
----@overload fun(vec: Vector2, radius: float, filter: UnitFilter): void
+---@overload fun(vec: Vector, radius: float, filter: UnitFilter): void
 ---@param x float
 ---@param y float
 ---@param radius float
@@ -204,7 +204,7 @@ function Group:enumUnitsInRange(x, y, radius, filter)
 end
 
 ---enumUnitsInRangeCounted
----@overload fun(vec: Vector2, radius: float, countLimit: integer, filter: UnitFilter): void
+---@overload fun(vec: Vector, radius: float, countLimit: integer, filter: UnitFilter): void
 ---@param x float
 ---@param y float
 ---@param radius float
@@ -256,7 +256,7 @@ function Group:immediateOrder(order)
 end
 
 ---pointOrder
----@overload fun(order: integer, vec: Vector2): boolean
+---@overload fun(order: integer, vec: Vector): boolean
 ---@param order integer
 ---@param x float
 ---@param y float
