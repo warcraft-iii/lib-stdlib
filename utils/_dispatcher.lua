@@ -13,6 +13,13 @@ Dispatcher.dispatchers = setmetatable({}, {
     end,
 })
 
+local function errorhandler(err)
+    local h = geterrorhandler()
+    if h then
+        h(err)
+    end
+end
+
 function Dispatcher:constructor(id)
     self.id = id
     self.listeners = {}
@@ -64,7 +71,7 @@ function Dispatcher:dispatch(...)
     self.recurse = recurse + 1
 
     for obj, method in pairs(self.listeners) do
-        method(obj, ...)
+        xpcall(method, errorhandler, ...)
     end
 
     self.recurse = recurse

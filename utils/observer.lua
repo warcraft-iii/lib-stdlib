@@ -9,21 +9,29 @@ local Dispatcher = require('lib.stdlib.utils._dispatcher')
 
 ---registerEvent
 ---@param id integer
----@param method function
+---@param method function | string
 ---@return void
-function Observer:registerEvent(id, method)
-    Dispatcher:get(id):addObject(self, method)
-end
+function Observer:registerEvent(...)
+    local length = select('#', ...)
+    local method = select(length, ...)
 
----registerEvents
----@vararg integer[]
----@param method function
----@return void
-function Observer:registerEvents(...)
-    local args = {...}
-    local count = #args
-    for i = 1, count - 1 do
-        self:registerEvent(args[i], args[count])
+    if type(method) == 'string' then
+        local _method = self[method]
+        if not _method then
+            error(string.format([[not found method '%s' in object]], method), 2)
+        end
+        method = function(...)
+            return _method(self, ...)
+        end
+    end
+
+    if type(method) ~= 'function' then
+        error('not function', 2)
+    end
+
+    for i = 1, length - 1 do
+        local id = select(i, ...)
+        Dispatcher:get(id):addObject(self, method)
     end
 end
 
