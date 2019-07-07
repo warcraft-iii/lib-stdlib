@@ -2,12 +2,14 @@ local Quest = require('stdlib.oop.quest')
 local Trigger = require('stdlib.oop.trigger')
 local CommandLine = require('stdlib.utils.commandline')
 local Icons = require('stdlib.ui.icons')
+local Message = require('utils.message')
 
 ---@class ChangeLog : object
 ---@field private major integer
 ---@field private minor integer
 ---@field private rev integer
 ---@field protected logs string[]
+---@field protected quest Quest
 local ChangeLog = class('ChangeLog')
 
 ---@class table<string, ChangeLog>
@@ -15,9 +17,6 @@ local versionMap = {}
 
 ---@type ChangeLog[]
 local versionList = {}
-
----@type Quest[]
-local quests = {}
 
 ---LogType
 ChangeLog.LogType = {
@@ -38,6 +37,19 @@ function ChangeLog:constructor()
     self.minor = 0
     self.rev = 0
     self.logs = {}
+end
+
+function ChangeLog:destructor()
+    versionMap[self:getVersionString()] = nil
+    for i, v in ipairs(versionList) do
+        if v == self then
+            table.remove(versionList, i)
+            break
+        end
+    end
+    if self.quest then
+        self.quest:delete()
+    end
 end
 
 ---<static> setVersion
@@ -118,38 +130,49 @@ function ChangeLog:getVersions()
     return versionList
 end
 
-CommandLine:addOptionAnyPlayer('-changelog|-cl', function(player, str)
-    if not string.startswith(str, 'v') then
-        str = 'v' .. str
-    end
-    local ver = ChangeLog:getVersion(str)
-    if not ver then
-        player:displayTimedTextTo(0, 0, 15, string.format(L["Not find version: %s"], str))
-    else
-        local title = string.format(L["|cff6495edChange Log for |cffffd700%s"], ver:getVersionString())
-        player:displayTimedTextTo(0, 0, 15, title)
-        for _, log in ipairs(ver.logs) do
-            player:displayTimedTextTo(0, 0, 15, string.format("|cffb8860b - |r|cffc2e8eb%s", log))
-        end
-    end
-end)
-
-Timer:after(3, function()
-
+---<static> update
+function ChangeLog:update()
     for _, changeLog in ipairs(ChangeLog:getVersions()) do
-        local title = string.format(L["|cffff6347Change Log for |cffffd700%s"], changeLog:getVersionString())
+        local title = string.format(L['|cffff6347Change Log for |cffffd700%s'], changeLog:getVersionString())
         local changes = table.reduce(changeLog.logs, function(ret, str, i, t)
-            return ret .. string.format("|cffb8860b - |r|cffc2e8eb%s|r|n", str)
+            return ret .. string.format('|cffb8860b - |r|cffc2e8eb%s|r|n', str)
         end, '')
-        local quest = Quest:create()
+        local quest
+        if not changeLog.quest then
+            quest = Quest:create()
+            changeLog.quest = quest
+        else
+            quest = changeLog.quest
+        end
         quest:setRequired(false)
         quest:setTitle(title)
         quest:setDescription(changes)
         quest:setIconPath(Icons.bTNTome)
         quest:setState(Quest.StateType.Discovered)
-        table.insert(quests, quest)
     end
+end
 
+CommandLine:addOptionAnyPlayer('-changelog|-cl', function(player, str)
+    if not str then
+        local versions = ChangeLog:getVersions()
+        if not versions or #versions == 0 then
+            Message:toPlayer(player, L['no valid change log'])
+            return
+        end
+        str = versions[#versions]:getVersionString()
+    elseif not string.startswith(str, 'v') then
+        str = 'v' .. str
+    end
+    local ver = ChangeLog:getVersion(str)
+    if not ver then
+        Message:toPlayer(player, string.format(L['Not find version: %s'], str), 15)
+    else
+        local title = string.format(L['|cff6495edChange Log for |cffffd700%s'], ver:getVersionString())
+        Message:toPlayer(player, title, 15)
+        for _, log in ipairs(ver.logs) do
+            Message:toPlayer(player, string.format('|cffb8860b - |r|cffc2e8eb%s', log), 15)
+        end
+    end
 end)
 
 return ChangeLog

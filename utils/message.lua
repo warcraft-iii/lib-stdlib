@@ -52,9 +52,9 @@ function Message:toPlayer(player, text, timeout)
         return
     end
     if timeout then
-        Native.DisplayTimedTextToPlayer(player, 0, 0, timeout, text)
+        Native.DisplayTimedTextToPlayer(player:getUd(), 0, 0, timeout, text)
     else
-        Native.DisplayTextToPlayer(player, 0, 0, text)
+        Native.DisplayTextToPlayer(player:getUd(), 0, 0, text)
     end
 
 end
