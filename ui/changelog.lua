@@ -152,7 +152,7 @@ function ChangeLog:update()
     end
 end
 
-CommandLine:addOptionAnyPlayer('-changelog|-cl', function(player, str)
+CommandLine:addOptionToAll('-changelog|-cl', function(player, str)
     if not str then
         local versions = ChangeLog:getVersions()
         if not versions or #versions == 0 then

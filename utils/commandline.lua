@@ -37,7 +37,7 @@ end
 ---<static> addOptionAnyPlayer
 ---@param command string
 ---@param cb fun(player:Player, str:String)
-function CommandLine:addOptionAnyPlayer(command, cb)
+function CommandLine:addOptionToAll(command, cb)
     self:addOption(nil, command, cb)
 end
 
