@@ -37,6 +37,9 @@ function ChangeLog:constructor()
     self.minor = 0
     self.rev = 0
     self.logs = {}
+    for i, v in ipairs(ChangeLog.LogType) do
+        self.logs[i] = {}
+    end
 end
 
 function ChangeLog:destructor()
@@ -76,11 +79,8 @@ end
 ---@param logType LogType
 ---@param change string
 function ChangeLog:add(logType, change)
-    if logType == ChangeLog.LogType.Normal then
-        table.insert(self.logs, change)
-    else
-        table.insert(self.logs, string.format(L['%s: %s'], ChangeLog.LogType[logType], change))
-    end
+    self.logs[logType] = self.logs[logType] or {}
+    table.insert(self.logs[logType], change)
     return self
 end
 
@@ -114,6 +114,21 @@ function ChangeLog:normal(change)
     return self:add(ChangeLog.LogType.Normal, change)
 end
 
+---getLog
+---@return string
+function ChangeLog:getLog()
+    local msg = {}
+    for i, changes in ipairs(self.logs) do
+        if #changes > 0 then
+            table.insert(msg, ChangeLog.LogType[i])
+            for _, change in ipairs(changes) do
+                table.insert(msg, string.format('|cffb8860b - |r|cffc2e8eb%s|r', change))
+            end
+        end
+    end
+    return msg
+end
+
 ---<static> getVersion
 ---@param version string
 ---@return ChangeLog
@@ -134,9 +149,6 @@ end
 function ChangeLog:update()
     for _, changeLog in ipairs(ChangeLog:getVersions()) do
         local title = string.format(L['|cffff6347Change Log for |cffffd700%s'], changeLog:getVersionString())
-        local changes = table.reduce(changeLog.logs, function(ret, str, i, t)
-            return ret .. string.format('|cffb8860b - |r|cffc2e8eb%s|r|n', str)
-        end, '')
         local quest
         if not changeLog.quest then
             quest = Quest:create()
@@ -146,7 +158,7 @@ function ChangeLog:update()
         end
         quest:setRequired(false)
         quest:setTitle(title)
-        quest:setDescription(changes)
+        quest:setDescription(table.concat(changeLog:getLog(), '|n'))
         quest:setIconPath(Icons.bTNTome)
         quest:setState(Quest.StateType.Discovered)
     end
@@ -169,8 +181,8 @@ CommandLine:addOptionToAll('-changelog|-cl', function(player, str)
     else
         local title = string.format(L['|cff6495edChange Log for |cffffd700%s'], ver:getVersionString())
         Message:toPlayer(player, title, 15)
-        for _, log in ipairs(ver.logs) do
-            Message:toPlayer(player, string.format('|cffb8860b - |r|cffc2e8eb%s', log), 15)
+        for _, msg in ipairs(ver:getLog()) do
+            Message:toPlayer(player, msg)
         end
     end
 end)
