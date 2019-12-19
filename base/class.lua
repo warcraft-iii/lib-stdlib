@@ -10,7 +10,7 @@ local function constructor(obj, cls, ...)
     if not cls then
         return
     end
-    constructor(obj, cls:getSuper(), ...)
+    constructor(obj, cls:metaSuper(), ...)
 
     local ctor = rawget(cls, 'constructor')
     if type(ctor) == 'function' then
@@ -23,7 +23,7 @@ local function inherit(cls, super)
     if not super then
         return
     end
-    inherit(cls, super:getSuper())
+    inherit(cls, super:metaSuper())
 
     local inh = rawget(super, 'inherit')
     if type(inh) == 'function' then
@@ -36,15 +36,15 @@ object = {}
 
 object.meta = { __index = object, __type = object, __name = 'object' }
 
----getSuper
+---metaSuper
 ---@return object
-function object:getSuper()
+function object:metaSuper()
     return self.meta.__super
 end
 
----getType
+---metaType
 ---@return object
-function object:getType()
+function object:metaType()
     return self.meta.__type
 end
 
@@ -84,7 +84,7 @@ local mtDestroyed = {
 ---delete
 ---@return void
 function object:delete()
-    local destructor = rawget(self:getType(), 'destructor')
+    local destructor = rawget(self:metaType(), 'destructor')
     if destructor then
         destructor(self)
     end
@@ -134,7 +134,7 @@ function isInheritOf(cls, base)
     if not isClass(base) then
         return false
     end
-    local super = cls:getSuper()
+    local super = cls:metaSuper()
     if rawequal(super, base) then
         return true
     end
@@ -152,10 +152,10 @@ function isInstanceOf(obj, cls)
     if not isClass(cls) then
         return false
     end
-    if rawequal(obj:getType(), cls) then
+    if rawequal(obj:metaType(), cls) then
         return true
     end
-    return isInheritOf(obj:getType(), cls)
+    return isInheritOf(obj:metaType(), cls)
 end
 
 ---class
