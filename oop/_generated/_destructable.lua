@@ -129,6 +129,122 @@ function Destructable:createDeadZ(objectid, x, y, z, face, scale, variation)
     return Destructable:fromUd(Native.CreateDeadDestructableZ(objectid, x, y, z, face, scale, variation))
 end
 
+---<static> createWithSkin
+---@overload fun(objectid: integer, vec: Vector, face: float, scale: float, variation: integer, skinId: integer): Destructable
+---@param objectid integer
+---@param x float
+---@param y float
+---@param face float
+---@param scale float
+---@param variation integer
+---@param skinId integer
+---@return Destructable
+function Destructable:createWithSkin(objectid, x, y, face, scale, variation, skinId)
+    if type(x) == 'table' then
+        face, scale, variation, skinId = y, face, scale, variation
+        x, y = table.unpack(x)
+    end
+--@debug@
+    checkclass(self, Destructable, 'createWithSkin', 'self')
+    checktype(objectid, 'integer', 'createWithSkin', 1)
+    checktype(x, 'float', 'createWithSkin', 2)
+    checktype(y, 'float', 'createWithSkin', 3)
+    checktype(face, 'float', 'createWithSkin', 4)
+    checktype(scale, 'float', 'createWithSkin', 5)
+    checktype(variation, 'integer', 'createWithSkin', 6)
+    checktype(skinId, 'integer', 'createWithSkin', 7)
+--@end-debug@
+    return Destructable:fromUd(Native.BlzCreateDestructableWithSkin(objectid, x, y, face, scale, variation, skinId))
+end
+
+---<static> createZWithSkin
+---@overload fun(objectid: integer, vec: Vector3, face: float, scale: float, variation: integer, skinId: integer): Destructable
+---@param objectid integer
+---@param x float
+---@param y float
+---@param z float
+---@param face float
+---@param scale float
+---@param variation integer
+---@param skinId integer
+---@return Destructable
+function Destructable:createZWithSkin(objectid, x, y, z, face, scale, variation, skinId)
+    if type(x) == 'table' then
+        face, scale, variation, skinId = y, z, face, scale
+        x, y, z = table.unpack(x)
+    end
+--@debug@
+    checkclass(self, Destructable, 'createZWithSkin', 'self')
+    checktype(objectid, 'integer', 'createZWithSkin', 1)
+    checktype(x, 'float', 'createZWithSkin', 2)
+    checktype(y, 'float', 'createZWithSkin', 3)
+    checktype(z, 'float', 'createZWithSkin', 4)
+    checktype(face, 'float', 'createZWithSkin', 5)
+    checktype(scale, 'float', 'createZWithSkin', 6)
+    checktype(variation, 'integer', 'createZWithSkin', 7)
+    checktype(skinId, 'integer', 'createZWithSkin', 8)
+--@end-debug@
+    return Destructable:fromUd(Native.BlzCreateDestructableZWithSkin(objectid, x, y, z, face, scale, variation, skinId))
+end
+
+---<static> createDeadWithSkin
+---@overload fun(objectid: integer, vec: Vector, face: float, scale: float, variation: integer, skinId: integer): Destructable
+---@param objectid integer
+---@param x float
+---@param y float
+---@param face float
+---@param scale float
+---@param variation integer
+---@param skinId integer
+---@return Destructable
+function Destructable:createDeadWithSkin(objectid, x, y, face, scale, variation, skinId)
+    if type(x) == 'table' then
+        face, scale, variation, skinId = y, face, scale, variation
+        x, y = table.unpack(x)
+    end
+--@debug@
+    checkclass(self, Destructable, 'createDeadWithSkin', 'self')
+    checktype(objectid, 'integer', 'createDeadWithSkin', 1)
+    checktype(x, 'float', 'createDeadWithSkin', 2)
+    checktype(y, 'float', 'createDeadWithSkin', 3)
+    checktype(face, 'float', 'createDeadWithSkin', 4)
+    checktype(scale, 'float', 'createDeadWithSkin', 5)
+    checktype(variation, 'integer', 'createDeadWithSkin', 6)
+    checktype(skinId, 'integer', 'createDeadWithSkin', 7)
+--@end-debug@
+    return Destructable:fromUd(Native.BlzCreateDeadDestructableWithSkin(objectid, x, y, face, scale, variation, skinId))
+end
+
+---<static> createDeadZWithSkin
+---@overload fun(objectid: integer, vec: Vector3, face: float, scale: float, variation: integer, skinId: integer): Destructable
+---@param objectid integer
+---@param x float
+---@param y float
+---@param z float
+---@param face float
+---@param scale float
+---@param variation integer
+---@param skinId integer
+---@return Destructable
+function Destructable:createDeadZWithSkin(objectid, x, y, z, face, scale, variation, skinId)
+    if type(x) == 'table' then
+        face, scale, variation, skinId = y, z, face, scale
+        x, y, z = table.unpack(x)
+    end
+--@debug@
+    checkclass(self, Destructable, 'createDeadZWithSkin', 'self')
+    checktype(objectid, 'integer', 'createDeadZWithSkin', 1)
+    checktype(x, 'float', 'createDeadZWithSkin', 2)
+    checktype(y, 'float', 'createDeadZWithSkin', 3)
+    checktype(z, 'float', 'createDeadZWithSkin', 4)
+    checktype(face, 'float', 'createDeadZWithSkin', 5)
+    checktype(scale, 'float', 'createDeadZWithSkin', 6)
+    checktype(variation, 'integer', 'createDeadZWithSkin', 7)
+    checktype(skinId, 'integer', 'createDeadZWithSkin', 8)
+--@end-debug@
+    return Destructable:fromUd(Native.BlzCreateDeadDestructableZWithSkin(objectid, x, y, z, face, scale, variation, skinId))
+end
+
 ---kill
 ---@return void
 function Destructable:kill()

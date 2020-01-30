@@ -492,6 +492,24 @@ function Player:getHandicapXP()
     return Native.GetPlayerHandicapXP(getUd(self))
 end
 
+---getHandicapReviveTime
+---@return float
+function Player:getHandicapReviveTime()
+--@debug@
+    checkobject(self, Player, 'getHandicapReviveTime', 'self')
+--@end-debug@
+    return Native.GetPlayerHandicapReviveTime(getUd(self))
+end
+
+---getHandicapDamage
+---@return float
+function Player:getHandicapDamage()
+--@debug@
+    checkobject(self, Player, 'getHandicapDamage', 'self')
+--@end-debug@
+    return Native.GetPlayerHandicapDamage(getUd(self))
+end
+
 ---setHandicap
 ---@param handicap float
 ---@return void
@@ -512,6 +530,28 @@ function Player:setHandicapXP(handicap)
     checktype(handicap, 'float', 'setHandicapXP', 1)
 --@end-debug@
     return Native.SetPlayerHandicapXP(getUd(self), handicap)
+end
+
+---setHandicapReviveTime
+---@param handicap float
+---@return void
+function Player:setHandicapReviveTime(handicap)
+--@debug@
+    checkobject(self, Player, 'setHandicapReviveTime', 'self')
+    checktype(handicap, 'float', 'setHandicapReviveTime', 1)
+--@end-debug@
+    return Native.SetPlayerHandicapReviveTime(getUd(self), handicap)
+end
+
+---setHandicapDamage
+---@param handicap float
+---@return void
+function Player:setHandicapDamage(handicap)
+--@debug@
+    checkobject(self, Player, 'setHandicapDamage', 'self')
+    checktype(handicap, 'float', 'setHandicapDamage', 1)
+--@end-debug@
+    return Native.SetPlayerHandicapDamage(getUd(self), handicap)
 end
 
 ---setTechMaxAllowed
@@ -939,6 +979,15 @@ function Player:displayChatMessage(recipient, message)
     checktype(message, 'string', 'displayChatMessage', 2)
 --@end-debug@
     return Native.BlzDisplayChatMessage(getUd(self), recipient, message)
+end
+
+---getTownHallCount
+---@return integer
+function Player:getTownHallCount()
+--@debug@
+    checkobject(self, Player, 'getTownHallCount', 'self')
+--@end-debug@
+    return Native.BlzGetPlayerTownHallCount(getUd(self))
 end
 
 return Player

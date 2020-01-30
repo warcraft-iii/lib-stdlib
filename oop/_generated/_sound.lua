@@ -346,4 +346,77 @@ function Sound:unregisterStacked(byPosition, rectwidth, rectheight)
     return Native.UnregisterStackedSound(getUd(self), byPosition, rectwidth, rectheight)
 end
 
+---setFacialAnimationLabel
+---@param animationLabel string
+---@return boolean
+function Sound:setFacialAnimationLabel(animationLabel)
+--@debug@
+    checkobject(self, Sound, 'setFacialAnimationLabel', 'self')
+    checktype(animationLabel, 'string', 'setFacialAnimationLabel', 1)
+--@end-debug@
+    return Native.SetSoundFacialAnimationLabel(getUd(self), animationLabel)
+end
+
+---setFacialAnimationGroupLabel
+---@param groupLabel string
+---@return boolean
+function Sound:setFacialAnimationGroupLabel(groupLabel)
+--@debug@
+    checkobject(self, Sound, 'setFacialAnimationGroupLabel', 'self')
+    checktype(groupLabel, 'string', 'setFacialAnimationGroupLabel', 1)
+--@end-debug@
+    return Native.SetSoundFacialAnimationGroupLabel(getUd(self), groupLabel)
+end
+
+---setFacialAnimationSetFilepath
+---@param animationSetFilepath string
+---@return boolean
+function Sound:setFacialAnimationSetFilepath(animationSetFilepath)
+--@debug@
+    checkobject(self, Sound, 'setFacialAnimationSetFilepath', 'self')
+    checktype(animationSetFilepath, 'string', 'setFacialAnimationSetFilepath', 1)
+--@end-debug@
+    return Native.SetSoundFacialAnimationSetFilepath(getUd(self), animationSetFilepath)
+end
+
+---setDialogueSpeakerNameKey
+---@param speakerName string
+---@return boolean
+function Sound:setDialogueSpeakerNameKey(speakerName)
+--@debug@
+    checkobject(self, Sound, 'setDialogueSpeakerNameKey', 'self')
+    checktype(speakerName, 'string', 'setDialogueSpeakerNameKey', 1)
+--@end-debug@
+    return Native.SetDialogueSpeakerNameKey(getUd(self), speakerName)
+end
+
+---getDialogueSpeakerNameKey
+---@return string
+function Sound:getDialogueSpeakerNameKey()
+--@debug@
+    checkobject(self, Sound, 'getDialogueSpeakerNameKey', 'self')
+--@end-debug@
+    return Native.GetDialogueSpeakerNameKey(getUd(self))
+end
+
+---setDialogueTextKey
+---@param dialogueText string
+---@return boolean
+function Sound:setDialogueTextKey(dialogueText)
+--@debug@
+    checkobject(self, Sound, 'setDialogueTextKey', 'self')
+    checktype(dialogueText, 'string', 'setDialogueTextKey', 1)
+--@end-debug@
+    return Native.SetDialogueTextKey(getUd(self), dialogueText)
+end
+
+---getDialogueTextKey
+---@return string
+function Sound:getDialogueTextKey()
+--@debug@
+    checkobject(self, Sound, 'getDialogueTextKey', 'self')
+--@end-debug@
+    return Native.GetDialogueTextKey(getUd(self))
+end
+
 return Sound

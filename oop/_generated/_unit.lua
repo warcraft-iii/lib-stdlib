@@ -115,6 +115,32 @@ function Unit:createBlightedGoldmine(id, x, y, face)
     return Unit:fromUd(Native.CreateBlightedGoldmine(getUd(id), x, y, face))
 end
 
+---<static> createWithSkin
+---@overload fun(id: Player, unitid: integer, vec: Vector, face: float, skinId: integer): Unit
+---@param id Player
+---@param unitid integer
+---@param x float
+---@param y float
+---@param face float
+---@param skinId integer
+---@return Unit
+function Unit:createWithSkin(id, unitid, x, y, face, skinId)
+    if type(x) == 'table' then
+        face, skinId = y, face
+        x, y = table.unpack(x)
+    end
+--@debug@
+    checkclass(self, Unit, 'createWithSkin', 'self')
+    checkobject(id, require('lib.stdlib.oop.player'), 'createWithSkin', 1)
+    checktype(unitid, 'integer', 'createWithSkin', 2)
+    checktype(x, 'float', 'createWithSkin', 3)
+    checktype(y, 'float', 'createWithSkin', 4)
+    checktype(face, 'float', 'createWithSkin', 5)
+    checktype(skinId, 'integer', 'createWithSkin', 6)
+--@end-debug@
+    return Unit:fromUd(Native.BlzCreateUnitWithSkin(getUd(id), unitid, x, y, face, skinId))
+end
+
 ---kill
 ---@return void
 function Unit:kill()
@@ -2142,6 +2168,25 @@ function Unit:addIndicator(red, green, blue, alpha)
     return Native.UnitAddIndicator(getUd(self), red, green, blue, alpha)
 end
 
+---createMinimapIconOn
+---@param red integer
+---@param green integer
+---@param blue integer
+---@param pingPath string
+---@param fogVisibility FogState
+---@return minimapicon
+function Unit:createMinimapIconOn(red, green, blue, pingPath, fogVisibility)
+--@debug@
+    checkobject(self, Unit, 'createMinimapIconOn', 'self')
+    checktype(red, 'integer', 'createMinimapIconOn', 1)
+    checktype(green, 'integer', 'createMinimapIconOn', 2)
+    checktype(blue, 'integer', 'createMinimapIconOn', 3)
+    checktype(pingPath, 'string', 'createMinimapIconOn', 4)
+    checkuserdata(fogVisibility, 'fogstate', 'createMinimapIconOn', 5)
+--@end-debug@
+    return Native.CreateMinimapIconOnUnit(getUd(self), red, green, blue, pingPath, fogVisibility)
+end
+
 ---setCameraTargetController
 ---@param xoffset float
 ---@param yoffset float
@@ -2489,6 +2534,19 @@ function Unit:endAbilityCooldown(abilCode)
     return Native.BlzEndUnitAbilityCooldown(getUd(self), abilCode)
 end
 
+---startAbilityCooldown
+---@param abilCode integer
+---@param cooldown float
+---@return void
+function Unit:startAbilityCooldown(abilCode, cooldown)
+--@debug@
+    checkobject(self, Unit, 'startAbilityCooldown', 'self')
+    checktype(abilCode, 'integer', 'startAbilityCooldown', 1)
+    checktype(cooldown, 'float', 'startAbilityCooldown', 2)
+--@end-debug@
+    return Native.BlzStartUnitAbilityCooldown(getUd(self), abilCode, cooldown)
+end
+
 ---getAbilityManaCost
 ---@param abilId integer
 ---@param level integer
@@ -2535,6 +2593,17 @@ function Unit:getZ()
     return Native.BlzGetUnitZ(getUd(self))
 end
 
+---showTeamGlow
+---@param show boolean
+---@return void
+function Unit:showTeamGlow(show)
+--@debug@
+    checkobject(self, Unit, 'showTeamGlow', 'self')
+    checktype(show, 'boolean', 'showTeamGlow', 1)
+--@end-debug@
+    return Native.BlzShowUnitTeamGlow(getUd(self), show)
+end
+
 ---getAbility
 ---@param abilId integer
 ---@return Ability
@@ -2566,6 +2635,17 @@ function Unit:pauseEx(flag)
     checktype(flag, 'boolean', 'pauseEx', 1)
 --@end-debug@
     return Native.BlzPauseUnitEx(getUd(self), flag)
+end
+
+---setFacingEx
+---@param facingAngle float
+---@return void
+function Unit:setFacingEx(facingAngle)
+--@debug@
+    checkobject(self, Unit, 'setFacingEx', 'self')
+    checktype(facingAngle, 'float', 'setFacingEx', 1)
+--@end-debug@
+    return Native.BlzSetUnitFacingEx(getUd(self), facingAngle)
 end
 
 ---getBooleanField
@@ -2774,6 +2854,26 @@ function Unit:setWeaponStringField(field, index, value)
     checktype(value, 'string', 'setWeaponStringField', 3)
 --@end-debug@
     return Native.BlzSetUnitWeaponStringField(getUd(self), field, index, value)
+end
+
+---getSkin
+---@return integer
+function Unit:getSkin()
+--@debug@
+    checkobject(self, Unit, 'getSkin', 'self')
+--@end-debug@
+    return Native.BlzGetUnitSkin(getUd(self))
+end
+
+---setSkin
+---@param skinId integer
+---@return void
+function Unit:setSkin(skinId)
+--@debug@
+    checkobject(self, Unit, 'setSkin', 'self')
+    checktype(skinId, 'integer', 'setSkin', 1)
+--@end-debug@
+    return Native.BlzSetUnitSkin(getUd(self), skinId)
 end
 
 return Unit

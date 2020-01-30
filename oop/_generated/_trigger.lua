@@ -272,6 +272,30 @@ function Trigger:registerTrackableTrackEvent(t)
     return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterTrackableTrackEvent(getUd(self), getUd(t)))
 end
 
+---registerCommandEvent
+---@param ability integer
+---@param order string
+---@return Event
+function Trigger:registerCommandEvent(ability, order)
+--@debug@
+    checkobject(self, Trigger, 'registerCommandEvent', 'self')
+    checktype(ability, 'integer', 'registerCommandEvent', 1)
+    checktype(order, 'string', 'registerCommandEvent', 2)
+--@end-debug@
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterCommandEvent(getUd(self), ability, order))
+end
+
+---registerUpgradeCommandEvent
+---@param upgrade integer
+---@return Event
+function Trigger:registerUpgradeCommandEvent(upgrade)
+--@debug@
+    checkobject(self, Trigger, 'registerUpgradeCommandEvent', 'self')
+    checktype(upgrade, 'integer', 'registerUpgradeCommandEvent', 1)
+--@end-debug@
+    return require('lib.stdlib.oop.event'):fromUd(Native.TriggerRegisterUpgradeCommandEvent(getUd(self), upgrade))
+end
+
 ---registerPlayerEvent
 ---@param player Player
 ---@param playerEvent PlayerEvent

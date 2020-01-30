@@ -132,6 +132,26 @@ function CameraSetup:applyForceDurationWithZ(zDestOffset, forceDuration)
     return Native.CameraSetupApplyForceDurationWithZ(getUd(self), zDestOffset, forceDuration)
 end
 
+---setLabel
+---@param label string
+---@return void
+function CameraSetup:setLabel(label)
+--@debug@
+    checkobject(self, CameraSetup, 'setLabel', 'self')
+    checktype(label, 'string', 'setLabel', 1)
+--@end-debug@
+    return Native.BlzCameraSetupSetLabel(getUd(self), label)
+end
+
+---getLabel
+---@return string
+function CameraSetup:getLabel()
+--@debug@
+    checkobject(self, CameraSetup, 'getLabel', 'self')
+--@end-debug@
+    return Native.BlzCameraSetupGetLabel(getUd(self))
+end
+
 ---applyForceDurationSmooth
 ---@param doPan boolean
 ---@param forcedDuration float

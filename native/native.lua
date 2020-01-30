@@ -431,6 +431,10 @@ function Native.SquareRoot(x) end
 ---@return float
 function Native.Pow(x, power) end
 
+---@param r float
+---@return integer
+function Native.MathRound(r) end
+
 ---@param i integer
 ---@return float
 function Native.I2R(i) end
@@ -540,6 +544,18 @@ function Native.GetStartLocPrioSlot(startLoc, prioSlotIndex) end
 ---@param prioSlotIndex integer
 ---@return startlocprio
 function Native.GetStartLocPrio(startLoc, prioSlotIndex) end
+
+---@param startLoc integer
+---@param prioSlotCount integer
+---@return void
+function Native.SetEnemyStartLocPrioCount(startLoc, prioSlotCount) end
+
+---@param startLoc integer
+---@param prioSlotIndex integer
+---@param otherStartLocIndex integer
+---@param priority startlocprio
+---@return void
+function Native.SetEnemyStartLocPrio(startLoc, prioSlotIndex, otherStartLocIndex, priority) end
 
 ---@param gameType gametype
 ---@param value boolean
@@ -1171,6 +1187,10 @@ function Native.GetFilterItem() end
 ---@return item
 function Native.GetEnumItem() end
 
+---@param taggedString string
+---@return string
+function Native.ParseTags(taggedString) end
+
 ---@return player
 function Native.GetFilterPlayer() end
 
@@ -1305,6 +1325,17 @@ function Native.TriggerRegisterTrackableHitEvent(trigger, t) end
 ---@param t trackable
 ---@return event
 function Native.TriggerRegisterTrackableTrackEvent(trigger, t) end
+
+---@param trigger trigger
+---@param ability integer
+---@param order string
+---@return event
+function Native.TriggerRegisterCommandEvent(trigger, ability, order) end
+
+---@param trigger trigger
+---@param upgrade integer
+---@return event
+function Native.TriggerRegisterUpgradeCommandEvent(trigger, upgrade) end
 
 ---@return trackable
 function Native.GetTriggeringTrackable() end
@@ -3122,6 +3153,14 @@ function Native.GetPlayerHandicap(player) end
 function Native.GetPlayerHandicapXP(player) end
 
 ---@param player player
+---@return float
+function Native.GetPlayerHandicapReviveTime(player) end
+
+---@param player player
+---@return float
+function Native.GetPlayerHandicapDamage(player) end
+
+---@param player player
 ---@param handicap float
 ---@return void
 function Native.SetPlayerHandicap(player, handicap) end
@@ -3130,6 +3169,16 @@ function Native.SetPlayerHandicap(player, handicap) end
 ---@param handicap float
 ---@return void
 function Native.SetPlayerHandicapXP(player, handicap) end
+
+---@param player player
+---@param handicap float
+---@return void
+function Native.SetPlayerHandicapReviveTime(player, handicap) end
+
+---@param player player
+---@param handicap float
+---@return void
+function Native.SetPlayerHandicapDamage(player, handicap) end
 
 ---@param player player
 ---@param techid integer
@@ -3339,6 +3388,15 @@ function Native.CopySaveGame(sourceSaveName, destSaveName) end
 ---@param saveName string
 ---@return boolean
 function Native.SaveGameExists(saveName) end
+
+---@param maxCheckpointSaves integer
+---@return void
+function Native.SetMaxCheckpointSaves(maxCheckpointSaves) end
+
+---@param saveFileName string
+---@param showWindow boolean
+---@return void
+function Native.SaveGameCheckpoint(saveFileName, showWindow) end
 
 ---@return void
 function Native.SyncSelections() end
@@ -4397,6 +4455,10 @@ function Native.ClearTextMessages() end
 ---@return void
 function Native.SetDayNightModels(terrainDNCFile, unitDNCFile) end
 
+---@param portraitDNCFile string
+---@return void
+function Native.SetPortraitLight(portraitDNCFile) end
+
 ---@param skyModelFile string
 ---@return void
 function Native.SetSkyModel(skyModelFile) end
@@ -4460,6 +4522,52 @@ function Native.PingMinimap(x, y, duration) end
 ---@param extraEffects boolean
 ---@return void
 function Native.PingMinimapEx(x, y, duration, red, green, blue, extraEffects) end
+
+---@param unit unit
+---@param red integer
+---@param green integer
+---@param blue integer
+---@param pingPath string
+---@param fogVisibility fogstate
+---@return minimapicon
+function Native.CreateMinimapIconOnUnit(unit, red, green, blue, pingPath, fogVisibility) end
+
+---@param where location
+---@param red integer
+---@param green integer
+---@param blue integer
+---@param pingPath string
+---@param fogVisibility fogstate
+---@return minimapicon
+function Native.CreateMinimapIconAtLoc(where, red, green, blue, pingPath, fogVisibility) end
+
+---@param x float
+---@param y float
+---@param red integer
+---@param green integer
+---@param blue integer
+---@param pingPath string
+---@param fogVisibility fogstate
+---@return minimapicon
+function Native.CreateMinimapIcon(x, y, red, green, blue, pingPath, fogVisibility) end
+
+---@param key string
+---@return string
+function Native.SkinManagerGetLocalPath(key) end
+
+---@param pingId minimapicon
+---@return void
+function Native.DestroyMinimapIcon(pingId) end
+
+---@param minimapIcon minimapicon
+---@param visible boolean
+---@return void
+function Native.SetMinimapIconVisible(minimapIcon, visible) end
+
+---@param minimapIcon minimapicon
+---@param doDestroy boolean
+---@return void
+function Native.SetMinimapIconOrphanDestroy(minimapIcon, doDestroy) end
 
 ---@param flag boolean
 ---@return void
@@ -5201,6 +5309,15 @@ function Native.CameraSetupApplyForceDuration(setup, doPan, forceDuration) end
 ---@return void
 function Native.CameraSetupApplyForceDurationWithZ(setup, zDestOffset, forceDuration) end
 
+---@param setup camerasetup
+---@param label string
+---@return void
+function Native.BlzCameraSetupSetLabel(setup, label) end
+
+---@param setup camerasetup
+---@return string
+function Native.BlzCameraSetupGetLabel(setup) end
+
 ---@param mag float
 ---@param velocity float
 ---@return void
@@ -5226,6 +5343,14 @@ function Native.CameraSetSourceNoiseEx(mag, velocity, vertOnly) end
 ---@param factor float
 ---@return void
 function Native.CameraSetSmoothingFactor(factor) end
+
+---@param distance float
+---@return void
+function Native.CameraSetFocalDistance(distance) end
+
+---@param scale float
+---@return void
+function Native.CameraSetDepthOfFieldScale(scale) end
 
 ---@param filename string
 ---@return void
@@ -5293,6 +5418,10 @@ function Native.EndCinematicScene() end
 ---@param flag boolean
 ---@return void
 function Native.ForceCinematicSubtitles(flag) end
+
+---@param cinematicAudio boolean
+---@return void
+function Native.SetCinematicAudio(cinematicAudio) end
 
 ---@param margin integer
 ---@return float
@@ -5552,6 +5681,39 @@ function Native.RegisterStackedSound(soundHandle, byPosition, rectwidth, recthei
 ---@param rectheight float
 ---@return void
 function Native.UnregisterStackedSound(soundHandle, byPosition, rectwidth, rectheight) end
+
+---@param soundHandle sound
+---@param animationLabel string
+---@return boolean
+function Native.SetSoundFacialAnimationLabel(soundHandle, animationLabel) end
+
+---@param soundHandle sound
+---@param groupLabel string
+---@return boolean
+function Native.SetSoundFacialAnimationGroupLabel(soundHandle, groupLabel) end
+
+---@param soundHandle sound
+---@param animationSetFilepath string
+---@return boolean
+function Native.SetSoundFacialAnimationSetFilepath(soundHandle, animationSetFilepath) end
+
+---@param soundHandle sound
+---@param speakerName string
+---@return boolean
+function Native.SetDialogueSpeakerNameKey(soundHandle, speakerName) end
+
+---@param soundHandle sound
+---@return string
+function Native.GetDialogueSpeakerNameKey(soundHandle) end
+
+---@param soundHandle sound
+---@param dialogueText string
+---@return boolean
+function Native.SetDialogueTextKey(soundHandle, dialogueText) end
+
+---@param soundHandle sound
+---@return string
+function Native.GetDialogueTextKey(soundHandle) end
 
 ---@param where rect
 ---@param effectID integer
@@ -6058,6 +6220,10 @@ function Native.PreloadGenEnd(filename) end
 ---@return void
 function Native.Preloader(filename) end
 
+---@param enable boolean
+---@return void
+function Native.BlzHideCinematicPanels(enable) end
+
 ---@param testType string
 ---@return void
 function Native.AutomationSetTestType(testType) end
@@ -6520,6 +6686,12 @@ function Native.BlzGetUnitAbilityCooldownRemaining(unit, abilId) end
 function Native.BlzEndUnitAbilityCooldown(unit, abilCode) end
 
 ---@param unit unit
+---@param abilCode integer
+---@param cooldown float
+---@return void
+function Native.BlzStartUnitAbilityCooldown(unit, abilCode, cooldown) end
+
+---@param unit unit
 ---@param abilId integer
 ---@param level integer
 ---@return integer
@@ -6569,6 +6741,9 @@ function Native.BlzSetEventDamageType(damageType) end
 ---@param weaponType weapontype
 ---@return boolean
 function Native.BlzSetEventWeaponType(weaponType) end
+
+---@return boolean
+function Native.BlzGetEventIsAttack() end
 
 ---@param dataType integer
 ---@param player player
@@ -6644,6 +6819,26 @@ function Native.BlzEnableTargetIndicator(enable) end
 
 ---@return boolean
 function Native.BlzIsTargetIndicatorEnabled() end
+
+---@param show boolean
+---@return void
+function Native.BlzShowTerrain(show) end
+
+---@param show boolean
+---@return void
+function Native.BlzShowSkyBox(show) end
+
+---@param fps integer
+---@return void
+function Native.BlzStartRecording(fps) end
+
+---@return void
+function Native.BlzEndRecording() end
+
+---@param unit unit
+---@param show boolean
+---@return void
+function Native.BlzShowUnitTeamGlow(unit, show) end
 
 ---@param frameType originframetype
 ---@param index integer
@@ -7008,6 +7203,28 @@ function Native.BlzDisplayChatMessage(player, recipient, message) end
 ---@param flag boolean
 ---@return void
 function Native.BlzPauseUnitEx(unit, flag) end
+
+---@param unit unit
+---@param facingAngle float
+---@return void
+function Native.BlzSetUnitFacingEx(unit, facingAngle) end
+
+---@param abilityId integer
+---@param order string
+---@return commandbuttoneffect
+function Native.CreateCommandButtonEffect(abilityId, order) end
+
+---@param uprgade integer
+---@return commandbuttoneffect
+function Native.CreateUpgradeCommandButtonEffect(uprgade) end
+
+---@param abilityId integer
+---@return commandbuttoneffect
+function Native.CreateLearnCommandButtonEffect(abilityId) end
+
+---@param effect commandbuttoneffect
+---@return void
+function Native.DestroyCommandButtonEffect(effect) end
 
 ---@param x integer
 ---@param y integer
@@ -7395,6 +7612,86 @@ function Native.BlzSetUnitWeaponRealField(unit, field, index, value) end
 ---@param value string
 ---@return boolean
 function Native.BlzSetUnitWeaponStringField(unit, field, index, value) end
+
+---@param unit unit
+---@return integer
+function Native.BlzGetUnitSkin(unit) end
+
+---@param item item
+---@return integer
+function Native.BlzGetItemSkin(item) end
+
+---@param unit unit
+---@param skinId integer
+---@return void
+function Native.BlzSetUnitSkin(unit, skinId) end
+
+---@param item item
+---@param skinId integer
+---@return void
+function Native.BlzSetItemSkin(item, skinId) end
+
+---@param itemid integer
+---@param x float
+---@param y float
+---@param skinId integer
+---@return item
+function Native.BlzCreateItemWithSkin(itemid, x, y, skinId) end
+
+---@param id player
+---@param unitid integer
+---@param x float
+---@param y float
+---@param face float
+---@param skinId integer
+---@return unit
+function Native.BlzCreateUnitWithSkin(id, unitid, x, y, face, skinId) end
+
+---@param objectid integer
+---@param x float
+---@param y float
+---@param face float
+---@param scale float
+---@param variation integer
+---@param skinId integer
+---@return destructable
+function Native.BlzCreateDestructableWithSkin(objectid, x, y, face, scale, variation, skinId) end
+
+---@param objectid integer
+---@param x float
+---@param y float
+---@param z float
+---@param face float
+---@param scale float
+---@param variation integer
+---@param skinId integer
+---@return destructable
+function Native.BlzCreateDestructableZWithSkin(objectid, x, y, z, face, scale, variation, skinId) end
+
+---@param objectid integer
+---@param x float
+---@param y float
+---@param face float
+---@param scale float
+---@param variation integer
+---@param skinId integer
+---@return destructable
+function Native.BlzCreateDeadDestructableWithSkin(objectid, x, y, face, scale, variation, skinId) end
+
+---@param objectid integer
+---@param x float
+---@param y float
+---@param z float
+---@param face float
+---@param scale float
+---@param variation integer
+---@param skinId integer
+---@return destructable
+function Native.BlzCreateDeadDestructableZWithSkin(objectid, x, y, z, face, scale, variation, skinId) end
+
+---@param player player
+---@return integer
+function Native.BlzGetPlayerTownHallCount(player) end
 
 ---@type boolean
 Native.FALSE = nil
@@ -9006,6 +9303,21 @@ Native.ORIGIN_FRAME_PORTRAIT = nil
 
 ---@type originframetype
 Native.ORIGIN_FRAME_WORLD_FRAME = nil
+
+---@type originframetype
+Native.ORIGIN_FRAME_SIMPLE_UI_PARENT = nil
+
+---@type originframetype
+Native.ORIGIN_FRAME_PORTRAIT_HP_TEXT = nil
+
+---@type originframetype
+Native.ORIGIN_FRAME_PORTRAIT_MANA_TEXT = nil
+
+---@type originframetype
+Native.ORIGIN_FRAME_UNIT_PANEL_BUFF_BAR = nil
+
+---@type originframetype
+Native.ORIGIN_FRAME_UNIT_PANEL_BUFF_BAR_LABEL = nil
 
 ---@type framepointtype
 Native.FRAMEPOINT_TOPLEFT = nil

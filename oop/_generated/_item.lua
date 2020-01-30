@@ -40,6 +40,28 @@ function Item:create(itemid, x, y)
     return Item:fromUd(Native.CreateItem(itemid, x, y))
 end
 
+---<static> createWithSkin
+---@overload fun(itemid: integer, vec: Vector, skinId: integer): Item
+---@param itemid integer
+---@param x float
+---@param y float
+---@param skinId integer
+---@return Item
+function Item:createWithSkin(itemid, x, y, skinId)
+    if type(x) == 'table' then
+        skinId = y
+        x, y = table.unpack(x)
+    end
+--@debug@
+    checkclass(self, Item, 'createWithSkin', 'self')
+    checktype(itemid, 'integer', 'createWithSkin', 1)
+    checktype(x, 'float', 'createWithSkin', 2)
+    checktype(y, 'float', 'createWithSkin', 3)
+    checktype(skinId, 'integer', 'createWithSkin', 4)
+--@end-debug@
+    return Item:fromUd(Native.BlzCreateItemWithSkin(itemid, x, y, skinId))
+end
+
 ---getPlayer
 ---@return Player
 function Item:getPlayer()
@@ -522,6 +544,26 @@ function Item:removeAbility(abilCode)
     checktype(abilCode, 'integer', 'removeAbility', 1)
 --@end-debug@
     return Native.BlzItemRemoveAbility(getUd(self), abilCode)
+end
+
+---getSkin
+---@return integer
+function Item:getSkin()
+--@debug@
+    checkobject(self, Item, 'getSkin', 'self')
+--@end-debug@
+    return Native.BlzGetItemSkin(getUd(self))
+end
+
+---setSkin
+---@param skinId integer
+---@return void
+function Item:setSkin(skinId)
+--@debug@
+    checkobject(self, Item, 'setSkin', 'self')
+    checktype(skinId, 'integer', 'setSkin', 1)
+--@end-debug@
+    return Native.BlzSetItemSkin(getUd(self), skinId)
 end
 
 return Item

@@ -20,5 +20,10 @@ local OriginFrameType = {
     TopMsg = Native.ConvertOriginFrameType(15), --ORIGIN_FRAME_TOP_MSG
     Portrait = Native.ConvertOriginFrameType(16), --ORIGIN_FRAME_PORTRAIT
     WorldFrame = Native.ConvertOriginFrameType(17), --ORIGIN_FRAME_WORLD_FRAME
+    SimpleUiParent = Native.ConvertOriginFrameType(18), --ORIGIN_FRAME_SIMPLE_UI_PARENT
+    PortraitHpText = Native.ConvertOriginFrameType(19), --ORIGIN_FRAME_PORTRAIT_HP_TEXT
+    PortraitManaText = Native.ConvertOriginFrameType(20), --ORIGIN_FRAME_PORTRAIT_MANA_TEXT
+    UnitPanelBuffBar = Native.ConvertOriginFrameType(21), --ORIGIN_FRAME_UNIT_PANEL_BUFF_BAR
+    UnitPanelBuffBarLabel = Native.ConvertOriginFrameType(22), --ORIGIN_FRAME_UNIT_PANEL_BUFF_BAR_LABEL
 }
 return OriginFrameType
