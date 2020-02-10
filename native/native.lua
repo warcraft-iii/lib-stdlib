@@ -5635,6 +5635,10 @@ function Native.SetMusicVolume(volume) end
 ---@return void
 function Native.SetMusicPlayPosition(millisecs) end
 
+---@param volume integer
+---@return void
+function Native.SetThematicMusicVolume(volume) end
+
 ---@param millisecs integer
 ---@return void
 function Native.SetThematicMusicPlayPosition(millisecs) end

@@ -1141,6 +1141,7 @@ return {
     'EndThematicMusic',
     'SetMusicVolume',
     'SetMusicPlayPosition',
+    'SetThematicMusicVolume',
     'SetThematicMusicPlayPosition',
     'SetSoundDuration',
     'GetSoundDuration',
