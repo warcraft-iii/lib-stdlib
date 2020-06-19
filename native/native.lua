@@ -1471,6 +1471,21 @@ function Native.GetManipulatingUnit() end
 ---@return item
 function Native.GetManipulatedItem() end
 
+---@return item
+function Native.BlzGetAbsorbingItem() end
+
+---@return boolean
+function Native.BlzGetManipulatedItemWasAbsorbed() end
+
+---@return item
+function Native.BlzGetStackingItemSource() end
+
+---@return item
+function Native.BlzGetStackingItemTarget() end
+
+---@return integer
+function Native.BlzGetStackingItemTargetPreviousCharges() end
+
 ---@return unit
 function Native.GetOrderedUnit() end
 
@@ -7091,6 +7106,15 @@ function Native.BlzFrameSetFont(frame, fileName, height, flags) end
 ---@return void
 function Native.BlzFrameSetTextAlignment(frame, vert, horz) end
 
+---@param frame framehandle
+---@return integer
+function Native.BlzFrameGetChildrenCount(frame) end
+
+---@param frame framehandle
+---@param index integer
+---@return framehandle
+function Native.BlzFrameGetChild(frame, index) end
+
 ---@param trigger trigger
 ---@param frame framehandle
 ---@param eventId frameeventtype
@@ -8978,6 +9002,9 @@ Native.EVENT_PLAYER_UNIT_SPELL_ENDCAST = nil
 ---@type playerunitevent
 Native.EVENT_PLAYER_UNIT_PAWN_ITEM = nil
 
+---@type playerunitevent
+Native.EVENT_PLAYER_UNIT_STACK_ITEM = nil
+
 ---@type unitevent
 Native.EVENT_UNIT_SELL = nil
 
@@ -9004,6 +9031,9 @@ Native.EVENT_UNIT_SPELL_ENDCAST = nil
 
 ---@type unitevent
 Native.EVENT_UNIT_PAWN_ITEM = nil
+
+---@type unitevent
+Native.EVENT_UNIT_STACK_ITEM = nil
 
 ---@type limitop
 Native.LESS_THAN = nil

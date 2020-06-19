@@ -49,5 +49,6 @@ local UnitEvent = {
     SpellFinish = Native.ConvertUnitEvent(292), --EVENT_UNIT_SPELL_FINISH
     SpellEndcast = Native.ConvertUnitEvent(293), --EVENT_UNIT_SPELL_ENDCAST
     PawnItem = Native.ConvertUnitEvent(294), --EVENT_UNIT_PAWN_ITEM
+    StackItem = Native.ConvertUnitEvent(318), --EVENT_UNIT_STACK_ITEM
 }
 return UnitEvent

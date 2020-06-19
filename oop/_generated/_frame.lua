@@ -510,4 +510,24 @@ function Frame:setTextAlignment(vert, horz)
     return Native.BlzFrameSetTextAlignment(getUd(self), vert, horz)
 end
 
+---getChildrenCount
+---@return integer
+function Frame:getChildrenCount()
+--@debug@
+    checkobject(self, Frame, 'getChildrenCount', 'self')
+--@end-debug@
+    return Native.BlzFrameGetChildrenCount(getUd(self))
+end
+
+---getChild
+---@param index integer
+---@return Frame
+function Frame:getChild(index)
+--@debug@
+    checkobject(self, Frame, 'getChild', 'self')
+    checktype(index, 'integer', 'getChild', 1)
+--@end-debug@
+    return Frame:fromUd(Native.BlzFrameGetChild(getUd(self), index))
+end
+
 return Frame
