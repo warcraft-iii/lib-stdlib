@@ -1,11 +1,14 @@
 local Native = require('lib.stdlib.native')
+local converter = require('lib.stdlib.enum.converter')
 
 ---@class GameSpeed
 local GameSpeed = {
-    Slowest = Native.ConvertGameSpeed(0), --MAP_SPEED_SLOWEST
-    Slow = Native.ConvertGameSpeed(1), --MAP_SPEED_SLOW
-    Normal = Native.ConvertGameSpeed(2), --MAP_SPEED_NORMAL
-    Fast = Native.ConvertGameSpeed(3), --MAP_SPEED_FAST
-    Fastest = Native.ConvertGameSpeed(4), --MAP_SPEED_FASTEST
+    Slowest = 0, --MAP_SPEED_SLOWEST
+    Slow = 1, --MAP_SPEED_SLOW
+    Normal = 2, --MAP_SPEED_NORMAL
+    Fast = 3, --MAP_SPEED_FAST
+    Fastest = 4, --MAP_SPEED_FASTEST
 }
+
+GameSpeed = converter(Native.ConvertGameSpeed, GameSpeed)
 return GameSpeed

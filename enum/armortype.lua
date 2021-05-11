@@ -1,12 +1,15 @@
 local Native = require('lib.stdlib.native')
+local converter = require('lib.stdlib.enum.converter')
 
 ---@class ArmorType
 local ArmorType = {
-    Whoknows = Native.ConvertArmorType(0), --ARMOR_TYPE_WHOKNOWS
-    Flesh = Native.ConvertArmorType(1), --ARMOR_TYPE_FLESH
-    Metal = Native.ConvertArmorType(2), --ARMOR_TYPE_METAL
-    Wood = Native.ConvertArmorType(3), --ARMOR_TYPE_WOOD
-    Ethreal = Native.ConvertArmorType(4), --ARMOR_TYPE_ETHREAL
-    Stone = Native.ConvertArmorType(5), --ARMOR_TYPE_STONE
+    Whoknows = 0, --ARMOR_TYPE_WHOKNOWS
+    Flesh = 1, --ARMOR_TYPE_FLESH
+    Metal = 2, --ARMOR_TYPE_METAL
+    Wood = 3, --ARMOR_TYPE_WOOD
+    Ethreal = 4, --ARMOR_TYPE_ETHREAL
+    Stone = 5, --ARMOR_TYPE_STONE
 }
+
+ArmorType = converter(Native.ConvertArmorType, ArmorType)
 return ArmorType

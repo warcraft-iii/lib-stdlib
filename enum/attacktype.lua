@@ -1,13 +1,16 @@
 local Native = require('lib.stdlib.native')
+local converter = require('lib.stdlib.enum.converter')
 
 ---@class AttackType
 local AttackType = {
-    Normal = Native.ConvertAttackType(0), --ATTACK_TYPE_NORMAL
-    Melee = Native.ConvertAttackType(1), --ATTACK_TYPE_MELEE
-    Pierce = Native.ConvertAttackType(2), --ATTACK_TYPE_PIERCE
-    Siege = Native.ConvertAttackType(3), --ATTACK_TYPE_SIEGE
-    Magic = Native.ConvertAttackType(4), --ATTACK_TYPE_MAGIC
-    Chaos = Native.ConvertAttackType(5), --ATTACK_TYPE_CHAOS
-    Hero = Native.ConvertAttackType(6), --ATTACK_TYPE_HERO
+    Normal = 0, --ATTACK_TYPE_NORMAL
+    Melee = 1, --ATTACK_TYPE_MELEE
+    Pierce = 2, --ATTACK_TYPE_PIERCE
+    Siege = 3, --ATTACK_TYPE_SIEGE
+    Magic = 4, --ATTACK_TYPE_MAGIC
+    Chaos = 5, --ATTACK_TYPE_CHAOS
+    Hero = 6, --ATTACK_TYPE_HERO
 }
+
+AttackType = converter(Native.ConvertAttackType, AttackType)
 return AttackType

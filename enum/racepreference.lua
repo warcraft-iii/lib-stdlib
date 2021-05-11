@@ -1,13 +1,16 @@
 local Native = require('lib.stdlib.native')
+local converter = require('lib.stdlib.enum.converter')
 
 ---@class RacePreference
 local RacePreference = {
-    Human = Native.ConvertRacePref(1), --RACE_PREF_HUMAN
-    Orc = Native.ConvertRacePref(2), --RACE_PREF_ORC
-    Nightelf = Native.ConvertRacePref(4), --RACE_PREF_NIGHTELF
-    Undead = Native.ConvertRacePref(8), --RACE_PREF_UNDEAD
-    Demon = Native.ConvertRacePref(16), --RACE_PREF_DEMON
-    Random = Native.ConvertRacePref(32), --RACE_PREF_RANDOM
-    UserSelectable = Native.ConvertRacePref(64), --RACE_PREF_USER_SELECTABLE
+    Human = 1, --RACE_PREF_HUMAN
+    Orc = 2, --RACE_PREF_ORC
+    Nightelf = 4, --RACE_PREF_NIGHTELF
+    Undead = 8, --RACE_PREF_UNDEAD
+    Demon = 16, --RACE_PREF_DEMON
+    Random = 32, --RACE_PREF_RANDOM
+    UserSelectable = 64, --RACE_PREF_USER_SELECTABLE
 }
+
+RacePreference = converter(Native.ConvertRacePref, RacePreference)
 return RacePreference

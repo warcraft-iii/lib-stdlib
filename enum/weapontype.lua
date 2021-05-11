@@ -1,30 +1,33 @@
 local Native = require('lib.stdlib.native')
+local converter = require('lib.stdlib.enum.converter')
 
 ---@class WeaponType
 local WeaponType = {
-    Whoknows = Native.ConvertWeaponType(0), --WEAPON_TYPE_WHOKNOWS
-    MetalLightChop = Native.ConvertWeaponType(1), --WEAPON_TYPE_METAL_LIGHT_CHOP
-    MetalMediumChop = Native.ConvertWeaponType(2), --WEAPON_TYPE_METAL_MEDIUM_CHOP
-    MetalHeavyChop = Native.ConvertWeaponType(3), --WEAPON_TYPE_METAL_HEAVY_CHOP
-    MetalLightSlice = Native.ConvertWeaponType(4), --WEAPON_TYPE_METAL_LIGHT_SLICE
-    MetalMediumSlice = Native.ConvertWeaponType(5), --WEAPON_TYPE_METAL_MEDIUM_SLICE
-    MetalHeavySlice = Native.ConvertWeaponType(6), --WEAPON_TYPE_METAL_HEAVY_SLICE
-    MetalMediumBash = Native.ConvertWeaponType(7), --WEAPON_TYPE_METAL_MEDIUM_BASH
-    MetalHeavyBash = Native.ConvertWeaponType(8), --WEAPON_TYPE_METAL_HEAVY_BASH
-    MetalMediumStab = Native.ConvertWeaponType(9), --WEAPON_TYPE_METAL_MEDIUM_STAB
-    MetalHeavyStab = Native.ConvertWeaponType(10), --WEAPON_TYPE_METAL_HEAVY_STAB
-    WoodLightSlice = Native.ConvertWeaponType(11), --WEAPON_TYPE_WOOD_LIGHT_SLICE
-    WoodMediumSlice = Native.ConvertWeaponType(12), --WEAPON_TYPE_WOOD_MEDIUM_SLICE
-    WoodHeavySlice = Native.ConvertWeaponType(13), --WEAPON_TYPE_WOOD_HEAVY_SLICE
-    WoodLightBash = Native.ConvertWeaponType(14), --WEAPON_TYPE_WOOD_LIGHT_BASH
-    WoodMediumBash = Native.ConvertWeaponType(15), --WEAPON_TYPE_WOOD_MEDIUM_BASH
-    WoodHeavyBash = Native.ConvertWeaponType(16), --WEAPON_TYPE_WOOD_HEAVY_BASH
-    WoodLightStab = Native.ConvertWeaponType(17), --WEAPON_TYPE_WOOD_LIGHT_STAB
-    WoodMediumStab = Native.ConvertWeaponType(18), --WEAPON_TYPE_WOOD_MEDIUM_STAB
-    ClawLightSlice = Native.ConvertWeaponType(19), --WEAPON_TYPE_CLAW_LIGHT_SLICE
-    ClawMediumSlice = Native.ConvertWeaponType(20), --WEAPON_TYPE_CLAW_MEDIUM_SLICE
-    ClawHeavySlice = Native.ConvertWeaponType(21), --WEAPON_TYPE_CLAW_HEAVY_SLICE
-    AxeMediumChop = Native.ConvertWeaponType(22), --WEAPON_TYPE_AXE_MEDIUM_CHOP
-    RockHeavyBash = Native.ConvertWeaponType(23), --WEAPON_TYPE_ROCK_HEAVY_BASH
+    Whoknows = 0, --WEAPON_TYPE_WHOKNOWS
+    MetalLightChop = 1, --WEAPON_TYPE_METAL_LIGHT_CHOP
+    MetalMediumChop = 2, --WEAPON_TYPE_METAL_MEDIUM_CHOP
+    MetalHeavyChop = 3, --WEAPON_TYPE_METAL_HEAVY_CHOP
+    MetalLightSlice = 4, --WEAPON_TYPE_METAL_LIGHT_SLICE
+    MetalMediumSlice = 5, --WEAPON_TYPE_METAL_MEDIUM_SLICE
+    MetalHeavySlice = 6, --WEAPON_TYPE_METAL_HEAVY_SLICE
+    MetalMediumBash = 7, --WEAPON_TYPE_METAL_MEDIUM_BASH
+    MetalHeavyBash = 8, --WEAPON_TYPE_METAL_HEAVY_BASH
+    MetalMediumStab = 9, --WEAPON_TYPE_METAL_MEDIUM_STAB
+    MetalHeavyStab = 10, --WEAPON_TYPE_METAL_HEAVY_STAB
+    WoodLightSlice = 11, --WEAPON_TYPE_WOOD_LIGHT_SLICE
+    WoodMediumSlice = 12, --WEAPON_TYPE_WOOD_MEDIUM_SLICE
+    WoodHeavySlice = 13, --WEAPON_TYPE_WOOD_HEAVY_SLICE
+    WoodLightBash = 14, --WEAPON_TYPE_WOOD_LIGHT_BASH
+    WoodMediumBash = 15, --WEAPON_TYPE_WOOD_MEDIUM_BASH
+    WoodHeavyBash = 16, --WEAPON_TYPE_WOOD_HEAVY_BASH
+    WoodLightStab = 17, --WEAPON_TYPE_WOOD_LIGHT_STAB
+    WoodMediumStab = 18, --WEAPON_TYPE_WOOD_MEDIUM_STAB
+    ClawLightSlice = 19, --WEAPON_TYPE_CLAW_LIGHT_SLICE
+    ClawMediumSlice = 20, --WEAPON_TYPE_CLAW_MEDIUM_SLICE
+    ClawHeavySlice = 21, --WEAPON_TYPE_CLAW_HEAVY_SLICE
+    AxeMediumChop = 22, --WEAPON_TYPE_AXE_MEDIUM_CHOP
+    RockHeavyBash = 23, --WEAPON_TYPE_ROCK_HEAVY_BASH
 }
+
+WeaponType = converter(Native.ConvertWeaponType, WeaponType)
 return WeaponType

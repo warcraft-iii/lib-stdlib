@@ -1,17 +1,20 @@
 local Native = require('lib.stdlib.native')
+local converter = require('lib.stdlib.enum.converter')
 
 ---@class TargetFlag
 local TargetFlag = {
-    None = Native.ConvertTargetFlag(1), --TARGET_FLAG_NONE
-    Ground = Native.ConvertTargetFlag(2), --TARGET_FLAG_GROUND
-    Air = Native.ConvertTargetFlag(4), --TARGET_FLAG_AIR
-    Structure = Native.ConvertTargetFlag(8), --TARGET_FLAG_STRUCTURE
-    Ward = Native.ConvertTargetFlag(16), --TARGET_FLAG_WARD
-    Item = Native.ConvertTargetFlag(32), --TARGET_FLAG_ITEM
-    Tree = Native.ConvertTargetFlag(64), --TARGET_FLAG_TREE
-    Wall = Native.ConvertTargetFlag(128), --TARGET_FLAG_WALL
-    Debris = Native.ConvertTargetFlag(256), --TARGET_FLAG_DEBRIS
-    Decoration = Native.ConvertTargetFlag(512), --TARGET_FLAG_DECORATION
-    Bridge = Native.ConvertTargetFlag(1024), --TARGET_FLAG_BRIDGE
+    None = 1, --TARGET_FLAG_NONE
+    Ground = 2, --TARGET_FLAG_GROUND
+    Air = 4, --TARGET_FLAG_AIR
+    Structure = 8, --TARGET_FLAG_STRUCTURE
+    Ward = 16, --TARGET_FLAG_WARD
+    Item = 32, --TARGET_FLAG_ITEM
+    Tree = 64, --TARGET_FLAG_TREE
+    Wall = 128, --TARGET_FLAG_WALL
+    Debris = 256, --TARGET_FLAG_DEBRIS
+    Decoration = 512, --TARGET_FLAG_DECORATION
+    Bridge = 1024, --TARGET_FLAG_BRIDGE
 }
+
+TargetFlag = converter(Native.ConvertTargetFlag, TargetFlag)
 return TargetFlag

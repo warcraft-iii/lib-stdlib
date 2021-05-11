@@ -1,10 +1,13 @@
 local Native = require('lib.stdlib.native')
+local converter = require('lib.stdlib.enum.converter')
 
 ---@class GameDifficulty
 local GameDifficulty = {
-    Easy = Native.ConvertGameDifficulty(0), --MAP_DIFFICULTY_EASY
-    Normal = Native.ConvertGameDifficulty(1), --MAP_DIFFICULTY_NORMAL
-    Hard = Native.ConvertGameDifficulty(2), --MAP_DIFFICULTY_HARD
-    Insane = Native.ConvertGameDifficulty(3), --MAP_DIFFICULTY_INSANE
+    Easy = 0, --MAP_DIFFICULTY_EASY
+    Normal = 1, --MAP_DIFFICULTY_NORMAL
+    Hard = 2, --MAP_DIFFICULTY_HARD
+    Insane = 3, --MAP_DIFFICULTY_INSANE
 }
+
+GameDifficulty = converter(Native.ConvertGameDifficulty, GameDifficulty)
 return GameDifficulty
