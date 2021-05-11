@@ -12759,9 +12759,15 @@ Native.PATHING_FLAG_UNAMPHIBIOUS = nil
 Native.PATHING_FLAG_UNITEMPLACABLE = nil
 
 --@end-remove@
-
+local _env
+--@classic@
+_env = require('jass.common')
+--@end-classic@
+--@reforge@
+_env = _G
+--@end-reforge@
 for _, v in ipairs(require('lib.stdlib.native._generated._globals')) do
-    Native[v] = _G[v]
+    Native[v] = _env[v]
 end
 
 return Native
