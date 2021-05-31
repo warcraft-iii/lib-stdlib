@@ -4,10 +4,6 @@
 -- @Date   : 6/27/2019, 8:55:59 PM
 
 -- @classic@
-local bj = require('jass.globals')
-for index, value in pairs(bj) do
-    _G[index] = value
-end
 function FourCC(id)
     if type(id) == 'number' then
         return id
