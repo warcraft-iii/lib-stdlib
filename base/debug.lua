@@ -89,7 +89,12 @@ end
 ---@param apiName string
 ---@param argIndex integer
 function checkuserdata(value, checkType, apiName, argIndex)
+    -- @reforge@
     if not tostring(value):startswith(checkType) then
+    -- @end-reforge@
+    --[===[@non-reforge@
+    if value == nil then
+    --@end-non-reforge@]===]
         error(string.format([[bad argument #%s to '%s' (%s expected, got %s)]], argIndex, apiName, checkType,
                             tostring(value)), 3)
     end
