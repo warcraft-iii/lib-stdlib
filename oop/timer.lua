@@ -18,8 +18,12 @@ end
 ---start
 ---@param duration number
 ---@param func function
-function Timer:start(duration, func)
-    Native.TimerStart(getUd(self), duration, true, func)
+---@param periodic boolean
+function Timer:start(duration, func, periodic)
+    if periodic == nil then
+        periodic = true
+    end
+    Native.TimerStart(getUd(self), duration, periodic, func)
 end
 
 return Timer
