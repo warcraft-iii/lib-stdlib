@@ -1,5 +1,7 @@
 ---@type Rect
 local Rect = require('lib.stdlib.oop._generated._rect')
+local Vector = require('lib.stdlib.oop.vector')
+local Native = require('lib.stdlib.native.native')
 
 ---<static> create
 ---@overload fun(min: Vector, max: Vector): Rect
@@ -43,6 +45,14 @@ function Rect:set(minx, miny, maxx, maxy)
     checktype(maxy, 'float', 'set', 4)
     -- @end-debug@
     return Native.SetRect(getUd(self), minx, miny, maxx, maxy)
+end
+
+---getCenter
+---@return Vector
+function Rect:getCenter()
+    local x = self:getCenterX()
+    local y = self:getCenterY()
+    return Vector:new(x, y)
 end
 
 return Rect
