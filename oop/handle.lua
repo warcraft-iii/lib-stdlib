@@ -49,6 +49,7 @@ function getUd(obj)
     if obj then
         return obj[0]
     end
+    return nil
 end
 
 return Handle
