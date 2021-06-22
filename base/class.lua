@@ -56,9 +56,8 @@ local function new(cls, ...)
 end
 
 ---new
----@generic T
 ---@vararg any
----@return T
+---@return self
 function object:new(...)
     if not isClass(self) then
         error('bad argument #self to `new` (class expected)', 2)

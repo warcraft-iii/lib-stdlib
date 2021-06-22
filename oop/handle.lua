@@ -29,9 +29,8 @@ function Handle:delete()
 end
 
 ---fromUd
----@generic T
 ---@param ud userdata
----@return T
+---@return self
 function Handle:fromUd(ud)
     if not ud then
         return
