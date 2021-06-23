@@ -1,5 +1,6 @@
 ---@type Unit
 local Unit = require('lib.stdlib.oop._generated._unit')
+local Vector = require('lib.stdlib.oop.vector')
 
 ---isDead
 ---@return boolean
@@ -52,6 +53,12 @@ function Unit:getOwningPlayer()
     deprecated('getOwningPlayer', 'getOwner')
     -- @end-debug@
     return self:getOwner()
+end
+
+---getPos
+---@return Vector
+function Unit:getPos()
+    return Vector:new(self:getX(), self:getY())
 end
 
 return Unit
