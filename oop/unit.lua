@@ -61,4 +61,16 @@ function Unit:getPos()
     return Vector:new(self:getX(), self:getY())
 end
 
+---findItem
+---@param itemId string
+---@return Item
+function Unit:findItem(itemId)
+    for i = 0, 5 do
+        local item = self:itemInSlot(i)
+        if item:getId() == itemId then
+            return item
+        end
+    end
+end
+
 return Unit
