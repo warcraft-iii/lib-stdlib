@@ -29,6 +29,11 @@ function Player:at(index)
     return _players[index]
 end
 
+---<static> all
+function Player:all()
+    return _players
+end
+
 ---<static> getLocal
 ---@return Player
 function Player:getLocal()

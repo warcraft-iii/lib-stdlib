@@ -77,4 +77,17 @@ function Trigger:registerEnterRect(rect)
     return self:registerEnterRegion(region)
 end
 
+---registerLeaveRect
+---@param rect Rect
+---@return Event
+function Trigger:registerLeaveRect(rect)
+    if self._rect then
+        error('Can`t registerLeaveRect twice', 2)
+    end
+    local region = Region:create()
+    region:addRect(rect)
+    self._rect = rect
+    return self:registerLeaveRegion(region)
+end
+
 return Trigger
