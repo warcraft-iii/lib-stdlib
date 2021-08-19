@@ -2,11 +2,13 @@
 return function(converter, ids)
     return setmetatable({}, {
         __index = function(tbl, key)
-            --@debug@
+            -- @debug@
+            -- @reforge@
             assert(converter, 'Invalid enum converter ' .. key)
-            --@end-debug@
+            -- @end-reforge@
+            -- @end-debug@
             if ids[key] then
-                local val = converter(ids[key])
+                local val = converter and converter(ids[key]) or ids[key]
                 tbl[key] = val
                 return val
             end

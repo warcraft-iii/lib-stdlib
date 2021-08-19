@@ -1,6 +1,9 @@
 local common = require('jass.common')
 local _ENV = setmetatable(_G, {__index = 
 	function(tbl, k)
+		--@debug@
+		assert(common[k], 'Not find API: ' .. k .. '\n' .. debug.traceback())
+		--@end-debug
 		tbl[k] = common[k]
 		return tbl[k]
 	end})
