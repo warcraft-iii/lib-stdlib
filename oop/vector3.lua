@@ -27,3 +27,5 @@ end
 function Vector3:getXYZ()
     return self[1], self[2], self[3]
 end
+
+return Vector3

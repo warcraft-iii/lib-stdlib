@@ -1,6 +1,7 @@
 ---@type Event
 local Event = require('lib.stdlib.oop._generated._event')
 local Native = require('lib.stdlib.native')
+local Vector = require('lib.stdlib.oop.vector')
 
 ---getTriggerRect
 ---@return Rect
@@ -33,6 +34,10 @@ end
 
 function Event:isPlayerEvent()
     return checker(PlayerEvent, self:getTriggerEventId())
+end
+
+function Event:getSpellTargetPos()
+    return Vector:new(self:getSpellTargetX(), self:getSpellTargetY())
 end
 
 return Event

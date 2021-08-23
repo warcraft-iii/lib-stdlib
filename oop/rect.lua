@@ -25,6 +25,21 @@ function Rect:create(minx, miny, maxx, maxy)
     return Rect:fromUd(Native.Rect(minx, miny, maxx, maxy))
 end
 
+---@type Rect
+local _worldBound = Rect:fromUd(Native.GetWorldBounds())
+
+---<static> getWorldBounds
+---@return Rect
+function Rect:getWorldBounds()
+    return _worldBound
+end
+
+---getWorldBoundMax
+---@return Vector
+function Rect:getWorldBoundMax()
+    return Vector:new(_worldBound:getMaxX(), _worldBound:getMaxY())
+end
+
 ---set
 ---@overload fun(min: Vector, max: Vector): void
 ---@param minx float

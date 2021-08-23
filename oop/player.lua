@@ -40,6 +40,12 @@ function Player:getLocal()
     return _localPlayer
 end
 
+---<static> getNeutralPassive
+---@return Player
+function Player:getNeutralPassive()
+    return self:get(Native.PLAYER_NEUTRAL_PASSIVE)
+end
+
 ---adjustState
 ---@param state PlayerState
 ---@param delta integer
