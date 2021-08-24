@@ -1,11 +1,18 @@
 local common = require('jass.common')
-local _ENV = setmetatable(_G, {__index = 
+local _oEnv = _ENV
+local _ENV = setmetatable({}, {__index = 
 	function(tbl, k)
+		if _oEnv._G[k] then
+			tbl[k] = _oEnv._G[k]
+			return tbl[k]
+		end
+		if common[k] then
+			tbl[k] = common[k]
+			return tbl[k]
+		end		
 		--@debug@
 		assert(common[k], 'Not find Key: ' .. k .. '\n' .. debug.traceback())
 		--@end-debug@
-		tbl[k] = common[k]
-		return tbl[k]
 	end})
 	
 --===========================================================================
