@@ -72,6 +72,11 @@ function Vector.meta.__eq(me, other)
     return me:getX() == other:getX() and me:getY() == other:getY()
 end
 
+---@param me Vector
+function Vector.meta.__tostring(me)
+    return string.format('%s,%s', me:getX(), me:getY())
+end
+
 ---@param ang Angle
 ---@param dist float
 ---@return Vector
