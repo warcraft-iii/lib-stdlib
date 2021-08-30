@@ -89,6 +89,13 @@ function Angle.meta.__div(me, scalar)
     return Angle:new(me.radians / scalar)
 end
 
+---@param me Angle
+---@param other Angle
+---@return boolean
+function Angle.meta.__eq(me, other)
+    return me.radians == other.radians
+end
+
 ---returns a vector of the given length pointing into the direction of this angle
 ---@param len float
 ---@return Vector

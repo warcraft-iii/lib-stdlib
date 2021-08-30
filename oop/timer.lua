@@ -21,9 +21,26 @@ end
 ---@param periodic boolean
 function Timer:start(duration, func, periodic)
     if periodic == nil then
-        periodic = true
+        if self.periodic == nil then
+            periodic = true
+        else
+            periodic = self.periodic
+        end
     end
+    self.periodic = periodic
     Native.TimerStart(getUd(self), duration, periodic, func)
+end
+
+---setPeriodic
+---@param periodic boolean
+function Timer:setPeriodic(periodic)
+    self.periodic = periodic
+end
+
+---isPeriodic
+---@return boolean
+function Timer:isPeriodic()
+    return self.periodic
 end
 
 return Timer

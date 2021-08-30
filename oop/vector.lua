@@ -65,6 +65,13 @@ function Vector.meta.__add(me, other)
     return Vector:new(me:getX() + other:getX(), me:getY() + other:getY())
 end
 
+---@param me Vector
+---@param other Vector
+---@return boolean
+function Vector.meta.__eq(me, other)
+    return me:getX() == other:getX() and me:getY() == other:getY()
+end
+
 ---@param ang Angle
 ---@param dist float
 ---@return Vector

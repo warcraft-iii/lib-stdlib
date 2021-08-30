@@ -13,7 +13,7 @@ local Message = {}
 ---@param timeout float
 function Message:toAll(text, timeout)
     for player in Player:iterateAll() do
-        self:toPlayer(player, text, timeout)
+        self:toPlayer(player, text, timeout or 10)
     end
 end
 
