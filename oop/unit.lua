@@ -73,4 +73,8 @@ function Unit:findItem(itemId)
     end
 end
 
+function Unit:getId()
+    return string.pack('>I', self:getTypeId())
+end
+
 return Unit
