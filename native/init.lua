@@ -8,6 +8,10 @@ function FourCC(id)
     if type(id) == 'number' then
         return id
     end
+    -- @debug@
+    assert(type(id) == 'string', 'Invalid param #1 type ' .. type(id))
+    assert(id ~= '', 'Empty param #1')
+    -- @end-debug@
     id = string.unpack('>I', id)
     return id
 end

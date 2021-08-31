@@ -97,4 +97,9 @@ function Vector:angleTo(v)
     return require('lib.stdlib.math.Angle'):fromRad(math.atan(v:getY() - self:getY(), v:getX() - self:getX()))
 end
 
+---@return boolean
+function Vector:isValid()
+    return self:getX() ~= nil and self:getY() ~= nil
+end
+
 return Vector
