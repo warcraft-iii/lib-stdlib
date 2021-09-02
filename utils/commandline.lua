@@ -9,7 +9,7 @@ local CommandLine = class('__CommandLine'):new()
 ---@class CommandHandler: table
 ---@field triggerPlayer Player
 ---@field command string
----@field onEvent fun(player:Player, str:String)
+---@field onEvent fun(player:Player, str:string)
 local CommandHandler
 
 ---@type CommandHandler[]
@@ -18,7 +18,7 @@ local _HANDLER = {}
 ---<static> addOption
 ---@param player Player
 ---@param command string
----@param cb fun(player:Player, str:String)
+---@param cb fun(player:Player, str:string)
 function CommandLine:addOption(player, command, cb)
     local commandList = string.split(command, '|')
     for i, v in ipairs(commandList) do
@@ -36,7 +36,7 @@ end
 
 ---<static> addOptionAnyPlayer
 ---@param command string
----@param cb fun(player:Player, str:String)
+---@param cb fun(player:Player, str:string)
 function CommandLine:addOptionToAll(command, cb)
     self:addOption(nil, command, cb)
 end
