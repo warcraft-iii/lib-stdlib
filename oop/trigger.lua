@@ -68,12 +68,12 @@ Trigger.registerAllPlayersKeyEvent = generateRegisterAllPlayers(Trigger.register
 ---@param rect Rect
 ---@return Event
 function Trigger:registerEnterRect(rect)
-    if self._rect then
+    if self._enterRect then
         error('Can`t registerEnterRect twice', 2)
     end
     local region = Region:create()
     region:addRect(rect)
-    self._rect = rect
+    self._enterRect = rect
     return self:registerEnterRegion(region)
 end
 
@@ -81,12 +81,12 @@ end
 ---@param rect Rect
 ---@return Event
 function Trigger:registerLeaveRect(rect)
-    if self._rect then
+    if self._leaveRect then
         error('Can`t registerLeaveRect twice', 2)
     end
     local region = Region:create()
     region:addRect(rect)
-    self._rect = rect
+    self._leaveRect = rect
     return self:registerLeaveRegion(region)
 end
 

@@ -1,5 +1,7 @@
 local common = require('jass.common')
 local _oEnv = _ENV
+---@class Blizzard
+local bj = {}
 local _ENV = setmetatable({}, {__index = 
 	function(tbl, k)
 		if _oEnv._G[k] then
@@ -656,7 +658,7 @@ bj_wantDestroyGroup = false
 --***************************************************************************
 
 --===========================================================================
-function BJDebugMsg(msg)
+function bj.BJDebugMsg(msg)
 	local i = 0
 	for _ in _loop_() do
 		DisplayTimedTextToPlayer(Player(i), 0, 0, 60, msg)
@@ -674,7 +676,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function RMinBJ(a, b)
+function bj.RMinBJ(a, b)
 	if a < b then
 		return a
 	else
@@ -683,7 +685,7 @@ function RMinBJ(a, b)
 end
 
 --===========================================================================
-function RMaxBJ(a, b)
+function bj.RMaxBJ(a, b)
 	if a < b then
 		return b
 	else
@@ -692,7 +694,7 @@ function RMaxBJ(a, b)
 end
 
 --===========================================================================
-function RAbsBJ(a)
+function bj.RAbsBJ(a)
 	if a >= 0 then
 		return a
 	else
@@ -701,7 +703,7 @@ function RAbsBJ(a)
 end
 
 --===========================================================================
-function RSignBJ(a)
+function bj.RSignBJ(a)
 	if a >= 0.0 then
 		return 1.0
 	else
@@ -710,7 +712,7 @@ function RSignBJ(a)
 end
 
 --===========================================================================
-function IMinBJ(a, b)
+function bj.IMinBJ(a, b)
 	if a < b then
 		return a
 	else
@@ -719,7 +721,7 @@ function IMinBJ(a, b)
 end
 
 --===========================================================================
-function IMaxBJ(a, b)
+function bj.IMaxBJ(a, b)
 	if a < b then
 		return b
 	else
@@ -728,7 +730,7 @@ function IMaxBJ(a, b)
 end
 
 --===========================================================================
-function IAbsBJ(a)
+function bj.IAbsBJ(a)
 	if a >= 0 then
 		return a
 	else
@@ -737,7 +739,7 @@ function IAbsBJ(a)
 end
 
 --===========================================================================
-function ISignBJ(a)
+function bj.ISignBJ(a)
 	if a >= 0 then
 		return 1
 	else
@@ -746,71 +748,71 @@ function ISignBJ(a)
 end
 
 --===========================================================================
-function SinBJ(degrees)
+function bj.SinBJ(degrees)
 	return Sin(degrees * bj_DEGTORAD)
 end
 
 --===========================================================================
-function CosBJ(degrees)
+function bj.CosBJ(degrees)
 	return Cos(degrees * bj_DEGTORAD)
 end
 
 --===========================================================================
-function TanBJ(degrees)
+function bj.TanBJ(degrees)
 	return Tan(degrees * bj_DEGTORAD)
 end
 
 --===========================================================================
-function AsinBJ(degrees)
+function bj.AsinBJ(degrees)
 	return Asin(degrees) * bj_RADTODEG
 end
 
 --===========================================================================
-function AcosBJ(degrees)
+function bj.AcosBJ(degrees)
 	return Acos(degrees) * bj_RADTODEG
 end
 
 --===========================================================================
-function AtanBJ(degrees)
+function bj.AtanBJ(degrees)
 	return Atan(degrees) * bj_RADTODEG
 end
 
 --===========================================================================
-function Atan2BJ(y, x)
+function bj.Atan2BJ(y, x)
 	return Atan2(y, x) * bj_RADTODEG
 end
 
 --===========================================================================
-function AngleBetweenPoints(locA, locB)
+function bj.AngleBetweenPoints(locA, locB)
 	return bj_RADTODEG * Atan2(GetLocationY(locB) - GetLocationY(locA), GetLocationX(locB) - GetLocationX(locA))
 end
 
 --===========================================================================
-function DistanceBetweenPoints(locA, locB)
+function bj.DistanceBetweenPoints(locA, locB)
 	local dx = GetLocationX(locB) - GetLocationX(locA)
 	local dy = GetLocationY(locB) - GetLocationY(locA)
 	return SquareRoot(dx * dx + dy * dy)
 end
 
 --===========================================================================
-function PolarProjectionBJ(source, dist, angle)
+function bj.PolarProjectionBJ(source, dist, angle)
 	local x = GetLocationX(source) + dist * Cos(angle * bj_DEGTORAD)
 	local y = GetLocationY(source) + dist * Sin(angle * bj_DEGTORAD)
 	return Location(x, y)
 end
 
 --===========================================================================
-function GetRandomDirectionDeg()
+function bj.GetRandomDirectionDeg()
 	return GetRandomReal(0, 360)
 end
 
 --===========================================================================
-function GetRandomPercentageBJ()
+function bj.GetRandomPercentageBJ()
 	return GetRandomReal(0, 100)
 end
 
 --===========================================================================
-function GetRandomLocInRect(whichRect)
+function bj.GetRandomLocInRect(whichRect)
 	return Location(GetRandomReal(GetRectMinX(whichRect), GetRectMaxX(whichRect)), GetRandomReal(GetRectMinY(whichRect), GetRectMaxY(whichRect)))
 end
 
@@ -818,7 +820,7 @@ end
 -- Calculate the modulus/remainder of (dividend) divided by (divisor).
 -- Examples:  18 mod 5 = 3.  15 mod 5 = 0.  -8 mod 5 = 2.
 --
-function ModuloInteger(dividend, divisor)
+function bj.ModuloInteger(dividend, divisor)
 	local modulus = dividend - dividend // divisor * divisor
 
 	-- If the dividend was negative, the above modulus calculation will
@@ -835,7 +837,7 @@ end
 -- Calculate the modulus/remainder of (dividend) divided by (divisor).
 -- Examples:  13.000 mod 2.500 = 0.500.  -6.000 mod 2.500 = 1.500.
 --
-function ModuloReal(dividend, divisor)
+function bj.ModuloReal(dividend, divisor)
 	local modulus = dividend - I2R(R2I(dividend / divisor)) * divisor
 
 	-- If the dividend was negative, the above modulus calculation will
@@ -849,39 +851,39 @@ function ModuloReal(dividend, divisor)
 end
 
 --===========================================================================
-function OffsetLocation(loc, dx, dy)
+function bj.OffsetLocation(loc, dx, dy)
 	return Location(GetLocationX(loc) + dx, GetLocationY(loc) + dy)
 end
 
 --===========================================================================
-function OffsetRectBJ(r, dx, dy)
+function bj.OffsetRectBJ(r, dx, dy)
 	return Rect(GetRectMinX(r) + dx, GetRectMinY(r) + dy, GetRectMaxX(r) + dx, GetRectMaxY(r) + dy)
 end
 
 --===========================================================================
-function RectFromCenterSizeBJ(center, width, height)
+function bj.RectFromCenterSizeBJ(center, width, height)
 	local x = GetLocationX(center)
 	local y = GetLocationY(center)
 	return Rect(x - width * 0.5, y - height * 0.5, x + width * 0.5, y + height * 0.5)
 end
 
 --===========================================================================
-function RectContainsCoords(r, x, y)
+function bj.RectContainsCoords(r, x, y)
 	return GetRectMinX(r) <= x and x <= GetRectMaxX(r) and GetRectMinY(r) <= y and y <= GetRectMaxY(r)
 end
 
 --===========================================================================
-function RectContainsLoc(r, loc)
+function bj.RectContainsLoc(r, loc)
 	return RectContainsCoords(r, GetLocationX(loc), GetLocationY(loc))
 end
 
 --===========================================================================
-function RectContainsUnit(r, whichUnit)
+function bj.RectContainsUnit(r, whichUnit)
 	return RectContainsCoords(r, GetUnitX(whichUnit), GetUnitY(whichUnit))
 end
 
 --===========================================================================
-function RectContainsItem(whichItem, r)
+function bj.RectContainsItem(whichItem, r)
 	if whichItem == nil then
 		return false
 	end
@@ -904,7 +906,7 @@ end
 --===========================================================================
 -- Runs the trigger's actions if the trigger's conditions evaluate to true.
 --
-function ConditionalTriggerExecute(trig)
+function bj.ConditionalTriggerExecute(trig)
 	if TriggerEvaluate(trig) then
 		TriggerExecute(trig)
 	end
@@ -913,7 +915,7 @@ end
 --===========================================================================
 -- Runs the trigger's actions if the trigger's conditions evaluate to true.
 --
-function TriggerExecuteBJ(trig, checkConditions)
+function bj.TriggerExecuteBJ(trig, checkConditions)
 	if checkConditions then
 		if not TriggerEvaluate(trig) then
 			return false
@@ -928,7 +930,7 @@ end
 -- trigger is not interrupted as is the case with a TriggerExecute call.
 -- Since the trigger executes normally, its conditions are still evaluated.
 --
-function PostTriggerExecuteBJ(trig, checkConditions)
+function bj.PostTriggerExecuteBJ(trig, checkConditions)
 	if checkConditions then
 		if not TriggerEvaluate(trig) then
 			return false
@@ -941,7 +943,7 @@ end
 --===========================================================================
 -- Debug - Display the contents of the trigger queue (as either null or "x"
 -- for each entry).
-function QueuedTriggerCheck()
+function bj.QueuedTriggerCheck()
 	local s = "TrigQueue Check "
 	local i
 
@@ -964,7 +966,7 @@ end
 -- Searches the queue for a given trigger, returning the index of the
 -- trigger within the queue if it is found, or -1 if it is not found.
 --
-function QueuedTriggerGetIndex(trig)
+function bj.QueuedTriggerGetIndex(trig)
 	-- Determine which, if any, of the queued triggers is being removed.
 	local index = 0
 	for _ in _loop_() do
@@ -982,7 +984,7 @@ end
 -- to fill the unused space.  If the currently running trigger is removed
 -- in this manner, this function does NOT attempt to run the next trigger.
 --
-function QueuedTriggerRemoveByIndex(trigIndex)
+function bj.QueuedTriggerRemoveByIndex(trigIndex)
 	local index
 
 	-- If the to-be-removed index is out of range, fail.
@@ -1007,7 +1009,7 @@ end
 -- it and execute the next one.  Continue this cycle until a trigger runs,
 -- or until the queue is empty.
 --
-function QueuedTriggerAttemptExec()
+function bj.QueuedTriggerAttemptExec()
 	for _ in _loop_() do
 		if bj_queuedExecTotal == 0 then break end
 
@@ -1026,7 +1028,7 @@ end
 -- Queues a trigger to be executed, assuring that such triggers are not
 -- executed at the same time.
 --
-function QueuedTriggerAddBJ(trig, checkConditions)
+function bj.QueuedTriggerAddBJ(trig, checkConditions)
 	-- Make sure our queue isn't full.  If it is, return failure.
 	if bj_queuedExecTotal >= bj_MAX_QUEUED_TRIGGERS then
 		return false
@@ -1048,7 +1050,7 @@ end
 -- Denotes the end of a queued trigger. Be sure to call this only once per
 -- queued trigger, or risk stepping on the toes of other queued triggers.
 --
-function QueuedTriggerRemoveBJ(trig)
+function bj.QueuedTriggerRemoveBJ(trig)
 	local index
 	local trigIndex
 	local trigExecuted
@@ -1073,7 +1075,7 @@ end
 -- Denotes the end of a queued trigger. Be sure to call this only once per
 -- queued trigger, lest you step on the toes of other queued triggers.
 --
-function QueuedTriggerDoneBJ()
+function bj.QueuedTriggerDoneBJ()
 	local index
 
 	-- Make sure there's something on the queue to remove.
@@ -1092,7 +1094,7 @@ end
 --===========================================================================
 -- Empty the trigger queue.
 --
-function QueuedTriggerClearBJ()
+function bj.QueuedTriggerClearBJ()
 	PauseTimer(bj_queuedExecTimeoutTimer)
 	bj_queuedExecTotal = 0
 end
@@ -1100,49 +1102,49 @@ end
 --===========================================================================
 -- Remove all but the currently executing trigger from the trigger queue.
 --
-function QueuedTriggerClearInactiveBJ()
+function bj.QueuedTriggerClearInactiveBJ()
 	bj_queuedExecTotal = IMinBJ(bj_queuedExecTotal, 1)
 end
 
 --===========================================================================
-function QueuedTriggerCountBJ()
+function bj.QueuedTriggerCountBJ()
 	return bj_queuedExecTotal
 end
 
 --===========================================================================
-function IsTriggerQueueEmptyBJ()
+function bj.IsTriggerQueueEmptyBJ()
 	return bj_queuedExecTotal <= 0
 end
 
 --===========================================================================
-function IsTriggerQueuedBJ(trig)
+function bj.IsTriggerQueuedBJ(trig)
 	return QueuedTriggerGetIndex(trig) ~= -1
 end
 
 --===========================================================================
-function GetForLoopIndexA()
+function bj.GetForLoopIndexA()
 	return bj_forLoopAIndex
 end
 
 --===========================================================================
-function SetForLoopIndexA(newIndex)
+function bj.SetForLoopIndexA(newIndex)
 	bj_forLoopAIndex = newIndex
 end
 
 --===========================================================================
-function GetForLoopIndexB()
+function bj.GetForLoopIndexB()
 	return bj_forLoopBIndex
 end
 
 --===========================================================================
-function SetForLoopIndexB(newIndex)
+function bj.SetForLoopIndexB(newIndex)
 	bj_forLoopBIndex = newIndex
 end
 
 --===========================================================================
 -- We can't do game-time waits, so this simulates one by starting a timer
 -- and polling until the timer expires.
-function PolledWait(duration)
+function bj.PolledWait(duration)
 	local t
 	local timeRemaining
 
@@ -1167,7 +1169,7 @@ function PolledWait(duration)
 end
 
 --===========================================================================
-function IntegerTertiaryOp(flag, valueA, valueB)
+function bj.IntegerTertiaryOp(flag, valueA, valueB)
 	if flag then
 		return valueA
 	else
@@ -1185,7 +1187,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function DoNothing()
+function bj.DoNothing()
 end
 
 --===========================================================================
@@ -1193,23 +1195,23 @@ end
 -- CommentString triggers during script generation, but until such a time,
 -- this function will serve as a stub.
 --
-function CommentString(commentString)
+function bj.CommentString(commentString)
 end
 
 --===========================================================================
 -- This function returns the input string, converting it from the localized text, if necessary
 --
-function StringIdentity(theString)
+function bj.StringIdentity(theString)
 	return GetLocalizedString(theString)
 end
 
 --===========================================================================
-function GetBooleanAnd(valueA, valueB)
+function bj.GetBooleanAnd(valueA, valueB)
 	return valueA and valueB
 end
 
 --===========================================================================
-function GetBooleanOr(valueA, valueB)
+function bj.GetBooleanOr(valueA, valueB)
 	return valueA or valueB
 end
 
@@ -1217,7 +1219,7 @@ end
 -- Converts a percentage (real, 0..100) into a scaled integer (0..max),
 -- clipping the result to 0..max in case the input is invalid.
 --
-function PercentToInt(percentage, max)
+function bj.PercentToInt(percentage, max)
 	local result = R2I(percentage * I2R(max) * 0.01)
 
 	if result < 0 then
@@ -1230,51 +1232,51 @@ function PercentToInt(percentage, max)
 end
 
 --===========================================================================
-function PercentTo255(percentage)
+function bj.PercentTo255(percentage)
 	return PercentToInt(percentage, 255)
 end
 
 --===========================================================================
-function GetTimeOfDay()
+function bj.GetTimeOfDay()
 	return GetFloatGameState(GAME_STATE_TIME_OF_DAY)
 end
 
 --===========================================================================
-function SetTimeOfDay(whatTime)
+function bj.SetTimeOfDay(whatTime)
 	SetFloatGameState(GAME_STATE_TIME_OF_DAY, whatTime)
 end
 
 --===========================================================================
-function SetTimeOfDayScalePercentBJ(scalePercent)
+function bj.SetTimeOfDayScalePercentBJ(scalePercent)
 	SetTimeOfDayScale(scalePercent * 0.01)
 end
 
 --===========================================================================
-function GetTimeOfDayScalePercentBJ()
+function bj.GetTimeOfDayScalePercentBJ()
 	return GetTimeOfDayScale() * 100
 end
 
 --===========================================================================
-function PlaySound(soundName)
+function bj.PlaySound(soundName)
 	local soundHandle = CreateSound(soundName, false, false, true, 12700, 12700, "")
 	StartSound(soundHandle)
 	KillSoundWhenDone(soundHandle)
 end
 
 --===========================================================================
-function CompareLocationsBJ(A, B)
+function bj.CompareLocationsBJ(A, B)
 	return GetLocationX(A) == GetLocationX(B) and GetLocationY(A) == GetLocationY(B)
 end
 
 --===========================================================================
-function CompareRectsBJ(A, B)
+function bj.CompareRectsBJ(A, B)
 	return GetRectMinX(A) == GetRectMinX(B) and GetRectMinY(A) == GetRectMinY(B) and GetRectMaxX(A) == GetRectMaxX(B) and GetRectMaxY(A) == GetRectMaxY(B)
 end
 
 --===========================================================================
 -- Returns a square rect that exactly encompasses the specified circle.
 --
-function GetRectFromCircleBJ(center, radius)
+function bj.GetRectFromCircleBJ(center, radius)
 	local centerX = GetLocationX(center)
 	local centerY = GetLocationY(center)
 	return Rect(centerX - radius, centerY - radius, centerX + radius, centerY + radius)
@@ -1289,7 +1291,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function GetCurrentCameraSetup()
+function bj.GetCurrentCameraSetup()
 	local theCam = CreateCameraSetup()
 	local duration = 0
 	CameraSetupSetField(theCam, CAMERA_FIELD_TARGET_DISTANCE, GetCameraField(CAMERA_FIELD_TARGET_DISTANCE), duration)
@@ -1304,7 +1306,7 @@ function GetCurrentCameraSetup()
 end
 
 --===========================================================================
-function CameraSetupApplyForPlayer(doPan, whichSetup, whichPlayer, duration)
+function bj.CameraSetupApplyForPlayer(doPan, whichSetup, whichPlayer, duration)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		CameraSetupApplyForceDuration(whichSetup, doPan, duration)
@@ -1312,12 +1314,12 @@ function CameraSetupApplyForPlayer(doPan, whichSetup, whichPlayer, duration)
 end
 
 --===========================================================================
-function CameraSetupGetFieldSwap(whichField, whichSetup)
+function bj.CameraSetupGetFieldSwap(whichField, whichSetup)
 	return CameraSetupGetField(whichSetup, whichField)
 end
 
 --===========================================================================
-function SetCameraFieldForPlayer(whichPlayer, whichField, value, duration)
+function bj.SetCameraFieldForPlayer(whichPlayer, whichField, value, duration)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetCameraField(whichField, value, duration)
@@ -1325,7 +1327,7 @@ function SetCameraFieldForPlayer(whichPlayer, whichField, value, duration)
 end
 
 --===========================================================================
-function SetCameraTargetControllerNoZForPlayer(whichPlayer, whichUnit, xoffset, yoffset, inheritOrientation)
+function bj.SetCameraTargetControllerNoZForPlayer(whichPlayer, whichUnit, xoffset, yoffset, inheritOrientation)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetCameraTargetController(whichUnit, xoffset, yoffset, inheritOrientation)
@@ -1333,7 +1335,7 @@ function SetCameraTargetControllerNoZForPlayer(whichPlayer, whichUnit, xoffset, 
 end
 
 --===========================================================================
-function SetCameraPositionForPlayer(whichPlayer, x, y)
+function bj.SetCameraPositionForPlayer(whichPlayer, x, y)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetCameraPosition(x, y)
@@ -1341,7 +1343,7 @@ function SetCameraPositionForPlayer(whichPlayer, x, y)
 end
 
 --===========================================================================
-function SetCameraPositionLocForPlayer(whichPlayer, loc)
+function bj.SetCameraPositionLocForPlayer(whichPlayer, loc)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetCameraPosition(GetLocationX(loc), GetLocationY(loc))
@@ -1349,7 +1351,7 @@ function SetCameraPositionLocForPlayer(whichPlayer, loc)
 end
 
 --===========================================================================
-function RotateCameraAroundLocBJ(degrees, loc, whichPlayer, duration)
+function bj.RotateCameraAroundLocBJ(degrees, loc, whichPlayer, duration)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetCameraRotateMode(GetLocationX(loc), GetLocationY(loc), bj_DEGTORAD * degrees, duration)
@@ -1357,7 +1359,7 @@ function RotateCameraAroundLocBJ(degrees, loc, whichPlayer, duration)
 end
 
 --===========================================================================
-function PanCameraToForPlayer(whichPlayer, x, y)
+function bj.PanCameraToForPlayer(whichPlayer, x, y)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		PanCameraTo(x, y)
@@ -1365,7 +1367,7 @@ function PanCameraToForPlayer(whichPlayer, x, y)
 end
 
 --===========================================================================
-function PanCameraToLocForPlayer(whichPlayer, loc)
+function bj.PanCameraToLocForPlayer(whichPlayer, loc)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		PanCameraTo(GetLocationX(loc), GetLocationY(loc))
@@ -1373,7 +1375,7 @@ function PanCameraToLocForPlayer(whichPlayer, loc)
 end
 
 --===========================================================================
-function PanCameraToTimedForPlayer(whichPlayer, x, y, duration)
+function bj.PanCameraToTimedForPlayer(whichPlayer, x, y, duration)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		PanCameraToTimed(x, y, duration)
@@ -1381,7 +1383,7 @@ function PanCameraToTimedForPlayer(whichPlayer, x, y, duration)
 end
 
 --===========================================================================
-function PanCameraToTimedLocForPlayer(whichPlayer, loc, duration)
+function bj.PanCameraToTimedLocForPlayer(whichPlayer, loc, duration)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		PanCameraToTimed(GetLocationX(loc), GetLocationY(loc), duration)
@@ -1389,7 +1391,7 @@ function PanCameraToTimedLocForPlayer(whichPlayer, loc, duration)
 end
 
 --===========================================================================
-function PanCameraToTimedLocWithZForPlayer(whichPlayer, loc, zOffset, duration)
+function bj.PanCameraToTimedLocWithZForPlayer(whichPlayer, loc, zOffset, duration)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		PanCameraToTimedWithZ(GetLocationX(loc), GetLocationY(loc), zOffset, duration)
@@ -1397,7 +1399,7 @@ function PanCameraToTimedLocWithZForPlayer(whichPlayer, loc, zOffset, duration)
 end
 
 --===========================================================================
-function SmartCameraPanBJ(whichPlayer, loc, duration)
+function bj.SmartCameraPanBJ(whichPlayer, loc, duration)
 	local dist
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1416,7 +1418,7 @@ function SmartCameraPanBJ(whichPlayer, loc, duration)
 end
 
 --===========================================================================
-function SetCinematicCameraForPlayer(whichPlayer, cameraModelFile)
+function bj.SetCinematicCameraForPlayer(whichPlayer, cameraModelFile)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetCinematicCamera(cameraModelFile)
@@ -1424,7 +1426,7 @@ function SetCinematicCameraForPlayer(whichPlayer, cameraModelFile)
 end
 
 --===========================================================================
-function ResetToGameCameraForPlayer(whichPlayer, duration)
+function bj.ResetToGameCameraForPlayer(whichPlayer, duration)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		ResetToGameCamera(duration)
@@ -1432,7 +1434,7 @@ function ResetToGameCameraForPlayer(whichPlayer, duration)
 end
 
 --===========================================================================
-function CameraSetSourceNoiseForPlayer(whichPlayer, magnitude, velocity)
+function bj.CameraSetSourceNoiseForPlayer(whichPlayer, magnitude, velocity)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		CameraSetSourceNoise(magnitude, velocity)
@@ -1440,7 +1442,7 @@ function CameraSetSourceNoiseForPlayer(whichPlayer, magnitude, velocity)
 end
 
 --===========================================================================
-function CameraSetTargetNoiseForPlayer(whichPlayer, magnitude, velocity)
+function bj.CameraSetTargetNoiseForPlayer(whichPlayer, magnitude, velocity)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		CameraSetTargetNoise(magnitude, velocity)
@@ -1448,7 +1450,7 @@ function CameraSetTargetNoiseForPlayer(whichPlayer, magnitude, velocity)
 end
 
 --===========================================================================
-function CameraSetEQNoiseForPlayer(whichPlayer, magnitude)
+function bj.CameraSetEQNoiseForPlayer(whichPlayer, magnitude)
 	local richter = magnitude
 	if richter > 5.0 then
 		richter = 5.0
@@ -1464,7 +1466,7 @@ function CameraSetEQNoiseForPlayer(whichPlayer, magnitude)
 end
 
 --===========================================================================
-function CameraClearNoiseForPlayer(whichPlayer)
+function bj.CameraClearNoiseForPlayer(whichPlayer)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		CameraSetSourceNoise(0, 0)
@@ -1475,33 +1477,33 @@ end
 --===========================================================================
 -- Query the current camera bounds.
 --
-function GetCurrentCameraBoundsMapRectBJ()
+function bj.GetCurrentCameraBoundsMapRectBJ()
 	return Rect(GetCameraBoundMinX(), GetCameraBoundMinY(), GetCameraBoundMaxX(), GetCameraBoundMaxY())
 end
 
 --===========================================================================
 -- Query the initial camera bounds, as defined at map init.
 --
-function GetCameraBoundsMapRect()
+function bj.GetCameraBoundsMapRect()
 	return bj_mapInitialCameraBounds
 end
 
 --===========================================================================
 -- Query the playable map area, as defined at map init.
 --
-function GetPlayableMapRect()
+function bj.GetPlayableMapRect()
 	return bj_mapInitialPlayableArea
 end
 
 --===========================================================================
 -- Query the entire map area, as defined at map init.
 --
-function GetEntireMapRect()
+function bj.GetEntireMapRect()
 	return GetWorldBounds()
 end
 
 --===========================================================================
-function SetCameraBoundsToRect(r)
+function bj.SetCameraBoundsToRect(r)
 	local minX = GetRectMinX(r)
 	local minY = GetRectMinY(r)
 	local maxX = GetRectMaxX(r)
@@ -1510,7 +1512,7 @@ function SetCameraBoundsToRect(r)
 end
 
 --===========================================================================
-function SetCameraBoundsToRectForPlayerBJ(whichPlayer, r)
+function bj.SetCameraBoundsToRectForPlayerBJ(whichPlayer, r)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetCameraBoundsToRect(r)
@@ -1518,7 +1520,7 @@ function SetCameraBoundsToRectForPlayerBJ(whichPlayer, r)
 end
 
 --===========================================================================
-function AdjustCameraBoundsBJ(adjustMethod, dxWest, dxEast, dyNorth, dySouth)
+function bj.AdjustCameraBoundsBJ(adjustMethod, dxWest, dxEast, dyNorth, dySouth)
 	local minX = 0
 	local minY = 0
 	local maxX = 0
@@ -1555,7 +1557,7 @@ function AdjustCameraBoundsBJ(adjustMethod, dxWest, dxEast, dyNorth, dySouth)
 end
 
 --===========================================================================
-function AdjustCameraBoundsForPlayerBJ(adjustMethod, whichPlayer, dxWest, dxEast, dyNorth, dySouth)
+function bj.AdjustCameraBoundsForPlayerBJ(adjustMethod, whichPlayer, dxWest, dxEast, dyNorth, dySouth)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		AdjustCameraBoundsBJ(adjustMethod, dxWest, dxEast, dyNorth, dySouth)
@@ -1563,7 +1565,7 @@ function AdjustCameraBoundsForPlayerBJ(adjustMethod, whichPlayer, dxWest, dxEast
 end
 
 --===========================================================================
-function SetCameraQuickPositionForPlayer(whichPlayer, x, y)
+function bj.SetCameraQuickPositionForPlayer(whichPlayer, x, y)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetCameraQuickPosition(x, y)
@@ -1571,7 +1573,7 @@ function SetCameraQuickPositionForPlayer(whichPlayer, x, y)
 end
 
 --===========================================================================
-function SetCameraQuickPositionLocForPlayer(whichPlayer, loc)
+function bj.SetCameraQuickPositionLocForPlayer(whichPlayer, loc)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetCameraQuickPosition(GetLocationX(loc), GetLocationY(loc))
@@ -1579,12 +1581,12 @@ function SetCameraQuickPositionLocForPlayer(whichPlayer, loc)
 end
 
 --===========================================================================
-function SetCameraQuickPositionLoc(loc)
+function bj.SetCameraQuickPositionLoc(loc)
 	SetCameraQuickPosition(GetLocationX(loc), GetLocationY(loc))
 end
 
 --===========================================================================
-function StopCameraForPlayerBJ(whichPlayer)
+function bj.StopCameraForPlayerBJ(whichPlayer)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		StopCamera()
@@ -1592,7 +1594,7 @@ function StopCameraForPlayerBJ(whichPlayer)
 end
 
 --===========================================================================
-function SetCameraOrientControllerForPlayerBJ(whichPlayer, whichUnit, xoffset, yoffset)
+function bj.SetCameraOrientControllerForPlayerBJ(whichPlayer, whichUnit, xoffset, yoffset)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetCameraOrientController(whichUnit, xoffset, yoffset)
@@ -1600,12 +1602,12 @@ function SetCameraOrientControllerForPlayerBJ(whichPlayer, whichUnit, xoffset, y
 end
 
 --===========================================================================
-function CameraSetSmoothingFactorBJ(factor)
+function bj.CameraSetSmoothingFactorBJ(factor)
 	CameraSetSmoothingFactor(factor)
 end
 
 --===========================================================================
-function CameraResetSmoothingFactorBJ()
+function bj.CameraResetSmoothingFactorBJ()
 	CameraSetSmoothingFactor(0)
 end
 
@@ -1618,7 +1620,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function DisplayTextToForce(toForce, message)
+function bj.DisplayTextToForce(toForce, message)
 	if IsPlayerInForce(GetLocalPlayer(), toForce) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		DisplayTextToPlayer(GetLocalPlayer(), 0, 0, message)
@@ -1626,7 +1628,7 @@ function DisplayTextToForce(toForce, message)
 end
 
 --===========================================================================
-function DisplayTimedTextToForce(toForce, duration, message)
+function bj.DisplayTimedTextToForce(toForce, duration, message)
 	if IsPlayerInForce(GetLocalPlayer(), toForce) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, duration, message)
@@ -1634,7 +1636,7 @@ function DisplayTimedTextToForce(toForce, duration, message)
 end
 
 --===========================================================================
-function ClearTextMessagesBJ(toForce)
+function bj.ClearTextMessagesBJ(toForce)
 	if IsPlayerInForce(GetLocalPlayer(), toForce) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		ClearTextMessages()
@@ -1645,15 +1647,15 @@ end
 -- The parameters for the API Substring function are unintuitive, so this
 -- merely performs a translation for the starting index.
 --
-function SubStringBJ(source, start, end_)
+function bj.SubStringBJ(source, start, end_)
 	return SubString(source, start - 1, end_)
 end
 
-function GetHandleIdBJ(h)
+function bj.GetHandleIdBJ(h)
 	return GetHandleId(h)
 end
 
-function StringHashBJ(s)
+function bj.StringHashBJ(s)
 	return StringHash(s)
 end
 
@@ -1666,27 +1668,27 @@ end
 --***************************************************************************
 
 --===========================================================================
-function TriggerRegisterTimerEventPeriodic(trig, timeout)
+function bj.TriggerRegisterTimerEventPeriodic(trig, timeout)
 	return TriggerRegisterTimerEvent(trig, timeout, true)
 end
 
 --===========================================================================
-function TriggerRegisterTimerEventSingle(trig, timeout)
+function bj.TriggerRegisterTimerEventSingle(trig, timeout)
 	return TriggerRegisterTimerEvent(trig, timeout, false)
 end
 
 --===========================================================================
-function TriggerRegisterTimerExpireEventBJ(trig, t)
+function bj.TriggerRegisterTimerExpireEventBJ(trig, t)
 	return TriggerRegisterTimerExpireEvent(trig, t)
 end
 
 --===========================================================================
-function TriggerRegisterPlayerUnitEventSimple(trig, whichPlayer, whichEvent)
+function bj.TriggerRegisterPlayerUnitEventSimple(trig, whichPlayer, whichEvent)
 	return TriggerRegisterPlayerUnitEvent(trig, whichPlayer, whichEvent, nil)
 end
 
 --===========================================================================
-function TriggerRegisterAnyUnitEventBJ(trig, whichEvent)
+function bj.TriggerRegisterAnyUnitEventBJ(trig, whichEvent)
 	local index
 
 	index = 0
@@ -1699,7 +1701,7 @@ function TriggerRegisterAnyUnitEventBJ(trig, whichEvent)
 end
 
 --===========================================================================
-function TriggerRegisterPlayerSelectionEventBJ(trig, whichPlayer, selected)
+function bj.TriggerRegisterPlayerSelectionEventBJ(trig, whichPlayer, selected)
 	if selected then
 		return TriggerRegisterPlayerUnitEvent(trig, whichPlayer, EVENT_PLAYER_UNIT_SELECTED, nil)
 	else
@@ -1708,7 +1710,7 @@ function TriggerRegisterPlayerSelectionEventBJ(trig, whichPlayer, selected)
 end
 
 --===========================================================================
-function TriggerRegisterPlayerKeyEventBJ(trig, whichPlayer, keType, keKey)
+function bj.TriggerRegisterPlayerKeyEventBJ(trig, whichPlayer, keType, keKey)
 	if keType == bj_KEYEVENTTYPE_DEPRESS then
 		-- Depress event - find out what key
 		if keKey == bj_KEYEVENTKEY_LEFT then
@@ -1744,106 +1746,106 @@ function TriggerRegisterPlayerKeyEventBJ(trig, whichPlayer, keType, keKey)
 end
 
 --===========================================================================
-function TriggerRegisterPlayerEventVictory(trig, whichPlayer)
+function bj.TriggerRegisterPlayerEventVictory(trig, whichPlayer)
 	return TriggerRegisterPlayerEvent(trig, whichPlayer, EVENT_PLAYER_VICTORY)
 end
 
 --===========================================================================
-function TriggerRegisterPlayerEventDefeat(trig, whichPlayer)
+function bj.TriggerRegisterPlayerEventDefeat(trig, whichPlayer)
 	return TriggerRegisterPlayerEvent(trig, whichPlayer, EVENT_PLAYER_DEFEAT)
 end
 
 --===========================================================================
-function TriggerRegisterPlayerEventLeave(trig, whichPlayer)
+function bj.TriggerRegisterPlayerEventLeave(trig, whichPlayer)
 	return TriggerRegisterPlayerEvent(trig, whichPlayer, EVENT_PLAYER_LEAVE)
 end
 
 --===========================================================================
-function TriggerRegisterPlayerEventAllianceChanged(trig, whichPlayer)
+function bj.TriggerRegisterPlayerEventAllianceChanged(trig, whichPlayer)
 	return TriggerRegisterPlayerEvent(trig, whichPlayer, EVENT_PLAYER_ALLIANCE_CHANGED)
 end
 
 --===========================================================================
-function TriggerRegisterPlayerEventEndCinematic(trig, whichPlayer)
+function bj.TriggerRegisterPlayerEventEndCinematic(trig, whichPlayer)
 	return TriggerRegisterPlayerEvent(trig, whichPlayer, EVENT_PLAYER_END_CINEMATIC)
 end
 
 --===========================================================================
-function TriggerRegisterGameStateEventTimeOfDay(trig, opcode, limitval)
+function bj.TriggerRegisterGameStateEventTimeOfDay(trig, opcode, limitval)
 	return TriggerRegisterGameStateEvent(trig, GAME_STATE_TIME_OF_DAY, opcode, limitval)
 end
 
 --===========================================================================
-function TriggerRegisterEnterRegionSimple(trig, whichRegion)
+function bj.TriggerRegisterEnterRegionSimple(trig, whichRegion)
 	return TriggerRegisterEnterRegion(trig, whichRegion, nil)
 end
 
 --===========================================================================
-function TriggerRegisterLeaveRegionSimple(trig, whichRegion)
+function bj.TriggerRegisterLeaveRegionSimple(trig, whichRegion)
 	return TriggerRegisterLeaveRegion(trig, whichRegion, nil)
 end
 
 --===========================================================================
-function TriggerRegisterEnterRectSimple(trig, r)
+function bj.TriggerRegisterEnterRectSimple(trig, r)
 	local rectRegion = CreateRegion()
 	RegionAddRect(rectRegion, r)
 	return TriggerRegisterEnterRegion(trig, rectRegion, nil)
 end
 
 --===========================================================================
-function TriggerRegisterLeaveRectSimple(trig, r)
+function bj.TriggerRegisterLeaveRectSimple(trig, r)
 	local rectRegion = CreateRegion()
 	RegionAddRect(rectRegion, r)
 	return TriggerRegisterLeaveRegion(trig, rectRegion, nil)
 end
 
 --===========================================================================
-function TriggerRegisterDistanceBetweenUnits(trig, whichUnit, condition, range)
+function bj.TriggerRegisterDistanceBetweenUnits(trig, whichUnit, condition, range)
 	return TriggerRegisterUnitInRange(trig, whichUnit, range, condition)
 end
 
 --===========================================================================
-function TriggerRegisterUnitInRangeSimple(trig, range, whichUnit)
+function bj.TriggerRegisterUnitInRangeSimple(trig, range, whichUnit)
 	return TriggerRegisterUnitInRange(trig, whichUnit, range, nil)
 end
 
 --===========================================================================
-function TriggerRegisterUnitLifeEvent(trig, whichUnit, opcode, limitval)
+function bj.TriggerRegisterUnitLifeEvent(trig, whichUnit, opcode, limitval)
 	return TriggerRegisterUnitStateEvent(trig, whichUnit, UNIT_STATE_LIFE, opcode, limitval)
 end
 
 --===========================================================================
-function TriggerRegisterUnitManaEvent(trig, whichUnit, opcode, limitval)
+function bj.TriggerRegisterUnitManaEvent(trig, whichUnit, opcode, limitval)
 	return TriggerRegisterUnitStateEvent(trig, whichUnit, UNIT_STATE_MANA, opcode, limitval)
 end
 
 --===========================================================================
-function TriggerRegisterDialogEventBJ(trig, whichDialog)
+function bj.TriggerRegisterDialogEventBJ(trig, whichDialog)
 	return TriggerRegisterDialogEvent(trig, whichDialog)
 end
 
 --===========================================================================
-function TriggerRegisterShowSkillEventBJ(trig)
+function bj.TriggerRegisterShowSkillEventBJ(trig)
 	return TriggerRegisterGameEvent(trig, EVENT_GAME_SHOW_SKILL)
 end
 
 --===========================================================================
-function TriggerRegisterBuildSubmenuEventBJ(trig)
+function bj.TriggerRegisterBuildSubmenuEventBJ(trig)
 	return TriggerRegisterGameEvent(trig, EVENT_GAME_BUILD_SUBMENU)
 end
 
 --===========================================================================
-function TriggerRegisterGameLoadedEventBJ(trig)
+function bj.TriggerRegisterGameLoadedEventBJ(trig)
 	return TriggerRegisterGameEvent(trig, EVENT_GAME_LOADED)
 end
 
 --===========================================================================
-function TriggerRegisterGameSavedEventBJ(trig)
+function bj.TriggerRegisterGameSavedEventBJ(trig)
 	return TriggerRegisterGameEvent(trig, EVENT_GAME_SAVE)
 end
 
 --===========================================================================
-function RegisterDestDeathInRegionEnum()
+function bj.RegisterDestDeathInRegionEnum()
 	bj_destInRegionDiesCount = bj_destInRegionDiesCount + 1
 	if bj_destInRegionDiesCount <= bj_MAX_DEST_IN_REGION_EVENTS then
 		TriggerRegisterDeathEvent(bj_destInRegionDiesTrig, GetEnumDestructable())
@@ -1851,7 +1853,7 @@ function RegisterDestDeathInRegionEnum()
 end
 
 --===========================================================================
-function TriggerRegisterDestDeathInRegionEvent(trig, r)
+function bj.TriggerRegisterDestDeathInRegionEvent(trig, r)
 	bj_destInRegionDiesTrig = trig
 	bj_destInRegionDiesCount = 0
 	EnumDestructablesInRect(r, nil, RegisterDestDeathInRegionEnum)
@@ -1866,29 +1868,29 @@ end
 --***************************************************************************
 
 --===========================================================================
-function AddWeatherEffectSaveLast(where, effectID)
+function bj.AddWeatherEffectSaveLast(where, effectID)
 	bj_lastCreatedWeatherEffect = AddWeatherEffect(where, effectID)
 	return bj_lastCreatedWeatherEffect
 end
 
 --===========================================================================
-function GetLastCreatedWeatherEffect()
+function bj.GetLastCreatedWeatherEffect()
 	return bj_lastCreatedWeatherEffect
 end
 
 --===========================================================================
-function RemoveWeatherEffectBJ(whichWeatherEffect)
+function bj.RemoveWeatherEffectBJ(whichWeatherEffect)
 	RemoveWeatherEffect(whichWeatherEffect)
 end
 
 --===========================================================================
-function TerrainDeformationCraterBJ(duration, permanent, where, radius, depth)
+function bj.TerrainDeformationCraterBJ(duration, permanent, where, radius, depth)
 	bj_lastCreatedTerrainDeformation = TerrainDeformCrater(GetLocationX(where), GetLocationY(where), radius, depth, R2I(duration * 1000), permanent)
 	return bj_lastCreatedTerrainDeformation
 end
 
 --===========================================================================
-function TerrainDeformationRippleBJ(duration, limitNeg, where, startRadius, endRadius, depth, wavePeriod, waveWidth)
+function bj.TerrainDeformationRippleBJ(duration, limitNeg, where, startRadius, endRadius, depth, wavePeriod, waveWidth)
 	local spaceWave
 	local timeWave
 	local radiusRatio
@@ -1906,7 +1908,7 @@ function TerrainDeformationRippleBJ(duration, limitNeg, where, startRadius, endR
 end
 
 --===========================================================================
-function TerrainDeformationWaveBJ(duration, source, target, radius, depth, trailDelay)
+function bj.TerrainDeformationWaveBJ(duration, source, target, radius, depth, trailDelay)
 	local distance
 	local dirX
 	local dirY
@@ -1926,121 +1928,121 @@ function TerrainDeformationWaveBJ(duration, source, target, radius, depth, trail
 end
 
 --===========================================================================
-function TerrainDeformationRandomBJ(duration, where, radius, minDelta, maxDelta, updateInterval)
+function bj.TerrainDeformationRandomBJ(duration, where, radius, minDelta, maxDelta, updateInterval)
 	bj_lastCreatedTerrainDeformation = TerrainDeformRandom(GetLocationX(where), GetLocationY(where), radius, minDelta, maxDelta, R2I(duration * 1000), R2I(updateInterval * 1000))
 	return bj_lastCreatedTerrainDeformation
 end
 
 --===========================================================================
-function TerrainDeformationStopBJ(deformation, duration)
+function bj.TerrainDeformationStopBJ(deformation, duration)
 	TerrainDeformStop(deformation, R2I(duration * 1000))
 end
 
 --===========================================================================
-function GetLastCreatedTerrainDeformation()
+function bj.GetLastCreatedTerrainDeformation()
 	return bj_lastCreatedTerrainDeformation
 end
 
 --===========================================================================
-function AddLightningLoc(codeName, where1, where2)
+function bj.AddLightningLoc(codeName, where1, where2)
 	bj_lastCreatedLightning = AddLightningEx(codeName, true, GetLocationX(where1), GetLocationY(where1), GetLocationZ(where1), GetLocationX(where2), GetLocationY(where2), GetLocationZ(where2))
 	return bj_lastCreatedLightning
 end
 
 --===========================================================================
-function DestroyLightningBJ(whichBolt)
+function bj.DestroyLightningBJ(whichBolt)
 	return DestroyLightning(whichBolt)
 end
 
 --===========================================================================
-function MoveLightningLoc(whichBolt, where1, where2)
+function bj.MoveLightningLoc(whichBolt, where1, where2)
 	return MoveLightningEx(whichBolt, true, GetLocationX(where1), GetLocationY(where1), GetLocationZ(where1), GetLocationX(where2), GetLocationY(where2), GetLocationZ(where2))
 end
 
 --===========================================================================
-function GetLightningColorABJ(whichBolt)
+function bj.GetLightningColorABJ(whichBolt)
 	return GetLightningColorA(whichBolt)
 end
 
 --===========================================================================
-function GetLightningColorRBJ(whichBolt)
+function bj.GetLightningColorRBJ(whichBolt)
 	return GetLightningColorR(whichBolt)
 end
 
 --===========================================================================
-function GetLightningColorGBJ(whichBolt)
+function bj.GetLightningColorGBJ(whichBolt)
 	return GetLightningColorG(whichBolt)
 end
 
 --===========================================================================
-function GetLightningColorBBJ(whichBolt)
+function bj.GetLightningColorBBJ(whichBolt)
 	return GetLightningColorB(whichBolt)
 end
 
 --===========================================================================
-function SetLightningColorBJ(whichBolt, r, g, b, a)
+function bj.SetLightningColorBJ(whichBolt, r, g, b, a)
 	return SetLightningColor(whichBolt, r, g, b, a)
 end
 
 --===========================================================================
-function GetLastCreatedLightningBJ()
+function bj.GetLastCreatedLightningBJ()
 	return bj_lastCreatedLightning
 end
 
 --===========================================================================
-function GetAbilityEffectBJ(abilcode, t, index)
+function bj.GetAbilityEffectBJ(abilcode, t, index)
 	return GetAbilityEffectById(abilcode, t, index)
 end
 
 --===========================================================================
-function GetAbilitySoundBJ(abilcode, t)
+function bj.GetAbilitySoundBJ(abilcode, t)
 	return GetAbilitySoundById(abilcode, t)
 end
 
 
 --===========================================================================
-function GetTerrainCliffLevelBJ(where)
+function bj.GetTerrainCliffLevelBJ(where)
 	return GetTerrainCliffLevel(GetLocationX(where), GetLocationY(where))
 end
 
 --===========================================================================
-function GetTerrainTypeBJ(where)
+function bj.GetTerrainTypeBJ(where)
 	return GetTerrainType(GetLocationX(where), GetLocationY(where))
 end
 
 --===========================================================================
-function GetTerrainVarianceBJ(where)
+function bj.GetTerrainVarianceBJ(where)
 	return GetTerrainVariance(GetLocationX(where), GetLocationY(where))
 end
 
 --===========================================================================
-function SetTerrainTypeBJ(where, terrainType, variation, area, shape)
+function bj.SetTerrainTypeBJ(where, terrainType, variation, area, shape)
 	SetTerrainType(GetLocationX(where), GetLocationY(where), terrainType, variation, area, shape)
 end
 
 --===========================================================================
-function IsTerrainPathableBJ(where, t)
+function bj.IsTerrainPathableBJ(where, t)
 	return IsTerrainPathable(GetLocationX(where), GetLocationY(where), t)
 end
 
 --===========================================================================
-function SetTerrainPathableBJ(where, t, flag)
+function bj.SetTerrainPathableBJ(where, t, flag)
 	SetTerrainPathable(GetLocationX(where), GetLocationY(where), t, flag)
 end
 
 --===========================================================================
-function SetWaterBaseColorBJ(red, green, blue, transparency)
+function bj.SetWaterBaseColorBJ(red, green, blue, transparency)
 	SetWaterBaseColor(PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function CreateFogModifierRectSimple(whichPlayer, whichFogState, r, afterUnits)
+function bj.CreateFogModifierRectSimple(whichPlayer, whichFogState, r, afterUnits)
 	bj_lastCreatedFogModifier = CreateFogModifierRect(whichPlayer, whichFogState, r, true, afterUnits)
 	return bj_lastCreatedFogModifier
 end
 
 --===========================================================================
-function CreateFogModifierRadiusLocSimple(whichPlayer, whichFogState, center, radius, afterUnits)
+function bj.CreateFogModifierRadiusLocSimple(whichPlayer, whichFogState, center, radius, afterUnits)
 	bj_lastCreatedFogModifier = CreateFogModifierRadiusLoc(whichPlayer, whichFogState, center, radius, true, afterUnits)
 	return bj_lastCreatedFogModifier
 end
@@ -2050,7 +2052,7 @@ end
 -- gives the option of immediately enabling the modifier, so that triggers
 -- can default to modifiers that are immediately enabled.
 --
-function CreateFogModifierRectBJ(enabled, whichPlayer, whichFogState, r)
+function bj.CreateFogModifierRectBJ(enabled, whichPlayer, whichFogState, r)
 	bj_lastCreatedFogModifier = CreateFogModifierRect(whichPlayer, whichFogState, r, true, false)
 	if enabled then
 		FogModifierStart(bj_lastCreatedFogModifier)
@@ -2063,7 +2065,7 @@ end
 -- gives the option of immediately enabling the modifier, so that triggers
 -- can default to modifiers that are immediately enabled.
 --
-function CreateFogModifierRadiusLocBJ(enabled, whichPlayer, whichFogState, center, radius)
+function bj.CreateFogModifierRadiusLocBJ(enabled, whichPlayer, whichFogState, center, radius)
 	bj_lastCreatedFogModifier = CreateFogModifierRadiusLoc(whichPlayer, whichFogState, center, radius, true, false)
 	if enabled then
 		FogModifierStart(bj_lastCreatedFogModifier)
@@ -2072,100 +2074,100 @@ function CreateFogModifierRadiusLocBJ(enabled, whichPlayer, whichFogState, cente
 end
 
 --===========================================================================
-function GetLastCreatedFogModifier()
+function bj.GetLastCreatedFogModifier()
 	return bj_lastCreatedFogModifier
 end
 
 --===========================================================================
-function FogEnableOn()
+function bj.FogEnableOn()
 	FogEnable(true)
 end
 
 --===========================================================================
-function FogEnableOff()
+function bj.FogEnableOff()
 	FogEnable(false)
 end
 
 --===========================================================================
-function FogMaskEnableOn()
+function bj.FogMaskEnableOn()
 	FogMaskEnable(true)
 end
 
 --===========================================================================
-function FogMaskEnableOff()
+function bj.FogMaskEnableOff()
 	FogMaskEnable(false)
 end
 
 --===========================================================================
-function UseTimeOfDayBJ(flag)
+function bj.UseTimeOfDayBJ(flag)
 	SuspendTimeOfDay(not flag)
 end
 
 --===========================================================================
-function SetTerrainFogExBJ(style, zstart, zend, density, red, green, blue)
+function bj.SetTerrainFogExBJ(style, zstart, zend, density, red, green, blue)
 	SetTerrainFogEx(style, zstart, zend, density, red * 0.01, green * 0.01, blue * 0.01)
 end
 
 --===========================================================================
-function ResetTerrainFogBJ()
+function bj.ResetTerrainFogBJ()
 	ResetTerrainFog()
 end
 
 --===========================================================================
-function SetDoodadAnimationBJ(animName, doodadID, radius, center)
+function bj.SetDoodadAnimationBJ(animName, doodadID, radius, center)
 	SetDoodadAnimation(GetLocationX(center), GetLocationY(center), radius, doodadID, false, animName, false)
 end
 
 --===========================================================================
-function SetDoodadAnimationRectBJ(animName, doodadID, r)
+function bj.SetDoodadAnimationRectBJ(animName, doodadID, r)
 	SetDoodadAnimationRect(r, doodadID, animName, false)
 end
 
 --===========================================================================
-function AddUnitAnimationPropertiesBJ(add, animProperties, whichUnit)
+function bj.AddUnitAnimationPropertiesBJ(add, animProperties, whichUnit)
 	AddUnitAnimationProperties(whichUnit, animProperties, add)
 end
 
 
 --============================================================================
-function CreateImageBJ(file, size, where, zOffset, imageType)
+function bj.CreateImageBJ(file, size, where, zOffset, imageType)
 	bj_lastCreatedImage = CreateImage(file, size, size, size, GetLocationX(where), GetLocationY(where), zOffset, 0, 0, 0, imageType)
 	return bj_lastCreatedImage
 end
 
 --============================================================================
-function ShowImageBJ(flag, whichImage)
+function bj.ShowImageBJ(flag, whichImage)
 	ShowImage(whichImage, flag)
 end
 
 --============================================================================
-function SetImagePositionBJ(whichImage, where, zOffset)
+function bj.SetImagePositionBJ(whichImage, where, zOffset)
 	SetImagePosition(whichImage, GetLocationX(where), GetLocationY(where), zOffset)
 end
 
 --============================================================================
-function SetImageColorBJ(whichImage, red, green, blue, alpha)
+function bj.SetImageColorBJ(whichImage, red, green, blue, alpha)
 	SetImageColor(whichImage, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - alpha))
 end
 
 --============================================================================
-function GetLastCreatedImage()
+function bj.GetLastCreatedImage()
 	return bj_lastCreatedImage
 end
 
 --============================================================================
-function CreateUbersplatBJ(where, name, red, green, blue, alpha, forcePaused, noBirthTime)
+function bj.CreateUbersplatBJ(where, name, red, green, blue, alpha, forcePaused, noBirthTime)
 	bj_lastCreatedUbersplat = CreateUbersplat(GetLocationX(where), GetLocationY(where), name, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - alpha), forcePaused, noBirthTime)
 	return bj_lastCreatedUbersplat
 end
 
 --============================================================================
-function ShowUbersplatBJ(flag, whichSplat)
+function bj.ShowUbersplatBJ(flag, whichSplat)
 	ShowUbersplat(whichSplat, flag)
 end
 
 --============================================================================
-function GetLastCreatedUbersplat()
+function bj.GetLastCreatedUbersplat()
 	return bj_lastCreatedUbersplat
 end
 
@@ -2177,7 +2179,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function PlaySoundBJ(soundHandle)
+function bj.PlaySoundBJ(soundHandle)
 	bj_lastPlayedSound = soundHandle
 	if soundHandle ~= nil then
 		StartSound(soundHandle)
@@ -2185,125 +2187,125 @@ function PlaySoundBJ(soundHandle)
 end
 
 --===========================================================================
-function StopSoundBJ(soundHandle, fadeOut)
+function bj.StopSoundBJ(soundHandle, fadeOut)
 	StopSound(soundHandle, false, fadeOut)
 end
 
 --===========================================================================
-function SetSoundVolumeBJ(soundHandle, volumePercent)
+function bj.SetSoundVolumeBJ(soundHandle, volumePercent)
 	SetSoundVolume(soundHandle, PercentToInt(volumePercent, 127))
 end
 
 --===========================================================================
-function SetSoundOffsetBJ(newOffset, soundHandle)
+function bj.SetSoundOffsetBJ(newOffset, soundHandle)
 	SetSoundPlayPosition(soundHandle, R2I(newOffset * 1000))
 end
 
 --===========================================================================
-function SetSoundDistanceCutoffBJ(soundHandle, cutoff)
+function bj.SetSoundDistanceCutoffBJ(soundHandle, cutoff)
 	SetSoundDistanceCutoff(soundHandle, cutoff)
 end
 
 --===========================================================================
-function SetSoundPitchBJ(soundHandle, pitch)
+function bj.SetSoundPitchBJ(soundHandle, pitch)
 	SetSoundPitch(soundHandle, pitch)
 end
 
 --===========================================================================
-function SetSoundPositionLocBJ(soundHandle, loc, z)
+function bj.SetSoundPositionLocBJ(soundHandle, loc, z)
 	SetSoundPosition(soundHandle, GetLocationX(loc), GetLocationY(loc), z)
 end
 
 --===========================================================================
-function AttachSoundToUnitBJ(soundHandle, whichUnit)
+function bj.AttachSoundToUnitBJ(soundHandle, whichUnit)
 	AttachSoundToUnit(soundHandle, whichUnit)
 end
 
 --===========================================================================
-function SetSoundConeAnglesBJ(soundHandle, inside, outside, outsideVolumePercent)
+function bj.SetSoundConeAnglesBJ(soundHandle, inside, outside, outsideVolumePercent)
 	SetSoundConeAngles(soundHandle, inside, outside, PercentToInt(outsideVolumePercent, 127))
 end
 
 --===========================================================================
-function KillSoundWhenDoneBJ(soundHandle)
+function bj.KillSoundWhenDoneBJ(soundHandle)
 	KillSoundWhenDone(soundHandle)
 end
 
 --===========================================================================
-function PlaySoundAtPointBJ(soundHandle, volumePercent, loc, z)
+function bj.PlaySoundAtPointBJ(soundHandle, volumePercent, loc, z)
 	SetSoundPositionLocBJ(soundHandle, loc, z)
 	SetSoundVolumeBJ(soundHandle, volumePercent)
 	PlaySoundBJ(soundHandle)
 end
 
 --===========================================================================
-function PlaySoundOnUnitBJ(soundHandle, volumePercent, whichUnit)
+function bj.PlaySoundOnUnitBJ(soundHandle, volumePercent, whichUnit)
 	AttachSoundToUnitBJ(soundHandle, whichUnit)
 	SetSoundVolumeBJ(soundHandle, volumePercent)
 	PlaySoundBJ(soundHandle)
 end
 
 --===========================================================================
-function PlaySoundFromOffsetBJ(soundHandle, volumePercent, startingOffset)
+function bj.PlaySoundFromOffsetBJ(soundHandle, volumePercent, startingOffset)
 	SetSoundVolumeBJ(soundHandle, volumePercent)
 	PlaySoundBJ(soundHandle)
 	SetSoundOffsetBJ(startingOffset, soundHandle)
 end
 
 --===========================================================================
-function PlayMusicBJ(musicFileName)
+function bj.PlayMusicBJ(musicFileName)
 	bj_lastPlayedMusic = musicFileName
 	PlayMusic(musicFileName)
 end
 
 --===========================================================================
-function PlayMusicExBJ(musicFileName, startingOffset, fadeInTime)
+function bj.PlayMusicExBJ(musicFileName, startingOffset, fadeInTime)
 	bj_lastPlayedMusic = musicFileName
 	PlayMusicEx(musicFileName, R2I(startingOffset * 1000), R2I(fadeInTime * 1000))
 end
 
 --===========================================================================
-function SetMusicOffsetBJ(newOffset)
+function bj.SetMusicOffsetBJ(newOffset)
 	SetMusicPlayPosition(R2I(newOffset * 1000))
 end
 
 --===========================================================================
-function PlayThematicMusicBJ(musicName)
+function bj.PlayThematicMusicBJ(musicName)
 	PlayThematicMusic(musicName)
 end
 
 --===========================================================================
-function PlayThematicMusicExBJ(musicName, startingOffset)
+function bj.PlayThematicMusicExBJ(musicName, startingOffset)
 	PlayThematicMusicEx(musicName, R2I(startingOffset * 1000))
 end
 
 --===========================================================================
-function SetThematicMusicOffsetBJ(newOffset)
+function bj.SetThematicMusicOffsetBJ(newOffset)
 	SetThematicMusicPlayPosition(R2I(newOffset * 1000))
 end
 
 --===========================================================================
-function EndThematicMusicBJ()
+function bj.EndThematicMusicBJ()
 	EndThematicMusic()
 end
 
 --===========================================================================
-function StopMusicBJ(fadeOut)
+function bj.StopMusicBJ(fadeOut)
 	StopMusic(fadeOut)
 end
 
 --===========================================================================
-function ResumeMusicBJ()
+function bj.ResumeMusicBJ()
 	ResumeMusic()
 end
 
 --===========================================================================
-function SetMusicVolumeBJ(volumePercent)
+function bj.SetMusicVolumeBJ(volumePercent)
 	SetMusicVolume(PercentToInt(volumePercent, 127))
 end
 
 --===========================================================================
-function GetSoundDurationBJ(soundHandle)
+function bj.GetSoundDurationBJ(soundHandle)
 	if soundHandle == nil then
 		return bj_NOTHING_SOUND_DURATION
 	else
@@ -2312,27 +2314,27 @@ function GetSoundDurationBJ(soundHandle)
 end
 
 --===========================================================================
-function GetSoundFileDurationBJ(musicFileName)
+function bj.GetSoundFileDurationBJ(musicFileName)
 	return I2R(GetSoundFileDuration(musicFileName)) * 0.001
 end
 
 --===========================================================================
-function GetLastPlayedSound()
+function bj.GetLastPlayedSound()
 	return bj_lastPlayedSound
 end
 
 --===========================================================================
-function GetLastPlayedMusic()
+function bj.GetLastPlayedMusic()
 	return bj_lastPlayedMusic
 end
 
 --===========================================================================
-function VolumeGroupSetVolumeBJ(vgroup, percent)
+function bj.VolumeGroupSetVolumeBJ(vgroup, percent)
 	VolumeGroupSetVolume(vgroup, percent * 0.01)
 end
 
 --===========================================================================
-function SetCineModeVolumeGroupsImmediateBJ()
+function bj.SetCineModeVolumeGroupsImmediateBJ()
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITMOVEMENT, bj_CINEMODE_VOLUME_UNITMOVEMENT)
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITSOUNDS, bj_CINEMODE_VOLUME_UNITSOUNDS)
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_COMBAT, bj_CINEMODE_VOLUME_COMBAT)
@@ -2344,7 +2346,7 @@ function SetCineModeVolumeGroupsImmediateBJ()
 end
 
 --===========================================================================
-function SetCineModeVolumeGroupsBJ()
+function bj.SetCineModeVolumeGroupsBJ()
 	-- Delay the request if it occurs at map init.
 	if bj_gameStarted then
 		SetCineModeVolumeGroupsImmediateBJ()
@@ -2354,7 +2356,7 @@ function SetCineModeVolumeGroupsBJ()
 end
 
 --===========================================================================
-function SetSpeechVolumeGroupsImmediateBJ()
+function bj.SetSpeechVolumeGroupsImmediateBJ()
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITMOVEMENT, bj_SPEECH_VOLUME_UNITMOVEMENT)
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITSOUNDS, bj_SPEECH_VOLUME_UNITSOUNDS)
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_COMBAT, bj_SPEECH_VOLUME_COMBAT)
@@ -2366,7 +2368,7 @@ function SetSpeechVolumeGroupsImmediateBJ()
 end
 
 --===========================================================================
-function SetSpeechVolumeGroupsBJ()
+function bj.SetSpeechVolumeGroupsBJ()
 	-- Delay the request if it occurs at map init.
 	if bj_gameStarted then
 		SetSpeechVolumeGroupsImmediateBJ()
@@ -2376,12 +2378,12 @@ function SetSpeechVolumeGroupsBJ()
 end
 
 --===========================================================================
-function VolumeGroupResetImmediateBJ()
+function bj.VolumeGroupResetImmediateBJ()
 	VolumeGroupReset()
 end
 
 --===========================================================================
-function VolumeGroupResetBJ()
+function bj.VolumeGroupResetBJ()
 	-- Delay the request if it occurs at map init.
 	if bj_gameStarted then
 		VolumeGroupResetImmediateBJ()
@@ -2391,32 +2393,32 @@ function VolumeGroupResetBJ()
 end
 
 --===========================================================================
-function GetSoundIsPlayingBJ(soundHandle)
+function bj.GetSoundIsPlayingBJ(soundHandle)
 	return GetSoundIsLoading(soundHandle) or GetSoundIsPlaying(soundHandle)
 end
 
 --===========================================================================
-function WaitForSoundBJ(soundHandle, offset)
+function bj.WaitForSoundBJ(soundHandle, offset)
 	TriggerWaitForSound(soundHandle, offset)
 end
 
 --===========================================================================
-function SetMapMusicIndexedBJ(musicName, index)
+function bj.SetMapMusicIndexedBJ(musicName, index)
 	SetMapMusic(musicName, false, index)
 end
 
 --===========================================================================
-function SetMapMusicRandomBJ(musicName)
+function bj.SetMapMusicRandomBJ(musicName)
 	SetMapMusic(musicName, true, 0)
 end
 
 --===========================================================================
-function ClearMapMusicBJ()
+function bj.ClearMapMusicBJ()
 	ClearMapMusic()
 end
 
 --===========================================================================
-function SetStackedSoundBJ(add, soundHandle, r)
+function bj.SetStackedSoundBJ(add, soundHandle, r)
 	local width = GetRectMaxX(r) - GetRectMinX(r)
 	local height = GetRectMaxY(r) - GetRectMinY(r)
 
@@ -2429,26 +2431,26 @@ function SetStackedSoundBJ(add, soundHandle, r)
 end
 
 --===========================================================================
-function StartSoundForPlayerBJ(whichPlayer, soundHandle)
+function bj.StartSoundForPlayerBJ(whichPlayer, soundHandle)
 	if whichPlayer == GetLocalPlayer() then
 		StartSound(soundHandle)
 	end
 end
 
 --===========================================================================
-function VolumeGroupSetVolumeForPlayerBJ(whichPlayer, vgroup, scale)
+function bj.VolumeGroupSetVolumeForPlayerBJ(whichPlayer, vgroup, scale)
 	if GetLocalPlayer() == whichPlayer then
 		VolumeGroupSetVolume(vgroup, scale)
 	end
 end
 
 --===========================================================================
-function EnableDawnDusk(flag)
+function bj.EnableDawnDusk(flag)
 	bj_useDawnDuskSounds = flag
 end
 
 --===========================================================================
-function IsDawnDuskEnabled()
+function bj.IsDawnDuskEnabled()
 	return bj_useDawnDuskSounds
 end
 
@@ -2461,7 +2463,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function SetAmbientDaySound(inLabel)
+function bj.SetAmbientDaySound(inLabel)
 	local ToD
 
 	-- Stop old sound, if necessary
@@ -2480,7 +2482,7 @@ function SetAmbientDaySound(inLabel)
 end
 
 --===========================================================================
-function SetAmbientNightSound(inLabel)
+function bj.SetAmbientNightSound(inLabel)
 	local ToD
 
 	-- Stop old sound, if necessary
@@ -2507,13 +2509,13 @@ end
 --***************************************************************************
 
 --===========================================================================
-function AddSpecialEffectLocBJ(where, modelName)
+function bj.AddSpecialEffectLocBJ(where, modelName)
 	bj_lastCreatedEffect = AddSpecialEffectLoc(modelName, where)
 	return bj_lastCreatedEffect
 end
 
 --===========================================================================
-function AddSpecialEffectTargetUnitBJ(attachPointName, targetWidget, modelName)
+function bj.AddSpecialEffectTargetUnitBJ(attachPointName, targetWidget, modelName)
 	bj_lastCreatedEffect = AddSpecialEffectTarget(modelName, targetWidget, attachPointName)
 	return bj_lastCreatedEffect
 end
@@ -2539,12 +2541,12 @@ end
 --endfunction
 
 --===========================================================================
-function DestroyEffectBJ(whichEffect)
+function bj.DestroyEffectBJ(whichEffect)
 	DestroyEffect(whichEffect)
 end
 
 --===========================================================================
-function GetLastCreatedEffectBJ()
+function bj.GetLastCreatedEffectBJ()
 	return bj_lastCreatedEffect
 end
 
@@ -2557,27 +2559,27 @@ end
 --***************************************************************************
 
 --===========================================================================
-function GetItemLoc(whichItem)
+function bj.GetItemLoc(whichItem)
 	return Location(GetItemX(whichItem), GetItemY(whichItem))
 end
 
 --===========================================================================
-function GetItemLifeBJ(whichWidget)
+function bj.GetItemLifeBJ(whichWidget)
 	return GetWidgetLife(whichWidget)
 end
 
 --===========================================================================
-function SetItemLifeBJ(whichWidget, life)
+function bj.SetItemLifeBJ(whichWidget, life)
 	SetWidgetLife(whichWidget, life)
 end
 
 --===========================================================================
-function AddHeroXPSwapped(xpToAdd, whichHero, showEyeCandy)
+function bj.AddHeroXPSwapped(xpToAdd, whichHero, showEyeCandy)
 	AddHeroXP(whichHero, xpToAdd, showEyeCandy)
 end
 
 --===========================================================================
-function SetHeroLevelBJ(whichHero, newLevel, showEyeCandy)
+function bj.SetHeroLevelBJ(whichHero, newLevel, showEyeCandy)
 	local oldLevel = GetHeroLevel(whichHero)
 
 	if newLevel > oldLevel then
@@ -2590,42 +2592,42 @@ function SetHeroLevelBJ(whichHero, newLevel, showEyeCandy)
 end
 
 --===========================================================================
-function DecUnitAbilityLevelSwapped(abilcode, whichUnit)
+function bj.DecUnitAbilityLevelSwapped(abilcode, whichUnit)
 	return DecUnitAbilityLevel(whichUnit, abilcode)
 end
 
 --===========================================================================
-function IncUnitAbilityLevelSwapped(abilcode, whichUnit)
+function bj.IncUnitAbilityLevelSwapped(abilcode, whichUnit)
 	return IncUnitAbilityLevel(whichUnit, abilcode)
 end
 
 --===========================================================================
-function SetUnitAbilityLevelSwapped(abilcode, whichUnit, level)
+function bj.SetUnitAbilityLevelSwapped(abilcode, whichUnit, level)
 	return SetUnitAbilityLevel(whichUnit, abilcode, level)
 end
 
 --===========================================================================
-function GetUnitAbilityLevelSwapped(abilcode, whichUnit)
+function bj.GetUnitAbilityLevelSwapped(abilcode, whichUnit)
 	return GetUnitAbilityLevel(whichUnit, abilcode)
 end
 
 --===========================================================================
-function UnitHasBuffBJ(whichUnit, buffcode)
+function bj.UnitHasBuffBJ(whichUnit, buffcode)
 	return GetUnitAbilityLevel(whichUnit, buffcode) > 0
 end
 
 --===========================================================================
-function UnitRemoveBuffBJ(buffcode, whichUnit)
+function bj.UnitRemoveBuffBJ(buffcode, whichUnit)
 	return UnitRemoveAbility(whichUnit, buffcode)
 end
 
 --===========================================================================
-function UnitAddItemSwapped(whichItem, whichHero)
+function bj.UnitAddItemSwapped(whichItem, whichHero)
 	return UnitAddItem(whichHero, whichItem)
 end
 
 --===========================================================================
-function UnitAddItemByIdSwapped(itemId, whichHero)
+function bj.UnitAddItemByIdSwapped(itemId, whichHero)
 	-- Create the item at the hero's feet first, and then give it to him.
 	-- This is to ensure that the item will be left at the hero's feet if
 	-- his inventory is full. 
@@ -2635,7 +2637,7 @@ function UnitAddItemByIdSwapped(itemId, whichHero)
 end
 
 --===========================================================================
-function UnitRemoveItemSwapped(whichItem, whichHero)
+function bj.UnitRemoveItemSwapped(whichItem, whichHero)
 	bj_lastRemovedItem = whichItem
 	UnitRemoveItem(whichHero, whichItem)
 end
@@ -2643,64 +2645,64 @@ end
 --===========================================================================
 -- Translates 0-based slot indices to 1-based slot indices.
 --
-function UnitRemoveItemFromSlotSwapped(itemSlot, whichHero)
+function bj.UnitRemoveItemFromSlotSwapped(itemSlot, whichHero)
 	bj_lastRemovedItem = UnitRemoveItemFromSlot(whichHero, itemSlot - 1)
 	return bj_lastRemovedItem
 end
 
 --===========================================================================
-function CreateItemLoc(itemId, loc)
+function bj.CreateItemLoc(itemId, loc)
 	bj_lastCreatedItem = CreateItem(itemId, GetLocationX(loc), GetLocationY(loc))
 	return bj_lastCreatedItem
 end
 
 --===========================================================================
-function GetLastCreatedItem()
+function bj.GetLastCreatedItem()
 	return bj_lastCreatedItem
 end
 
 --===========================================================================
-function GetLastRemovedItem()
+function bj.GetLastRemovedItem()
 	return bj_lastRemovedItem
 end
 
 --===========================================================================
-function SetItemPositionLoc(whichItem, loc)
+function bj.SetItemPositionLoc(whichItem, loc)
 	SetItemPosition(whichItem, GetLocationX(loc), GetLocationY(loc))
 end
 
 --===========================================================================
-function GetLearnedSkillBJ()
+function bj.GetLearnedSkillBJ()
 	return GetLearnedSkill()
 end
 
 --===========================================================================
-function SuspendHeroXPBJ(flag, whichHero)
+function bj.SuspendHeroXPBJ(flag, whichHero)
 	SuspendHeroXP(whichHero, not flag)
 end
 
 --===========================================================================
-function SetPlayerHandicapXPBJ(whichPlayer, handicapPercent)
+function bj.SetPlayerHandicapXPBJ(whichPlayer, handicapPercent)
 	SetPlayerHandicapXP(whichPlayer, handicapPercent * 0.01)
 end
 
 --===========================================================================
-function GetPlayerHandicapXPBJ(whichPlayer)
+function bj.GetPlayerHandicapXPBJ(whichPlayer)
 	return GetPlayerHandicapXP(whichPlayer) * 100
 end
 
 --===========================================================================
-function SetPlayerHandicapBJ(whichPlayer, handicapPercent)
+function bj.SetPlayerHandicapBJ(whichPlayer, handicapPercent)
 	SetPlayerHandicap(whichPlayer, handicapPercent * 0.01)
 end
 
 --===========================================================================
-function GetPlayerHandicapBJ(whichPlayer)
+function bj.GetPlayerHandicapBJ(whichPlayer)
 	return GetPlayerHandicap(whichPlayer) * 100
 end
 
 --===========================================================================
-function GetHeroStatBJ(whichStat, whichHero, includeBonuses)
+function bj.GetHeroStatBJ(whichStat, whichHero, includeBonuses)
 	if whichStat == bj_HEROSTAT_STR then
 		return GetHeroStr(whichHero, includeBonuses)
 	elseif whichStat == bj_HEROSTAT_AGI then
@@ -2714,7 +2716,7 @@ function GetHeroStatBJ(whichStat, whichHero, includeBonuses)
 end
 
 --===========================================================================
-function SetHeroStat(whichHero, whichStat, value)
+function bj.SetHeroStat(whichHero, whichStat, value)
 	-- Ignore requests for negative hero stats.
 	if value <= 0 then
 		return
@@ -2732,7 +2734,7 @@ function SetHeroStat(whichHero, whichStat, value)
 end
 
 --===========================================================================
-function ModifyHeroStat(whichStat, whichHero, modifyMethod, value)
+function bj.ModifyHeroStat(whichStat, whichHero, modifyMethod, value)
 	if modifyMethod == bj_MODIFYMETHOD_ADD then
 		SetHeroStat(whichHero, whichStat, GetHeroStatBJ(whichStat, whichHero, false) + value)
 	elseif modifyMethod == bj_MODIFYMETHOD_SUB then
@@ -2745,7 +2747,7 @@ function ModifyHeroStat(whichStat, whichHero, modifyMethod, value)
 end
 
 --===========================================================================
-function ModifyHeroSkillPoints(whichHero, modifyMethod, value)
+function bj.ModifyHeroSkillPoints(whichHero, modifyMethod, value)
 	if modifyMethod == bj_MODIFYMETHOD_ADD then
 		return UnitModifySkillPoints(whichHero, value)
 	elseif modifyMethod == bj_MODIFYMETHOD_SUB then
@@ -2759,22 +2761,22 @@ function ModifyHeroSkillPoints(whichHero, modifyMethod, value)
 end
 
 --===========================================================================
-function UnitDropItemPointBJ(whichUnit, whichItem, x, y)
+function bj.UnitDropItemPointBJ(whichUnit, whichItem, x, y)
 	return UnitDropItemPoint(whichUnit, whichItem, x, y)
 end
 
 --===========================================================================
-function UnitDropItemPointLoc(whichUnit, whichItem, loc)
+function bj.UnitDropItemPointLoc(whichUnit, whichItem, loc)
 	return UnitDropItemPoint(whichUnit, whichItem, GetLocationX(loc), GetLocationY(loc))
 end
 
 --===========================================================================
-function UnitDropItemSlotBJ(whichUnit, whichItem, slot)
+function bj.UnitDropItemSlotBJ(whichUnit, whichItem, slot)
 	return UnitDropItemSlot(whichUnit, whichItem, slot - 1)
 end
 
 --===========================================================================
-function UnitDropItemTargetBJ(whichUnit, whichItem, target)
+function bj.UnitDropItemTargetBJ(whichUnit, whichItem, target)
 	return UnitDropItemTarget(whichUnit, whichItem, target)
 end
 
@@ -2782,26 +2784,26 @@ end
 -- Two distinct trigger actions can't share the same function name, so this
 -- dummy function simply mimics the behavior of an existing call.
 --
-function UnitUseItemDestructable(whichUnit, whichItem, target)
+function bj.UnitUseItemDestructable(whichUnit, whichItem, target)
 	return UnitUseItemTarget(whichUnit, whichItem, target)
 end
 
 --===========================================================================
-function UnitUseItemPointLoc(whichUnit, whichItem, loc)
+function bj.UnitUseItemPointLoc(whichUnit, whichItem, loc)
 	return UnitUseItemPoint(whichUnit, whichItem, GetLocationX(loc), GetLocationY(loc))
 end
 
 --===========================================================================
 -- Translates 0-based slot indices to 1-based slot indices.
 --
-function UnitItemInSlotBJ(whichUnit, itemSlot)
+function bj.UnitItemInSlotBJ(whichUnit, itemSlot)
 	return UnitItemInSlot(whichUnit, itemSlot - 1)
 end
 
 --===========================================================================
 -- Translates 0-based slot indices to 1-based slot indices.
 --
-function GetInventoryIndexOfItemTypeBJ(whichUnit, itemId)
+function bj.GetInventoryIndexOfItemTypeBJ(whichUnit, itemId)
 	local index
 	local indexItem
 
@@ -2819,7 +2821,7 @@ function GetInventoryIndexOfItemTypeBJ(whichUnit, itemId)
 end
 
 --===========================================================================
-function GetItemOfTypeFromUnitBJ(whichUnit, itemId)
+function bj.GetItemOfTypeFromUnitBJ(whichUnit, itemId)
 	local index = GetInventoryIndexOfItemTypeBJ(whichUnit, itemId)
 
 	if index == 0 then
@@ -2830,12 +2832,12 @@ function GetItemOfTypeFromUnitBJ(whichUnit, itemId)
 end
 
 --===========================================================================
-function UnitHasItemOfTypeBJ(whichUnit, itemId)
+function bj.UnitHasItemOfTypeBJ(whichUnit, itemId)
 	return GetInventoryIndexOfItemTypeBJ(whichUnit, itemId) > 0
 end
 
 --===========================================================================
-function UnitInventoryCount(whichUnit)
+function bj.UnitInventoryCount(whichUnit)
 	local index = 0
 	local count = 0
 
@@ -2852,69 +2854,69 @@ function UnitInventoryCount(whichUnit)
 end
 
 --===========================================================================
-function UnitInventorySizeBJ(whichUnit)
+function bj.UnitInventorySizeBJ(whichUnit)
 	return UnitInventorySize(whichUnit)
 end
 
 --===========================================================================
-function SetItemInvulnerableBJ(whichItem, flag)
+function bj.SetItemInvulnerableBJ(whichItem, flag)
 	SetItemInvulnerable(whichItem, flag)
 end
 
 --===========================================================================
-function SetItemDropOnDeathBJ(whichItem, flag)
+function bj.SetItemDropOnDeathBJ(whichItem, flag)
 	SetItemDropOnDeath(whichItem, flag)
 end
 
 --===========================================================================
-function SetItemDroppableBJ(whichItem, flag)
+function bj.SetItemDroppableBJ(whichItem, flag)
 	SetItemDroppable(whichItem, flag)
 end
 
 --===========================================================================
-function SetItemPlayerBJ(whichItem, whichPlayer, changeColor)
+function bj.SetItemPlayerBJ(whichItem, whichPlayer, changeColor)
 	SetItemPlayer(whichItem, whichPlayer, changeColor)
 end
 
 --===========================================================================
-function SetItemVisibleBJ(show, whichItem)
+function bj.SetItemVisibleBJ(show, whichItem)
 	SetItemVisible(whichItem, show)
 end
 
 --===========================================================================
-function IsItemHiddenBJ(whichItem)
+function bj.IsItemHiddenBJ(whichItem)
 	return not IsItemVisible(whichItem)
 end
 
 --===========================================================================
-function ChooseRandomItemBJ(level)
+function bj.ChooseRandomItemBJ(level)
 	return ChooseRandomItem(level)
 end
 
 --===========================================================================
-function ChooseRandomItemExBJ(level, whichType)
+function bj.ChooseRandomItemExBJ(level, whichType)
 	return ChooseRandomItemEx(whichType, level)
 end
 
 --===========================================================================
-function ChooseRandomNPBuildingBJ()
+function bj.ChooseRandomNPBuildingBJ()
 	return ChooseRandomNPBuilding()
 end
 
 --===========================================================================
-function ChooseRandomCreepBJ(level)
+function bj.ChooseRandomCreepBJ(level)
 	return ChooseRandomCreep(level)
 end
 
 --===========================================================================
-function EnumItemsInRectBJ(r, actionFunc)
+function bj.EnumItemsInRectBJ(r, actionFunc)
 	EnumItemsInRect(r, nil, actionFunc)
 end
 
 --===========================================================================
 -- See GroupPickRandomUnitEnum for the details of this algorithm.
 --
-function RandomItemInRectBJEnum()
+function bj.RandomItemInRectBJEnum()
 	bj_itemRandomConsidered = bj_itemRandomConsidered + 1
 	if GetRandomInt(1, bj_itemRandomConsidered) == 1 then
 		bj_itemRandomCurrentPick = GetEnumItem()
@@ -2924,7 +2926,7 @@ end
 --===========================================================================
 -- Picks a random item from within a rect, matching a condition
 --
-function RandomItemInRectBJ(r, filter)
+function bj.RandomItemInRectBJ(r, filter)
 	bj_itemRandomConsidered = 0
 	bj_itemRandomCurrentPick = nil
 	EnumItemsInRect(r, filter, RandomItemInRectBJEnum)
@@ -2935,12 +2937,12 @@ end
 --===========================================================================
 -- Picks a random item from within a rect
 --
-function RandomItemInRectSimpleBJ(r)
+function bj.RandomItemInRectSimpleBJ(r)
 	return RandomItemInRectBJ(r, nil)
 end
 
 --===========================================================================
-function CheckItemStatus(whichItem, status)
+function bj.CheckItemStatus(whichItem, status)
 	if status == bj_ITEM_STATUS_HIDDEN then
 		return not IsItemVisible(whichItem)
 	elseif status == bj_ITEM_STATUS_OWNED then
@@ -2960,7 +2962,7 @@ function CheckItemStatus(whichItem, status)
 end
 
 --===========================================================================
-function CheckItemcodeStatus(itemId, status)
+function bj.CheckItemcodeStatus(itemId, status)
 	if status == bj_ITEMCODE_STATUS_POWERUP then
 		return IsItemIdPowerup(itemId)
 	elseif status == bj_ITEMCODE_STATUS_SELLABLE then
@@ -2982,17 +2984,17 @@ end
 --***************************************************************************
 
 --===========================================================================
-function UnitId2OrderIdBJ(unitId)
+function bj.UnitId2OrderIdBJ(unitId)
 	return unitId
 end
 
 --===========================================================================
-function String2UnitIdBJ(unitIdString)
+function bj.String2UnitIdBJ(unitIdString)
 	return UnitId(unitIdString)
 end
 
 --===========================================================================
-function UnitId2StringBJ(unitId)
+function bj.UnitId2StringBJ(unitId)
 	local unitString = UnitId2String(unitId)
 
 	if unitString ~= nil then
@@ -3004,7 +3006,7 @@ function UnitId2StringBJ(unitId)
 end
 
 --===========================================================================
-function String2OrderIdBJ(orderIdString)
+function bj.String2OrderIdBJ(orderIdString)
 	local orderId
 
 	-- Check to see if it's a generic order.
@@ -3024,7 +3026,7 @@ function String2OrderIdBJ(orderIdString)
 end
 
 --===========================================================================
-function OrderId2StringBJ(orderId)
+function bj.OrderId2StringBJ(orderId)
 	local orderString
 
 	-- Check to see if it's a generic order.
@@ -3044,17 +3046,17 @@ function OrderId2StringBJ(orderId)
 end
 
 --===========================================================================
-function GetIssuedOrderIdBJ()
+function bj.GetIssuedOrderIdBJ()
 	return GetIssuedOrderId()
 end
 
 --===========================================================================
-function GetKillingUnitBJ()
+function bj.GetKillingUnitBJ()
 	return GetKillingUnit()
 end
 
 --===========================================================================
-function CreateUnitAtLocSaveLast(id, unitid, loc, face)
+function bj.CreateUnitAtLocSaveLast(id, unitid, loc, face)
 	if unitid == 1969713004 then
 		bj_lastCreatedUnit = CreateBlightedGoldmine(id, GetLocationX(loc), GetLocationY(loc), face)
 	else
@@ -3065,12 +3067,12 @@ function CreateUnitAtLocSaveLast(id, unitid, loc, face)
 end
 
 --===========================================================================
-function GetLastCreatedUnit()
+function bj.GetLastCreatedUnit()
 	return bj_lastCreatedUnit
 end
 
 --===========================================================================
-function CreateNUnitsAtLoc(count, unitId, whichPlayer, loc, face)
+function bj.CreateNUnitsAtLoc(count, unitId, whichPlayer, loc, face)
 	GroupClear(bj_lastCreatedGroup)
 	for _ in _loop_() do
 		count = count - 1
@@ -3082,35 +3084,35 @@ function CreateNUnitsAtLoc(count, unitId, whichPlayer, loc, face)
 end
 
 --===========================================================================
-function CreateNUnitsAtLocFacingLocBJ(count, unitId, whichPlayer, loc, lookAt)
+function bj.CreateNUnitsAtLocFacingLocBJ(count, unitId, whichPlayer, loc, lookAt)
 	return CreateNUnitsAtLoc(count, unitId, whichPlayer, loc, AngleBetweenPoints(loc, lookAt))
 end
 
 --===========================================================================
-function GetLastCreatedGroupEnum()
+function bj.GetLastCreatedGroupEnum()
 	GroupAddUnit(bj_groupLastCreatedDest, GetEnumUnit())
 end
 
 --===========================================================================
-function GetLastCreatedGroup()
+function bj.GetLastCreatedGroup()
 	bj_groupLastCreatedDest = CreateGroup()
 	ForGroup(bj_lastCreatedGroup, GetLastCreatedGroupEnum)
 	return bj_groupLastCreatedDest
 end
 
 --===========================================================================
-function CreateCorpseLocBJ(unitid, whichPlayer, loc)
+function bj.CreateCorpseLocBJ(unitid, whichPlayer, loc)
 	bj_lastCreatedUnit = CreateCorpse(whichPlayer, unitid, GetLocationX(loc), GetLocationY(loc), GetRandomReal(0, 360))
 	return bj_lastCreatedUnit
 end
 
 --===========================================================================
-function UnitSuspendDecayBJ(suspend, whichUnit)
+function bj.UnitSuspendDecayBJ(suspend, whichUnit)
 	UnitSuspendDecay(whichUnit, suspend)
 end
 
 --===========================================================================
-function DelayedSuspendDecayStopAnimEnum()
+function bj.DelayedSuspendDecayStopAnimEnum()
 	local enumUnit = GetEnumUnit()
 
 	if GetUnitState(enumUnit, UNIT_STATE_LIFE) <= 0 then
@@ -3119,7 +3121,7 @@ function DelayedSuspendDecayStopAnimEnum()
 end
 
 --===========================================================================
-function DelayedSuspendDecayBoneEnum()
+function bj.DelayedSuspendDecayBoneEnum()
 	local enumUnit = GetEnumUnit()
 
 	if GetUnitState(enumUnit, UNIT_STATE_LIFE) <= 0 then
@@ -3133,7 +3135,7 @@ end
 -- initial corpse fades away, so we reset it now.  It's best not to show
 -- off corpses thus created until after this grace period has passed.
 --
-function DelayedSuspendDecayFleshEnum()
+function bj.DelayedSuspendDecayFleshEnum()
 	local enumUnit = GetEnumUnit()
 
 	if GetUnitState(enumUnit, UNIT_STATE_LIFE) <= 0 then
@@ -3147,7 +3149,7 @@ end
 -- Waits a short period of time to ensure that the corpse is decaying, and
 -- then suspend the animation and corpse decay.
 --
-function DelayedSuspendDecay()
+function bj.DelayedSuspendDecay()
 	local boneGroup
 	local fleshGroup
 
@@ -3174,14 +3176,14 @@ function DelayedSuspendDecay()
 end
 
 --===========================================================================
-function DelayedSuspendDecayCreate()
+function bj.DelayedSuspendDecayCreate()
 	bj_delayedSuspendDecayTrig = CreateTrigger()
 	TriggerRegisterTimerExpireEvent(bj_delayedSuspendDecayTrig, bj_delayedSuspendDecayTimer)
 	TriggerAddAction(bj_delayedSuspendDecayTrig, DelayedSuspendDecay)
 end
 
 --===========================================================================
-function CreatePermanentCorpseLocBJ(style, unitid, whichPlayer, loc, facing)
+function bj.CreatePermanentCorpseLocBJ(style, unitid, whichPlayer, loc, facing)
 	bj_lastCreatedUnit = CreateCorpse(whichPlayer, unitid, GetLocationX(loc), GetLocationY(loc), facing)
 	SetUnitBlendTime(bj_lastCreatedUnit, 0)
 
@@ -3202,12 +3204,12 @@ function CreatePermanentCorpseLocBJ(style, unitid, whichPlayer, loc, facing)
 end
 
 --===========================================================================
-function GetUnitStateSwap(whichState, whichUnit)
+function bj.GetUnitStateSwap(whichState, whichUnit)
 	return GetUnitState(whichUnit, whichState)
 end
 
 --===========================================================================
-function GetUnitStatePercent(whichUnit, whichState, whichMaxState)
+function bj.GetUnitStatePercent(whichUnit, whichState, whichMaxState)
 	local value = GetUnitState(whichUnit, whichState)
 	local maxValue = GetUnitState(whichUnit, whichMaxState)
 
@@ -3220,44 +3222,44 @@ function GetUnitStatePercent(whichUnit, whichState, whichMaxState)
 end
 
 --===========================================================================
-function GetUnitLifePercent(whichUnit)
+function bj.GetUnitLifePercent(whichUnit)
 	return GetUnitStatePercent(whichUnit, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE)
 end
 
 --===========================================================================
-function GetUnitManaPercent(whichUnit)
+function bj.GetUnitManaPercent(whichUnit)
 	return GetUnitStatePercent(whichUnit, UNIT_STATE_MANA, UNIT_STATE_MAX_MANA)
 end
 
 --===========================================================================
-function SelectUnitSingle(whichUnit)
+function bj.SelectUnitSingle(whichUnit)
 	ClearSelection()
 	SelectUnit(whichUnit, true)
 end
 
 --===========================================================================
-function SelectGroupBJEnum()
+function bj.SelectGroupBJEnum()
 	SelectUnit(GetEnumUnit(), true)
 end
 
 --===========================================================================
-function SelectGroupBJ(g)
+function bj.SelectGroupBJ(g)
 	ClearSelection()
 	ForGroup(g, SelectGroupBJEnum)
 end
 
 --===========================================================================
-function SelectUnitAdd(whichUnit)
+function bj.SelectUnitAdd(whichUnit)
 	SelectUnit(whichUnit, true)
 end
 
 --===========================================================================
-function SelectUnitRemove(whichUnit)
+function bj.SelectUnitRemove(whichUnit)
 	SelectUnit(whichUnit, false)
 end
 
 --===========================================================================
-function ClearSelectionForPlayer(whichPlayer)
+function bj.ClearSelectionForPlayer(whichPlayer)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		ClearSelection()
@@ -3265,7 +3267,7 @@ function ClearSelectionForPlayer(whichPlayer)
 end
 
 --===========================================================================
-function SelectUnitForPlayerSingle(whichUnit, whichPlayer)
+function bj.SelectUnitForPlayerSingle(whichUnit, whichPlayer)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		ClearSelection()
@@ -3274,7 +3276,7 @@ function SelectUnitForPlayerSingle(whichUnit, whichPlayer)
 end
 
 --===========================================================================
-function SelectGroupForPlayerBJ(g, whichPlayer)
+function bj.SelectGroupForPlayerBJ(g, whichPlayer)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		ClearSelection()
@@ -3283,7 +3285,7 @@ function SelectGroupForPlayerBJ(g, whichPlayer)
 end
 
 --===========================================================================
-function SelectUnitAddForPlayer(whichUnit, whichPlayer)
+function bj.SelectUnitAddForPlayer(whichUnit, whichPlayer)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SelectUnit(whichUnit, true)
@@ -3291,7 +3293,7 @@ function SelectUnitAddForPlayer(whichUnit, whichPlayer)
 end
 
 --===========================================================================
-function SelectUnitRemoveForPlayer(whichUnit, whichPlayer)
+function bj.SelectUnitRemoveForPlayer(whichUnit, whichPlayer)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SelectUnit(whichUnit, false)
@@ -3299,37 +3301,37 @@ function SelectUnitRemoveForPlayer(whichUnit, whichPlayer)
 end
 
 --===========================================================================
-function SetUnitLifeBJ(whichUnit, newValue)
+function bj.SetUnitLifeBJ(whichUnit, newValue)
 	SetUnitState(whichUnit, UNIT_STATE_LIFE, RMaxBJ(0, newValue))
 end
 
 --===========================================================================
-function SetUnitManaBJ(whichUnit, newValue)
+function bj.SetUnitManaBJ(whichUnit, newValue)
 	SetUnitState(whichUnit, UNIT_STATE_MANA, RMaxBJ(0, newValue))
 end
 
 --===========================================================================
-function SetUnitLifePercentBJ(whichUnit, percent)
+function bj.SetUnitLifePercentBJ(whichUnit, percent)
 	SetUnitState(whichUnit, UNIT_STATE_LIFE, GetUnitState(whichUnit, UNIT_STATE_MAX_LIFE) * RMaxBJ(0, percent) * 0.01)
 end
 
 --===========================================================================
-function SetUnitManaPercentBJ(whichUnit, percent)
+function bj.SetUnitManaPercentBJ(whichUnit, percent)
 	SetUnitState(whichUnit, UNIT_STATE_MANA, GetUnitState(whichUnit, UNIT_STATE_MAX_MANA) * RMaxBJ(0, percent) * 0.01)
 end
 
 --===========================================================================
-function IsUnitDeadBJ(whichUnit)
+function bj.IsUnitDeadBJ(whichUnit)
 	return GetUnitState(whichUnit, UNIT_STATE_LIFE) <= 0
 end
 
 --===========================================================================
-function IsUnitAliveBJ(whichUnit)
+function bj.IsUnitAliveBJ(whichUnit)
 	return not IsUnitDeadBJ(whichUnit)
 end
 
 --===========================================================================
-function IsUnitGroupDeadBJEnum()
+function bj.IsUnitGroupDeadBJEnum()
 	if not IsUnitDeadBJ(GetEnumUnit()) then
 		bj_isUnitGroupDeadResult = false
 	end
@@ -3338,7 +3340,7 @@ end
 --===========================================================================
 -- Returns true if every unit of the group is dead.
 --
-function IsUnitGroupDeadBJ(g)
+function bj.IsUnitGroupDeadBJ(g)
 	-- If the user wants the group destroyed, remember that fact and clear
 	-- the flag, in case it is used again in the callback.
 	local wantDestroy = bj_wantDestroyGroup
@@ -3355,14 +3357,14 @@ function IsUnitGroupDeadBJ(g)
 end
 
 --===========================================================================
-function IsUnitGroupEmptyBJEnum()
+function bj.IsUnitGroupEmptyBJEnum()
 	bj_isUnitGroupEmptyResult = false
 end
 
 --===========================================================================
 -- Returns true if the group contains no units.
 --
-function IsUnitGroupEmptyBJ(g)
+function bj.IsUnitGroupEmptyBJ(g)
 	-- If the user wants the group destroyed, remember that fact and clear
 	-- the flag, in case it is used again in the callback.
 	local wantDestroy = bj_wantDestroyGroup
@@ -3379,7 +3381,7 @@ function IsUnitGroupEmptyBJ(g)
 end
 
 --===========================================================================
-function IsUnitGroupInRectBJEnum()
+function bj.IsUnitGroupInRectBJEnum()
 	if not RectContainsUnit(bj_isUnitGroupInRectRect, GetEnumUnit()) then
 		bj_isUnitGroupInRectResult = false
 	end
@@ -3388,7 +3390,7 @@ end
 --===========================================================================
 -- Returns true if every unit of the group is within the given rect.
 --
-function IsUnitGroupInRectBJ(g, r)
+function bj.IsUnitGroupInRectBJ(g, r)
 	bj_isUnitGroupInRectResult = true
 	bj_isUnitGroupInRectRect = r
 	ForGroup(g, IsUnitGroupInRectBJEnum)
@@ -3396,17 +3398,17 @@ function IsUnitGroupInRectBJ(g, r)
 end
 
 --===========================================================================
-function IsUnitHiddenBJ(whichUnit)
+function bj.IsUnitHiddenBJ(whichUnit)
 	return IsUnitHidden(whichUnit)
 end
 
 --===========================================================================
-function ShowUnitHide(whichUnit)
+function bj.ShowUnitHide(whichUnit)
 	ShowUnit(whichUnit, false)
 end
 
 --===========================================================================
-function ShowUnitShow(whichUnit)
+function bj.ShowUnitShow(whichUnit)
 	-- Prevent dead heroes from being unhidden.
 	if IsUnitType(whichUnit, UNIT_TYPE_HERO) and IsUnitDeadBJ(whichUnit) then
 		return
@@ -3416,12 +3418,12 @@ function ShowUnitShow(whichUnit)
 end
 
 --===========================================================================
-function IssueHauntOrderAtLocBJFilter()
+function bj.IssueHauntOrderAtLocBJFilter()
 	return GetUnitTypeId(GetFilterUnit()) == 1852272492
 end
 
 --===========================================================================
-function IssueHauntOrderAtLocBJ(whichPeon, loc)
+function bj.IssueHauntOrderAtLocBJ(whichPeon, loc)
 	local g = nil
 	local goldMine = nil
 
@@ -3441,7 +3443,7 @@ function IssueHauntOrderAtLocBJ(whichPeon, loc)
 end
 
 --===========================================================================
-function IssueBuildOrderByIdLocBJ(whichPeon, unitId, loc)
+function bj.IssueBuildOrderByIdLocBJ(whichPeon, unitId, loc)
 	if unitId == 1969713004 then
 		return IssueHauntOrderAtLocBJ(whichPeon, loc)
 	else
@@ -3450,37 +3452,37 @@ function IssueBuildOrderByIdLocBJ(whichPeon, unitId, loc)
 end
 
 --===========================================================================
-function IssueTrainOrderByIdBJ(whichUnit, unitId)
+function bj.IssueTrainOrderByIdBJ(whichUnit, unitId)
 	return IssueImmediateOrderById(whichUnit, unitId)
 end
 
 --===========================================================================
-function GroupTrainOrderByIdBJ(g, unitId)
+function bj.GroupTrainOrderByIdBJ(g, unitId)
 	return GroupImmediateOrderById(g, unitId)
 end
 
 --===========================================================================
-function IssueUpgradeOrderByIdBJ(whichUnit, techId)
+function bj.IssueUpgradeOrderByIdBJ(whichUnit, techId)
 	return IssueImmediateOrderById(whichUnit, techId)
 end
 
 --===========================================================================
-function GetAttackedUnitBJ()
+function bj.GetAttackedUnitBJ()
 	return GetTriggerUnit()
 end
 
 --===========================================================================
-function SetUnitFlyHeightBJ(whichUnit, newHeight, rate)
+function bj.SetUnitFlyHeightBJ(whichUnit, newHeight, rate)
 	SetUnitFlyHeight(whichUnit, newHeight, rate)
 end
 
 --===========================================================================
-function SetUnitTurnSpeedBJ(whichUnit, turnSpeed)
+function bj.SetUnitTurnSpeedBJ(whichUnit, turnSpeed)
 	SetUnitTurnSpeed(whichUnit, turnSpeed)
 end
 
 --===========================================================================
-function SetUnitPropWindowBJ(whichUnit, propWindow)
+function bj.SetUnitPropWindowBJ(whichUnit, propWindow)
 	local angle = propWindow
 	if angle <= 0 then
 		angle = 1
@@ -3493,52 +3495,52 @@ function SetUnitPropWindowBJ(whichUnit, propWindow)
 end
 
 --===========================================================================
-function GetUnitPropWindowBJ(whichUnit)
+function bj.GetUnitPropWindowBJ(whichUnit)
 	return GetUnitPropWindow(whichUnit) * bj_RADTODEG
 end
 
 --===========================================================================
-function GetUnitDefaultPropWindowBJ(whichUnit)
+function bj.GetUnitDefaultPropWindowBJ(whichUnit)
 	return GetUnitDefaultPropWindow(whichUnit)
 end
 
 --===========================================================================
-function SetUnitBlendTimeBJ(whichUnit, blendTime)
+function bj.SetUnitBlendTimeBJ(whichUnit, blendTime)
 	SetUnitBlendTime(whichUnit, blendTime)
 end
 
 --===========================================================================
-function SetUnitAcquireRangeBJ(whichUnit, acquireRange)
+function bj.SetUnitAcquireRangeBJ(whichUnit, acquireRange)
 	SetUnitAcquireRange(whichUnit, acquireRange)
 end
 
 --===========================================================================
-function UnitSetCanSleepBJ(whichUnit, canSleep)
+function bj.UnitSetCanSleepBJ(whichUnit, canSleep)
 	UnitAddSleep(whichUnit, canSleep)
 end
 
 --===========================================================================
-function UnitCanSleepBJ(whichUnit)
+function bj.UnitCanSleepBJ(whichUnit)
 	return UnitCanSleep(whichUnit)
 end
 
 --===========================================================================
-function UnitWakeUpBJ(whichUnit)
+function bj.UnitWakeUpBJ(whichUnit)
 	UnitWakeUp(whichUnit)
 end
 
 --===========================================================================
-function UnitIsSleepingBJ(whichUnit)
+function bj.UnitIsSleepingBJ(whichUnit)
 	return UnitIsSleeping(whichUnit)
 end
 
 --===========================================================================
-function WakePlayerUnitsEnum()
+function bj.WakePlayerUnitsEnum()
 	UnitWakeUp(GetEnumUnit())
 end
 
 --===========================================================================
-function WakePlayerUnits(whichPlayer)
+function bj.WakePlayerUnits(whichPlayer)
 	local g = CreateGroup()
 	GroupEnumUnitsOfPlayer(g, whichPlayer, nil)
 	ForGroup(g, WakePlayerUnitsEnum)
@@ -3546,7 +3548,7 @@ function WakePlayerUnits(whichPlayer)
 end
 
 --===========================================================================
-function EnableCreepSleepBJ(enable)
+function bj.EnableCreepSleepBJ(enable)
 	SetPlayerState(Player(PLAYER_NEUTRAL_AGGRESSIVE), PLAYER_STATE_NO_CREEP_SLEEP, IntegerTertiaryOp(enable, 0, 1))
 
 	-- If we're disabling, attempt to wake any already-sleeping creeps.
@@ -3556,23 +3558,23 @@ function EnableCreepSleepBJ(enable)
 end
 
 --===========================================================================
-function UnitGenerateAlarms(whichUnit, generate)
+function bj.UnitGenerateAlarms(whichUnit, generate)
 	return UnitIgnoreAlarm(whichUnit, not generate)
 end
 
 --===========================================================================
-function DoesUnitGenerateAlarms(whichUnit)
+function bj.DoesUnitGenerateAlarms(whichUnit)
 	return not UnitIgnoreAlarmToggled(whichUnit)
 end
 
 --===========================================================================
-function PauseAllUnitsBJEnum()
+function bj.PauseAllUnitsBJEnum()
 	PauseUnit(GetEnumUnit(), bj_pauseAllUnitsFlag)
 end
 
 --===========================================================================
 -- Pause all units 
-function PauseAllUnitsBJ(pause)
+function bj.PauseAllUnitsBJ(pause)
 	local index
 	local indexPlayer
 	local g
@@ -3600,32 +3602,32 @@ function PauseAllUnitsBJ(pause)
 end
 
 --===========================================================================
-function PauseUnitBJ(pause, whichUnit)
+function bj.PauseUnitBJ(pause, whichUnit)
 	PauseUnit(whichUnit, pause)
 end
 
 --===========================================================================
-function IsUnitPausedBJ(whichUnit)
+function bj.IsUnitPausedBJ(whichUnit)
 	return IsUnitPaused(whichUnit)
 end
 
 --===========================================================================
-function UnitPauseTimedLifeBJ(flag, whichUnit)
+function bj.UnitPauseTimedLifeBJ(flag, whichUnit)
 	UnitPauseTimedLife(whichUnit, flag)
 end
 
 --===========================================================================
-function UnitApplyTimedLifeBJ(duration, buffId, whichUnit)
+function bj.UnitApplyTimedLifeBJ(duration, buffId, whichUnit)
 	UnitApplyTimedLife(whichUnit, buffId, duration)
 end
 
 --===========================================================================
-function UnitShareVisionBJ(share, whichUnit, whichPlayer)
+function bj.UnitShareVisionBJ(share, whichUnit, whichPlayer)
 	UnitShareVision(whichUnit, whichPlayer, share)
 end
 
 --===========================================================================
-function UnitRemoveBuffsBJ(buffType, whichUnit)
+function bj.UnitRemoveBuffsBJ(buffType, whichUnit)
 	if buffType == bj_REMOVEBUFFS_POSITIVE then
 		UnitRemoveBuffs(whichUnit, true, false)
 	elseif buffType == bj_REMOVEBUFFS_NEGATIVE then
@@ -3640,7 +3642,7 @@ function UnitRemoveBuffsBJ(buffType, whichUnit)
 end
 
 --===========================================================================
-function UnitRemoveBuffsExBJ(polarity, resist, whichUnit, bTLife, bAura)
+function bj.UnitRemoveBuffsExBJ(polarity, resist, whichUnit, bTLife, bAura)
 	local bPos = polarity == bj_BUFF_POLARITY_EITHER or polarity == bj_BUFF_POLARITY_POSITIVE
 	local bNeg = polarity == bj_BUFF_POLARITY_EITHER or polarity == bj_BUFF_POLARITY_NEGATIVE
 	local bMagic = resist == bj_BUFF_RESIST_BOTH or resist == bj_BUFF_RESIST_MAGIC
@@ -3650,7 +3652,7 @@ function UnitRemoveBuffsExBJ(polarity, resist, whichUnit, bTLife, bAura)
 end
 
 --===========================================================================
-function UnitCountBuffsExBJ(polarity, resist, whichUnit, bTLife, bAura)
+function bj.UnitCountBuffsExBJ(polarity, resist, whichUnit, bTLife, bAura)
 	local bPos = polarity == bj_BUFF_POLARITY_EITHER or polarity == bj_BUFF_POLARITY_POSITIVE
 	local bNeg = polarity == bj_BUFF_POLARITY_EITHER or polarity == bj_BUFF_POLARITY_NEGATIVE
 	local bMagic = resist == bj_BUFF_RESIST_BOTH or resist == bj_BUFF_RESIST_MAGIC
@@ -3660,63 +3662,63 @@ function UnitCountBuffsExBJ(polarity, resist, whichUnit, bTLife, bAura)
 end
 
 --===========================================================================
-function UnitRemoveAbilityBJ(abilityId, whichUnit)
+function bj.UnitRemoveAbilityBJ(abilityId, whichUnit)
 	return UnitRemoveAbility(whichUnit, abilityId)
 end
 
 --===========================================================================
-function UnitAddAbilityBJ(abilityId, whichUnit)
+function bj.UnitAddAbilityBJ(abilityId, whichUnit)
 	return UnitAddAbility(whichUnit, abilityId)
 end
 
 --===========================================================================
-function UnitRemoveTypeBJ(whichType, whichUnit)
+function bj.UnitRemoveTypeBJ(whichType, whichUnit)
 	return UnitRemoveType(whichUnit, whichType)
 end
 
 --===========================================================================
-function UnitAddTypeBJ(whichType, whichUnit)
+function bj.UnitAddTypeBJ(whichType, whichUnit)
 	return UnitAddType(whichUnit, whichType)
 end
 
 --===========================================================================
-function UnitMakeAbilityPermanentBJ(permanent, abilityId, whichUnit)
+function bj.UnitMakeAbilityPermanentBJ(permanent, abilityId, whichUnit)
 	return UnitMakeAbilityPermanent(whichUnit, permanent, abilityId)
 end
 
 --===========================================================================
-function SetUnitExplodedBJ(whichUnit, exploded)
+function bj.SetUnitExplodedBJ(whichUnit, exploded)
 	SetUnitExploded(whichUnit, exploded)
 end
 
 --===========================================================================
-function ExplodeUnitBJ(whichUnit)
+function bj.ExplodeUnitBJ(whichUnit)
 	SetUnitExploded(whichUnit, true)
 	KillUnit(whichUnit)
 end
 
 --===========================================================================
-function GetTransportUnitBJ()
+function bj.GetTransportUnitBJ()
 	return GetTransportUnit()
 end
 
 --===========================================================================
-function GetLoadedUnitBJ()
+function bj.GetLoadedUnitBJ()
 	return GetLoadedUnit()
 end
 
 --===========================================================================
-function IsUnitInTransportBJ(whichUnit, whichTransport)
+function bj.IsUnitInTransportBJ(whichUnit, whichTransport)
 	return IsUnitInTransport(whichUnit, whichTransport)
 end
 
 --===========================================================================
-function IsUnitLoadedBJ(whichUnit)
+function bj.IsUnitLoadedBJ(whichUnit)
 	return IsUnitLoaded(whichUnit)
 end
 
 --===========================================================================
-function IsUnitIllusionBJ(whichUnit)
+function bj.IsUnitIllusionBJ(whichUnit)
 	return IsUnitIllusion(whichUnit)
 end
 
@@ -3724,7 +3726,7 @@ end
 -- This attempts to replace a unit with a new unit type by creating a new
 -- unit of the desired type using the old unit's location, facing, etc.
 --
-function ReplaceUnitBJ(whichUnit, newUnitId, unitStateMethod)
+function bj.ReplaceUnitBJ(whichUnit, newUnitId, unitStateMethod)
 	local oldUnit = whichUnit
 	local newUnit
 	local wasHidden
@@ -3814,54 +3816,54 @@ function ReplaceUnitBJ(whichUnit, newUnitId, unitStateMethod)
 end
 
 --===========================================================================
-function GetLastReplacedUnitBJ()
+function bj.GetLastReplacedUnitBJ()
 	return bj_lastReplacedUnit
 end
 
 --===========================================================================
-function SetUnitPositionLocFacingBJ(whichUnit, loc, facing)
+function bj.SetUnitPositionLocFacingBJ(whichUnit, loc, facing)
 	SetUnitPositionLoc(whichUnit, loc)
 	SetUnitFacing(whichUnit, facing)
 end
 
 --===========================================================================
-function SetUnitPositionLocFacingLocBJ(whichUnit, loc, lookAt)
+function bj.SetUnitPositionLocFacingLocBJ(whichUnit, loc, lookAt)
 	SetUnitPositionLoc(whichUnit, loc)
 	SetUnitFacing(whichUnit, AngleBetweenPoints(loc, lookAt))
 end
 
 --===========================================================================
-function AddItemToStockBJ(itemId, whichUnit, currentStock, stockMax)
+function bj.AddItemToStockBJ(itemId, whichUnit, currentStock, stockMax)
 	AddItemToStock(whichUnit, itemId, currentStock, stockMax)
 end
 
 --===========================================================================
-function AddUnitToStockBJ(unitId, whichUnit, currentStock, stockMax)
+function bj.AddUnitToStockBJ(unitId, whichUnit, currentStock, stockMax)
 	AddUnitToStock(whichUnit, unitId, currentStock, stockMax)
 end
 
 --===========================================================================
-function RemoveItemFromStockBJ(itemId, whichUnit)
+function bj.RemoveItemFromStockBJ(itemId, whichUnit)
 	RemoveItemFromStock(whichUnit, itemId)
 end
 
 --===========================================================================
-function RemoveUnitFromStockBJ(unitId, whichUnit)
+function bj.RemoveUnitFromStockBJ(unitId, whichUnit)
 	RemoveUnitFromStock(whichUnit, unitId)
 end
 
 --===========================================================================
-function SetUnitUseFoodBJ(enable, whichUnit)
+function bj.SetUnitUseFoodBJ(enable, whichUnit)
 	SetUnitUseFood(whichUnit, enable)
 end
 
 --===========================================================================
-function UnitDamagePointLoc(whichUnit, delay, radius, loc, amount, whichAttack, whichDamage)
+function bj.UnitDamagePointLoc(whichUnit, delay, radius, loc, amount, whichAttack, whichDamage)
 	return UnitDamagePoint(whichUnit, delay, radius, GetLocationX(loc), GetLocationY(loc), amount, true, false, whichAttack, whichDamage, WEAPON_TYPE_WHOKNOWS)
 end
 
 --===========================================================================
-function UnitDamageTargetBJ(whichUnit, target, amount, whichAttack, whichDamage)
+function bj.UnitDamageTargetBJ(whichUnit, target, amount, whichAttack, whichDamage)
 	return UnitDamageTarget(whichUnit, target, amount, true, false, whichAttack, whichDamage, WEAPON_TYPE_WHOKNOWS)
 end
 
@@ -3874,49 +3876,49 @@ end
 --***************************************************************************
 
 --===========================================================================
-function CreateDestructableLoc(objectid, loc, facing, scale, variation)
+function bj.CreateDestructableLoc(objectid, loc, facing, scale, variation)
 	bj_lastCreatedDestructable = CreateDestructable(objectid, GetLocationX(loc), GetLocationY(loc), facing, scale, variation)
 	return bj_lastCreatedDestructable
 end
 
 --===========================================================================
-function CreateDeadDestructableLocBJ(objectid, loc, facing, scale, variation)
+function bj.CreateDeadDestructableLocBJ(objectid, loc, facing, scale, variation)
 	bj_lastCreatedDestructable = CreateDeadDestructable(objectid, GetLocationX(loc), GetLocationY(loc), facing, scale, variation)
 	return bj_lastCreatedDestructable
 end
 
 --===========================================================================
-function GetLastCreatedDestructable()
+function bj.GetLastCreatedDestructable()
 	return bj_lastCreatedDestructable
 end
 
 --===========================================================================
-function ShowDestructableBJ(flag, d)
+function bj.ShowDestructableBJ(flag, d)
 	ShowDestructable(d, flag)
 end
 
 --===========================================================================
-function SetDestructableInvulnerableBJ(d, flag)
+function bj.SetDestructableInvulnerableBJ(d, flag)
 	SetDestructableInvulnerable(d, flag)
 end
 
 --===========================================================================
-function IsDestructableInvulnerableBJ(d)
+function bj.IsDestructableInvulnerableBJ(d)
 	return IsDestructableInvulnerable(d)
 end
 
 --===========================================================================
-function GetDestructableLoc(whichDestructable)
+function bj.GetDestructableLoc(whichDestructable)
 	return Location(GetDestructableX(whichDestructable), GetDestructableY(whichDestructable))
 end
 
 --===========================================================================
-function EnumDestructablesInRectAll(r, actionFunc)
+function bj.EnumDestructablesInRectAll(r, actionFunc)
 	EnumDestructablesInRect(r, nil, actionFunc)
 end
 
 --===========================================================================
-function EnumDestructablesInCircleBJFilter()
+function bj.EnumDestructablesInCircleBJFilter()
 	local destLoc = GetDestructableLoc(GetFilterDestructable())
 	local result
 
@@ -3926,19 +3928,19 @@ function EnumDestructablesInCircleBJFilter()
 end
 
 --===========================================================================
-function IsDestructableDeadBJ(d)
+function bj.IsDestructableDeadBJ(d)
 	return GetDestructableLife(d) <= 0
 end
 
 --===========================================================================
-function IsDestructableAliveBJ(d)
+function bj.IsDestructableAliveBJ(d)
 	return not IsDestructableDeadBJ(d)
 end
 
 --===========================================================================
 -- See GroupPickRandomUnitEnum for the details of this algorithm.
 --
-function RandomDestructableInRectBJEnum()
+function bj.RandomDestructableInRectBJEnum()
 	bj_destRandomConsidered = bj_destRandomConsidered + 1
 	if GetRandomInt(1, bj_destRandomConsidered) == 1 then
 		bj_destRandomCurrentPick = GetEnumDestructable()
@@ -3948,7 +3950,7 @@ end
 --===========================================================================
 -- Picks a random destructable from within a rect, matching a condition
 --
-function RandomDestructableInRectBJ(r, filter)
+function bj.RandomDestructableInRectBJ(r, filter)
 	bj_destRandomConsidered = 0
 	bj_destRandomCurrentPick = nil
 	EnumDestructablesInRect(r, filter, RandomDestructableInRectBJEnum)
@@ -3959,7 +3961,7 @@ end
 --===========================================================================
 -- Picks a random destructable from within a rect
 --
-function RandomDestructableInRectSimpleBJ(r)
+function bj.RandomDestructableInRectSimpleBJ(r)
 	return RandomDestructableInRectBJ(r, nil)
 end
 
@@ -3967,7 +3969,7 @@ end
 -- Enumerates within a rect, with a filter to narrow the enumeration down
 -- objects within a circular area.
 --
-function EnumDestructablesInCircleBJ(radius, loc, actionFunc)
+function bj.EnumDestructablesInCircleBJ(radius, loc, actionFunc)
 	local r
 
 	if radius >= 0 then
@@ -3980,17 +3982,17 @@ function EnumDestructablesInCircleBJ(radius, loc, actionFunc)
 end
 
 --===========================================================================
-function SetDestructableLifePercentBJ(d, percent)
+function bj.SetDestructableLifePercentBJ(d, percent)
 	SetDestructableLife(d, GetDestructableMaxLife(d) * percent * 0.01)
 end
 
 --===========================================================================
-function SetDestructableMaxLifeBJ(d, max)
+function bj.SetDestructableMaxLifeBJ(d, max)
 	SetDestructableMaxLife(d, max)
 end
 
 --===========================================================================
-function ModifyGateBJ(gateOperation, d)
+function bj.ModifyGateBJ(gateOperation, d)
 	if gateOperation == bj_GATEOPERATION_CLOSE then
 		if GetDestructableLife(d) <= 0 then
 			DestructableRestoreLife(d, GetDestructableMaxLife(d), true)
@@ -4014,7 +4016,7 @@ end
 --===========================================================================
 -- Determine the elevator's height from its occlusion height.
 --
-function GetElevatorHeight(d)
+function bj.GetElevatorHeight(d)
 	local height
 
 	height = 1 + R2I(GetDestructableOccluderHeight(d) / bj_CLIFFHEIGHT)
@@ -4030,7 +4032,7 @@ end
 -- determines the elevator's current height from its occlusion height.
 -- Arbitrarily changing an elevator's occlusion height is thus inadvisable.
 --
-function ChangeElevatorHeight(d, newHeight)
+function bj.ChangeElevatorHeight(d, newHeight)
 	local oldHeight
 
 	-- Cap the new height within the supported range.
@@ -4085,14 +4087,14 @@ end
 -- Grab the unit and throw his own coords in his face, forcing him to push
 -- and shove until he finds a spot where noone will bother him.
 --
-function NudgeUnitsInRectEnum()
+function bj.NudgeUnitsInRectEnum()
 	local nudgee = GetEnumUnit()
 
 	SetUnitPosition(nudgee, GetUnitX(nudgee), GetUnitY(nudgee))
 end
 
 --===========================================================================
-function NudgeItemsInRectEnum()
+function bj.NudgeItemsInRectEnum()
 	local nudgee = GetEnumItem()
 
 	SetItemPosition(nudgee, GetItemX(nudgee), GetItemY(nudgee))
@@ -4103,7 +4105,7 @@ end
 -- encourage them to find locations where they can peacefully coexist with
 -- pathing restrictions and live happy, fruitful lives.
 --
-function NudgeObjectsInRect(nudgeArea)
+function bj.NudgeObjectsInRect(nudgeArea)
 	local g
 
 	g = CreateGroup()
@@ -4115,7 +4117,7 @@ function NudgeObjectsInRect(nudgeArea)
 end
 
 --===========================================================================
-function NearbyElevatorExistsEnum()
+function bj.NearbyElevatorExistsEnum()
 	local d = GetEnumDestructable()
 	local dType = GetDestructableTypeId(d)
 
@@ -4125,7 +4127,7 @@ function NearbyElevatorExistsEnum()
 end
 
 --===========================================================================
-function NearbyElevatorExists(x, y)
+function bj.NearbyElevatorExists(x, y)
 	local findThreshold = 32
 	local r
 
@@ -4139,7 +4141,7 @@ function NearbyElevatorExists(x, y)
 end
 
 --===========================================================================
-function FindElevatorWallBlockerEnum()
+function bj.FindElevatorWallBlockerEnum()
 	bj_elevatorWallBlocker = GetEnumDestructable()
 end
 
@@ -4148,7 +4150,7 @@ end
 -- or reviving a pathing blocker at the appropriate location (and creating
 -- the pathing blocker in the first place, if it does not yet exist).
 --
-function ChangeElevatorWallBlocker(x, y, facing, open)
+function bj.ChangeElevatorWallBlocker(x, y, facing, open)
 	local blocker = nil
 	local findThreshold = 32
 	local nudgeLength = 4.25 * bj_CELLWIDTH
@@ -4199,7 +4201,7 @@ function ChangeElevatorWallBlocker(x, y, facing, open)
 end
 
 --===========================================================================
-function ChangeElevatorWalls(open, walls, d)
+function bj.ChangeElevatorWalls(open, walls, d)
 	local x = GetDestructableX(d)
 	local y = GetDestructableY(d)
 	local distToBlocker = 192
@@ -4239,27 +4241,27 @@ end
 --***************************************************************************
 
 --===========================================================================
-function WaygateActivateBJ(activate, waygate)
+function bj.WaygateActivateBJ(activate, waygate)
 	WaygateActivate(waygate, activate)
 end
 
 --===========================================================================
-function WaygateIsActiveBJ(waygate)
+function bj.WaygateIsActiveBJ(waygate)
 	return WaygateIsActive(waygate)
 end
 
 --===========================================================================
-function WaygateSetDestinationLocBJ(waygate, loc)
+function bj.WaygateSetDestinationLocBJ(waygate, loc)
 	WaygateSetDestination(waygate, GetLocationX(loc), GetLocationY(loc))
 end
 
 --===========================================================================
-function WaygateGetDestinationLocBJ(waygate)
+function bj.WaygateGetDestinationLocBJ(waygate)
 	return Location(WaygateGetDestinationX(waygate), WaygateGetDestinationY(waygate))
 end
 
 --===========================================================================
-function UnitSetUsesAltIconBJ(flag, whichUnit)
+function bj.UnitSetUsesAltIconBJ(flag, whichUnit)
 	UnitSetUsesAltIcon(whichUnit, flag)
 end
 
@@ -4272,7 +4274,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function ForceUIKeyBJ(whichPlayer, key)
+function bj.ForceUIKeyBJ(whichPlayer, key)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		ForceUIKey(key)
@@ -4280,7 +4282,7 @@ function ForceUIKeyBJ(whichPlayer, key)
 end
 
 --===========================================================================
-function ForceUICancelBJ(whichPlayer)
+function bj.ForceUICancelBJ(whichPlayer)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		ForceUICancel()
@@ -4296,7 +4298,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function ForGroupBJ(whichGroup, callback)
+function bj.ForGroupBJ(whichGroup, callback)
 	-- If the user wants the group destroyed, remember that fact and clear
 	-- the flag, in case it is used again in the callback.
 	local wantDestroy = bj_wantDestroyGroup
@@ -4311,22 +4313,22 @@ function ForGroupBJ(whichGroup, callback)
 end
 
 --===========================================================================
-function GroupAddUnitSimple(whichUnit, whichGroup)
+function bj.GroupAddUnitSimple(whichUnit, whichGroup)
 	GroupAddUnit(whichGroup, whichUnit)
 end
 
 --===========================================================================
-function GroupRemoveUnitSimple(whichUnit, whichGroup)
+function bj.GroupRemoveUnitSimple(whichUnit, whichGroup)
 	GroupRemoveUnit(whichGroup, whichUnit)
 end
 
 --===========================================================================
-function GroupAddGroupEnum()
+function bj.GroupAddGroupEnum()
 	GroupAddUnit(bj_groupAddGroupDest, GetEnumUnit())
 end
 
 --===========================================================================
-function GroupAddGroup(sourceGroup, destGroup)
+function bj.GroupAddGroup(sourceGroup, destGroup)
 	-- If the user wants the group destroyed, remember that fact and clear
 	-- the flag, in case it is used again in the callback.
 	local wantDestroy = bj_wantDestroyGroup
@@ -4342,12 +4344,12 @@ function GroupAddGroup(sourceGroup, destGroup)
 end
 
 --===========================================================================
-function GroupRemoveGroupEnum()
+function bj.GroupRemoveGroupEnum()
 	GroupRemoveUnit(bj_groupRemoveGroupDest, GetEnumUnit())
 end
 
 --===========================================================================
-function GroupRemoveGroup(sourceGroup, destGroup)
+function bj.GroupRemoveGroup(sourceGroup, destGroup)
 	-- If the user wants the group destroyed, remember that fact and clear
 	-- the flag, in case it is used again in the callback.
 	local wantDestroy = bj_wantDestroyGroup
@@ -4363,12 +4365,12 @@ function GroupRemoveGroup(sourceGroup, destGroup)
 end
 
 --===========================================================================
-function ForceAddPlayerSimple(whichPlayer, whichForce)
+function bj.ForceAddPlayerSimple(whichPlayer, whichForce)
 	ForceAddPlayer(whichForce, whichPlayer)
 end
 
 --===========================================================================
-function ForceRemovePlayerSimple(whichPlayer, whichForce)
+function bj.ForceRemovePlayerSimple(whichPlayer, whichForce)
 	ForceRemovePlayer(whichForce, whichPlayer)
 end
 
@@ -4379,7 +4381,7 @@ end
 -- The chance of picking a given unit over the "current pick" is 1/N, where N is
 -- the number of units considered thusfar (including the current consideration).
 --
-function GroupPickRandomUnitEnum()
+function bj.GroupPickRandomUnitEnum()
 	bj_groupRandomConsidered = bj_groupRandomConsidered + 1
 	if GetRandomInt(1, bj_groupRandomConsidered) == 1 then
 		bj_groupRandomCurrentPick = GetEnumUnit()
@@ -4389,7 +4391,7 @@ end
 --===========================================================================
 -- Picks a random unit from a group.
 --
-function GroupPickRandomUnit(whichGroup)
+function bj.GroupPickRandomUnit(whichGroup)
 	-- If the user wants the group destroyed, remember that fact and clear
 	-- the flag, in case it is used again in the callback.
 	local wantDestroy = bj_wantDestroyGroup
@@ -4409,7 +4411,7 @@ end
 --===========================================================================
 -- See GroupPickRandomUnitEnum for the details of this algorithm.
 --
-function ForcePickRandomPlayerEnum()
+function bj.ForcePickRandomPlayerEnum()
 	bj_forceRandomConsidered = bj_forceRandomConsidered + 1
 	if GetRandomInt(1, bj_forceRandomConsidered) == 1 then
 		bj_forceRandomCurrentPick = GetEnumPlayer()
@@ -4419,7 +4421,7 @@ end
 --===========================================================================
 -- Picks a random player from a force.
 --
-function ForcePickRandomPlayer(whichForce)
+function bj.ForcePickRandomPlayer(whichForce)
 	bj_forceRandomConsidered = 0
 	bj_forceRandomCurrentPick = nil
 	ForForce(whichForce, ForcePickRandomPlayerEnum)
@@ -4427,7 +4429,7 @@ function ForcePickRandomPlayer(whichForce)
 end
 
 --===========================================================================
-function EnumUnitsSelected(whichPlayer, enumFilter, enumAction)
+function bj.EnumUnitsSelected(whichPlayer, enumFilter, enumAction)
 	local g = CreateGroup()
 	SyncSelections()
 	GroupEnumUnitsSelected(g, whichPlayer, enumFilter)
@@ -4437,7 +4439,7 @@ function EnumUnitsSelected(whichPlayer, enumFilter, enumAction)
 end
 
 --===========================================================================
-function GetUnitsInRectMatching(r, filter)
+function bj.GetUnitsInRectMatching(r, filter)
 	local g = CreateGroup()
 	GroupEnumUnitsInRect(g, r, filter)
 	DestroyBoolExpr(filter)
@@ -4445,17 +4447,17 @@ function GetUnitsInRectMatching(r, filter)
 end
 
 --===========================================================================
-function GetUnitsInRectAll(r)
+function bj.GetUnitsInRectAll(r)
 	return GetUnitsInRectMatching(r, nil)
 end
 
 --===========================================================================
-function GetUnitsInRectOfPlayerFilter()
+function bj.GetUnitsInRectOfPlayerFilter()
 	return GetOwningPlayer(GetFilterUnit()) == bj_groupEnumOwningPlayer
 end
 
 --===========================================================================
-function GetUnitsInRectOfPlayer(r, whichPlayer)
+function bj.GetUnitsInRectOfPlayer(r, whichPlayer)
 	local g = CreateGroup()
 	bj_groupEnumOwningPlayer = whichPlayer
 	GroupEnumUnitsInRect(g, r, filterGetUnitsInRectOfPlayer)
@@ -4463,7 +4465,7 @@ function GetUnitsInRectOfPlayer(r, whichPlayer)
 end
 
 --===========================================================================
-function GetUnitsInRangeOfLocMatching(radius, whichLocation, filter)
+function bj.GetUnitsInRangeOfLocMatching(radius, whichLocation, filter)
 	local g = CreateGroup()
 	GroupEnumUnitsInRangeOfLoc(g, whichLocation, radius, filter)
 	DestroyBoolExpr(filter)
@@ -4471,17 +4473,17 @@ function GetUnitsInRangeOfLocMatching(radius, whichLocation, filter)
 end
 
 --===========================================================================
-function GetUnitsInRangeOfLocAll(radius, whichLocation)
+function bj.GetUnitsInRangeOfLocAll(radius, whichLocation)
 	return GetUnitsInRangeOfLocMatching(radius, whichLocation, nil)
 end
 
 --===========================================================================
-function GetUnitsOfTypeIdAllFilter()
+function bj.GetUnitsOfTypeIdAllFilter()
 	return GetUnitTypeId(GetFilterUnit()) == bj_groupEnumTypeId
 end
 
 --===========================================================================
-function GetUnitsOfTypeIdAll(unitid)
+function bj.GetUnitsOfTypeIdAll(unitid)
 	local result = CreateGroup()
 	local g = CreateGroup()
 	local index
@@ -4502,7 +4504,7 @@ function GetUnitsOfTypeIdAll(unitid)
 end
 
 --===========================================================================
-function GetUnitsOfPlayerMatching(whichPlayer, filter)
+function bj.GetUnitsOfPlayerMatching(whichPlayer, filter)
 	local g = CreateGroup()
 	GroupEnumUnitsOfPlayer(g, whichPlayer, filter)
 	DestroyBoolExpr(filter)
@@ -4510,17 +4512,17 @@ function GetUnitsOfPlayerMatching(whichPlayer, filter)
 end
 
 --===========================================================================
-function GetUnitsOfPlayerAll(whichPlayer)
+function bj.GetUnitsOfPlayerAll(whichPlayer)
 	return GetUnitsOfPlayerMatching(whichPlayer, nil)
 end
 
 --===========================================================================
-function GetUnitsOfPlayerAndTypeIdFilter()
+function bj.GetUnitsOfPlayerAndTypeIdFilter()
 	return GetUnitTypeId(GetFilterUnit()) == bj_groupEnumTypeId
 end
 
 --===========================================================================
-function GetUnitsOfPlayerAndTypeId(whichPlayer, unitid)
+function bj.GetUnitsOfPlayerAndTypeId(whichPlayer, unitid)
 	local g = CreateGroup()
 	bj_groupEnumTypeId = unitid
 	GroupEnumUnitsOfPlayer(g, whichPlayer, filterGetUnitsOfPlayerAndTypeId)
@@ -4528,7 +4530,7 @@ function GetUnitsOfPlayerAndTypeId(whichPlayer, unitid)
 end
 
 --===========================================================================
-function GetUnitsSelectedAll(whichPlayer)
+function bj.GetUnitsSelectedAll(whichPlayer)
 	local g = CreateGroup()
 	SyncSelections()
 	GroupEnumUnitsSelected(g, whichPlayer, nil)
@@ -4536,19 +4538,19 @@ function GetUnitsSelectedAll(whichPlayer)
 end
 
 --===========================================================================
-function GetForceOfPlayer(whichPlayer)
+function bj.GetForceOfPlayer(whichPlayer)
 	local f = CreateForce()
 	ForceAddPlayer(f, whichPlayer)
 	return f
 end
 
 --===========================================================================
-function GetPlayersAll()
+function bj.GetPlayersAll()
 	return bj_FORCE_ALL_PLAYERS
 end
 
 --===========================================================================
-function GetPlayersByMapControl(whichControl)
+function bj.GetPlayersByMapControl(whichControl)
 	local f = CreateForce()
 	local playerIndex
 	local indexPlayer
@@ -4568,21 +4570,21 @@ function GetPlayersByMapControl(whichControl)
 end
 
 --===========================================================================
-function GetPlayersAllies(whichPlayer)
+function bj.GetPlayersAllies(whichPlayer)
 	local f = CreateForce()
 	ForceEnumAllies(f, whichPlayer, nil)
 	return f
 end
 
 --===========================================================================
-function GetPlayersEnemies(whichPlayer)
+function bj.GetPlayersEnemies(whichPlayer)
 	local f = CreateForce()
 	ForceEnumEnemies(f, whichPlayer, nil)
 	return f
 end
 
 --===========================================================================
-function GetPlayersMatching(filter)
+function bj.GetPlayersMatching(filter)
 	local f = CreateForce()
 	ForceEnumPlayers(f, filter)
 	DestroyBoolExpr(filter)
@@ -4590,12 +4592,12 @@ function GetPlayersMatching(filter)
 end
 
 --===========================================================================
-function CountUnitsInGroupEnum()
+function bj.CountUnitsInGroupEnum()
 	bj_groupCountUnits = bj_groupCountUnits + 1
 end
 
 --===========================================================================
-function CountUnitsInGroup(g)
+function bj.CountUnitsInGroup(g)
 	-- If the user wants the group destroyed, remember that fact and clear
 	-- the flag, in case it is used again in the callback.
 	local wantDestroy = bj_wantDestroyGroup
@@ -4612,19 +4614,19 @@ function CountUnitsInGroup(g)
 end
 
 --===========================================================================
-function CountPlayersInForceEnum()
+function bj.CountPlayersInForceEnum()
 	bj_forceCountPlayers = bj_forceCountPlayers + 1
 end
 
 --===========================================================================
-function CountPlayersInForceBJ(f)
+function bj.CountPlayersInForceBJ(f)
 	bj_forceCountPlayers = 0
 	ForForce(f, CountPlayersInForceEnum)
 	return bj_forceCountPlayers
 end
 
 --===========================================================================
-function GetRandomSubGroupEnum()
+function bj.GetRandomSubGroupEnum()
 	if bj_randomSubGroupWant > 0 then
 		if bj_randomSubGroupWant >= bj_randomSubGroupTotal or GetRandomReal(0, 1) < bj_randomSubGroupChance then
 			-- We either need every remaining unit, or the unit passed its chance check.
@@ -4636,7 +4638,7 @@ function GetRandomSubGroupEnum()
 end
 
 --===========================================================================
-function GetRandomSubGroup(count, sourceGroup)
+function bj.GetRandomSubGroup(count, sourceGroup)
 	local g = CreateGroup()
 
 	bj_randomSubGroupGroup = g
@@ -4653,13 +4655,13 @@ function GetRandomSubGroup(count, sourceGroup)
 end
 
 --===========================================================================
-function LivingPlayerUnitsOfTypeIdFilter()
+function bj.LivingPlayerUnitsOfTypeIdFilter()
 	local filterUnit = GetFilterUnit()
 	return IsUnitAliveBJ(filterUnit) and GetUnitTypeId(filterUnit) == bj_livingPlayerUnitsTypeId
 end
 
 --===========================================================================
-function CountLivingPlayerUnitsOfTypeId(unitId, whichPlayer)
+function bj.CountLivingPlayerUnitsOfTypeId(unitId, whichPlayer)
 	local g
 	local matchedCount
 
@@ -4681,17 +4683,17 @@ end
 --***************************************************************************
 
 --===========================================================================
-function ResetUnitAnimation(whichUnit)
+function bj.ResetUnitAnimation(whichUnit)
 	SetUnitAnimation(whichUnit, "stand")
 end
 
 --===========================================================================
-function SetUnitTimeScalePercent(whichUnit, percentScale)
+function bj.SetUnitTimeScalePercent(whichUnit, percentScale)
 	SetUnitTimeScale(whichUnit, percentScale * 0.01)
 end
 
 --===========================================================================
-function SetUnitScalePercent(whichUnit, percentScaleX, percentScaleY, percentScaleZ)
+function bj.SetUnitScalePercent(whichUnit, percentScaleX, percentScaleY, percentScaleZ)
 	SetUnitScale(whichUnit, percentScaleX * 0.01, percentScaleY * 0.01, percentScaleZ * 0.01)
 end
 
@@ -4700,29 +4702,29 @@ end
 -- is reversed so as to be displayed as transparency, and all four parameters
 -- are treated as percentages rather than bytes.
 --
-function SetUnitVertexColorBJ(whichUnit, red, green, blue, transparency)
+function bj.SetUnitVertexColorBJ(whichUnit, red, green, blue, transparency)
 	SetUnitVertexColor(whichUnit, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function UnitAddIndicatorBJ(whichUnit, red, green, blue, transparency)
+function bj.UnitAddIndicatorBJ(whichUnit, red, green, blue, transparency)
 	AddIndicator(whichUnit, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function DestructableAddIndicatorBJ(whichDestructable, red, green, blue, transparency)
+function bj.DestructableAddIndicatorBJ(whichDestructable, red, green, blue, transparency)
 	AddIndicator(whichDestructable, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function ItemAddIndicatorBJ(whichItem, red, green, blue, transparency)
+function bj.ItemAddIndicatorBJ(whichItem, red, green, blue, transparency)
 	AddIndicator(whichItem, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
 -- Sets a unit's facing to point directly at a location.
 --
-function SetUnitFacingToFaceLocTimed(whichUnit, target, duration)
+function bj.SetUnitFacingToFaceLocTimed(whichUnit, target, duration)
 	local unitLoc = GetUnitLoc(whichUnit)
 
 	SetUnitFacingTimed(whichUnit, AngleBetweenPoints(unitLoc, target), duration)
@@ -4732,7 +4734,7 @@ end
 --===========================================================================
 -- Sets a unit's facing to point directly at another unit.
 --
-function SetUnitFacingToFaceUnitTimed(whichUnit, target, duration)
+function bj.SetUnitFacingToFaceUnitTimed(whichUnit, target, duration)
 	local unitLoc = GetUnitLoc(target)
 
 	SetUnitFacingToFaceLocTimed(whichUnit, unitLoc, duration)
@@ -4740,22 +4742,22 @@ function SetUnitFacingToFaceUnitTimed(whichUnit, target, duration)
 end
 
 --===========================================================================
-function QueueUnitAnimationBJ(whichUnit, whichAnimation)
+function bj.QueueUnitAnimationBJ(whichUnit, whichAnimation)
 	QueueUnitAnimation(whichUnit, whichAnimation)
 end
 
 --===========================================================================
-function SetDestructableAnimationBJ(d, whichAnimation)
+function bj.SetDestructableAnimationBJ(d, whichAnimation)
 	SetDestructableAnimation(d, whichAnimation)
 end
 
 --===========================================================================
-function QueueDestructableAnimationBJ(d, whichAnimation)
+function bj.QueueDestructableAnimationBJ(d, whichAnimation)
 	QueueDestructableAnimation(d, whichAnimation)
 end
 
 --===========================================================================
-function SetDestAnimationSpeedPercent(d, percentScale)
+function bj.SetDestAnimationSpeedPercent(d, percentScale)
 	SetDestructableAnimationSpeed(d, percentScale * 0.01)
 end
 
@@ -4768,44 +4770,44 @@ end
 --***************************************************************************
 
 --===========================================================================
-function DialogDisplayBJ(flag, whichDialog, whichPlayer)
+function bj.DialogDisplayBJ(flag, whichDialog, whichPlayer)
 	DialogDisplay(whichPlayer, whichDialog, flag)
 end
 
 --===========================================================================
-function DialogSetMessageBJ(whichDialog, message)
+function bj.DialogSetMessageBJ(whichDialog, message)
 	DialogSetMessage(whichDialog, message)
 end
 
 --===========================================================================
-function DialogAddButtonBJ(whichDialog, buttonText)
+function bj.DialogAddButtonBJ(whichDialog, buttonText)
 	bj_lastCreatedButton = DialogAddButton(whichDialog, buttonText, 0)
 	return bj_lastCreatedButton
 end
 
 --===========================================================================
-function DialogAddButtonWithHotkeyBJ(whichDialog, buttonText, hotkey)
+function bj.DialogAddButtonWithHotkeyBJ(whichDialog, buttonText, hotkey)
 	bj_lastCreatedButton = DialogAddButton(whichDialog, buttonText, hotkey)
 	return bj_lastCreatedButton
 end
 
 --===========================================================================
-function DialogClearBJ(whichDialog)
+function bj.DialogClearBJ(whichDialog)
 	DialogClear(whichDialog)
 end
 
 --===========================================================================
-function GetLastCreatedButtonBJ()
+function bj.GetLastCreatedButtonBJ()
 	return bj_lastCreatedButton
 end
 
 --===========================================================================
-function GetClickedButtonBJ()
+function bj.GetClickedButtonBJ()
 	return GetClickedButton()
 end
 
 --===========================================================================
-function GetClickedDialogBJ()
+function bj.GetClickedDialogBJ()
 	return GetClickedDialog()
 end
 
@@ -4818,7 +4820,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function SetPlayerAllianceBJ(sourcePlayer, whichAllianceSetting, value, otherPlayer)
+function bj.SetPlayerAllianceBJ(sourcePlayer, whichAllianceSetting, value, otherPlayer)
 	-- Prevent players from attempting to ally with themselves.
 	if sourcePlayer == otherPlayer then
 		return
@@ -4830,7 +4832,7 @@ end
 --===========================================================================
 -- Set all flags used by the in-game "Ally" checkbox.
 --
-function SetPlayerAllianceStateAllyBJ(sourcePlayer, otherPlayer, flag)
+function bj.SetPlayerAllianceStateAllyBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_PASSIVE, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_HELP_REQUEST, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_HELP_RESPONSE, flag)
@@ -4841,14 +4843,14 @@ end
 --===========================================================================
 -- Set all flags used by the in-game "Shared Vision" checkbox.
 --
-function SetPlayerAllianceStateVisionBJ(sourcePlayer, otherPlayer, flag)
+function bj.SetPlayerAllianceStateVisionBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_SHARED_VISION, flag)
 end
 
 --===========================================================================
 -- Set all flags used by the in-game "Shared Units" checkbox.
 --
-function SetPlayerAllianceStateControlBJ(sourcePlayer, otherPlayer, flag)
+function bj.SetPlayerAllianceStateControlBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_SHARED_CONTROL, flag)
 end
 
@@ -4856,12 +4858,12 @@ end
 -- Set all flags used by the in-game "Shared Units" checkbox with the Full
 -- Shared Unit Control feature enabled.
 --
-function SetPlayerAllianceStateFullControlBJ(sourcePlayer, otherPlayer, flag)
+function bj.SetPlayerAllianceStateFullControlBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_SHARED_ADVANCED_CONTROL, flag)
 end
 
 --===========================================================================
-function SetPlayerAllianceStateBJ(sourcePlayer, otherPlayer, allianceState)
+function bj.SetPlayerAllianceStateBJ(sourcePlayer, otherPlayer, allianceState)
 	-- Prevent players from attempting to ally with themselves.
 	if sourcePlayer == otherPlayer then
 		return
@@ -4917,7 +4919,7 @@ end
 --===========================================================================
 -- Set the alliance states for an entire force towards another force.
 --
-function SetForceAllianceStateBJ(sourceForce, targetForce, allianceState)
+function bj.SetForceAllianceStateBJ(sourceForce, targetForce, allianceState)
 	local sourceIndex
 	local targetIndex
 
@@ -4944,7 +4946,7 @@ end
 --===========================================================================
 -- Test to see if two players are co-allied (allied with each other).
 --
-function PlayersAreCoAllied(playerA, playerB)
+function bj.PlayersAreCoAllied(playerA, playerB)
 	-- Players are considered to be allied with themselves.
 	if playerA == playerB then
 		return true
@@ -4963,7 +4965,7 @@ end
 -- Force (whichPlayer) AI player to share vision and advanced unit control 
 -- with all AI players of its allies.
 --
-function ShareEverythingWithTeamAI(whichPlayer)
+function bj.ShareEverythingWithTeamAI(whichPlayer)
 	local playerIndex
 	local indexPlayer
 
@@ -4986,7 +4988,7 @@ end
 --===========================================================================
 -- Force (whichPlayer) to share vision and advanced unit control with all of his/her allies.
 --
-function ShareEverythingWithTeam(whichPlayer)
+function bj.ShareEverythingWithTeam(whichPlayer)
 	local playerIndex
 	local indexPlayer
 
@@ -5009,7 +5011,7 @@ end
 -- Creates a 'Neutral Victim' player slot.  This slot is passive towards all
 -- other players, but all other players are aggressive towards him/her.
 -- 
-function ConfigureNeutralVictim()
+function bj.ConfigureNeutralVictim()
 	local index
 	local indexPlayer
 	local neutralVictim = Player(bj_PLAYER_NEUTRAL_VICTIM)
@@ -5035,14 +5037,14 @@ function ConfigureNeutralVictim()
 end
 
 --===========================================================================
-function MakeUnitsPassiveForPlayerEnum()
+function bj.MakeUnitsPassiveForPlayerEnum()
 	SetUnitOwner(GetEnumUnit(), Player(bj_PLAYER_NEUTRAL_VICTIM), false)
 end
 
 --===========================================================================
 -- Change ownership for every unit of (whichPlayer)'s team to neutral passive.
 --
-function MakeUnitsPassiveForPlayer(whichPlayer)
+function bj.MakeUnitsPassiveForPlayer(whichPlayer)
 	local playerUnits = CreateGroup()
 	CachePlayerHeroData(whichPlayer)
 	GroupEnumUnitsOfPlayer(playerUnits, whichPlayer, nil)
@@ -5053,7 +5055,7 @@ end
 --===========================================================================
 -- Change ownership for every unit of (whichPlayer)'s team to neutral passive.
 --
-function MakeUnitsPassiveForTeam(whichPlayer)
+function bj.MakeUnitsPassiveForTeam(whichPlayer)
 	local playerIndex
 	local indexPlayer
 
@@ -5072,7 +5074,7 @@ end
 --===========================================================================
 -- Determine whether or not victory/defeat is disabled via cheat codes.
 --
-function AllowVictoryDefeat(gameResult)
+function bj.AllowVictoryDefeat(gameResult)
 	if gameResult == PLAYER_GAME_RESULT_VICTORY then
 		return not IsNoVictoryCheat()
 	end
@@ -5086,12 +5088,12 @@ function AllowVictoryDefeat(gameResult)
 end
 
 --===========================================================================
-function EndGameBJ()
+function bj.EndGameBJ()
 	EndGame(true)
 end
 
 --===========================================================================
-function MeleeVictoryDialogBJ(whichPlayer, leftGame)
+function bj.MeleeVictoryDialogBJ(whichPlayer, leftGame)
 	local t = CreateTrigger()
 	local d = DialogCreate()
 	local formatString
@@ -5116,7 +5118,7 @@ function MeleeVictoryDialogBJ(whichPlayer, leftGame)
 end
 
 --===========================================================================
-function MeleeDefeatDialogBJ(whichPlayer, leftGame)
+function bj.MeleeDefeatDialogBJ(whichPlayer, leftGame)
 	local t = CreateTrigger()
 	local d = DialogCreate()
 	local formatString
@@ -5145,7 +5147,7 @@ function MeleeDefeatDialogBJ(whichPlayer, leftGame)
 end
 
 --===========================================================================
-function GameOverDialogBJ(whichPlayer, leftGame)
+function bj.GameOverDialogBJ(whichPlayer, leftGame)
 	local t = CreateTrigger()
 	local d = DialogCreate()
 	local s
@@ -5169,7 +5171,7 @@ function GameOverDialogBJ(whichPlayer, leftGame)
 end
 
 --===========================================================================
-function RemovePlayerPreserveUnitsBJ(whichPlayer, gameResult, leftGame)
+function bj.RemovePlayerPreserveUnitsBJ(whichPlayer, gameResult, leftGame)
 	if AllowVictoryDefeat(gameResult) then
 
 		RemovePlayer(whichPlayer, gameResult)
@@ -5187,7 +5189,7 @@ function RemovePlayerPreserveUnitsBJ(whichPlayer, gameResult, leftGame)
 end
 
 --===========================================================================
-function CustomVictoryOkBJ()
+function bj.CustomVictoryOkBJ()
 	if bj_isSinglePlayer then
 		PauseGame(false)
 		-- Bump the difficulty back up to the default.
@@ -5202,7 +5204,7 @@ function CustomVictoryOkBJ()
 end
 
 --===========================================================================
-function CustomVictoryQuitBJ()
+function bj.CustomVictoryQuitBJ()
 	if bj_isSinglePlayer then
 		PauseGame(false)
 		-- Bump the difficulty back up to the default.
@@ -5213,7 +5215,7 @@ function CustomVictoryQuitBJ()
 end
 
 --===========================================================================
-function CustomVictoryDialogBJ(whichPlayer)
+function bj.CustomVictoryDialogBJ(whichPlayer)
 	local t = CreateTrigger()
 	local d = DialogCreate()
 
@@ -5241,7 +5243,7 @@ function CustomVictoryDialogBJ(whichPlayer)
 end
 
 --===========================================================================
-function CustomVictorySkipBJ(whichPlayer)
+function bj.CustomVictorySkipBJ(whichPlayer)
 	if GetLocalPlayer() == whichPlayer then
 		if bj_isSinglePlayer then
 			-- Bump the difficulty back up to the default.
@@ -5257,7 +5259,7 @@ function CustomVictorySkipBJ(whichPlayer)
 end
 
 --===========================================================================
-function CustomVictoryBJ(whichPlayer, showDialog, showScores)
+function bj.CustomVictoryBJ(whichPlayer, showDialog, showScores)
 	if AllowVictoryDefeat(PLAYER_GAME_RESULT_VICTORY) then
 		RemovePlayer(whichPlayer, PLAYER_GAME_RESULT_VICTORY)
 
@@ -5278,13 +5280,13 @@ function CustomVictoryBJ(whichPlayer, showDialog, showScores)
 end
 
 --===========================================================================
-function CustomDefeatRestartBJ()
+function bj.CustomDefeatRestartBJ()
 	PauseGame(false)
 	RestartGame(true)
 end
 
 --===========================================================================
-function CustomDefeatReduceDifficultyBJ()
+function bj.CustomDefeatReduceDifficultyBJ()
 	local diff = GetGameDifficulty()
 
 	PauseGame(false)
@@ -5304,13 +5306,13 @@ function CustomDefeatReduceDifficultyBJ()
 end
 
 --===========================================================================
-function CustomDefeatLoadBJ()
+function bj.CustomDefeatLoadBJ()
 	PauseGame(false)
 	DisplayLoadDialog()
 end
 
 --===========================================================================
-function CustomDefeatQuitBJ()
+function bj.CustomDefeatQuitBJ()
 	if bj_isSinglePlayer then
 		PauseGame(false)
 	end
@@ -5321,7 +5323,7 @@ function CustomDefeatQuitBJ()
 end
 
 --===========================================================================
-function CustomDefeatDialogBJ(whichPlayer, message)
+function bj.CustomDefeatDialogBJ(whichPlayer, message)
 	local t = CreateTrigger()
 	local d = DialogCreate()
 
@@ -5361,7 +5363,7 @@ function CustomDefeatDialogBJ(whichPlayer, message)
 end
 
 --===========================================================================
-function CustomDefeatBJ(whichPlayer, message)
+function bj.CustomDefeatBJ(whichPlayer, message)
 	if AllowVictoryDefeat(PLAYER_GAME_RESULT_DEFEAT) then
 		RemovePlayer(whichPlayer, PLAYER_GAME_RESULT_DEFEAT)
 
@@ -5377,7 +5379,7 @@ function CustomDefeatBJ(whichPlayer, message)
 end
 
 --===========================================================================
-function SetNextLevelBJ(nextLevel)
+function bj.SetNextLevelBJ(nextLevel)
 	if nextLevel == "" then
 		bj_changeLevelMapName = nil
 	else
@@ -5386,7 +5388,7 @@ function SetNextLevelBJ(nextLevel)
 end
 
 --===========================================================================
-function SetPlayerOnScoreScreenBJ(flag, whichPlayer)
+function bj.SetPlayerOnScoreScreenBJ(flag, whichPlayer)
 	SetPlayerOnScoreScreen(whichPlayer, flag)
 end
 
@@ -5399,7 +5401,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function CreateQuestBJ(questType, title, description, iconPath)
+function bj.CreateQuestBJ(questType, title, description, iconPath)
 	local required = questType == bj_QUESTTYPE_REQ_DISCOVERED or questType == bj_QUESTTYPE_REQ_UNDISCOVERED
 	local discovered = questType == bj_QUESTTYPE_REQ_DISCOVERED or questType == bj_QUESTTYPE_OPT_DISCOVERED
 
@@ -5414,47 +5416,47 @@ function CreateQuestBJ(questType, title, description, iconPath)
 end
 
 --===========================================================================
-function DestroyQuestBJ(whichQuest)
+function bj.DestroyQuestBJ(whichQuest)
 	DestroyQuest(whichQuest)
 end
 
 --===========================================================================
-function QuestSetEnabledBJ(enabled, whichQuest)
+function bj.QuestSetEnabledBJ(enabled, whichQuest)
 	QuestSetEnabled(whichQuest, enabled)
 end
 
 --===========================================================================
-function QuestSetTitleBJ(whichQuest, title)
+function bj.QuestSetTitleBJ(whichQuest, title)
 	QuestSetTitle(whichQuest, title)
 end
 
 --===========================================================================
-function QuestSetDescriptionBJ(whichQuest, description)
+function bj.QuestSetDescriptionBJ(whichQuest, description)
 	QuestSetDescription(whichQuest, description)
 end
 
 --===========================================================================
-function QuestSetCompletedBJ(whichQuest, completed)
+function bj.QuestSetCompletedBJ(whichQuest, completed)
 	QuestSetCompleted(whichQuest, completed)
 end
 
 --===========================================================================
-function QuestSetFailedBJ(whichQuest, failed)
+function bj.QuestSetFailedBJ(whichQuest, failed)
 	QuestSetFailed(whichQuest, failed)
 end
 
 --===========================================================================
-function QuestSetDiscoveredBJ(whichQuest, discovered)
+function bj.QuestSetDiscoveredBJ(whichQuest, discovered)
 	QuestSetDiscovered(whichQuest, discovered)
 end
 
 --===========================================================================
-function GetLastCreatedQuestBJ()
+function bj.GetLastCreatedQuestBJ()
 	return bj_lastCreatedQuest
 end
 
 --===========================================================================
-function CreateQuestItemBJ(whichQuest, description)
+function bj.CreateQuestItemBJ(whichQuest, description)
 	bj_lastCreatedQuestItem = QuestCreateItem(whichQuest)
 	QuestItemSetDescription(bj_lastCreatedQuestItem, description)
 	QuestItemSetCompleted(bj_lastCreatedQuestItem, false)
@@ -5462,49 +5464,49 @@ function CreateQuestItemBJ(whichQuest, description)
 end
 
 --===========================================================================
-function QuestItemSetDescriptionBJ(whichQuestItem, description)
+function bj.QuestItemSetDescriptionBJ(whichQuestItem, description)
 	QuestItemSetDescription(whichQuestItem, description)
 end
 
 --===========================================================================
-function QuestItemSetCompletedBJ(whichQuestItem, completed)
+function bj.QuestItemSetCompletedBJ(whichQuestItem, completed)
 	QuestItemSetCompleted(whichQuestItem, completed)
 end
 
 --===========================================================================
-function GetLastCreatedQuestItemBJ()
+function bj.GetLastCreatedQuestItemBJ()
 	return bj_lastCreatedQuestItem
 end
 
 --===========================================================================
-function CreateDefeatConditionBJ(description)
+function bj.CreateDefeatConditionBJ(description)
 	bj_lastCreatedDefeatCondition = CreateDefeatCondition()
 	DefeatConditionSetDescription(bj_lastCreatedDefeatCondition, description)
 	return bj_lastCreatedDefeatCondition
 end
 
 --===========================================================================
-function DestroyDefeatConditionBJ(whichCondition)
+function bj.DestroyDefeatConditionBJ(whichCondition)
 	DestroyDefeatCondition(whichCondition)
 end
 
 --===========================================================================
-function DefeatConditionSetDescriptionBJ(whichCondition, description)
+function bj.DefeatConditionSetDescriptionBJ(whichCondition, description)
 	DefeatConditionSetDescription(whichCondition, description)
 end
 
 --===========================================================================
-function GetLastCreatedDefeatConditionBJ()
+function bj.GetLastCreatedDefeatConditionBJ()
 	return bj_lastCreatedDefeatCondition
 end
 
 --===========================================================================
-function FlashQuestDialogButtonBJ()
+function bj.FlashQuestDialogButtonBJ()
 	FlashQuestDialogButton()
 end
 
 --===========================================================================
-function QuestMessageBJ(f, messageType, message)
+function bj.QuestMessageBJ(f, messageType, message)
 	if IsPlayerInForce(GetLocalPlayer(), f) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 
@@ -5590,26 +5592,26 @@ end
 --***************************************************************************
 
 --===========================================================================
-function StartTimerBJ(t, periodic, timeout)
+function bj.StartTimerBJ(t, periodic, timeout)
 	bj_lastStartedTimer = t
 	TimerStart(t, timeout, periodic, nil)
 	return bj_lastStartedTimer
 end
 
 --===========================================================================
-function CreateTimerBJ(periodic, timeout)
+function bj.CreateTimerBJ(periodic, timeout)
 	bj_lastStartedTimer = CreateTimer()
 	TimerStart(bj_lastStartedTimer, timeout, periodic, nil)
 	return bj_lastStartedTimer
 end
 
 --===========================================================================
-function DestroyTimerBJ(whichTimer)
+function bj.DestroyTimerBJ(whichTimer)
 	DestroyTimer(whichTimer)
 end
 
 --===========================================================================
-function PauseTimerBJ(pause, whichTimer)
+function bj.PauseTimerBJ(pause, whichTimer)
 	if pause then
 		PauseTimer(whichTimer)
 	else
@@ -5618,12 +5620,12 @@ function PauseTimerBJ(pause, whichTimer)
 end
 
 --===========================================================================
-function GetLastCreatedTimerBJ()
+function bj.GetLastCreatedTimerBJ()
 	return bj_lastStartedTimer
 end
 
 --===========================================================================
-function CreateTimerDialogBJ(t, title)
+function bj.CreateTimerDialogBJ(t, title)
 	bj_lastCreatedTimerDialog = CreateTimerDialog(t)
 	TimerDialogSetTitle(bj_lastCreatedTimerDialog, title)
 	TimerDialogDisplay(bj_lastCreatedTimerDialog, true)
@@ -5631,32 +5633,32 @@ function CreateTimerDialogBJ(t, title)
 end
 
 --===========================================================================
-function DestroyTimerDialogBJ(td)
+function bj.DestroyTimerDialogBJ(td)
 	DestroyTimerDialog(td)
 end
 
 --===========================================================================
-function TimerDialogSetTitleBJ(td, title)
+function bj.TimerDialogSetTitleBJ(td, title)
 	TimerDialogSetTitle(td, title)
 end
 
 --===========================================================================
-function TimerDialogSetTitleColorBJ(td, red, green, blue, transparency)
+function bj.TimerDialogSetTitleColorBJ(td, red, green, blue, transparency)
 	TimerDialogSetTitleColor(td, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function TimerDialogSetTimeColorBJ(td, red, green, blue, transparency)
+function bj.TimerDialogSetTimeColorBJ(td, red, green, blue, transparency)
 	TimerDialogSetTimeColor(td, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function TimerDialogSetSpeedBJ(td, speedMultFactor)
+function bj.TimerDialogSetSpeedBJ(td, speedMultFactor)
 	TimerDialogSetSpeed(td, speedMultFactor)
 end
 
 --===========================================================================
-function TimerDialogDisplayForPlayerBJ(show, td, whichPlayer)
+function bj.TimerDialogDisplayForPlayerBJ(show, td, whichPlayer)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		TimerDialogDisplay(td, show)
@@ -5664,12 +5666,12 @@ function TimerDialogDisplayForPlayerBJ(show, td, whichPlayer)
 end
 
 --===========================================================================
-function TimerDialogDisplayBJ(show, td)
+function bj.TimerDialogDisplayBJ(show, td)
 	TimerDialogDisplay(td, show)
 end
 
 --===========================================================================
-function GetLastCreatedTimerDialogBJ()
+function bj.GetLastCreatedTimerDialogBJ()
 	return bj_lastCreatedTimerDialog
 end
 
@@ -5682,7 +5684,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function LeaderboardResizeBJ(lb)
+function bj.LeaderboardResizeBJ(lb)
 	local size = LeaderboardGetItemCount(lb)
 
 	if LeaderboardGetLabelText(lb) == "" then
@@ -5692,63 +5694,63 @@ function LeaderboardResizeBJ(lb)
 end
 
 --===========================================================================
-function LeaderboardSetPlayerItemValueBJ(whichPlayer, lb, val)
+function bj.LeaderboardSetPlayerItemValueBJ(whichPlayer, lb, val)
 	LeaderboardSetItemValue(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), val)
 end
 
 --===========================================================================
-function LeaderboardSetPlayerItemLabelBJ(whichPlayer, lb, val)
+function bj.LeaderboardSetPlayerItemLabelBJ(whichPlayer, lb, val)
 	LeaderboardSetItemLabel(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), val)
 end
 
 --===========================================================================
-function LeaderboardSetPlayerItemStyleBJ(whichPlayer, lb, showLabel, showValue, showIcon)
+function bj.LeaderboardSetPlayerItemStyleBJ(whichPlayer, lb, showLabel, showValue, showIcon)
 	LeaderboardSetItemStyle(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), showLabel, showValue, showIcon)
 end
 
 --===========================================================================
-function LeaderboardSetPlayerItemLabelColorBJ(whichPlayer, lb, red, green, blue, transparency)
+function bj.LeaderboardSetPlayerItemLabelColorBJ(whichPlayer, lb, red, green, blue, transparency)
 	LeaderboardSetItemLabelColor(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function LeaderboardSetPlayerItemValueColorBJ(whichPlayer, lb, red, green, blue, transparency)
+function bj.LeaderboardSetPlayerItemValueColorBJ(whichPlayer, lb, red, green, blue, transparency)
 	LeaderboardSetItemValueColor(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function LeaderboardSetLabelColorBJ(lb, red, green, blue, transparency)
+function bj.LeaderboardSetLabelColorBJ(lb, red, green, blue, transparency)
 	LeaderboardSetLabelColor(lb, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function LeaderboardSetValueColorBJ(lb, red, green, blue, transparency)
+function bj.LeaderboardSetValueColorBJ(lb, red, green, blue, transparency)
 	LeaderboardSetValueColor(lb, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function LeaderboardSetLabelBJ(lb, label)
+function bj.LeaderboardSetLabelBJ(lb, label)
 	LeaderboardSetLabel(lb, label)
 	LeaderboardResizeBJ(lb)
 end
 
 --===========================================================================
-function LeaderboardSetStyleBJ(lb, showLabel, showNames, showValues, showIcons)
+function bj.LeaderboardSetStyleBJ(lb, showLabel, showNames, showValues, showIcons)
 	LeaderboardSetStyle(lb, showLabel, showNames, showValues, showIcons)
 end
 
 --===========================================================================
-function LeaderboardGetItemCountBJ(lb)
+function bj.LeaderboardGetItemCountBJ(lb)
 	return LeaderboardGetItemCount(lb)
 end
 
 --===========================================================================
-function LeaderboardHasPlayerItemBJ(lb, whichPlayer)
+function bj.LeaderboardHasPlayerItemBJ(lb, whichPlayer)
 	return LeaderboardHasPlayerItem(lb, whichPlayer)
 end
 
 --===========================================================================
-function ForceSetLeaderboardBJ(lb, toForce)
+function bj.ForceSetLeaderboardBJ(lb, toForce)
 	local index
 	local indexPlayer
 
@@ -5764,7 +5766,7 @@ function ForceSetLeaderboardBJ(lb, toForce)
 end
 
 --===========================================================================
-function CreateLeaderboardBJ(toForce, label)
+function bj.CreateLeaderboardBJ(toForce, label)
 	bj_lastCreatedLeaderboard = CreateLeaderboard()
 	LeaderboardSetLabel(bj_lastCreatedLeaderboard, label)
 	ForceSetLeaderboardBJ(bj_lastCreatedLeaderboard, toForce)
@@ -5773,17 +5775,17 @@ function CreateLeaderboardBJ(toForce, label)
 end
 
 --===========================================================================
-function DestroyLeaderboardBJ(lb)
+function bj.DestroyLeaderboardBJ(lb)
 	DestroyLeaderboard(lb)
 end
 
 --===========================================================================
-function LeaderboardDisplayBJ(show, lb)
+function bj.LeaderboardDisplayBJ(show, lb)
 	LeaderboardDisplay(lb, show)
 end
 
 --===========================================================================
-function LeaderboardAddItemBJ(whichPlayer, lb, label, value)
+function bj.LeaderboardAddItemBJ(whichPlayer, lb, label, value)
 	if LeaderboardHasPlayerItem(lb, whichPlayer) then
 		LeaderboardRemovePlayerItem(lb, whichPlayer)
 	end
@@ -5793,13 +5795,13 @@ function LeaderboardAddItemBJ(whichPlayer, lb, label, value)
 end
 
 --===========================================================================
-function LeaderboardRemovePlayerItemBJ(whichPlayer, lb)
+function bj.LeaderboardRemovePlayerItemBJ(whichPlayer, lb)
 	LeaderboardRemovePlayerItem(lb, whichPlayer)
 	LeaderboardResizeBJ(lb)
 end
 
 --===========================================================================
-function LeaderboardSortItemsBJ(lb, sortType, ascending)
+function bj.LeaderboardSortItemsBJ(lb, sortType, ascending)
 	if sortType == bj_SORTTYPE_SORTBYVALUE then
 		LeaderboardSortItemsByValue(lb, ascending)
 	elseif sortType == bj_SORTTYPE_SORTBYPLAYER then
@@ -5812,17 +5814,17 @@ function LeaderboardSortItemsBJ(lb, sortType, ascending)
 end
 
 --===========================================================================
-function LeaderboardSortItemsByPlayerBJ(lb, ascending)
+function bj.LeaderboardSortItemsByPlayerBJ(lb, ascending)
 	LeaderboardSortItemsByPlayer(lb, ascending)
 end
 
 --===========================================================================
-function LeaderboardSortItemsByLabelBJ(lb, ascending)
+function bj.LeaderboardSortItemsByLabelBJ(lb, ascending)
 	LeaderboardSortItemsByLabel(lb, ascending)
 end
 
 --===========================================================================
-function LeaderboardGetPlayerIndexBJ(whichPlayer, lb)
+function bj.LeaderboardGetPlayerIndexBJ(whichPlayer, lb)
 	return LeaderboardGetPlayerIndex(lb, whichPlayer) + 1
 end
 
@@ -5830,7 +5832,7 @@ end
 -- Returns the player who is occupying a specified position in a leaderboard.
 -- The position parameter is expected in the range of 1..16.
 --
-function LeaderboardGetIndexedPlayerBJ(position, lb)
+function bj.LeaderboardGetIndexedPlayerBJ(position, lb)
 	local index
 	local indexPlayer
 
@@ -5849,12 +5851,12 @@ function LeaderboardGetIndexedPlayerBJ(position, lb)
 end
 
 --===========================================================================
-function PlayerGetLeaderboardBJ(whichPlayer)
+function bj.PlayerGetLeaderboardBJ(whichPlayer)
 	return PlayerGetLeaderboard(whichPlayer)
 end
 
 --===========================================================================
-function GetLastCreatedLeaderboard()
+function bj.GetLastCreatedLeaderboard()
 	return bj_lastCreatedLeaderboard
 end
 
@@ -5865,7 +5867,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function CreateMultiboardBJ(cols, rows, title)
+function bj.CreateMultiboardBJ(cols, rows, title)
 	bj_lastCreatedMultiboard = CreateMultiboard()
 	MultiboardSetRowCount(bj_lastCreatedMultiboard, rows)
 	MultiboardSetColumnCount(bj_lastCreatedMultiboard, cols)
@@ -5875,37 +5877,37 @@ function CreateMultiboardBJ(cols, rows, title)
 end
 
 --===========================================================================
-function DestroyMultiboardBJ(mb)
+function bj.DestroyMultiboardBJ(mb)
 	DestroyMultiboard(mb)
 end
 
 --===========================================================================
-function GetLastCreatedMultiboard()
+function bj.GetLastCreatedMultiboard()
 	return bj_lastCreatedMultiboard
 end
 
 --===========================================================================
-function MultiboardDisplayBJ(show, mb)
+function bj.MultiboardDisplayBJ(show, mb)
 	MultiboardDisplay(mb, show)
 end
 
 --===========================================================================
-function MultiboardMinimizeBJ(minimize, mb)
+function bj.MultiboardMinimizeBJ(minimize, mb)
 	MultiboardMinimize(mb, minimize)
 end
 
 --===========================================================================
-function MultiboardSetTitleTextColorBJ(mb, red, green, blue, transparency)
+function bj.MultiboardSetTitleTextColorBJ(mb, red, green, blue, transparency)
 	MultiboardSetTitleTextColor(mb, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function MultiboardAllowDisplayBJ(flag)
+function bj.MultiboardAllowDisplayBJ(flag)
 	MultiboardSuppressDisplay(not flag)
 end
 
 --===========================================================================
-function MultiboardSetItemStyleBJ(mb, col, row, showValue, showIcon)
+function bj.MultiboardSetItemStyleBJ(mb, col, row, showValue, showIcon)
 	local curRow = 0
 	local curCol = 0
 	local numRows = MultiboardGetRowCount(mb)
@@ -5937,7 +5939,7 @@ function MultiboardSetItemStyleBJ(mb, col, row, showValue, showIcon)
 end
 
 --===========================================================================
-function MultiboardSetItemValueBJ(mb, col, row, val)
+function bj.MultiboardSetItemValueBJ(mb, col, row, val)
 	local curRow = 0
 	local curCol = 0
 	local numRows = MultiboardGetRowCount(mb)
@@ -5969,7 +5971,7 @@ function MultiboardSetItemValueBJ(mb, col, row, val)
 end
 
 --===========================================================================
-function MultiboardSetItemColorBJ(mb, col, row, red, green, blue, transparency)
+function bj.MultiboardSetItemColorBJ(mb, col, row, red, green, blue, transparency)
 	local curRow = 0
 	local curCol = 0
 	local numRows = MultiboardGetRowCount(mb)
@@ -6001,7 +6003,7 @@ function MultiboardSetItemColorBJ(mb, col, row, red, green, blue, transparency)
 end
 
 --===========================================================================
-function MultiboardSetItemWidthBJ(mb, col, row, width)
+function bj.MultiboardSetItemWidthBJ(mb, col, row, width)
 	local curRow = 0
 	local curCol = 0
 	local numRows = MultiboardGetRowCount(mb)
@@ -6033,7 +6035,7 @@ function MultiboardSetItemWidthBJ(mb, col, row, width)
 end
 
 --===========================================================================
-function MultiboardSetItemIconBJ(mb, col, row, iconFileName)
+function bj.MultiboardSetItemIconBJ(mb, col, row, iconFileName)
 	local curRow = 0
 	local curCol = 0
 	local numRows = MultiboardGetRowCount(mb)
@@ -6076,7 +6078,7 @@ end
 -- Scale the font size linearly such that size 10 equates to height 0.023.
 -- Screen-relative font heights are harder to grasp and than font sizes.
 --
-function TextTagSize2Height(size)
+function bj.TextTagSize2Height(size)
 	return size * 0.023 / 10
 end
 
@@ -6084,17 +6086,17 @@ end
 -- Scale the speed linearly such that speed 128 equates to 0.071.
 -- Screen-relative speeds are hard to grasp.
 --
-function TextTagSpeed2Velocity(speed)
+function bj.TextTagSpeed2Velocity(speed)
 	return speed * 0.071 / 128
 end
 
 --===========================================================================
-function SetTextTagColorBJ(tt, red, green, blue, transparency)
+function bj.SetTextTagColorBJ(tt, red, green, blue, transparency)
 	SetTextTagColor(tt, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 
 --===========================================================================
-function SetTextTagVelocityBJ(tt, speed, angle)
+function bj.SetTextTagVelocityBJ(tt, speed, angle)
 	local vel = TextTagSpeed2Velocity(speed)
 	local xvel = vel * Cos(angle * bj_DEGTORAD)
 	local yvel = vel * Sin(angle * bj_DEGTORAD)
@@ -6103,49 +6105,49 @@ function SetTextTagVelocityBJ(tt, speed, angle)
 end
 
 --===========================================================================
-function SetTextTagTextBJ(tt, s, size)
+function bj.SetTextTagTextBJ(tt, s, size)
 	local textHeight = TextTagSize2Height(size)
 
 	SetTextTagText(tt, s, textHeight)
 end
 
 --===========================================================================
-function SetTextTagPosBJ(tt, loc, zOffset)
+function bj.SetTextTagPosBJ(tt, loc, zOffset)
 	SetTextTagPos(tt, GetLocationX(loc), GetLocationY(loc), zOffset)
 end
 
 --===========================================================================
-function SetTextTagPosUnitBJ(tt, whichUnit, zOffset)
+function bj.SetTextTagPosUnitBJ(tt, whichUnit, zOffset)
 	SetTextTagPosUnit(tt, whichUnit, zOffset)
 end
 
 --===========================================================================
-function SetTextTagSuspendedBJ(tt, flag)
+function bj.SetTextTagSuspendedBJ(tt, flag)
 	SetTextTagSuspended(tt, flag)
 end
 
 --===========================================================================
-function SetTextTagPermanentBJ(tt, flag)
+function bj.SetTextTagPermanentBJ(tt, flag)
 	SetTextTagPermanent(tt, flag)
 end
 
 --===========================================================================
-function SetTextTagAgeBJ(tt, age)
+function bj.SetTextTagAgeBJ(tt, age)
 	SetTextTagAge(tt, age)
 end
 
 --===========================================================================
-function SetTextTagLifespanBJ(tt, lifespan)
+function bj.SetTextTagLifespanBJ(tt, lifespan)
 	SetTextTagLifespan(tt, lifespan)
 end
 
 --===========================================================================
-function SetTextTagFadepointBJ(tt, fadepoint)
+function bj.SetTextTagFadepointBJ(tt, fadepoint)
 	SetTextTagFadepoint(tt, fadepoint)
 end
 
 --===========================================================================
-function CreateTextTagLocBJ(s, loc, zOffset, size, red, green, blue, transparency)
+function bj.CreateTextTagLocBJ(s, loc, zOffset, size, red, green, blue, transparency)
 	bj_lastCreatedTextTag = CreateTextTag()
 	SetTextTagTextBJ(bj_lastCreatedTextTag, s, size)
 	SetTextTagPosBJ(bj_lastCreatedTextTag, loc, zOffset)
@@ -6155,7 +6157,7 @@ function CreateTextTagLocBJ(s, loc, zOffset, size, red, green, blue, transparenc
 end
 
 --===========================================================================
-function CreateTextTagUnitBJ(s, whichUnit, zOffset, size, red, green, blue, transparency)
+function bj.CreateTextTagUnitBJ(s, whichUnit, zOffset, size, red, green, blue, transparency)
 	bj_lastCreatedTextTag = CreateTextTag()
 	SetTextTagTextBJ(bj_lastCreatedTextTag, s, size)
 	SetTextTagPosUnitBJ(bj_lastCreatedTextTag, whichUnit, zOffset)
@@ -6165,12 +6167,12 @@ function CreateTextTagUnitBJ(s, whichUnit, zOffset, size, red, green, blue, tran
 end
 
 --===========================================================================
-function DestroyTextTagBJ(tt)
+function bj.DestroyTextTagBJ(tt)
 	DestroyTextTag(tt)
 end
 
 --===========================================================================
-function ShowTextTagForceBJ(show, tt, whichForce)
+function bj.ShowTextTagForceBJ(show, tt, whichForce)
 	if IsPlayerInForce(GetLocalPlayer(), whichForce) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		SetTextTagVisibility(tt, show)
@@ -6178,7 +6180,7 @@ function ShowTextTagForceBJ(show, tt, whichForce)
 end
 
 --===========================================================================
-function GetLastCreatedTextTag()
+function bj.GetLastCreatedTextTag()
 	return bj_lastCreatedTextTag
 end
 
@@ -6191,17 +6193,17 @@ end
 --***************************************************************************
 
 --===========================================================================
-function PauseGameOn()
+function bj.PauseGameOn()
 	PauseGame(true)
 end
 
 --===========================================================================
-function PauseGameOff()
+function bj.PauseGameOff()
 	PauseGame(false)
 end
 
 --===========================================================================
-function SetUserControlForceOn(whichForce)
+function bj.SetUserControlForceOn(whichForce)
 	if IsPlayerInForce(GetLocalPlayer(), whichForce) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		EnableUserControl(true)
@@ -6209,7 +6211,7 @@ function SetUserControlForceOn(whichForce)
 end
 
 --===========================================================================
-function SetUserControlForceOff(whichForce)
+function bj.SetUserControlForceOff(whichForce)
 	if IsPlayerInForce(GetLocalPlayer(), whichForce) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		EnableUserControl(false)
@@ -6217,7 +6219,7 @@ function SetUserControlForceOff(whichForce)
 end
 
 --===========================================================================
-function ShowInterfaceForceOn(whichForce, fadeDuration)
+function bj.ShowInterfaceForceOn(whichForce, fadeDuration)
 	if IsPlayerInForce(GetLocalPlayer(), whichForce) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		ShowInterface(true, fadeDuration)
@@ -6225,7 +6227,7 @@ function ShowInterfaceForceOn(whichForce, fadeDuration)
 end
 
 --===========================================================================
-function ShowInterfaceForceOff(whichForce, fadeDuration)
+function bj.ShowInterfaceForceOff(whichForce, fadeDuration)
 	if IsPlayerInForce(GetLocalPlayer(), whichForce) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		ShowInterface(false, fadeDuration)
@@ -6233,7 +6235,7 @@ function ShowInterfaceForceOff(whichForce, fadeDuration)
 end
 
 --===========================================================================
-function PingMinimapForForce(whichForce, x, y, duration)
+function bj.PingMinimapForForce(whichForce, x, y, duration)
 	if IsPlayerInForce(GetLocalPlayer(), whichForce) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		PingMinimap(x, y, duration)
@@ -6242,12 +6244,12 @@ function PingMinimapForForce(whichForce, x, y, duration)
 end
 
 --===========================================================================
-function PingMinimapLocForForce(whichForce, loc, duration)
+function bj.PingMinimapLocForForce(whichForce, loc, duration)
 	PingMinimapForForce(whichForce, GetLocationX(loc), GetLocationY(loc), duration)
 end
 
 --===========================================================================
-function PingMinimapForPlayer(whichPlayer, x, y, duration)
+function bj.PingMinimapForPlayer(whichPlayer, x, y, duration)
 	if GetLocalPlayer() == whichPlayer then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		PingMinimap(x, y, duration)
@@ -6256,12 +6258,12 @@ function PingMinimapForPlayer(whichPlayer, x, y, duration)
 end
 
 --===========================================================================
-function PingMinimapLocForPlayer(whichPlayer, loc, duration)
+function bj.PingMinimapLocForPlayer(whichPlayer, loc, duration)
 	PingMinimapForPlayer(whichPlayer, GetLocationX(loc), GetLocationY(loc), duration)
 end
 
 --===========================================================================
-function PingMinimapForForceEx(whichForce, x, y, duration, style, red, green, blue)
+function bj.PingMinimapForForceEx(whichForce, x, y, duration, style, red, green, blue)
 	local red255 = PercentTo255(red)
 	local green255 = PercentTo255(green)
 	local blue255 = PercentTo255(blue)
@@ -6289,12 +6291,12 @@ function PingMinimapForForceEx(whichForce, x, y, duration, style, red, green, bl
 end
 
 --===========================================================================
-function PingMinimapLocForForceEx(whichForce, loc, duration, style, red, green, blue)
+function bj.PingMinimapLocForForceEx(whichForce, loc, duration, style, red, green, blue)
 	PingMinimapForForceEx(whichForce, GetLocationX(loc), GetLocationY(loc), duration, style, red, green, blue)
 end
 
 --===========================================================================
-function EnableWorldFogBoundaryBJ(enable, f)
+function bj.EnableWorldFogBoundaryBJ(enable, f)
 	if IsPlayerInForce(GetLocalPlayer(), f) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		EnableWorldFogBoundary(enable)
@@ -6302,7 +6304,7 @@ function EnableWorldFogBoundaryBJ(enable, f)
 end
 
 --===========================================================================
-function EnableOcclusionBJ(enable, f)
+function bj.EnableOcclusionBJ(enable, f)
 	if IsPlayerInForce(GetLocalPlayer(), f) then
 		-- Use only local code (no net traffic) within this block to avoid desyncs.
 		EnableOcclusion(enable)
@@ -6320,7 +6322,7 @@ end
 --===========================================================================
 -- If cancelled, stop the sound and end the cinematic scene.
 --
-function CancelCineSceneBJ()
+function bj.CancelCineSceneBJ()
 	StopSoundBJ(bj_cineSceneLastSound, true)
 	EndCinematicScene()
 end
@@ -6331,7 +6333,7 @@ end
 -- only be called once a cinematic scene has been started, so that maps
 -- lacking such scenes do not bother to register for these events.
 --
-function TryInitCinematicBehaviorBJ()
+function bj.TryInitCinematicBehaviorBJ()
 	local index
 
 	if bj_cineSceneBeingSkipped == nil then
@@ -6347,14 +6349,14 @@ function TryInitCinematicBehaviorBJ()
 end
 
 --===========================================================================
-function SetCinematicSceneBJ(soundHandle, portraitUnitId, color, speakerTitle, text, sceneDuration, voiceoverDuration)
+function bj.SetCinematicSceneBJ(soundHandle, portraitUnitId, color, speakerTitle, text, sceneDuration, voiceoverDuration)
 	bj_cineSceneLastSound = soundHandle
 	PlaySoundBJ(soundHandle)
 	SetCinematicScene(portraitUnitId, color, speakerTitle, text, sceneDuration, voiceoverDuration)
 end
 
 --===========================================================================
-function GetTransmissionDuration(soundHandle, timeType, timeVal)
+function bj.GetTransmissionDuration(soundHandle, timeType, timeVal)
 	local duration
 
 	if timeType == bj_TIMETYPE_ADD then
@@ -6376,7 +6378,7 @@ function GetTransmissionDuration(soundHandle, timeType, timeVal)
 end
 
 --===========================================================================
-function WaitTransmissionDuration(soundHandle, timeType, timeVal)
+function bj.WaitTransmissionDuration(soundHandle, timeType, timeVal)
 	if timeType == bj_TIMETYPE_SET then
 		-- If we have a static duration wait, just perform the wait.
 		TriggerSleepAction(timeVal)
@@ -6402,7 +6404,7 @@ function WaitTransmissionDuration(soundHandle, timeType, timeVal)
 end
 
 --===========================================================================
-function DoTransmissionBasicsXYBJ(unitId, color, x, y, soundHandle, unitName, message, duration)
+function bj.DoTransmissionBasicsXYBJ(unitId, color, x, y, soundHandle, unitName, message, duration)
 	SetCinematicSceneBJ(soundHandle, unitId, color, unitName, message, duration + bj_TRANSMISSION_PORT_HANGTIME, duration)
 
 	if unitId ~= 0 then
@@ -6421,7 +6423,7 @@ end
 --   - Display a speech indicator for the unit
 --   - Ping the minimap
 --
-function TransmissionFromUnitWithNameBJ(toForce, whichUnit, unitName, soundHandle, message, timeType, timeVal, wait)
+function bj.TransmissionFromUnitWithNameBJ(toForce, whichUnit, unitName, soundHandle, message, timeType, timeVal, wait)
 	TryInitCinematicBehaviorBJ()
 
 	-- Ensure that the time value is non-negative.
@@ -6455,7 +6457,7 @@ end
 -- This operates like TransmissionFromUnitWithNameBJ, but for a unit type
 -- rather than a unit instance.  As such, no speech indicator is employed.
 --
-function TransmissionFromUnitTypeWithNameBJ(toForce, fromPlayer, unitId, unitName, loc, soundHandle, message, timeType, timeVal, wait)
+function bj.TransmissionFromUnitTypeWithNameBJ(toForce, fromPlayer, unitId, unitName, loc, soundHandle, message, timeType, timeVal, wait)
 	TryInitCinematicBehaviorBJ()
 
 	-- Ensure that the time value is non-negative.
@@ -6478,12 +6480,12 @@ function TransmissionFromUnitTypeWithNameBJ(toForce, fromPlayer, unitId, unitNam
 end
 
 --===========================================================================
-function GetLastTransmissionDurationBJ()
+function bj.GetLastTransmissionDurationBJ()
 	return bj_lastTransmissionDuration
 end
 
 --===========================================================================
-function ForceCinematicSubtitlesBJ(flag)
+function bj.ForceCinematicSubtitlesBJ(flag)
 	ForceCinematicSubtitles(flag)
 end
 
@@ -6513,7 +6515,7 @@ end
 --   - Fix the random seed to a set value
 --   - Reset the camera smoothing factor
 --
-function CinematicModeExBJ(cineMode, forForce, interfaceFadeTime)
+function bj.CinematicModeExBJ(cineMode, forForce, interfaceFadeTime)
 	-- If the game hasn't started yet, perform interface fades immediately
 	if not bj_gameStarted then
 		interfaceFadeTime = 0
@@ -6576,7 +6578,7 @@ function CinematicModeExBJ(cineMode, forForce, interfaceFadeTime)
 end
 
 --===========================================================================
-function CinematicModeBJ(cineMode, forForce)
+function bj.CinematicModeBJ(cineMode, forForce)
 	CinematicModeExBJ(cineMode, forForce, bj_CINEMODE_INTERFACEFADE)
 end
 
@@ -6589,12 +6591,12 @@ end
 --***************************************************************************
 
 --===========================================================================
-function DisplayCineFilterBJ(flag)
+function bj.DisplayCineFilterBJ(flag)
 	DisplayCineFilter(flag)
 end
 
 --===========================================================================
-function CinematicFadeCommonBJ(red, green, blue, duration, tex, startTrans, endTrans)
+function bj.CinematicFadeCommonBJ(red, green, blue, duration, tex, startTrans, endTrans)
 	if duration == 0 then
 		-- If the fade is instant, use the same starting and ending values,
 		-- so that we effectively do a set rather than a fade.
@@ -6613,7 +6615,7 @@ function CinematicFadeCommonBJ(red, green, blue, duration, tex, startTrans, endT
 end
 
 --===========================================================================
-function FinishCinematicFadeBJ()
+function bj.FinishCinematicFadeBJ()
 	DestroyTimer(bj_cineFadeFinishTimer)
 	bj_cineFadeFinishTimer = nil
 	DisplayCineFilter(false)
@@ -6621,21 +6623,21 @@ function FinishCinematicFadeBJ()
 end
 
 --===========================================================================
-function FinishCinematicFadeAfterBJ(duration)
+function bj.FinishCinematicFadeAfterBJ(duration)
 	-- Create a timer to end the cinematic fade.
 	bj_cineFadeFinishTimer = CreateTimer()
 	TimerStart(bj_cineFadeFinishTimer, duration, false, FinishCinematicFadeBJ)
 end
 
 --===========================================================================
-function ContinueCinematicFadeBJ()
+function bj.ContinueCinematicFadeBJ()
 	DestroyTimer(bj_cineFadeContinueTimer)
 	bj_cineFadeContinueTimer = nil
 	CinematicFadeCommonBJ(bj_cineFadeContinueRed, bj_cineFadeContinueGreen, bj_cineFadeContinueBlue, bj_cineFadeContinueDuration, bj_cineFadeContinueTex, bj_cineFadeContinueTrans, 100)
 end
 
 --===========================================================================
-function ContinueCinematicFadeAfterBJ(duration, red, green, blue, trans, tex)
+function bj.ContinueCinematicFadeAfterBJ(duration, red, green, blue, trans, tex)
 	bj_cineFadeContinueRed = red
 	bj_cineFadeContinueGreen = green
 	bj_cineFadeContinueBlue = blue
@@ -6649,7 +6651,7 @@ function ContinueCinematicFadeAfterBJ(duration, red, green, blue, trans, tex)
 end
 
 --===========================================================================
-function AbortCinematicFadeBJ()
+function bj.AbortCinematicFadeBJ()
 	if bj_cineFadeContinueTimer ~= nil then
 		DestroyTimer(bj_cineFadeContinueTimer)
 	end
@@ -6660,7 +6662,7 @@ function AbortCinematicFadeBJ()
 end
 
 --===========================================================================
-function CinematicFadeBJ(fadetype, duration, tex, red, green, blue, trans)
+function bj.CinematicFadeBJ(fadetype, duration, tex, red, green, blue, trans)
 	if fadetype == bj_CINEFADETYPE_FADEOUT then
 		-- Fade out to the requested color.
 		AbortCinematicFadeBJ()
@@ -6684,7 +6686,7 @@ function CinematicFadeBJ(fadetype, duration, tex, red, green, blue, trans)
 end
 
 --===========================================================================
-function CinematicFilterGenericBJ(duration, bmode, tex, red0, green0, blue0, trans0, red1, green1, blue1, trans1)
+function bj.CinematicFilterGenericBJ(duration, bmode, tex, red0, green0, blue0, trans0, red1, green1, blue1, trans1)
 	AbortCinematicFadeBJ()
 	SetCineFilterTexture(tex)
 	SetCineFilterBlendMode(bmode)
@@ -6710,7 +6712,7 @@ end
 -- including a rescue sound, flashing selection circle, ownership change,
 -- and optionally a unit color change.
 --
-function RescueUnitBJ(whichUnit, rescuer, changeColor)
+function bj.RescueUnitBJ(whichUnit, rescuer, changeColor)
 	if IsUnitDeadBJ(whichUnit) or GetOwningPlayer(whichUnit) == rescuer then
 		return
 	end
@@ -6722,7 +6724,7 @@ function RescueUnitBJ(whichUnit, rescuer, changeColor)
 end
 
 --===========================================================================
-function TriggerActionUnitRescuedBJ()
+function bj.TriggerActionUnitRescuedBJ()
 	local theUnit = GetTriggerUnit()
 
 	if IsUnitType(theUnit, UNIT_TYPE_STRUCTURE) then
@@ -6737,7 +6739,7 @@ end
 -- reasons, this should only be attempted if a player is set to Rescuable,
 -- or if a specific unit is thus flagged.
 --
-function TryInitRescuableTriggersBJ()
+function bj.TryInitRescuableTriggersBJ()
 	local index
 
 	if bj_rescueUnitBehavior == nil then
@@ -6756,7 +6758,7 @@ end
 -- Determines whether or not rescued units automatically change color upon
 -- being rescued.
 --
-function SetRescueUnitColorChangeBJ(changeColor)
+function bj.SetRescueUnitColorChangeBJ(changeColor)
 	bj_rescueChangeColorUnit = changeColor
 end
 
@@ -6764,18 +6766,18 @@ end
 -- Determines whether or not rescued buildings automatically change color
 -- upon being rescued.
 --
-function SetRescueBuildingColorChangeBJ(changeColor)
+function bj.SetRescueBuildingColorChangeBJ(changeColor)
 	bj_rescueChangeColorBldg = changeColor
 end
 
 --===========================================================================
-function MakeUnitRescuableToForceBJEnum()
+function bj.MakeUnitRescuableToForceBJEnum()
 	TryInitRescuableTriggersBJ()
 	SetUnitRescuable(bj_makeUnitRescuableUnit, GetEnumPlayer(), bj_makeUnitRescuableFlag)
 end
 
 --===========================================================================
-function MakeUnitRescuableToForceBJ(whichUnit, isRescuable, whichForce)
+function bj.MakeUnitRescuableToForceBJ(whichUnit, isRescuable, whichForce)
 	-- Flag the unit as rescuable/unrescuable for the appropriate players.
 	bj_makeUnitRescuableUnit = whichUnit
 	bj_makeUnitRescuableFlag = isRescuable
@@ -6783,7 +6785,7 @@ function MakeUnitRescuableToForceBJ(whichUnit, isRescuable, whichForce)
 end
 
 --===========================================================================
-function InitRescuableBehaviorBJ()
+function bj.InitRescuableBehaviorBJ()
 	local index
 
 	index = 0
@@ -6808,32 +6810,32 @@ end
 --***************************************************************************
 
 --===========================================================================
-function SetPlayerTechResearchedSwap(techid, levels, whichPlayer)
+function bj.SetPlayerTechResearchedSwap(techid, levels, whichPlayer)
 	SetPlayerTechResearched(whichPlayer, techid, levels)
 end
 
 --===========================================================================
-function SetPlayerTechMaxAllowedSwap(techid, maximum, whichPlayer)
+function bj.SetPlayerTechMaxAllowedSwap(techid, maximum, whichPlayer)
 	SetPlayerTechMaxAllowed(whichPlayer, techid, maximum)
 end
 
 --===========================================================================
-function SetPlayerMaxHeroesAllowed(maximum, whichPlayer)
+function bj.SetPlayerMaxHeroesAllowed(maximum, whichPlayer)
 	SetPlayerTechMaxAllowed(whichPlayer, 1212502607, maximum)
 end
 
 --===========================================================================
-function GetPlayerTechCountSimple(techid, whichPlayer)
+function bj.GetPlayerTechCountSimple(techid, whichPlayer)
 	return GetPlayerTechCount(whichPlayer, techid, true)
 end
 
 --===========================================================================
-function GetPlayerTechMaxAllowedSwap(techid, whichPlayer)
+function bj.GetPlayerTechMaxAllowedSwap(techid, whichPlayer)
 	return GetPlayerTechMaxAllowed(whichPlayer, techid)
 end
 
 --===========================================================================
-function SetPlayerAbilityAvailableBJ(avail, abilid, whichPlayer)
+function bj.SetPlayerAbilityAvailableBJ(avail, abilid, whichPlayer)
 	SetPlayerAbilityAvailable(whichPlayer, abilid, avail)
 end
 
@@ -6845,7 +6847,7 @@ end
 --*
 --***************************************************************************
 
-function SetCampaignMenuRaceBJ(campaignNumber)
+function bj.SetCampaignMenuRaceBJ(campaignNumber)
 	if campaignNumber == bj_CAMPAIGN_INDEX_T then
 		SetCampaignMenuRace(RACE_OTHER)
 	elseif campaignNumber == bj_CAMPAIGN_INDEX_H then
@@ -6876,7 +6878,7 @@ end
 -- so that the trigger for this can use a single drop-down to list all of
 -- the campaign missions.
 --
-function SetMissionAvailableBJ(available, missionIndex)
+function bj.SetMissionAvailableBJ(available, missionIndex)
 	local campaignNumber = missionIndex // 1000
 	local missionNumber = missionIndex - campaignNumber * 1000
 
@@ -6884,7 +6886,7 @@ function SetMissionAvailableBJ(available, missionIndex)
 end
 
 --===========================================================================
-function SetCampaignAvailableBJ(available, campaignNumber)
+function bj.SetCampaignAvailableBJ(available, campaignNumber)
 	local campaignOffset
 
 	if campaignNumber == bj_CAMPAIGN_INDEX_H then
@@ -6909,7 +6911,7 @@ function SetCampaignAvailableBJ(available, campaignNumber)
 end
 
 --===========================================================================
-function SetCinematicAvailableBJ(available, cinematicIndex)
+function bj.SetCinematicAvailableBJ(available, cinematicIndex)
 	if cinematicIndex == bj_CINEMATICINDEX_TOP then
 		SetOpCinematicAvailable(bj_CAMPAIGN_INDEX_T, available)
 		PlayCinematic("TutorialOp")
@@ -6949,292 +6951,292 @@ function SetCinematicAvailableBJ(available, cinematicIndex)
 end
 
 --===========================================================================
-function InitGameCacheBJ(campaignFile)
+function bj.InitGameCacheBJ(campaignFile)
 	bj_lastCreatedGameCache = InitGameCache(campaignFile)
 	return bj_lastCreatedGameCache
 end
 
 --===========================================================================
-function SaveGameCacheBJ(cache)
+function bj.SaveGameCacheBJ(cache)
 	return SaveGameCache(cache)
 end
 
 --===========================================================================
-function GetLastCreatedGameCacheBJ()
+function bj.GetLastCreatedGameCacheBJ()
 	return bj_lastCreatedGameCache
 end
 
 --===========================================================================
-function InitHashtableBJ()
+function bj.InitHashtableBJ()
 	bj_lastCreatedHashtable = InitHashtable()
 	return bj_lastCreatedHashtable
 end
 
 --===========================================================================
-function GetLastCreatedHashtableBJ()
+function bj.GetLastCreatedHashtableBJ()
 	return bj_lastCreatedHashtable
 end
 
 --===========================================================================
-function StoreRealBJ(value, key, missionKey, cache)
+function bj.StoreRealBJ(value, key, missionKey, cache)
 	StoreReal(cache, missionKey, key, value)
 end
 
 --===========================================================================
-function StoreIntegerBJ(value, key, missionKey, cache)
+function bj.StoreIntegerBJ(value, key, missionKey, cache)
 	StoreInteger(cache, missionKey, key, value)
 end
 
 --===========================================================================
-function StoreBooleanBJ(value, key, missionKey, cache)
+function bj.StoreBooleanBJ(value, key, missionKey, cache)
 	StoreBoolean(cache, missionKey, key, value)
 end
 
 --===========================================================================
-function StoreStringBJ(value, key, missionKey, cache)
+function bj.StoreStringBJ(value, key, missionKey, cache)
 	return StoreString(cache, missionKey, key, value)
 end
 
 --===========================================================================
-function StoreUnitBJ(whichUnit, key, missionKey, cache)
+function bj.StoreUnitBJ(whichUnit, key, missionKey, cache)
 	return StoreUnit(cache, missionKey, key, whichUnit)
 end
 
 --===========================================================================
-function SaveRealBJ(value, key, missionKey, table)
+function bj.SaveRealBJ(value, key, missionKey, table)
 	SaveReal(table, missionKey, key, value)
 end
 
 --===========================================================================
-function SaveIntegerBJ(value, key, missionKey, table)
+function bj.SaveIntegerBJ(value, key, missionKey, table)
 	SaveInteger(table, missionKey, key, value)
 end
 
 --===========================================================================
-function SaveBooleanBJ(value, key, missionKey, table)
+function bj.SaveBooleanBJ(value, key, missionKey, table)
 	SaveBoolean(table, missionKey, key, value)
 end
 
 --===========================================================================
-function SaveStringBJ(value, key, missionKey, table)
+function bj.SaveStringBJ(value, key, missionKey, table)
 	return SaveStr(table, missionKey, key, value)
 end
 
 --===========================================================================
-function SavePlayerHandleBJ(whichPlayer, key, missionKey, table)
+function bj.SavePlayerHandleBJ(whichPlayer, key, missionKey, table)
 	return SavePlayerHandle(table, missionKey, key, whichPlayer)
 end
 
 --===========================================================================
-function SaveWidgetHandleBJ(whichWidget, key, missionKey, table)
+function bj.SaveWidgetHandleBJ(whichWidget, key, missionKey, table)
 	return SaveWidgetHandle(table, missionKey, key, whichWidget)
 end
 
 --===========================================================================
-function SaveDestructableHandleBJ(whichDestructable, key, missionKey, table)
+function bj.SaveDestructableHandleBJ(whichDestructable, key, missionKey, table)
 	return SaveDestructableHandle(table, missionKey, key, whichDestructable)
 end
 
 --===========================================================================
-function SaveItemHandleBJ(whichItem, key, missionKey, table)
+function bj.SaveItemHandleBJ(whichItem, key, missionKey, table)
 	return SaveItemHandle(table, missionKey, key, whichItem)
 end
 
 --===========================================================================
-function SaveUnitHandleBJ(whichUnit, key, missionKey, table)
+function bj.SaveUnitHandleBJ(whichUnit, key, missionKey, table)
 	return SaveUnitHandle(table, missionKey, key, whichUnit)
 end
 
 --===========================================================================
-function SaveAbilityHandleBJ(whichAbility, key, missionKey, table)
+function bj.SaveAbilityHandleBJ(whichAbility, key, missionKey, table)
 	return SaveAbilityHandle(table, missionKey, key, whichAbility)
 end
 
 --===========================================================================
-function SaveTimerHandleBJ(whichTimer, key, missionKey, table)
+function bj.SaveTimerHandleBJ(whichTimer, key, missionKey, table)
 	return SaveTimerHandle(table, missionKey, key, whichTimer)
 end
 
 --===========================================================================
-function SaveTriggerHandleBJ(whichTrigger, key, missionKey, table)
+function bj.SaveTriggerHandleBJ(whichTrigger, key, missionKey, table)
 	return SaveTriggerHandle(table, missionKey, key, whichTrigger)
 end
 
 --===========================================================================
-function SaveTriggerConditionHandleBJ(whichTriggercondition, key, missionKey, table)
+function bj.SaveTriggerConditionHandleBJ(whichTriggercondition, key, missionKey, table)
 	return SaveTriggerConditionHandle(table, missionKey, key, whichTriggercondition)
 end
 
 --===========================================================================
-function SaveTriggerActionHandleBJ(whichTriggeraction, key, missionKey, table)
+function bj.SaveTriggerActionHandleBJ(whichTriggeraction, key, missionKey, table)
 	return SaveTriggerActionHandle(table, missionKey, key, whichTriggeraction)
 end
 
 --===========================================================================
-function SaveTriggerEventHandleBJ(whichEvent, key, missionKey, table)
+function bj.SaveTriggerEventHandleBJ(whichEvent, key, missionKey, table)
 	return SaveTriggerEventHandle(table, missionKey, key, whichEvent)
 end
 
 --===========================================================================
-function SaveForceHandleBJ(whichForce, key, missionKey, table)
+function bj.SaveForceHandleBJ(whichForce, key, missionKey, table)
 	return SaveForceHandle(table, missionKey, key, whichForce)
 end
 
 --===========================================================================
-function SaveGroupHandleBJ(whichGroup, key, missionKey, table)
+function bj.SaveGroupHandleBJ(whichGroup, key, missionKey, table)
 	return SaveGroupHandle(table, missionKey, key, whichGroup)
 end
 
 --===========================================================================
-function SaveLocationHandleBJ(whichLocation, key, missionKey, table)
+function bj.SaveLocationHandleBJ(whichLocation, key, missionKey, table)
 	return SaveLocationHandle(table, missionKey, key, whichLocation)
 end
 
 --===========================================================================
-function SaveRectHandleBJ(whichRect, key, missionKey, table)
+function bj.SaveRectHandleBJ(whichRect, key, missionKey, table)
 	return SaveRectHandle(table, missionKey, key, whichRect)
 end
 
 --===========================================================================
-function SaveBooleanExprHandleBJ(whichBoolexpr, key, missionKey, table)
+function bj.SaveBooleanExprHandleBJ(whichBoolexpr, key, missionKey, table)
 	return SaveBooleanExprHandle(table, missionKey, key, whichBoolexpr)
 end
 
 --===========================================================================
-function SaveSoundHandleBJ(whichSound, key, missionKey, table)
+function bj.SaveSoundHandleBJ(whichSound, key, missionKey, table)
 	return SaveSoundHandle(table, missionKey, key, whichSound)
 end
 
 --===========================================================================
-function SaveEffectHandleBJ(whichEffect, key, missionKey, table)
+function bj.SaveEffectHandleBJ(whichEffect, key, missionKey, table)
 	return SaveEffectHandle(table, missionKey, key, whichEffect)
 end
 
 --===========================================================================
-function SaveUnitPoolHandleBJ(whichUnitpool, key, missionKey, table)
+function bj.SaveUnitPoolHandleBJ(whichUnitpool, key, missionKey, table)
 	return SaveUnitPoolHandle(table, missionKey, key, whichUnitpool)
 end
 
 --===========================================================================
-function SaveItemPoolHandleBJ(whichItempool, key, missionKey, table)
+function bj.SaveItemPoolHandleBJ(whichItempool, key, missionKey, table)
 	return SaveItemPoolHandle(table, missionKey, key, whichItempool)
 end
 
 --===========================================================================
-function SaveQuestHandleBJ(whichQuest, key, missionKey, table)
+function bj.SaveQuestHandleBJ(whichQuest, key, missionKey, table)
 	return SaveQuestHandle(table, missionKey, key, whichQuest)
 end
 
 --===========================================================================
-function SaveQuestItemHandleBJ(whichQuestitem, key, missionKey, table)
+function bj.SaveQuestItemHandleBJ(whichQuestitem, key, missionKey, table)
 	return SaveQuestItemHandle(table, missionKey, key, whichQuestitem)
 end
 
 --===========================================================================
-function SaveDefeatConditionHandleBJ(whichDefeatcondition, key, missionKey, table)
+function bj.SaveDefeatConditionHandleBJ(whichDefeatcondition, key, missionKey, table)
 	return SaveDefeatConditionHandle(table, missionKey, key, whichDefeatcondition)
 end
 
 --===========================================================================
-function SaveTimerDialogHandleBJ(whichTimerdialog, key, missionKey, table)
+function bj.SaveTimerDialogHandleBJ(whichTimerdialog, key, missionKey, table)
 	return SaveTimerDialogHandle(table, missionKey, key, whichTimerdialog)
 end
 
 --===========================================================================
-function SaveLeaderboardHandleBJ(whichLeaderboard, key, missionKey, table)
+function bj.SaveLeaderboardHandleBJ(whichLeaderboard, key, missionKey, table)
 	return SaveLeaderboardHandle(table, missionKey, key, whichLeaderboard)
 end
 
 --===========================================================================
-function SaveMultiboardHandleBJ(whichMultiboard, key, missionKey, table)
+function bj.SaveMultiboardHandleBJ(whichMultiboard, key, missionKey, table)
 	return SaveMultiboardHandle(table, missionKey, key, whichMultiboard)
 end
 
 --===========================================================================
-function SaveMultiboardItemHandleBJ(whichMultiboarditem, key, missionKey, table)
+function bj.SaveMultiboardItemHandleBJ(whichMultiboarditem, key, missionKey, table)
 	return SaveMultiboardItemHandle(table, missionKey, key, whichMultiboarditem)
 end
 
 --===========================================================================
-function SaveTrackableHandleBJ(whichTrackable, key, missionKey, table)
+function bj.SaveTrackableHandleBJ(whichTrackable, key, missionKey, table)
 	return SaveTrackableHandle(table, missionKey, key, whichTrackable)
 end
 
 --===========================================================================
-function SaveDialogHandleBJ(whichDialog, key, missionKey, table)
+function bj.SaveDialogHandleBJ(whichDialog, key, missionKey, table)
 	return SaveDialogHandle(table, missionKey, key, whichDialog)
 end
 
 --===========================================================================
-function SaveButtonHandleBJ(whichButton, key, missionKey, table)
+function bj.SaveButtonHandleBJ(whichButton, key, missionKey, table)
 	return SaveButtonHandle(table, missionKey, key, whichButton)
 end
 
 --===========================================================================
-function SaveTextTagHandleBJ(whichTexttag, key, missionKey, table)
+function bj.SaveTextTagHandleBJ(whichTexttag, key, missionKey, table)
 	return SaveTextTagHandle(table, missionKey, key, whichTexttag)
 end
 
 --===========================================================================
-function SaveLightningHandleBJ(whichLightning, key, missionKey, table)
+function bj.SaveLightningHandleBJ(whichLightning, key, missionKey, table)
 	return SaveLightningHandle(table, missionKey, key, whichLightning)
 end
 
 --===========================================================================
-function SaveImageHandleBJ(whichImage, key, missionKey, table)
+function bj.SaveImageHandleBJ(whichImage, key, missionKey, table)
 	return SaveImageHandle(table, missionKey, key, whichImage)
 end
 
 --===========================================================================
-function SaveUbersplatHandleBJ(whichUbersplat, key, missionKey, table)
+function bj.SaveUbersplatHandleBJ(whichUbersplat, key, missionKey, table)
 	return SaveUbersplatHandle(table, missionKey, key, whichUbersplat)
 end
 
 --===========================================================================
-function SaveRegionHandleBJ(whichRegion, key, missionKey, table)
+function bj.SaveRegionHandleBJ(whichRegion, key, missionKey, table)
 	return SaveRegionHandle(table, missionKey, key, whichRegion)
 end
 
 --===========================================================================
-function SaveFogStateHandleBJ(whichFogState, key, missionKey, table)
+function bj.SaveFogStateHandleBJ(whichFogState, key, missionKey, table)
 	return SaveFogStateHandle(table, missionKey, key, whichFogState)
 end
 
 --===========================================================================
-function SaveFogModifierHandleBJ(whichFogModifier, key, missionKey, table)
+function bj.SaveFogModifierHandleBJ(whichFogModifier, key, missionKey, table)
 	return SaveFogModifierHandle(table, missionKey, key, whichFogModifier)
 end
 
 --===========================================================================
-function SaveAgentHandleBJ(whichAgent, key, missionKey, table)
+function bj.SaveAgentHandleBJ(whichAgent, key, missionKey, table)
 	return SaveAgentHandle(table, missionKey, key, whichAgent)
 end
 
 --===========================================================================
-function SaveHashtableHandleBJ(whichHashtable, key, missionKey, table)
+function bj.SaveHashtableHandleBJ(whichHashtable, key, missionKey, table)
 	return SaveHashtableHandle(table, missionKey, key, whichHashtable)
 end
 
 --===========================================================================
-function GetStoredRealBJ(key, missionKey, cache)
+function bj.GetStoredRealBJ(key, missionKey, cache)
 	--call SyncStoredReal(cache, missionKey, key)
 	return GetStoredReal(cache, missionKey, key)
 end
 
 --===========================================================================
-function GetStoredIntegerBJ(key, missionKey, cache)
+function bj.GetStoredIntegerBJ(key, missionKey, cache)
 	--call SyncStoredInteger(cache, missionKey, key)
 	return GetStoredInteger(cache, missionKey, key)
 end
 
 --===========================================================================
-function GetStoredBooleanBJ(key, missionKey, cache)
+function bj.GetStoredBooleanBJ(key, missionKey, cache)
 	--call SyncStoredBoolean(cache, missionKey, key)
 	return GetStoredBoolean(cache, missionKey, key)
 end
 
 --===========================================================================
-function GetStoredStringBJ(key, missionKey, cache)
+function bj.GetStoredStringBJ(key, missionKey, cache)
 	local s
 
 	--call SyncStoredString(cache, missionKey, key)
@@ -7247,25 +7249,25 @@ function GetStoredStringBJ(key, missionKey, cache)
 end
 
 --===========================================================================
-function LoadRealBJ(key, missionKey, table)
+function bj.LoadRealBJ(key, missionKey, table)
 	--call SyncStoredReal(table, missionKey, key)
 	return LoadReal(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadIntegerBJ(key, missionKey, table)
+function bj.LoadIntegerBJ(key, missionKey, table)
 	--call SyncStoredInteger(table, missionKey, key)
 	return LoadInteger(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadBooleanBJ(key, missionKey, table)
+function bj.LoadBooleanBJ(key, missionKey, table)
 	--call SyncStoredBoolean(table, missionKey, key)
 	return LoadBoolean(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadStringBJ(key, missionKey, table)
+function bj.LoadStringBJ(key, missionKey, table)
 	local s
 
 	--call SyncStoredString(table, missionKey, key)
@@ -7278,235 +7280,235 @@ function LoadStringBJ(key, missionKey, table)
 end
 
 --===========================================================================
-function LoadPlayerHandleBJ(key, missionKey, table)
+function bj.LoadPlayerHandleBJ(key, missionKey, table)
 	return LoadPlayerHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadWidgetHandleBJ(key, missionKey, table)
+function bj.LoadWidgetHandleBJ(key, missionKey, table)
 	return LoadWidgetHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadDestructableHandleBJ(key, missionKey, table)
+function bj.LoadDestructableHandleBJ(key, missionKey, table)
 	return LoadDestructableHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadItemHandleBJ(key, missionKey, table)
+function bj.LoadItemHandleBJ(key, missionKey, table)
 	return LoadItemHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadUnitHandleBJ(key, missionKey, table)
+function bj.LoadUnitHandleBJ(key, missionKey, table)
 	return LoadUnitHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadAbilityHandleBJ(key, missionKey, table)
+function bj.LoadAbilityHandleBJ(key, missionKey, table)
 	return LoadAbilityHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadTimerHandleBJ(key, missionKey, table)
+function bj.LoadTimerHandleBJ(key, missionKey, table)
 	return LoadTimerHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadTriggerHandleBJ(key, missionKey, table)
+function bj.LoadTriggerHandleBJ(key, missionKey, table)
 	return LoadTriggerHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadTriggerConditionHandleBJ(key, missionKey, table)
+function bj.LoadTriggerConditionHandleBJ(key, missionKey, table)
 	return LoadTriggerConditionHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadTriggerActionHandleBJ(key, missionKey, table)
+function bj.LoadTriggerActionHandleBJ(key, missionKey, table)
 	return LoadTriggerActionHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadTriggerEventHandleBJ(key, missionKey, table)
+function bj.LoadTriggerEventHandleBJ(key, missionKey, table)
 	return LoadTriggerEventHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadForceHandleBJ(key, missionKey, table)
+function bj.LoadForceHandleBJ(key, missionKey, table)
 	return LoadForceHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadGroupHandleBJ(key, missionKey, table)
+function bj.LoadGroupHandleBJ(key, missionKey, table)
 	return LoadGroupHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadLocationHandleBJ(key, missionKey, table)
+function bj.LoadLocationHandleBJ(key, missionKey, table)
 	return LoadLocationHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadRectHandleBJ(key, missionKey, table)
+function bj.LoadRectHandleBJ(key, missionKey, table)
 	return LoadRectHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadBooleanExprHandleBJ(key, missionKey, table)
+function bj.LoadBooleanExprHandleBJ(key, missionKey, table)
 	return LoadBooleanExprHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadSoundHandleBJ(key, missionKey, table)
+function bj.LoadSoundHandleBJ(key, missionKey, table)
 	return LoadSoundHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadEffectHandleBJ(key, missionKey, table)
+function bj.LoadEffectHandleBJ(key, missionKey, table)
 	return LoadEffectHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadUnitPoolHandleBJ(key, missionKey, table)
+function bj.LoadUnitPoolHandleBJ(key, missionKey, table)
 	return LoadUnitPoolHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadItemPoolHandleBJ(key, missionKey, table)
+function bj.LoadItemPoolHandleBJ(key, missionKey, table)
 	return LoadItemPoolHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadQuestHandleBJ(key, missionKey, table)
+function bj.LoadQuestHandleBJ(key, missionKey, table)
 	return LoadQuestHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadQuestItemHandleBJ(key, missionKey, table)
+function bj.LoadQuestItemHandleBJ(key, missionKey, table)
 	return LoadQuestItemHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadDefeatConditionHandleBJ(key, missionKey, table)
+function bj.LoadDefeatConditionHandleBJ(key, missionKey, table)
 	return LoadDefeatConditionHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadTimerDialogHandleBJ(key, missionKey, table)
+function bj.LoadTimerDialogHandleBJ(key, missionKey, table)
 	return LoadTimerDialogHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadLeaderboardHandleBJ(key, missionKey, table)
+function bj.LoadLeaderboardHandleBJ(key, missionKey, table)
 	return LoadLeaderboardHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadMultiboardHandleBJ(key, missionKey, table)
+function bj.LoadMultiboardHandleBJ(key, missionKey, table)
 	return LoadMultiboardHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadMultiboardItemHandleBJ(key, missionKey, table)
+function bj.LoadMultiboardItemHandleBJ(key, missionKey, table)
 	return LoadMultiboardItemHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadTrackableHandleBJ(key, missionKey, table)
+function bj.LoadTrackableHandleBJ(key, missionKey, table)
 	return LoadTrackableHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadDialogHandleBJ(key, missionKey, table)
+function bj.LoadDialogHandleBJ(key, missionKey, table)
 	return LoadDialogHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadButtonHandleBJ(key, missionKey, table)
+function bj.LoadButtonHandleBJ(key, missionKey, table)
 	return LoadButtonHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadTextTagHandleBJ(key, missionKey, table)
+function bj.LoadTextTagHandleBJ(key, missionKey, table)
 	return LoadTextTagHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadLightningHandleBJ(key, missionKey, table)
+function bj.LoadLightningHandleBJ(key, missionKey, table)
 	return LoadLightningHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadImageHandleBJ(key, missionKey, table)
+function bj.LoadImageHandleBJ(key, missionKey, table)
 	return LoadImageHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadUbersplatHandleBJ(key, missionKey, table)
+function bj.LoadUbersplatHandleBJ(key, missionKey, table)
 	return LoadUbersplatHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadRegionHandleBJ(key, missionKey, table)
+function bj.LoadRegionHandleBJ(key, missionKey, table)
 	return LoadRegionHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadFogStateHandleBJ(key, missionKey, table)
+function bj.LoadFogStateHandleBJ(key, missionKey, table)
 	return LoadFogStateHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadFogModifierHandleBJ(key, missionKey, table)
+function bj.LoadFogModifierHandleBJ(key, missionKey, table)
 	return LoadFogModifierHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function LoadHashtableHandleBJ(key, missionKey, table)
+function bj.LoadHashtableHandleBJ(key, missionKey, table)
 	return LoadHashtableHandle(table, missionKey, key)
 end
 
 --===========================================================================
-function RestoreUnitLocFacingAngleBJ(key, missionKey, cache, forWhichPlayer, loc, facing)
+function bj.RestoreUnitLocFacingAngleBJ(key, missionKey, cache, forWhichPlayer, loc, facing)
 	--call SyncStoredUnit(cache, missionKey, key)
 	bj_lastLoadedUnit = RestoreUnit(cache, missionKey, key, forWhichPlayer, GetLocationX(loc), GetLocationY(loc), facing)
 	return bj_lastLoadedUnit
 end
 
 --===========================================================================
-function RestoreUnitLocFacingPointBJ(key, missionKey, cache, forWhichPlayer, loc, lookAt)
+function bj.RestoreUnitLocFacingPointBJ(key, missionKey, cache, forWhichPlayer, loc, lookAt)
 	--call SyncStoredUnit(cache, missionKey, key)
 	return RestoreUnitLocFacingAngleBJ(key, missionKey, cache, forWhichPlayer, loc, AngleBetweenPoints(loc, lookAt))
 end
 
 --===========================================================================
-function GetLastRestoredUnitBJ()
+function bj.GetLastRestoredUnitBJ()
 	return bj_lastLoadedUnit
 end
 
 --===========================================================================
-function FlushGameCacheBJ(cache)
+function bj.FlushGameCacheBJ(cache)
 	FlushGameCache(cache)
 end
 
 --===========================================================================
-function FlushStoredMissionBJ(missionKey, cache)
+function bj.FlushStoredMissionBJ(missionKey, cache)
 	FlushStoredMission(cache, missionKey)
 end
 
 --===========================================================================
-function FlushParentHashtableBJ(table)
+function bj.FlushParentHashtableBJ(table)
 	FlushParentHashtable(table)
 end
 
 --===========================================================================
-function FlushChildHashtableBJ(missionKey, table)
+function bj.FlushChildHashtableBJ(missionKey, table)
 	FlushChildHashtable(table, missionKey)
 end
 
 --===========================================================================
-function HaveStoredValue(key, valueType, missionKey, cache)
+function bj.HaveStoredValue(key, valueType, missionKey, cache)
 	if valueType == bj_GAMECACHE_BOOLEAN then
 		return HaveStoredBoolean(cache, missionKey, key)
 	elseif valueType == bj_GAMECACHE_INTEGER then
@@ -7524,7 +7526,7 @@ function HaveStoredValue(key, valueType, missionKey, cache)
 end
 
 --===========================================================================
-function HaveSavedValue(key, valueType, missionKey, table)
+function bj.HaveSavedValue(key, valueType, missionKey, table)
 	if valueType == bj_HASHTABLE_BOOLEAN then
 		return HaveSavedBoolean(table, missionKey, key)
 	elseif valueType == bj_HASHTABLE_INTEGER then
@@ -7542,44 +7544,44 @@ function HaveSavedValue(key, valueType, missionKey, table)
 end
 
 --===========================================================================
-function ShowCustomCampaignButton(show, whichButton)
+function bj.ShowCustomCampaignButton(show, whichButton)
 	SetCustomCampaignButtonVisible(whichButton - 1, show)
 end
 
 --===========================================================================
-function IsCustomCampaignButtonVisibile(whichButton)
+function bj.IsCustomCampaignButtonVisibile(whichButton)
 	return GetCustomCampaignButtonVisible(whichButton - 1)
 end
 
 --===========================================================================
-function LoadGameBJ(loadFileName, doScoreScreen)
+function bj.LoadGameBJ(loadFileName, doScoreScreen)
 	LoadGame(loadFileName, doScoreScreen)
 end
 
 --===========================================================================
-function SaveAndChangeLevelBJ(saveFileName, newLevel, doScoreScreen)
+function bj.SaveAndChangeLevelBJ(saveFileName, newLevel, doScoreScreen)
 	SaveGame(saveFileName)
 	ChangeLevel(newLevel, doScoreScreen)
 end
 
 --===========================================================================
-function SaveAndLoadGameBJ(saveFileName, loadFileName, doScoreScreen)
+function bj.SaveAndLoadGameBJ(saveFileName, loadFileName, doScoreScreen)
 	SaveGame(saveFileName)
 	LoadGame(loadFileName, doScoreScreen)
 end
 
 --===========================================================================
-function RenameSaveDirectoryBJ(sourceDirName, destDirName)
+function bj.RenameSaveDirectoryBJ(sourceDirName, destDirName)
 	return RenameSaveDirectory(sourceDirName, destDirName)
 end
 
 --===========================================================================
-function RemoveSaveDirectoryBJ(sourceDirName)
+function bj.RemoveSaveDirectoryBJ(sourceDirName)
 	return RemoveSaveDirectory(sourceDirName)
 end
 
 --===========================================================================
-function CopySaveGameBJ(sourceSaveName, destSaveName)
+function bj.CopySaveGameBJ(sourceSaveName, destSaveName)
 	return CopySaveGame(sourceSaveName, destSaveName)
 end
 
@@ -7592,32 +7594,32 @@ end
 --***************************************************************************
 
 --===========================================================================
-function GetPlayerStartLocationX(whichPlayer)
+function bj.GetPlayerStartLocationX(whichPlayer)
 	return GetStartLocationX(GetPlayerStartLocation(whichPlayer))
 end
 
 --===========================================================================
-function GetPlayerStartLocationY(whichPlayer)
+function bj.GetPlayerStartLocationY(whichPlayer)
 	return GetStartLocationY(GetPlayerStartLocation(whichPlayer))
 end
 
 --===========================================================================
-function GetPlayerStartLocationLoc(whichPlayer)
+function bj.GetPlayerStartLocationLoc(whichPlayer)
 	return GetStartLocationLoc(GetPlayerStartLocation(whichPlayer))
 end
 
 --===========================================================================
-function GetRectCenter(whichRect)
+function bj.GetRectCenter(whichRect)
 	return Location(GetRectCenterX(whichRect), GetRectCenterY(whichRect))
 end
 
 --===========================================================================
-function IsPlayerSlotState(whichPlayer, whichState)
+function bj.IsPlayerSlotState(whichPlayer, whichState)
 	return GetPlayerSlotState(whichPlayer) == whichState
 end
 
 --===========================================================================
-function GetFadeFromSeconds(seconds)
+function bj.GetFadeFromSeconds(seconds)
 	if seconds ~= 0 then
 		return 128 // R2I(seconds)
 	end
@@ -7625,7 +7627,7 @@ function GetFadeFromSeconds(seconds)
 end
 
 --===========================================================================
-function GetFadeFromSecondsAsReal(seconds)
+function bj.GetFadeFromSecondsAsReal(seconds)
 	if seconds ~= 0 then
 		return 128.0 / seconds
 	end
@@ -7633,12 +7635,12 @@ function GetFadeFromSecondsAsReal(seconds)
 end
 
 --===========================================================================
-function AdjustPlayerStateSimpleBJ(whichPlayer, whichPlayerState, delta)
+function bj.AdjustPlayerStateSimpleBJ(whichPlayer, whichPlayerState, delta)
 	SetPlayerState(whichPlayer, whichPlayerState, GetPlayerState(whichPlayer, whichPlayerState) + delta)
 end
 
 --===========================================================================
-function AdjustPlayerStateBJ(delta, whichPlayer, whichPlayerState)
+function bj.AdjustPlayerStateBJ(delta, whichPlayer, whichPlayerState)
 	-- If the change was positive, apply the difference to the player's
 	-- gathered resources property as well.
 	if delta > 0 then
@@ -7653,60 +7655,60 @@ function AdjustPlayerStateBJ(delta, whichPlayer, whichPlayerState)
 end
 
 --===========================================================================
-function SetPlayerStateBJ(whichPlayer, whichPlayerState, value)
+function bj.SetPlayerStateBJ(whichPlayer, whichPlayerState, value)
 	local oldValue = GetPlayerState(whichPlayer, whichPlayerState)
 	AdjustPlayerStateBJ(value - oldValue, whichPlayer, whichPlayerState)
 end
 
 --===========================================================================
-function SetPlayerFlagBJ(whichPlayerFlag, flag, whichPlayer)
+function bj.SetPlayerFlagBJ(whichPlayerFlag, flag, whichPlayer)
 	SetPlayerState(whichPlayer, whichPlayerFlag, IntegerTertiaryOp(flag, 1, 0))
 end
 
 --===========================================================================
-function SetPlayerTaxRateBJ(rate, whichResource, sourcePlayer, otherPlayer)
+function bj.SetPlayerTaxRateBJ(rate, whichResource, sourcePlayer, otherPlayer)
 	SetPlayerTaxRate(sourcePlayer, otherPlayer, whichResource, rate)
 end
 
 --===========================================================================
-function GetPlayerTaxRateBJ(whichResource, sourcePlayer, otherPlayer)
+function bj.GetPlayerTaxRateBJ(whichResource, sourcePlayer, otherPlayer)
 	return GetPlayerTaxRate(sourcePlayer, otherPlayer, whichResource)
 end
 
 --===========================================================================
-function IsPlayerFlagSetBJ(whichPlayerFlag, whichPlayer)
+function bj.IsPlayerFlagSetBJ(whichPlayerFlag, whichPlayer)
 	return GetPlayerState(whichPlayer, whichPlayerFlag) == 1
 end
 
 --===========================================================================
-function AddResourceAmountBJ(delta, whichUnit)
+function bj.AddResourceAmountBJ(delta, whichUnit)
 	AddResourceAmount(whichUnit, delta)
 end
 
 --===========================================================================
-function GetConvertedPlayerId(whichPlayer)
+function bj.GetConvertedPlayerId(whichPlayer)
 	return GetPlayerId(whichPlayer) + 1
 end
 
 --===========================================================================
-function ConvertedPlayer(convertedPlayerId)
+function bj.ConvertedPlayer(convertedPlayerId)
 	return Player(convertedPlayerId - 1)
 end
 
 --===========================================================================
-function GetRectWidthBJ(r)
+function bj.GetRectWidthBJ(r)
 	return GetRectMaxX(r) - GetRectMinX(r)
 end
 
 --===========================================================================
-function GetRectHeightBJ(r)
+function bj.GetRectHeightBJ(r)
 	return GetRectMaxY(r) - GetRectMinY(r)
 end
 
 --===========================================================================
 -- Replaces a gold mine with a blighted gold mine for the given player.
 --
-function BlightGoldMineForPlayerBJ(goldMine, whichPlayer)
+function bj.BlightGoldMineForPlayerBJ(goldMine, whichPlayer)
 	local mineX
 	local mineY
 	local mineGold
@@ -7730,28 +7732,28 @@ function BlightGoldMineForPlayerBJ(goldMine, whichPlayer)
 end
 
 --===========================================================================
-function BlightGoldMineForPlayer(goldMine, whichPlayer)
+function bj.BlightGoldMineForPlayer(goldMine, whichPlayer)
 	bj_lastHauntedGoldMine = BlightGoldMineForPlayerBJ(goldMine, whichPlayer)
 	return bj_lastHauntedGoldMine
 end
 
 --===========================================================================
-function GetLastHauntedGoldMine()
+function bj.GetLastHauntedGoldMine()
 	return bj_lastHauntedGoldMine
 end
 
 --===========================================================================
-function IsPointBlightedBJ(where)
+function bj.IsPointBlightedBJ(where)
 	return IsPointBlighted(GetLocationX(where), GetLocationY(where))
 end
 
 --===========================================================================
-function SetPlayerColorBJEnum()
+function bj.SetPlayerColorBJEnum()
 	SetUnitColor(GetEnumUnit(), bj_setPlayerTargetColor)
 end
 
 --===========================================================================
-function SetPlayerColorBJ(whichPlayer, color, changeExisting)
+function bj.SetPlayerColorBJ(whichPlayer, color, changeExisting)
 	local g
 
 	SetPlayerColor(whichPlayer, color)
@@ -7765,7 +7767,7 @@ function SetPlayerColorBJ(whichPlayer, color, changeExisting)
 end
 
 --===========================================================================
-function SetPlayerUnitAvailableBJ(unitId, allowed, whichPlayer)
+function bj.SetPlayerUnitAvailableBJ(unitId, allowed, whichPlayer)
 	if allowed then
 		SetPlayerTechMaxAllowed(whichPlayer, unitId, -1)
 	else
@@ -7774,22 +7776,22 @@ function SetPlayerUnitAvailableBJ(unitId, allowed, whichPlayer)
 end
 
 --===========================================================================
-function LockGameSpeedBJ()
+function bj.LockGameSpeedBJ()
 	SetMapFlag(MAP_LOCK_SPEED, true)
 end
 
 --===========================================================================
-function UnlockGameSpeedBJ()
+function bj.UnlockGameSpeedBJ()
 	SetMapFlag(MAP_LOCK_SPEED, false)
 end
 
 --===========================================================================
-function IssueTargetOrderBJ(whichUnit, order, targetWidget)
+function bj.IssueTargetOrderBJ(whichUnit, order, targetWidget)
 	return IssueTargetOrder(whichUnit, order, targetWidget)
 end
 
 --===========================================================================
-function IssuePointOrderLocBJ(whichUnit, order, whichLocation)
+function bj.IssuePointOrderLocBJ(whichUnit, order, whichLocation)
 	return IssuePointOrderLoc(whichUnit, order, whichLocation)
 end
 
@@ -7797,31 +7799,31 @@ end
 -- Two distinct trigger actions can't share the same function name, so this
 -- dummy function simply mimics the behavior of an existing call.
 --
-function IssueTargetDestructableOrder(whichUnit, order, targetWidget)
+function bj.IssueTargetDestructableOrder(whichUnit, order, targetWidget)
 	return IssueTargetOrder(whichUnit, order, targetWidget)
 end
 
-function IssueTargetItemOrder(whichUnit, order, targetWidget)
+function bj.IssueTargetItemOrder(whichUnit, order, targetWidget)
 	return IssueTargetOrder(whichUnit, order, targetWidget)
 end
 
 --===========================================================================
-function IssueImmediateOrderBJ(whichUnit, order)
+function bj.IssueImmediateOrderBJ(whichUnit, order)
 	return IssueImmediateOrder(whichUnit, order)
 end
 
 --===========================================================================
-function GroupTargetOrderBJ(whichGroup, order, targetWidget)
+function bj.GroupTargetOrderBJ(whichGroup, order, targetWidget)
 	return GroupTargetOrder(whichGroup, order, targetWidget)
 end
 
 --===========================================================================
-function GroupPointOrderLocBJ(whichGroup, order, whichLocation)
+function bj.GroupPointOrderLocBJ(whichGroup, order, whichLocation)
 	return GroupPointOrderLoc(whichGroup, order, whichLocation)
 end
 
 --===========================================================================
-function GroupImmediateOrderBJ(whichGroup, order)
+function bj.GroupImmediateOrderBJ(whichGroup, order)
 	return GroupImmediateOrder(whichGroup, order)
 end
 
@@ -7829,33 +7831,33 @@ end
 -- Two distinct trigger actions can't share the same function name, so this
 -- dummy function simply mimics the behavior of an existing call.
 --
-function GroupTargetDestructableOrder(whichGroup, order, targetWidget)
+function bj.GroupTargetDestructableOrder(whichGroup, order, targetWidget)
 	return GroupTargetOrder(whichGroup, order, targetWidget)
 end
 
-function GroupTargetItemOrder(whichGroup, order, targetWidget)
+function bj.GroupTargetItemOrder(whichGroup, order, targetWidget)
 	return GroupTargetOrder(whichGroup, order, targetWidget)
 end
 
 --===========================================================================
-function GetDyingDestructable()
+function bj.GetDyingDestructable()
 	return GetTriggerDestructable()
 end
 
 --===========================================================================
 -- Rally point setting
 --
-function SetUnitRallyPoint(whichUnit, targPos)
+function bj.SetUnitRallyPoint(whichUnit, targPos)
 	IssuePointOrderLocBJ(whichUnit, "setrally", targPos)
 end
 
 --===========================================================================
-function SetUnitRallyUnit(whichUnit, targUnit)
+function bj.SetUnitRallyUnit(whichUnit, targUnit)
 	IssueTargetOrder(whichUnit, "setrally", targUnit)
 end
 
 --===========================================================================
-function SetUnitRallyDestructable(whichUnit, targDest)
+function bj.SetUnitRallyDestructable(whichUnit, targDest)
 	IssueTargetOrder(whichUnit, "setrally", targDest)
 end
 
@@ -7864,22 +7866,22 @@ end
 -- This function is added as an action to all destructable drop triggers,
 -- so that a widget drop may be differentiated from a unit drop.
 --
-function SaveDyingWidget()
+function bj.SaveDyingWidget()
 	bj_lastDyingWidget = GetTriggerWidget()
 end
 
 --===========================================================================
-function SetBlightRectBJ(addBlight, whichPlayer, r)
+function bj.SetBlightRectBJ(addBlight, whichPlayer, r)
 	SetBlightRect(whichPlayer, r, addBlight)
 end
 
 --===========================================================================
-function SetBlightRadiusLocBJ(addBlight, whichPlayer, loc, radius)
+function bj.SetBlightRadiusLocBJ(addBlight, whichPlayer, loc, radius)
 	SetBlightLoc(whichPlayer, loc, radius, addBlight)
 end
 
 --===========================================================================
-function GetAbilityName(abilcode)
+function bj.GetAbilityName(abilcode)
 	return GetObjectName(abilcode)
 end
 
@@ -7891,7 +7893,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function MeleeStartingVisibility()
+function bj.MeleeStartingVisibility()
 	-- Start by setting the ToD.
 	SetFloatGameState(GAME_STATE_TIME_OF_DAY, bj_MELEE_STARTING_TOD)
 
@@ -7908,7 +7910,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function MeleeStartingResources()
+function bj.MeleeStartingResources()
 	local index
 	local indexPlayer
 	local v
@@ -7947,7 +7949,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function ReducePlayerTechMaxAllowed(whichPlayer, techId, limit)
+function bj.ReducePlayerTechMaxAllowed(whichPlayer, techId, limit)
 	local oldMax = GetPlayerTechMaxAllowed(whichPlayer, techId)
 
 	-- A value of -1 is used to indicate no limit, so check for that as well.
@@ -7957,7 +7959,7 @@ function ReducePlayerTechMaxAllowed(whichPlayer, techId, limit)
 end
 
 --===========================================================================
-function MeleeStartingHeroLimit()
+function bj.MeleeStartingHeroLimit()
 	local index
 
 	index = 0
@@ -8009,7 +8011,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function MeleeTrainedUnitIsHeroBJFilter()
+function bj.MeleeTrainedUnitIsHeroBJFilter()
 	return IsUnitType(GetFilterUnit(), UNIT_TYPE_HERO)
 end
 
@@ -8018,7 +8020,7 @@ end
 -- standard set of items.  This is currently:
 --   - 1x Scroll of Town Portal
 --
-function MeleeGrantItemsToHero(whichUnit)
+function bj.MeleeGrantItemsToHero(whichUnit)
 	local owner = GetPlayerId(GetOwningPlayer(whichUnit))
 
 	-- If we haven't twinked N heroes for this player yet, twink away.
@@ -8029,17 +8031,17 @@ function MeleeGrantItemsToHero(whichUnit)
 end
 
 --===========================================================================
-function MeleeGrantItemsToTrainedHero()
+function bj.MeleeGrantItemsToTrainedHero()
 	MeleeGrantItemsToHero(GetTrainedUnit())
 end
 
 --===========================================================================
-function MeleeGrantItemsToHiredHero()
+function bj.MeleeGrantItemsToHiredHero()
 	MeleeGrantItemsToHero(GetSoldUnit())
 end
 
 --===========================================================================
-function MeleeGrantHeroItems()
+function bj.MeleeGrantHeroItems()
 	local index
 	local trig
 
@@ -8084,7 +8086,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function MeleeClearExcessUnit()
+function bj.MeleeClearExcessUnit()
 	local theUnit = GetEnumUnit()
 	local owner = GetPlayerId(GetOwningPlayer(theUnit))
 
@@ -8100,7 +8102,7 @@ function MeleeClearExcessUnit()
 end
 
 --===========================================================================
-function MeleeClearNearbyUnits(x, y, range)
+function bj.MeleeClearNearbyUnits(x, y, range)
 	local nearbyUnits
 
 	nearbyUnits = CreateGroup()
@@ -8110,7 +8112,7 @@ function MeleeClearNearbyUnits(x, y, range)
 end
 
 --===========================================================================
-function MeleeClearExcessUnits()
+function bj.MeleeClearExcessUnits()
 	local index
 	local locX
 	local locY
@@ -8142,7 +8144,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function MeleeEnumFindNearestMine()
+function bj.MeleeEnumFindNearestMine()
 	local enumUnit = GetEnumUnit()
 	local dist
 	local unitLoc
@@ -8161,7 +8163,7 @@ function MeleeEnumFindNearestMine()
 end
 
 --===========================================================================
-function MeleeFindNearestMine(src, range)
+function bj.MeleeFindNearestMine(src, range)
 	local nearbyMines
 
 	bj_meleeNearestMine = nil
@@ -8177,7 +8179,7 @@ function MeleeFindNearestMine(src, range)
 end
 
 --===========================================================================
-function MeleeRandomHeroLoc(p, id1, id2, id3, id4, loc)
+function bj.MeleeRandomHeroLoc(p, id1, id2, id3, id4, loc)
 	local hero = nil
 	local roll
 	local pick
@@ -8216,7 +8218,7 @@ end
 --===========================================================================
 -- Returns a location which is (distance) away from (src) in the direction of (targ).
 --
-function MeleeGetProjectedLoc(src, targ, distance, deltaAngle)
+function bj.MeleeGetProjectedLoc(src, targ, distance, deltaAngle)
 	local srcX = GetLocationX(src)
 	local srcY = GetLocationY(src)
 	local direction = Atan2(GetLocationY(targ) - srcY, GetLocationX(targ) - srcX) + deltaAngle
@@ -8224,7 +8226,7 @@ function MeleeGetProjectedLoc(src, targ, distance, deltaAngle)
 end
 
 --===========================================================================
-function MeleeGetNearestValueWithin(val, minVal, maxVal)
+function bj.MeleeGetNearestValueWithin(val, minVal, maxVal)
 	if val < minVal then
 		return minVal
 	elseif val > maxVal then
@@ -8235,7 +8237,7 @@ function MeleeGetNearestValueWithin(val, minVal, maxVal)
 end
 
 --===========================================================================
-function MeleeGetLocWithinRect(src, r)
+function bj.MeleeGetLocWithinRect(src, r)
 	local withinX = MeleeGetNearestValueWithin(GetLocationX(src), GetRectMinX(r), GetRectMaxX(r))
 	local withinY = MeleeGetNearestValueWithin(GetLocationY(src), GetRectMinY(r), GetRectMaxY(r))
 	return Location(withinX, withinY)
@@ -8246,7 +8248,7 @@ end
 --   - 1 Town Hall, placed at start location
 --   - 5 Peasants, placed between start location and nearest gold mine
 --
-function MeleeStartingUnitsHuman(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
+function bj.MeleeStartingUnitsHuman(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
 	local unitSpacing = 64.0
 	local nearestMine
@@ -8321,7 +8323,7 @@ end
 --   - 1 Great Hall, placed at start location
 --   - 5 Peons, placed between start location and nearest gold mine
 --
-function MeleeStartingUnitsOrc(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
+function bj.MeleeStartingUnitsOrc(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
 	local unitSpacing = 64.0
 	local nearestMine
@@ -8393,7 +8395,7 @@ end
 --   - 1 Ghoul, placed between start location and nearest gold mine
 --   - Blight, centered on nearest gold mine, spread across a "large area"
 --
-function MeleeStartingUnitsUndead(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
+function bj.MeleeStartingUnitsUndead(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
 	local unitSpacing = 64.0
 	local nearestMine
@@ -8477,7 +8479,7 @@ end
 --   - 1 Tree of Life, placed by nearest gold mine, already entangled
 --   - 5 Wisps, placed between Tree of Life and nearest gold mine
 --
-function MeleeStartingUnitsNightElf(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
+function bj.MeleeStartingUnitsNightElf(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
 	local unitSpacing = 64.0
 	local minTreeDist = 3.5 * bj_CELLWIDTH
@@ -8555,7 +8557,7 @@ end
 -- Starting Units for Players Whose Race is Unknown
 --   - 12 Sheep, placed randomly around the start location
 --
-function MeleeStartingUnitsUnknownRace(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
+function bj.MeleeStartingUnitsUnknownRace(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local index
 
 	if doPreload then
@@ -8581,7 +8583,7 @@ function MeleeStartingUnitsUnknownRace(whichPlayer, startLoc, doHeroes, doCamera
 end
 
 --===========================================================================
-function MeleeStartingUnits()
+function bj.MeleeStartingUnits()
 	local index
 	local indexPlayer
 	local indexStartLoc
@@ -8617,7 +8619,7 @@ function MeleeStartingUnits()
 end
 
 --===========================================================================
-function MeleeStartingUnitsForPlayer(whichRace, whichPlayer, loc, doHeroes)
+function bj.MeleeStartingUnitsForPlayer(whichRace, whichPlayer, loc, doHeroes)
 	-- Create initial race-specific starting units
 	if whichRace == RACE_HUMAN then
 		MeleeStartingUnitsHuman(whichPlayer, loc, doHeroes, false, false)
@@ -8641,7 +8643,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function PickMeleeAI(num, s1, s2, s3)
+function bj.PickMeleeAI(num, s1, s2, s3)
 	local pick
 
 	-- easy difficulty never uses any custom AI scripts
@@ -8670,7 +8672,7 @@ function PickMeleeAI(num, s1, s2, s3)
 end
 
 --===========================================================================
-function MeleeStartingAI()
+function bj.MeleeStartingAI()
 	local index
 	local indexPlayer
 	local indexRace
@@ -8703,7 +8705,7 @@ function MeleeStartingAI()
 	end
 end
 
-function LockGuardPosition(targ)
+function bj.LockGuardPosition(targ)
 	SetUnitCreepGuard(targ, true)
 end
 
@@ -8715,7 +8717,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function MeleePlayerIsOpponent(playerIndex, opponentIndex)
+function bj.MeleePlayerIsOpponent(playerIndex, opponentIndex)
 	local thePlayer = Player(playerIndex)
 	local theOpponent = Player(opponentIndex)
 
@@ -8751,7 +8753,7 @@ end
 --===========================================================================
 -- Count buildings currently owned by all allies, including the player themself.
 --
-function MeleeGetAllyStructureCount(whichPlayer)
+function bj.MeleeGetAllyStructureCount(whichPlayer)
 	local playerIndex
 	local buildingCount
 	local indexPlayer
@@ -8778,7 +8780,7 @@ end
 --===========================================================================
 -- Count allies, excluding dead players and the player themself.
 --
-function MeleeGetAllyCount(whichPlayer)
+function bj.MeleeGetAllyCount(whichPlayer)
 	local playerIndex
 	local playerCount
 	local indexPlayer
@@ -8805,7 +8807,7 @@ end
 --
 -- Key structures: Town Hall, Great Hall, Tree of Life, Necropolis
 --
-function MeleeGetAllyKeyStructureCount(whichPlayer)
+function bj.MeleeGetAllyKeyStructureCount(whichPlayer)
 	local playerIndex
 	local indexPlayer
 	local keyStructs
@@ -8832,7 +8834,7 @@ end
 --===========================================================================
 -- Enum: Draw out a specific player.
 --
-function MeleeDoDrawEnum()
+function bj.MeleeDoDrawEnum()
 	local thePlayer = GetEnumPlayer()
 
 	CachePlayerHeroData(thePlayer)
@@ -8842,7 +8844,7 @@ end
 --===========================================================================
 -- Enum: Victory out a specific player.
 --
-function MeleeDoVictoryEnum()
+function bj.MeleeDoVictoryEnum()
 	local thePlayer = GetEnumPlayer()
 	local playerIndex = GetPlayerId(thePlayer)
 
@@ -8856,7 +8858,7 @@ end
 --===========================================================================
 -- Defeat out a specific player.
 --
-function MeleeDoDefeat(whichPlayer)
+function bj.MeleeDoDefeat(whichPlayer)
 	bj_meleeDefeated[GetPlayerId(whichPlayer)] = true
 	RemovePlayerPreserveUnitsBJ(whichPlayer, PLAYER_GAME_RESULT_DEFEAT, false)
 end
@@ -8864,7 +8866,7 @@ end
 --===========================================================================
 -- Enum: Defeat out a specific player.
 --
-function MeleeDoDefeatEnum()
+function bj.MeleeDoDefeatEnum()
 	local thePlayer = GetEnumPlayer()
 
 	-- needs to happen before ownership change
@@ -8876,7 +8878,7 @@ end
 --===========================================================================
 -- A specific player left the game.
 --
-function MeleeDoLeave(whichPlayer)
+function bj.MeleeDoLeave(whichPlayer)
 	if GetIntegerGameState(GAME_STATE_DISCONNECTED) ~= 0 then
 		GameOverDialogBJ(whichPlayer, true)
 	else
@@ -8888,7 +8890,7 @@ end
 --===========================================================================
 -- Remove all observers
 -- 
-function MeleeRemoveObservers()
+function bj.MeleeRemoveObservers()
 	local playerIndex
 	local indexPlayer
 
@@ -8912,7 +8914,7 @@ end
 -- remaining players.  If even one player is not allied towards another,
 -- everyone must be denied victory.
 --
-function MeleeCheckForVictors()
+function bj.MeleeCheckForVictors()
 	local playerIndex
 	local opponentIndex
 	local opponentlessPlayers = CreateForce()
@@ -8953,7 +8955,7 @@ end
 --===========================================================================
 -- Test each player to determine if anyone has been defeated.
 --
-function MeleeCheckForLosersAndVictors()
+function bj.MeleeCheckForLosersAndVictors()
 	local playerIndex
 	local indexPlayer
 	local defeatedPlayers = CreateForce()
@@ -9014,7 +9016,7 @@ end
 --===========================================================================
 -- Returns a race-specific "build X or be revealed" message.
 --
-function MeleeGetCrippledWarningMessage(whichPlayer)
+function bj.MeleeGetCrippledWarningMessage(whichPlayer)
 	local r = GetPlayerRace(whichPlayer)
 
 	if r == RACE_HUMAN then
@@ -9034,7 +9036,7 @@ end
 --===========================================================================
 -- Returns a race-specific "build X" label for cripple timers.
 --
-function MeleeGetCrippledTimerMessage(whichPlayer)
+function bj.MeleeGetCrippledTimerMessage(whichPlayer)
 	local r = GetPlayerRace(whichPlayer)
 
 	if r == RACE_HUMAN then
@@ -9054,12 +9056,12 @@ end
 --===========================================================================
 -- Returns a race-specific "build X" label for cripple timers.
 --
-function MeleeGetCrippledRevealedMessage(whichPlayer)
+function bj.MeleeGetCrippledRevealedMessage(whichPlayer)
 	return (GetLocalizedString("CRIPPLE_REVEALING_PREFIX") or "") .. (GetPlayerName(whichPlayer) or "") .. (GetLocalizedString("CRIPPLE_REVEALING_POSTFIX") or "")
 end
 
 --===========================================================================
-function MeleeExposePlayer(whichPlayer, expose)
+function bj.MeleeExposePlayer(whichPlayer, expose)
 	local playerIndex
 	local indexPlayer
 	local toExposeTo = CreateForce()
@@ -9083,7 +9085,7 @@ function MeleeExposePlayer(whichPlayer, expose)
 end
 
 --===========================================================================
-function MeleeExposeAllPlayers()
+function bj.MeleeExposeAllPlayers()
 	local playerIndex
 	local indexPlayer
 	local playerIndex2
@@ -9121,7 +9123,7 @@ function MeleeExposeAllPlayers()
 end
 
 --===========================================================================
-function MeleeCrippledPlayerTimeout()
+function bj.MeleeCrippledPlayerTimeout()
 	local expiredTimer = GetExpiredTimer()
 	local playerIndex
 	local exposedPlayer
@@ -9156,7 +9158,7 @@ function MeleeCrippledPlayerTimeout()
 end
 
 --===========================================================================
-function MeleePlayerIsCrippled(whichPlayer)
+function bj.MeleePlayerIsCrippled(whichPlayer)
 	local allyStructures = MeleeGetAllyStructureCount(whichPlayer)
 	local allyKeyStructures = MeleeGetAllyKeyStructureCount(whichPlayer)
 
@@ -9167,7 +9169,7 @@ end
 --===========================================================================
 -- Test each player to determine if anyone has become crippled.
 --
-function MeleeCheckForCrippledPlayers()
+function bj.MeleeCheckForCrippledPlayers()
 	local playerIndex
 	local indexPlayer
 	local crippledPlayers = CreateForce()
@@ -9236,7 +9238,7 @@ end
 --===========================================================================
 -- Determine if the lost unit should result in any defeats or victories.
 --
-function MeleeCheckLostUnit(lostUnit)
+function bj.MeleeCheckLostUnit(lostUnit)
 	local lostUnitOwner = GetOwningPlayer(lostUnit)
 
 	-- We only need to check for mortality if this was the last building.
@@ -9253,7 +9255,7 @@ end
 -- Determine if the gained unit should result in any defeats, victories,
 -- or cripple-status changes.
 --
-function MeleeCheckAddedUnit(addedUnit)
+function bj.MeleeCheckAddedUnit(addedUnit)
 	local addedUnitOwner = GetOwningPlayer(addedUnit)
 
 	-- If the player was crippled, this unit may have uncrippled him/her.
@@ -9263,24 +9265,24 @@ function MeleeCheckAddedUnit(addedUnit)
 end
 
 --===========================================================================
-function MeleeTriggerActionConstructCancel()
+function bj.MeleeTriggerActionConstructCancel()
 	MeleeCheckLostUnit(GetCancelledStructure())
 end
 
 --===========================================================================
-function MeleeTriggerActionUnitDeath()
+function bj.MeleeTriggerActionUnitDeath()
 	if IsUnitType(GetDyingUnit(), UNIT_TYPE_STRUCTURE) then
 		MeleeCheckLostUnit(GetDyingUnit())
 	end
 end
 
 --===========================================================================
-function MeleeTriggerActionUnitConstructionStart()
+function bj.MeleeTriggerActionUnitConstructionStart()
 	MeleeCheckAddedUnit(GetConstructingStructure())
 end
 
 --===========================================================================
-function MeleeTriggerActionPlayerDefeated()
+function bj.MeleeTriggerActionPlayerDefeated()
 	local thePlayer = GetTriggerPlayer()
 	CachePlayerHeroData(thePlayer)
 
@@ -9303,7 +9305,7 @@ function MeleeTriggerActionPlayerDefeated()
 end
 
 --===========================================================================
-function MeleeTriggerActionPlayerLeft()
+function bj.MeleeTriggerActionPlayerLeft()
 	local thePlayer = GetTriggerPlayer()
 
 	-- Just show game over for observers when they leave
@@ -9332,13 +9334,13 @@ function MeleeTriggerActionPlayerLeft()
 end
 
 --===========================================================================
-function MeleeTriggerActionAllianceChange()
+function bj.MeleeTriggerActionAllianceChange()
 	MeleeCheckForLosersAndVictors()
 	MeleeCheckForCrippledPlayers()
 end
 
 --===========================================================================
-function MeleeTriggerTournamentFinishSoon()
+function bj.MeleeTriggerTournamentFinishSoon()
 	-- Note: We may get this trigger multiple times
 	local playerIndex
 	local indexPlayer
@@ -9379,7 +9381,7 @@ end
 
 
 --===========================================================================
-function MeleeWasUserPlayer(whichPlayer)
+function bj.MeleeWasUserPlayer(whichPlayer)
 	local slotState
 
 	if GetPlayerController(whichPlayer) ~= MAP_CONTROL_USER then
@@ -9392,7 +9394,7 @@ function MeleeWasUserPlayer(whichPlayer)
 end
 
 --===========================================================================
-function MeleeTournamentFinishNowRuleA(multiplier)
+function bj.MeleeTournamentFinishNowRuleA(multiplier)
 	local playerScore = _array_(0)
 	local teamScore = _array_(0)
 	local teamForce = _array_()
@@ -9519,7 +9521,7 @@ function MeleeTournamentFinishNowRuleA(multiplier)
 end
 
 --===========================================================================
-function MeleeTriggerTournamentFinishNow()
+function bj.MeleeTriggerTournamentFinishNow()
 	local rule = GetTournamentFinishNowRule()
 
 	-- If the game is already over, do nothing
@@ -9541,7 +9543,7 @@ function MeleeTriggerTournamentFinishNow()
 end
 
 --===========================================================================
-function MeleeInitVictoryDefeat()
+function bj.MeleeInitVictoryDefeat()
 	local trig
 	local index
 	local indexPlayer
@@ -9638,7 +9640,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function CheckInitPlayerSlotAvailability()
+function bj.CheckInitPlayerSlotAvailability()
 	local index
 
 	if not bj_slotControlReady then
@@ -9654,7 +9656,7 @@ function CheckInitPlayerSlotAvailability()
 end
 
 --===========================================================================
-function SetPlayerSlotAvailable(whichPlayer, control)
+function bj.SetPlayerSlotAvailable(whichPlayer, control)
 	local playerIndex = GetPlayerId(whichPlayer)
 
 	CheckInitPlayerSlotAvailability()
@@ -9671,7 +9673,7 @@ end
 --***************************************************************************
 
 --===========================================================================
-function TeamInitPlayerSlots(teamCount)
+function bj.TeamInitPlayerSlots(teamCount)
 	local index
 	local indexPlayer
 	local team
@@ -9697,17 +9699,17 @@ function TeamInitPlayerSlots(teamCount)
 end
 
 --===========================================================================
-function MeleeInitPlayerSlots()
+function bj.MeleeInitPlayerSlots()
 	TeamInitPlayerSlots(bj_MAX_PLAYERS)
 end
 
 --===========================================================================
-function FFAInitPlayerSlots()
+function bj.FFAInitPlayerSlots()
 	TeamInitPlayerSlots(bj_MAX_PLAYERS)
 end
 
 --===========================================================================
-function OneOnOneInitPlayerSlots()
+function bj.OneOnOneInitPlayerSlots()
 	-- Limit the game to 2 players.
 	SetTeams(2)
 	SetPlayers(2)
@@ -9715,7 +9717,7 @@ function OneOnOneInitPlayerSlots()
 end
 
 --===========================================================================
-function InitGenericPlayerSlots()
+function bj.InitGenericPlayerSlots()
 	local gType = GetGameTypeSelected()
 
 	if gType == GAME_TYPE_MELEE then
@@ -9746,21 +9748,21 @@ end
 --***************************************************************************
 
 --===========================================================================
-function SetDNCSoundsDawn()
+function bj.SetDNCSoundsDawn()
 	if bj_useDawnDuskSounds then
 		StartSound(bj_dawnSound)
 	end
 end
 
 --===========================================================================
-function SetDNCSoundsDusk()
+function bj.SetDNCSoundsDusk()
 	if bj_useDawnDuskSounds then
 		StartSound(bj_duskSound)
 	end
 end
 
 --===========================================================================
-function SetDNCSoundsDay()
+function bj.SetDNCSoundsDay()
 	local ToD = GetTimeOfDay()
 
 	if ToD >= bj_TOD_DAWN and ToD < bj_TOD_DUSK and not bj_dncIsDaytime then
@@ -9773,7 +9775,7 @@ function SetDNCSoundsDay()
 end
 
 --===========================================================================
-function SetDNCSoundsNight()
+function bj.SetDNCSoundsNight()
 	local ToD = GetTimeOfDay()
 
 	if (ToD < bj_TOD_DAWN or ToD >= bj_TOD_DUSK) and bj_dncIsDaytime then
@@ -9786,7 +9788,7 @@ function SetDNCSoundsNight()
 end
 
 --===========================================================================
-function InitDNCSounds()
+function bj.InitDNCSounds()
 	-- Create sounds to be played at dawn and dusk.
 	bj_dawnSound = CreateSoundFromLabel("RoosterSound", false, false, false, 10000, 10000)
 	bj_duskSound = CreateSoundFromLabel("WolfSound", false, false, false, 10000, 10000)
@@ -9813,7 +9815,7 @@ function InitDNCSounds()
 end
 
 --===========================================================================
-function InitBlizzardGlobals()
+function bj.InitBlizzardGlobals()
 	local index
 	local userControlledPlayers
 	local v
@@ -9893,20 +9895,20 @@ function InitBlizzardGlobals()
 end
 
 --===========================================================================
-function InitQueuedTriggers()
+function bj.InitQueuedTriggers()
 	bj_queuedExecTimeout = CreateTrigger()
 	TriggerRegisterTimerExpireEvent(bj_queuedExecTimeout, bj_queuedExecTimeoutTimer)
 	TriggerAddAction(bj_queuedExecTimeout, QueuedTriggerDoneBJ)
 end
 
 --===========================================================================
-function InitMapRects()
+function bj.InitMapRects()
 	bj_mapInitialPlayableArea = Rect(GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT), GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM), GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT), GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP))
 	bj_mapInitialCameraBounds = GetCurrentCameraBoundsMapRectBJ()
 end
 
 --===========================================================================
-function InitSummonableCaps()
+function bj.InitSummonableCaps()
 	local index
 
 	index = 0
@@ -9934,7 +9936,7 @@ end
 --===========================================================================
 -- Update the per-class stock limits.
 --
-function UpdateStockAvailability(whichItem)
+function bj.UpdateStockAvailability(whichItem)
 	local iType = GetItemType(whichItem)
 	local iLevel = GetItemLevel(whichItem)
 
@@ -9953,7 +9955,7 @@ end
 --===========================================================================
 -- Find a sellable item of the given type and level, and then add it.
 --
-function UpdateEachStockBuildingEnum()
+function bj.UpdateEachStockBuildingEnum()
 	local iteration = 0
 	local pickedItemId
 
@@ -9972,7 +9974,7 @@ function UpdateEachStockBuildingEnum()
 end
 
 --===========================================================================
-function UpdateEachStockBuilding(iType, iLevel)
+function bj.UpdateEachStockBuilding(iType, iLevel)
 	local g
 
 	bj_stockPickedItemType = iType
@@ -9987,7 +9989,7 @@ end
 --===========================================================================
 -- Update stock inventory.
 --
-function PerformStockUpdates()
+function bj.PerformStockUpdates()
 	local pickedItemId
 	local pickedItemType
 	local pickedItemLevel = 0
@@ -10034,18 +10036,18 @@ end
 --===========================================================================
 -- Perform the first update, and then arrange future updates.
 --
-function StartStockUpdates()
+function bj.StartStockUpdates()
 	PerformStockUpdates()
 	TimerStart(bj_stockUpdateTimer, bj_STOCK_RESTOCK_INTERVAL, true, PerformStockUpdates)
 end
 
 --===========================================================================
-function RemovePurchasedItem()
+function bj.RemovePurchasedItem()
 	RemoveItemFromStock(GetSellingUnit(), GetItemTypeId(GetSoldItem()))
 end
 
 --===========================================================================
-function InitNeutralBuildings()
+function bj.InitNeutralBuildings()
 	local iLevel
 
 	-- Chart of allowed stock items.
@@ -10073,19 +10075,19 @@ function InitNeutralBuildings()
 end
 
 --===========================================================================
-function MarkGameStarted()
+function bj.MarkGameStarted()
 	bj_gameStarted = true
 	DestroyTimer(bj_gameStartedTimer)
 end
 
 --===========================================================================
-function DetectGameStarted()
+function bj.DetectGameStarted()
 	bj_gameStartedTimer = CreateTimer()
 	TimerStart(bj_gameStartedTimer, bj_GAME_STARTED_THRESHOLD, false, MarkGameStarted)
 end
 
 --===========================================================================
-function InitBlizzard()
+function bj.InitBlizzard()
 	-- Set up the Neutral Victim player slot, to torture the abandoned units
 	-- of defeated players.  Since some triggers expect this player slot to
 	-- exist, this is performed for all maps.
@@ -10123,19 +10125,19 @@ end
 --***************************************************************************
 
 --===========================================================================
-function RandomDistReset()
+function bj.RandomDistReset()
 	bj_randDistCount = 0
 end
 
 --===========================================================================
-function RandomDistAddItem(inID, inChance)
+function bj.RandomDistAddItem(inID, inChance)
 	bj_randDistID[bj_randDistCount] = inID
 	bj_randDistChance[bj_randDistCount] = inChance
 	bj_randDistCount = bj_randDistCount + 1
 end
 
 --===========================================================================
-function RandomDistChoose()
+function bj.RandomDistChoose()
 	local sum = 0
 	local chance = 0
 	local index
@@ -10196,7 +10198,7 @@ end
 --*
 --***************************************************************************
 
-function UnitDropItem(inUnit, inItemID)
+function bj.UnitDropItem(inUnit, inItemID)
 	local x
 	local y
 	local radius = 32
@@ -10223,7 +10225,7 @@ function UnitDropItem(inUnit, inItemID)
 end
 
 --===========================================================================
-function WidgetDropItem(inWidget, inItemID)
+function bj.WidgetDropItem(inWidget, inItemID)
 	local x
 	local y
 	local radius = 32
@@ -10242,3 +10244,5 @@ function WidgetDropItem(inWidget, inItemID)
 
 	return CreateItem(inItemID, x, y)
 end
+
+return bj

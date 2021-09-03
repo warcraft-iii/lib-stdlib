@@ -11,6 +11,7 @@
 ---@alias DestructableCallback fun(destructable: Destructable): void
 ---@alias ItemCallback fun(item: Item): void
 
+local Native = require('lib.stdlib.native')
 local Function = {}
 
 --@remove@
@@ -49,9 +50,9 @@ local function generateCallbackCreator(cls, method)
     end
 end
 
-Function.createUnitCallback = generateCallbackCreator(Unit, GetEnumUnit)
-Function.createPlayerCallback = generateCallbackCreator(Player, GetEnumPlayer)
-Function.createDestructableCallback = generateCallbackCreator(Destructable, GetEnumDestructable)
-Function.createItemCallback = generateCallbackCreator(Item, GetEnumItem)
+Function.createUnitCallback = generateCallbackCreator(Unit, Native.GetEnumUnit)
+Function.createPlayerCallback = generateCallbackCreator(Player, Native.GetEnumPlayer)
+Function.createDestructableCallback = generateCallbackCreator(Destructable, Native.GetEnumDestructable)
+Function.createItemCallback = generateCallbackCreator(Item, Native.GetEnumItem)
 
 return Function
