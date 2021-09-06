@@ -8,7 +8,10 @@ return function(converter, ids)
             -- @end-reforge@
             -- @end-debug@
             if ids[key] then
-                local val = converter and converter(ids[key]) or ids[key]
+                local val = ids[key]
+                if converter then
+                    val = converter(val)
+                end
                 tbl[key] = val
                 return val
             end
