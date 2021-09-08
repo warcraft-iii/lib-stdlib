@@ -70,4 +70,17 @@ function Rect:getCenter()
     return Vector:new(x, y)
 end
 
+---toCameraBounds
+---@return x1, y1, x2, y2, x3, y3, x4, y4 float
+function Rect:toCameraBounds()
+    return self:getMinX() + Native.GetCameraMargin(CAMERA_MARGIN_LEFT),
+           self:getMinY() + Native.GetCameraMargin(CAMERA_MARGIN_BOTTOM),
+           self:getMaxX() - Native.GetCameraMargin(CAMERA_MARGIN_RIGHT),
+           self:getMinY() - Native.GetCameraMargin(CAMERA_MARGIN_TOP),
+           self:getMinX() + Native.GetCameraMargin(CAMERA_MARGIN_LEFT),
+           self:getMaxY() - Native.GetCameraMargin(CAMERA_MARGIN_TOP),
+           self:getMaxX() - Native.GetCameraMargin(CAMERA_MARGIN_RIGHT),
+           self:getMaxY() + Native.GetCameraMargin(CAMERA_MARGIN_BOTTOM)
+end
+
 return Rect

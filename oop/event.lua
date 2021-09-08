@@ -3,6 +3,14 @@ local Event = require('lib.stdlib.oop._generated._event')
 local Native = require('lib.stdlib.native')
 local Vector = require('lib.stdlib.oop.vector')
 
+---@class EventTypeDef
+Event.EventTypeDef = {
+    Invalid = 0,
+    UnitEvent = 1, -- Unit Event
+    PlayerUnitEvent = 2, -- Player Unit Event
+    PlayerEvent = 3, -- Player Event
+}
+
 ---getTriggerRect
 ---@return Rect
 function Event:getTriggerRect()
@@ -22,6 +30,19 @@ local function checker(tbl, id)
         end
     end
     return false
+end
+
+---<static> getEventType
+---@return EventTypeDef
+function Event:getEventType(id)
+    if checker(PlayerUnitEvent, id) then
+        return Event.EventTypeDef.PlayerUnitEvent
+    elseif checker(UnitEvent, id) then
+        return Event.EventTypeDef.UnitEvent
+    elseif checker(PlayerEvent, id) then
+        return Event.EventTypeDef.PlayerEvent
+    end
+    return Event.EventTypeDef.Invalid
 end
 
 function Event:isPlayerUnitEvent()
