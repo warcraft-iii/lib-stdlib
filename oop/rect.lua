@@ -83,4 +83,9 @@ function Rect:toCameraBounds()
            self:getMaxY() + Native.GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 end
 
+---@param me Rect
+function Rect.meta.__tostring(me)
+    return string.format('%s,%s;%s,%s', me:getMinX(), me:getMinY(), me:getMaxX(), me:getMaxY())
+end
+
 return Rect
