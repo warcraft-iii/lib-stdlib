@@ -102,4 +102,9 @@ function Vector:isValid()
     return self:getX() ~= nil and self:getY() ~= nil
 end
 
+function Vector:clear()
+    self[1] = nil
+    self[2] = nil
+end
+
 return Vector
