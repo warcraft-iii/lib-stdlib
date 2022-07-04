@@ -81,7 +81,7 @@ function Dispatcher:dispatch(...)
             self.listeners[obj] = method
             self.insertQueue[obj] = nil
         end
-        self.insertQueue = nil
+        self.insertQueue = {}
     end
 end
 
