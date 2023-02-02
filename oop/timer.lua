@@ -1,6 +1,13 @@
 ---@type Timer
 local Timer = require('lib.stdlib.oop._generated._timer')
 local Native = require('lib.stdlib.native')
+local ActionMap = {}
+
+local _destructor = Timer.destructor
+function Timer:destructor()
+    ActionMap[getUd(self)] = nil
+    _destructor(self)
+end
 
 ---<static> after
 ---@param duration number
@@ -8,6 +15,7 @@ local Native = require('lib.stdlib.native')
 ---@return Timer
 function Timer:after(duration, func)
     local timer = Timer:create()
+    ActionMap[getUd(self)] = func
     Native.TimerStart(timer:getUd(), duration, false, function()
         func()
         timer:delete()
@@ -28,6 +36,7 @@ function Timer:start(duration, func, periodic)
         end
     end
     self.periodic = periodic
+    ActionMap[getUd(self)] = func
     Native.TimerStart(getUd(self), duration, periodic, func)
 end
 

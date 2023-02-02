@@ -2,6 +2,7 @@ local Native = require('lib.stdlib.native')
 
 ---@class Trigger : Agent
 local Trigger = class('Trigger', require('lib.stdlib.oop.agent'))
+local ActionMap = {}
 
 ---destructor
 ---@return void
@@ -9,6 +10,7 @@ function Trigger:destructor()
 --@debug@
     checkobject(self, Trigger, 'destructor', 'self')
 --@end-debug@
+    ActionMap[getUd(self)] = nil
     return Native.DestroyTrigger(getUd(self))
 end
 
@@ -480,6 +482,8 @@ function Trigger:addAction(actionFunc)
     checkobject(self, Trigger, 'addAction', 'self')
     checktype(actionFunc, 'function', 'addAction', 1)
 --@end-debug@
+    ActionMap[getUd(self)] = ActionMap[getUd(self)] or {}
+    ActionMap[getUd(self)][actionFunc] = actionFunc
     return Native.TriggerAddAction(getUd(self), actionFunc)
 end
 
@@ -491,6 +495,9 @@ function Trigger:removeAction(action)
     checkobject(self, Trigger, 'removeAction', 'self')
     checkuserdata(action, 'triggeraction', 'removeAction', 1)
 --@end-debug@
+    if ActionMap[getUd(self)] then
+        ActionMap[getUd(self)][action] = nil
+    end
     return Native.TriggerRemoveAction(getUd(self), action)
 end
 
@@ -500,6 +507,7 @@ function Trigger:clearActions()
 --@debug@
     checkobject(self, Trigger, 'clearActions', 'self')
 --@end-debug@
+    ActionMap[getUd(self)] = nil
     return Native.TriggerClearActions(getUd(self))
 end
 
