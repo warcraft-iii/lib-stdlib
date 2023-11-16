@@ -1,6 +1,6 @@
 ---@type Widget
 local Widget = require('lib.stdlib.oop._generated._widget')
-local Effect = require('stdlib.oop.effect')
+local Effect = require('lib.stdlib.oop.effect')
 
 ---addEffect
 ---@param model string

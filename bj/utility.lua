@@ -11,6 +11,10 @@ local rawset       = rawset
 local rawget       = rawget
 local error        = error
 
+-- @debug@
+console.debug = true
+-- @end-debug@
+
 local function warning(msg)
     console.write("---------------------------------------")
     console.write("             LUA WARNING!!             ")
