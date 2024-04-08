@@ -2,7 +2,7 @@ local common = require('jass.common')
 local _oEnv = _ENV
 ---@class Blizzard
 local bj = {}
-local _ENV = setmetatable({}, {__index = 
+local _ENV = setmetatable(bj, {__index = 
 	function(tbl, k)
 		if _oEnv._G[k] then
 			tbl[k] = _oEnv._G[k]

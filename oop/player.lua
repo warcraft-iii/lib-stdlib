@@ -11,7 +11,7 @@ local _localPlayer = Player:fromUd(Native.GetLocalPlayer())
 ---@type Player[]
 local _players = {}
 do
-    for id = 0, bj_MAX_PLAYER_SLOTS - 1 do
+    for id = 0, (bj_MAX_PLAYER_SLOTS or 16) - 1 do
         table.insert(_players, Player:fromUd(Native.Player(id)))
     end
 end

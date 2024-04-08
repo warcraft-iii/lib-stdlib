@@ -5,8 +5,18 @@ local ActionMap = {}
 
 local _destructor = Timer.destructor
 function Timer:destructor()
-    ActionMap[getUd(self)] = nil
+    local ud = getUd(self)
+    if ud then
+        ActionMap[ud] = nil
+    end
     _destructor(self)
+end
+
+function Timer:cache(func)
+    local ud = getUd(self)
+    if ud then
+        ActionMap[ud] = func
+    end
 end
 
 ---<static> after
@@ -15,7 +25,7 @@ end
 ---@return Timer
 function Timer:after(duration, func)
     local timer = Timer:create()
-    ActionMap[getUd(self)] = func
+    self:cache(func)
     Native.TimerStart(timer:getUd(), duration, false, function()
         func()
         timer:delete()
@@ -36,7 +46,7 @@ function Timer:start(duration, func, periodic)
         end
     end
     self.periodic = periodic
-    ActionMap[getUd(self)] = func
+    self:cache(func)
     Native.TimerStart(getUd(self), duration, periodic, func)
 end
 

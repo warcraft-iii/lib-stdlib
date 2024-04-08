@@ -93,7 +93,7 @@ function checkuserdata(value, checkType, apiName, argIndex)
     if not tostring(value):startswith(checkType) then
     -- @end-reforge@
     --[===[@non-reforge@
-    if value == nil then
+    if value ~= nil and type(value) ~= 'userdata' then
     --@end-non-reforge@]===]
         error(string.format([[bad argument #%s to '%s' (%s expected, got %s)]], argIndex, apiName, checkType,
                             tostring(value)), 3)
