@@ -12,7 +12,7 @@ local rawget       = rawget
 local error        = error
 
 -- @debug@
-console.debug = true
+console.enable = true
 -- @end-debug@
 
 local function warning(msg)
